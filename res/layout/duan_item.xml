@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/banner_home" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_gia"
+            android:padding="@dimen/padding10" >
+
+            <TextView
+                android:id="@+id/tvGia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="980.000.000 VNĐ"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_medium_large" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a"
+        android:orientation="vertical"
+        android:padding="@dimen/padding10" >
+
+        <TextView
+            android:id="@+id/tvTen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biệt thự cao cấp NOVALAND"
+            android:textSize="@dimen/textsize_medium_large"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDiachi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="618 / 1 / 5 Cách Mạng Tháng 8
+Phường 11, Quận 3, Tp. Hồ Chí MInh"
+            android:textSize="@dimen/textsize_medium" />
+    </LinearLayout>
+
+</RelativeLayout>

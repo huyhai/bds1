@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hotdeal</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="mapkey">AIzaSyB5Bw8_EYBY8yJO_Wwa66jGb3NcA4ZgUcY</string>
+    <string name="str_suco">Có sự cố khi tải dữ liệu, vui lòng thử lại sau</string>
+    <string name="app_id">278004972283280</string>
+    <string name="str_chonsoluong">Chọn số lượng</string>
+
+    <string-array name="location">
+        <item>HỒ CHÍ MINH</item>
+        <item>HÀ NỘI</item>
+        <item>TỈNH KHÁC</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rlName1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:paddingBottom="@dimen/padding5"
+        android:paddingTop="@dimen/padding5" >
+
+        <RelativeLayout
+            android:id="@+id/rlName"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/padding7"
+                android:layout_toRightOf="@+id/imgAvatar"
+                android:text="Abc abvf"
+                android:textSize="@dimen/textsize_medium" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Abc abvf"
+            android:textSize="@dimen/textsize_medium" />
+
+        <RelativeLayout
+            android:id="@+id/rlNamea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" >
+
+            <ImageView
+                android:id="@+id/imgAvatara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/padding7"
+                android:background="@drawable/ic_oto" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imgAvatara"
+                android:text="Abc abvf"
+                android:textSize="@dimen/textsize_medium" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CalendarCard.Root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/cardTitle"
+        style="@style/CalendarCard.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/textsize_medium" />
+
+    <LinearLayout
+        android:id="@+id/cardDays"
+        style="@style/CalendarCard.Days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardTitle"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/cardDay1"
+            style="@style/CalendarCard.Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cardDay2"
+            style="@style/CalendarCard.Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cardDay3"
+            style="@style/CalendarCard.Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cardDay4"
+            style="@style/CalendarCard.Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cardDay5"
+            style="@style/CalendarCard.Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cardDay6"
+            style="@style/CalendarCard.Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cardDay7"
+            style="@style/CalendarCard.Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardDays" >
+
+        <LinearLayout
+            android:id="@+id/cardGrid"
+            style="@style/CalendarCard.Grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <include layout="@layout/card_row" />
+
+            <include layout="@layout/card_row" />
+
+            <include layout="@layout/card_row" />
+
+            <include layout="@layout/card_row" />
+
+            <include layout="@layout/card_row" />
+
+            <include layout="@layout/card_row" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

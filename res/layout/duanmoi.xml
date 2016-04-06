@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ebebeb"
+        android:paddingBottom="@dimen/padding5"
+        android:paddingLeft="@dimen/padding10"
+        android:paddingRight="@dimen/padding10"
+        android:paddingTop="@dimen/padding5" >
+
+        <TextView
+            android:id="@+id/tvKq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="1212 kết quả"
+         
+            android:textSize="@dimen/textsize_medium" />
+
+        <TextView
+            android:id="@+id/tvSX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Sắp xếp"
+            android:textColor="#346357"
+            android:textSize="@dimen/textsize_medium" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lvDuan"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rlTop"
+        android:scrollbars="vertical" >
+    </ListView>
+
+</RelativeLayout>
