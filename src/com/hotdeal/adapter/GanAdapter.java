@@ -78,7 +78,12 @@ public class GanAdapter extends BaseAdapter {
 		final StateModel ca = listData.get(position);
 		holder.tvName.setText(ca.getStateName());
 		holder.tvDistance.setText(ca.getSort());
-		holder.tvTime.setText(ca.getStateID());
+		if(ca.getStateID().equals("")){
+			holder.tvTime.setText(ca.getStateID());
+		}else{
+			holder.tvTime.setText(ca.getStateID());	
+		}
+		
 		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb)
 				.error(R.drawable.noimage).into(holder.imgPic);
 		convertView.setOnClickListener(new OnClickListener() {

@@ -58,7 +58,12 @@ public class CateSildeModel implements Serializable {
 	}
 
 	public ArrayList<CateSildeSubModel> getListSub() {
-		return listSub;
+		if(null!=listSub){
+			return listSub;
+		}else{
+			return listSub=new ArrayList<CateSildeSubModel>();
+		}
+		
 	}
 
 	public void setListSub(ArrayList<CateSildeSubModel> listSub) {

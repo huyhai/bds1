@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rlHome"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="@color/vreal_orange"
+        android:gravity="center_vertical"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:id="@+id/rlToogle"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/padding10" >
+
+            <RelativeLayout
+                android:id="@+id/rlTooggle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/padding5" >
+
+                <ImageView
+                    android:id="@+id/imgTooggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/icon_back" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/imgLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Dự án Novaland"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_medium"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnOK"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_top1"
+        android:textColor="@color/white"
+        android:padding="@dimen/padding10"
+        android:text="XONG" />
+
+    <ExpandableListView
+        android:id="@+id/epLoai"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/btnOK"
+        android:layout_below="@+id/rlHome"
+        android:background="@color/white"
+        android:cacheColorHint="@android:color/transparent"
+        android:groupIndicator="@null"
+        android:scrollbars="none" >
+    </ExpandableListView>
+
+</RelativeLayout>

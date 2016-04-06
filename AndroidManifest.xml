@@ -81,13 +81,18 @@
             android:theme="@style/AppBaseTheme"
             android:windowSoftInputMode="adjustPan" >
         </activity>
-     
+        <activity
+            android:name="com.hotdealapp.ui2.LoaiNhaDat"
+            android:configChanges="keyboardHidden|orientation"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/mapkey" />
-
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -110,7 +115,7 @@
 
         <!--
           Optionally, register AnalyticsReceiver and AnalyticsService to support background
-          dispatching on non-Google Play devices
+          dispatching on non-Google Play devices
         -->
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
@@ -127,7 +132,7 @@
 
         <!--
              Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
-             installation campaign reporting
+             installation campaign reporting
         -->
         <receiver
             android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"

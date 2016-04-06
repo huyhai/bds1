@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.hotdeal.adapter.GanAdapter;
+import com.hotdeal.libs.ConstantValue;
 import com.hotdeal.libs.HotdealUtilities;
 import com.hotdeal.model.StateModel;
 
@@ -82,7 +83,7 @@ public class DetailF extends FragmentActivity {
 		HotdealUtilities.setWidth(aaaaaa, w);
 		HotdealUtilities.setWidth(aaaaaaa, w);
 
-		HotdealUtilities.setHeight(rlHome, 11.5);
+		HotdealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
 		HotdealUtilities.setHeight(rlPic, 3);
 		HotdealUtilities.setWidthHeight(rlPic1, 10, 20);
 		HotdealUtilities.setHeight(llPic, 4.5);
@@ -119,7 +120,7 @@ public class DetailF extends FragmentActivity {
 		
 		md=new StateModel();
 		md.setImage(R.drawable.ic_trungtam);
-		md.setStateName("Gần trung tâm thành phố");
+		md.setStateName("Gần thành phố");
 		md.setSort("20.3 km");
 		md.setStateID("23 phút");
 		list.add(md);
@@ -128,7 +129,7 @@ public class DetailF extends FragmentActivity {
 		md.setImage(R.drawable.ic_dao);
 		md.setStateName("Cửa hàng đồ ăn");
 		md.setSort("12 cửa hàng gần nhất");
-		md.setStateID("23 phút");
+		md.setStateID("");
 		list.add(md);
 		
 		GanAdapter adapter=new GanAdapter(this, list, null);
