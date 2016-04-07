@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/com/hotdeal/adapter/DuanAdapter.java=UTF-8
 encoding//src/com/hotdeal/adapter/GanAdapter.java=UTF-8
+encoding//src/com/hotdeal/adapter/ListAgentAdapter.java=UTF-8
 encoding//src/com/hotdeal/adapter/MenuAdapter.java=UTF-8
 encoding//src/com/hotdeal/libs/HotdealUtilities.java=UTF-8
 encoding//src/com/hotdealvn/hotdealapp/HotDealFragmentActivity.java=UTF-8

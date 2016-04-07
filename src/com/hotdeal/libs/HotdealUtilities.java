@@ -53,6 +53,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
@@ -908,6 +909,51 @@ public class HotdealUtilities {
 		});
 	}
 
+	public static void showDialogCustomListView(final Context c) {
+		AlertDialog.Builder builderSingle = new AlertDialog.Builder(c);
+//		builderSingle.setIcon(R.drawable.ic_launcher);
+//		builderSingle.setTitle("Select One Name:-");
+
+		final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(c,
+				android.R.layout.select_dialog_singlechoice);
+		arrayAdapter.add("Hardik");
+		arrayAdapter.add("Archit");
+		arrayAdapter.add("Jignesh");
+		arrayAdapter.add("Umang");
+		arrayAdapter.add("Gatti");
+
+		builderSingle.setNegativeButton("Hủy",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builderSingle.setAdapter(arrayAdapter,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String strName = arrayAdapter.getItem(which);
+						showToast(strName, Toast.LENGTH_SHORT, c);
+//						AlertDialog.Builder builderInner = new AlertDialog.Builder(
+//								c);
+//						builderInner.setMessage(strName);
+//						builderInner.setTitle("Your Selected Item is");
+//						builderInner.setPositiveButton("Ok",
+//								new DialogInterface.OnClickListener() {
+//									@Override
+//									public void onClick(DialogInterface dialog,
+//											int which) {
+//										dialog.dismiss();
+//									}
+//								});
+//						builderInner.show();
+					}
+				});
+		builderSingle.show();
+	}
+
 	public static AlertDialog showDialogOk(final String message,
 			final Activity ac) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ac);
@@ -931,6 +977,16 @@ public class HotdealUtilities {
 	public static void showToast(final String message, final int duration,
 			final Activity ac) {
 		ac.runOnUiThread(new Runnable() {
+			public void run() {
+				Toast toast = Toast.makeText(ac, message, duration);
+				toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+				toast.show();
+			}
+		});
+	}
+	public static void showToast(final String message, final int duration,
+			final Context ac) {
+		((Activity) ac).runOnUiThread(new Runnable() {
 			public void run() {
 				Toast toast = Toast.makeText(ac, message, duration);
 				toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);

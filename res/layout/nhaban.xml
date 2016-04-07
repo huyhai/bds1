@@ -171,6 +171,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rlDT"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding5"
@@ -208,6 +209,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rlMG"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding5"
@@ -245,6 +247,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rlHuong"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding5"

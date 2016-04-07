@@ -10,12 +10,14 @@ import com.hotdealvn.hotdealapp.DataManager2;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class LoaiNhaDat extends Activity {
+public class LoaiNhaDat extends Activity implements OnClickListener {
 	private RelativeLayout rlHome;
 	private ExpandableListView epLoai;
 	private Button btnOK;
@@ -37,7 +39,8 @@ public class LoaiNhaDat extends Activity {
 		HotdealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
 		HotdealUtilities.setHeight(btnOK, 12);
 		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
-
+		rlToogle.setOnClickListener(this);
+		DataManager2.getInstance().getListCateSlide().clear();
 		CateSildeModel md1;
 		CateSildeSubModel mdsub;
 		md1 = new CateSildeModel();
@@ -87,6 +90,15 @@ public class LoaiNhaDat extends Activity {
 		LoaiNhadatAdapter adapter = new LoaiNhadatAdapter(this, DataManager2
 				.getInstance().getListCateSlide(), null);
 		epLoai.setAdapter(adapter);
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (rlToogle == v) {
+			HotdealUtilities.setClickAnim(rlToogle);
+			this.finish();
+		}
+
 	}
 
 }

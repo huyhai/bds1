@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkgrey" >
+
+    <RelativeLayout
+        android:id="@+id/l"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding10" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/ed_loainhadat" >
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/padding10"
+                android:background="@drawable/ic_searchkv" />
+
+            <EditText
+                android:id="@+id/edKhuvuc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/padding10"
+                android:layout_toRightOf="@+id/img"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="Tìm môi giới"
+                android:paddingRight="@dimen/padding30"
+                android:textSize="@dimen/textsize_medium" >
+            </EditText>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lvTimAgent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/l"
+        android:scrollbars="none" >
+    </ListView>
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding20"
+        android:paddingLeft="@dimen/padding15"
+        android:paddingRight="@dimen/padding15"
+        android:paddingTop="@dimen/padding20" >
+
+        <ImageView
+            android:id="@+id/imgPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/imgPic1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_slip" />
+
+        <RelativeLayout
+            android:id="@+id/a"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imgPic"
+            android:layout_alignTop="@+id/imgPic"
+            android:layout_toLeftOf="@+id/imgPic1"
+            android:layout_toRightOf="@+id/imgPic"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding5" >
+
+            <TextView
+                android:id="@+id/tvNameAgent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Steven Dennis"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSDT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNameAgent"
+                android:text="308-089-4749"
+                android:textSize="@dimen/textsize_medium" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

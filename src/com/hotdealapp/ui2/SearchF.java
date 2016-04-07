@@ -5,6 +5,7 @@ import com.hotdeal.libs.HotdealUtilities;
 import com.hotdeal.pageindicator.TabPageIndicator;
 import com.hotdealapp.ui.NhabanF;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,26 +19,34 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 public class SearchF extends Fragment {
-	private static final String[] CONTENT = new String[] { "Nhà bán", "Cho thuê" };
+	private static final String[] CONTENT = new String[] { "Nhà bán",
+			"Cho thuê" };
 	private RelativeLayout rlRefresh;
+	ViewPager pager;
+	TabPageIndicator indicator;
+	GoogleMusicAdapter adapter;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.simple_tabs, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater
+				.inflate(R.layout.simple_tabs, container, false);
 		initView(rootView);
-
+		setData();
 		HotdealUtilities.showALog("S CREATE");
 		return rootView;
 	}
 
 	private void initView(View rootView) {
 		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
-		
-		GoogleMusicAdapter adapter = new GoogleMusicAdapter(getActivity().getSupportFragmentManager());
-		ViewPager pager = (ViewPager) rootView.findViewById(R.id.pager);
-		pager.setAdapter(adapter);
+		pager = (ViewPager) rootView.findViewById(R.id.pager);
+		indicator = (TabPageIndicator) rootView.findViewById(R.id.indicator);
 
-		TabPageIndicator indicator = (TabPageIndicator) rootView.findViewById(R.id.indicator);
+	}
+
+	private void setData() {
+		adapter = new GoogleMusicAdapter(getChildFragmentManager());
+		pager.setAdapter(adapter);
 		indicator.setViewPager(pager);
 	}
 
@@ -62,7 +71,13 @@ public class SearchF extends Fragment {
 
 		@Override
 		public Fragment getItem(int position) {
-			return new NhabanF();
+			switch (position) {
+			case 0:
+				return new NhabanF();
+			case 1:
+				return new NhabanF();
+			}
+			return null;
 		}
 
 		@Override
