@@ -74,6 +74,7 @@
                         android:visibility="gone" >
 
                         <ImageView
+                            android:id="@+id/imgFilter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -89,6 +90,7 @@
                         android:visibility="gone" >
 
                         <ImageView
+                            android:id="@+id/imgRefresh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -104,6 +106,7 @@
                         android:visibility="gone" >
 
                         <ImageView
+                            android:id="@+id/imgLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"

@@ -25,6 +25,7 @@
                 android:textStyle="bold" />
 
             <RelativeLayout
+                android:id="@+id/rlSearch"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding5"

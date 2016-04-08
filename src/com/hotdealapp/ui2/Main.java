@@ -7,7 +7,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hotdeal.libs.HotdealUtilities;
@@ -30,6 +32,10 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 	private FrameLayout left_drawerV2;
 	private boolean isOpenDrawer;
 	private static TextView imgLogo;
+	private ImageView imgTooggle;
+	private ImageView imgLocation;
+	private ImageView imgRefresh;
+	private ImageView imgFilter;
 
 	@Override
 	protected void onCreate(@Nullable Bundle arg0) {
@@ -48,6 +54,16 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		left_drawerV2 = (FrameLayout) findViewById(R.id.left_drawerV2);
 		imgLogo = (TextView) findViewById(R.id.imgLogo);
+
+		imgTooggle = (ImageView) findViewById(R.id.imgTooggle);
+		imgLocation = (ImageView) findViewById(R.id.imgLocation);
+		imgRefresh = (ImageView) findViewById(R.id.imgRefresh);
+		imgFilter = (ImageView) findViewById(R.id.imgFilter);
+		HotdealUtilities.setWidthHeight(imgTooggle, 12, 26);
+		HotdealUtilities.setWidthHeight(imgLocation, 16, 22);
+		HotdealUtilities.setWidthHeight(imgRefresh, 12.5, 22);
+		HotdealUtilities.setWidthHeight(imgFilter, 12.5, 22);
+
 		HotdealUtilities.setHeight(llTopBar, 11.5);
 
 		rlToogle.setOnClickListener(this);

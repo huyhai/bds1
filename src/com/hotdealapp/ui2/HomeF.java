@@ -2,6 +2,7 @@ package com.hotdealapp.ui2;
 
 import com.android.vrealapp.R;
 import com.hotdeal.libs.HotdealUtilities;
+import com.hotdealapp.ui.NhabanF;
 import com.hotdealvn.hotdealapp.HotDealFragmentActivity;
 
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public class HomeF extends Fragment implements OnClickListener {
 		if (v == llBanthue) {
 
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new SearchF());
+					.startFragment(new NhabanF());
 		} else if (v == llDuanmoi) {
 			((HotDealFragmentActivity) getActivity())
 					.startFragment(new DuAnMoiF());

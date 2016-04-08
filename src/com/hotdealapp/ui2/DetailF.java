@@ -133,8 +133,8 @@ public class DetailF extends FragmentActivity implements OnClickListener {
 
 		md = new StateModel();
 		md.setImage(R.drawable.ic_dao);
-		md.setStateName("Cửa hàng đồ ăn");
-		md.setSort("12 cửa hàng gần nhất");
+		md.setStateName("Cửa hàng đồ ăn 12 cửa hàng gần nhất");
+		md.setSort("");
 		md.setStateID("");
 		list.add(md);
 

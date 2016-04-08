@@ -30,10 +30,10 @@ public class GanAdapter extends BaseAdapter {
 		TextView tvDistance;
 		TextView tvTime;
 		RelativeLayout rlName1;
+		ImageView imgAvatara;
 	}
 
-	public GanAdapter(final Activity _ac, ArrayList<StateModel> _list,
-			NotifySomesDataListener no) {
+	public GanAdapter(final Activity _ac, ArrayList<StateModel> _list, NotifySomesDataListener no) {
 		this.listData = _list;
 		this.ac = _ac;
 		notify = no;
@@ -63,13 +63,11 @@ public class GanAdapter extends BaseAdapter {
 			LayoutInflater inflater = LayoutInflater.from(ac);
 			convertView = inflater.inflate(R.layout.gan_item, null);
 			holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
-			holder.imgPic = (ImageView) convertView
-					.findViewById(R.id.imgAvatar);
-			holder.tvDistance = (TextView) convertView
-					.findViewById(R.id.tvDistance);
+			holder.imgPic = (ImageView) convertView.findViewById(R.id.imgAvatar);
+			holder.tvDistance = (TextView) convertView.findViewById(R.id.tvDistance);
 			holder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
-			holder.rlName1 = (RelativeLayout) convertView
-					.findViewById(R.id.rlName1);
+			holder.rlName1 = (RelativeLayout) convertView.findViewById(R.id.rlName1);
+			holder.imgAvatara = (ImageView) convertView.findViewById(R.id.imgAvatara);
 			HotdealUtilities.setHeight(holder.rlName1, 13);
 			convertView.setTag(holder);
 		} else {
@@ -78,14 +76,14 @@ public class GanAdapter extends BaseAdapter {
 		final StateModel ca = listData.get(position);
 		holder.tvName.setText(ca.getStateName());
 		holder.tvDistance.setText(ca.getSort());
-		if(ca.getStateID().equals("")){
-			holder.tvTime.setText(ca.getStateID());
-		}else{
-			holder.tvTime.setText(ca.getStateID());	
+		holder.tvTime.setText(ca.getStateID());
+		if (ca.getStateID().equals("")) {
+			holder.imgAvatara.setBackgroundResource(R.drawable.ic_muitendo);
+		} else {
+			holder.imgAvatara.setBackgroundResource(R.drawable.ic_oto);
 		}
-		
-		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb)
-				.error(R.drawable.noimage).into(holder.imgPic);
+
+		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
 		convertView.setOnClickListener(new OnClickListener() {
 
 			@Override
