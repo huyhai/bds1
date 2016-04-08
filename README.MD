@@ -1,2 +1,1 @@
-Hotdeal-Mobile Project.
-Android Platform.
+du an cua tao
