@@ -1,5 +1,7 @@
 package com.hotdealapp.ui2;
 
+import java.util.ArrayList;
+
 import com.android.vrealapp.R;
 import com.hotdeal.adapter.LoaiNhadatAdapter;
 import com.hotdeal.libs.ConstantValue;
@@ -40,55 +42,54 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		HotdealUtilities.setHeight(btnOK, 12);
 		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
 		rlToogle.setOnClickListener(this);
-		DataManager2.getInstance().getListCateSlide().clear();
+		ArrayList<CateSildeModel> list=new ArrayList<>();
 		CateSildeModel md1;
 		CateSildeSubModel mdsub;
 		md1 = new CateSildeModel();
 		md1.setName("Bán căn hộ chung cư");
-		DataManager2.getInstance().getListCateSlide().add(md1);
+		list.add(md1);
 
 		md1 = new CateSildeModel();
 		md1.setName("Tất cả các loại nhà bán");
-		DataManager2.getInstance().getListCateSlide().add(md1);
+		list.add(md1);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán nhà riêng");
-		DataManager2.getInstance().getListCateSlide().get(1).getListSub()
+		list.get(1).getListSub()
 				.add(mdsub);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán nhà biệt thự, liền kề");
-		DataManager2.getInstance().getListCateSlide().get(1).getListSub()
+		list.get(1).getListSub()
 				.add(mdsub);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán nhà mặt phố");
-		DataManager2.getInstance().getListCateSlide().get(1).getListSub()
+		list.get(1).getListSub()
 				.add(mdsub);
 
 		md1 = new CateSildeModel();
 		md1.setName("Tất cả các loại đất bán");
-		DataManager2.getInstance().getListCateSlide().add(md1);
+		list.add(md1);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán đất nền dự án");
-		DataManager2.getInstance().getListCateSlide().get(2).getListSub()
+		list.get(2).getListSub()
 				.add(mdsub);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán đất");
-		DataManager2.getInstance().getListCateSlide().get(2).getListSub()
+		list.get(2).getListSub()
 				.add(mdsub);
 
 		md1 = new CateSildeModel();
 		md1.setName("Bán trang trại nghỉ dưỡng");
-		DataManager2.getInstance().getListCateSlide().add(md1);
+		list.add(md1);
 
 		md1 = new CateSildeModel();
 		md1.setName("Bán kho nhà xưởng");
-		DataManager2.getInstance().getListCateSlide().add(md1);
+		list.add(md1);
 
 		md1 = new CateSildeModel();
 		md1.setName("Bán các loại bất động sản khác");
-		DataManager2.getInstance().getListCateSlide().add(md1);
+		list.add(md1);
 
-		LoaiNhadatAdapter adapter = new LoaiNhadatAdapter(this, DataManager2
-				.getInstance().getListCateSlide(), null);
+		LoaiNhadatAdapter adapter = new LoaiNhadatAdapter(this,list, null);
 		epLoai.setAdapter(adapter);
 	}
 

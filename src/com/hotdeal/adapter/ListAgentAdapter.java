@@ -3,6 +3,7 @@ package com.hotdeal.adapter;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +28,7 @@ public class ListAgentAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView tvName;
 		ImageView imgPic;
-		TextView tvDistance;
+		TextView tvSDT;
 		TextView tvTime;
 		RelativeLayout rlName1;
 	}
@@ -62,25 +63,31 @@ public class ListAgentAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			LayoutInflater inflater = LayoutInflater.from(ac);
 			convertView = inflater.inflate(R.layout.list_agent_item, null);
+			holder.tvSDT = (TextView) convertView.findViewById(R.id.tvSDT);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-//		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb)
-//				.error(R.drawable.noimage).into(holder.imgPic);
-//		convertView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				if (notify != null) {
-//					notify.onReturnData(position);
-//					notify.onReturnDataString(ca.getStateID());
-//
-//				}
-//
-//			}
-//		});
+		// Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb)
+		// .error(R.drawable.noimage).into(holder.imgPic);
+		convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// if (notify != null) {
+				// notify.onReturnData(position);
+				// notify.onReturnDataString(ca.getStateID());
+				//
+				// }
+				Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+				smsIntent.setType("vnd.android-dir/mms-sms");
+				smsIntent
+						.putExtra("address", holder.tvSDT.getText().toString());
+				smsIntent.putExtra("sms_body", "Hi ..............");
+				ac.startActivity(smsIntent);
+			}
+		});
 		return convertView;
 	}
 

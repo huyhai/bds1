@@ -96,13 +96,6 @@ public class HotdealUtilities {
 	public static String FORMAT_DATE = "dd/MM/yyyy";
 
 	public static void addLogOut() {
-		CateSildeModel md2 = new CateSildeModel();
-		md2.setName("ĐĂNG XUẤT");
-		md2.setThem(true);
-		md2.setBackground(R.color.white);
-		md2.setCateID("-1");
-		md2.setImage(R.drawable.ico_logout);
-		DataManager2.getInstance().getListCateSlide().add(md2);
 	}
 
 	// public static void setActionDeeplink(Activity ac, String url) {
@@ -811,8 +804,7 @@ public class HotdealUtilities {
 
 	public static String getSign(String aip, String ts) {
 		try {
-			return md5(aip + ConstantValue.ANDROID + ConstantValue.PRIVATE_KEY
-					+ ts + ConstantValue.APPVERVALUE);
+			return "";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";

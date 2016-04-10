@@ -65,7 +65,6 @@ public class ACRAPostSender implements ReportSender {
 		a.put(ReportField.PHONE_MODEL, HotdealUtilities.getDeviceModel());
 		a.put(ReportField.APP_VERSION_CODE, HotdealUtilities.getBuildVertion(ac));
 		try {
-			a.put(ReportField.USER_EMAIL, DataManager2.getInstance().getUserModel().getEmail());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

@@ -1,10 +1,5 @@
 package com.hotdealvn.hotdealapp;
 
-import java.util.HashMap;
-
-import org.json.JSONObject;
-
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,33 +8,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.ClientError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.android.vrealapp.R;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
-import com.hotdeal.connection.JsonObjectInterface;
-import com.hotdeal.connection.VolleyRequestCustom;
 import com.hotdeal.libs.ConstantValue;
 import com.hotdeal.libs.HotdealUtilities;
-import com.hotdeal.libs.NotifyDataListener;
 import com.hotdeal.libs.SessionManager;
 import com.hotdealapp.ui2.Main;
 
 public class GCMIntentService extends GCMBaseIntentService {
 
-	public static final String SENDER_ID = "1019062855734";
+	public static final String SENDER_ID = "";
 	private SessionManager sm;
 
 	public GCMIntentService() {
@@ -60,100 +39,10 @@ public class GCMIntentService extends GCMBaseIntentService {
 		// UserFunctions.getInstance().add(context, params, false);
 		sm = new SessionManager(context);
 		String userID = "0";
-		if (DataManager2.getInstance().getUserModel().getUserID() != null) {
-			userID = DataManager2.getInstance().getUserModel().getUserID();
-		}
-
-		addDevice(context, false, true, new NotifyDataListener() {
-
-			@Override
-			public void onNotify(int id) {
-				// if (id == NotifyDataListener.NOTIFY_OK) {
-				// HotdealUtilities.showALog("ADD DEVICE OK");
-				// } else {
-				// HotdealUtilities.showALog("ADD DEVICE FAIL");
-				// }
-
-			}
-		}, HotdealUtilities.getANDROID_ID(context), registrationId, HotdealUtilities.getDeviceName(), HotdealUtilities.getDeviceModel(), HotdealUtilities.getDeviceVersion() + "", "active",
-				HotdealUtilities.getCurrentTime() + "", "0", userID, sm.getLocationID());
 
 	}
 
-	public void addDevice(Context activity, boolean showPro, boolean isPost, final NotifyDataListener notifi, String device_uid, String device_token, String device_name, String device_model,
-			String device_version, String status, String created, String modified, String userId, String state_id) {
-		HashMap<String, String> builder = DataManager2.getInstance().getDefauldParams(ConstantValue.ADD_DEVICE,activity);
-		builder.put("device_uid", device_uid);
-		builder.put("device_token", device_token);
-		builder.put("device_name", device_name);
-		builder.put("device_model", device_model);
-		builder.put("device_version", device_version);
-		builder.put("device_type", "1");
-		builder.put("status", status);
-		builder.put("created", created);
-		builder.put("modified", modified);
-		builder.put("userId", userId);
-		builder.put("state_id", state_id);
-		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-			@Override
-			public void callResultJOb(Context activity, JSONObject result) {
-				// try {
-				// HotdealUtilities.showALog(result.toString());
-				// } catch (Exception e) {
-				// // TODO: handle exception
-				// }
-
-			}
-		});
-	}
-
-	public void callServer(final Context activity, HashMap<String, String> parameters, final boolean showPro, boolean isPost, final JsonObjectInterface jsonObjectInterface) {
-		VolleyRequestCustom jsonObjRequest = new VolleyRequestCustom(Request.Method.POST, ConstantValue.URL_SERVER, parameters, new Response.Listener<JSONObject>() {
-			@Override
-			public void onResponse(JSONObject response) {
-				try {
-					HotdealUtilities.showALog(response.toString());
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-
-			}
-		}, new Response.ErrorListener() {
-
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				// Handle your error types accordingly.For Timeout & No
-				// connection error, you can show 'retry' button.
-				// For AuthFailure, you can re login with user
-				// credentials.
-				// For ClientError, 400 & 401, Errors happening on
-				// client side when sending api request.
-				// In this case you can check how client is forming the
-				// api and debug accordingly.
-				// For ServerError 5xx, you can do retry or handle
-				// accordingly.
-				if (error instanceof NetworkError) {
-				} else if (error instanceof ClientError) {
-				} else if (error instanceof ServerError) {
-				} else if (error instanceof AuthFailureError) {
-				} else if (error instanceof ParseError) {
-				} else if (error instanceof NoConnectionError) {
-				} else if (error instanceof TimeoutError) {
-				}
-				// HotdealUtilities.showALog(error.getMessage());
-
-			}
-		});
-
-		// Set a retry policy in case of SocketTimeout & ConnectionTimeout
-		// Exceptions. Volley does retry for you if you have specified the
-		// policy.
-		RequestQueue mVolleyQueue = Volley.newRequestQueue(activity);
-		jsonObjRequest.setRetryPolicy(new DefaultRetryPolicy(7000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-		jsonObjRequest.setTag("a");
-		mVolleyQueue.add(jsonObjRequest);
-	}
 
 	/**
 	 * 0 Method called on device un registred
