@@ -23,7 +23,8 @@
     <com.hotdeal.pageindicator.TabPageIndicator
         android:id="@+id/indicator"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/darkgrey" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkgrey" >
+
+    <RelativeLayout
+        android:id="@+id/rlHome"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="@color/vreal_orange"
+        android:gravity="center_vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/rlToogle"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/padding10" >
+
+            <RelativeLayout
+                android:id="@+id/rlTooggle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/padding5" >
+
+                <ImageView
+                    android:id="@+id/imgTooggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/icon_back" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/imgLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Dự án Novaland"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_medium"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rlHome"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <RelativeLayout
+                android:id="@+id/rlPic"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp" >
+
+                <ImageView
+                    android:id="@+id/imgPic1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/banner_home" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llTieude"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlPic"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/llTieude1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding10" >
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nhà bán - Chung cư cao cấp Novaland"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="95 Nguyễn Phi Khanh - Phường Tân Định - Quận 01 - Tp.Hồ Chí Minh"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTieude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llTieude"
+                android:padding="@dimen/padding10"
+                android:text="Thông tin mô tả"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llDes"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTieude"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/padding10" >
+
+                <TextView
+                    android:id="@+id/tvDes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bán nhà MT Phan Chu Trinh, P. Tân Thành, Q. Tân Phú.
+Vị trí: MT Phan Chu Trinh, P. Tân Thành, Q. Tân Phú.
+Diện tích: 5*19m.
+Kết cấu: Trệt + 3 lầu.
+Hướng: Nam.
+Tiện ích: Khu dân cư an ninh, sạch sẽ, thuận tiện mở văn phòng, công ty, gần Lũy Bán Bích, giáp Tân Bình...."
+                    android:textSize="@dimen/textsize_medium"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvThogtinlienhe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llDes"
+                android:padding="@dimen/padding10"
+                android:text="Thông tin liên hệ"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llTTLH"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvThogtinlienhe"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding10"
+                android:paddingTop="@dimen/padding10" >
+
+                <RelativeLayout
+                    android:id="@+id/rlFong"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding10" >
+
+                    <ImageView
+                        android:id="@+id/imgF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_phong" />
+
+                    <TextView
+                        android:id="@+id/tvFong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/padding10"
+                        android:layout_toRightOf="@+id/imgF"
+                        android:text="Phòng sale và Marketing"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlF"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding10" >
+
+                    <ImageView
+                        android:id="@+id/imgFF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_phong" />
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/padding10"
+                        android:layout_toRightOf="@+id/imgFF"
+                        android:text="083 555 555"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlCF"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding10" >
+
+                    <ImageView
+                        android:id="@+id/imgCF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_phong" />
+
+                    <TextView
+                        android:id="@+id/tvCellPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/padding10"
+                        android:layout_toRightOf="@+id/imgCF"
+                        android:text="0909.888.888"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvThogtinlienhe2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llTTLH"
+                android:padding="@dimen/padding10"
+                android:text="Thông tin liên hệ"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llDesLH2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvThogtinlienhe2"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/padding10" >
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

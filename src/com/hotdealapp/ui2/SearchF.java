@@ -1,16 +1,8 @@
 package com.hotdealapp.ui2;
 
-import com.android.vrealapp.R;
-import com.hotdeal.libs.HotdealUtilities;
-import com.hotdeal.pageindicator.TabPageIndicator;
-import com.hotdealapp.ui.NhabanF;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -18,9 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.android.vrealapp.R;
+import com.hotdeal.libs.HotdealUtilities;
+import com.hotdeal.pageindicator.IconPagerAdapter;
+import com.hotdeal.pageindicator.TabPageIndicator;
+import com.hotdealapp.ui.NhabanF;
+
 public class SearchF extends Fragment {
 	private static final String[] CONTENT = new String[] { "Nhà bán",
 			"Cho thuê" };
+	private static final int[] ICONS = new int[] { R.drawable.ic_chitiet, R.drawable.ic_tienich};
+
 	private RelativeLayout rlRefresh;
 	ViewPager pager;
 	TabPageIndicator indicator;
@@ -64,7 +64,7 @@ public class SearchF extends Fragment {
 		HotdealUtilities.showALog("S PAUSE");
 	}
 
-	class GoogleMusicAdapter extends FragmentStatePagerAdapter {
+	class GoogleMusicAdapter extends FragmentStatePagerAdapter implements IconPagerAdapter{
 		public GoogleMusicAdapter(FragmentManager fm) {
 			super(fm);
 		}
@@ -73,7 +73,7 @@ public class SearchF extends Fragment {
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
-				return new NhabanF();
+				return new DetailV2();
 			case 1:
 				return new NhabanF();
 			}
@@ -88,6 +88,11 @@ public class SearchF extends Fragment {
 		@Override
 		public int getCount() {
 			return 2;
+		}
+
+		@Override
+		public int getIconResId(int index) {
+			return ICONS[index];
 		}
 	}
 }
