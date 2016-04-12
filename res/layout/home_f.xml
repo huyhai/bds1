@@ -82,7 +82,7 @@
                         android:layout_below="@+id/img2"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/padding5"
-                        android:text="Dự án mới" />
+                        android:text="Nhà cho thuê" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

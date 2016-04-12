@@ -80,6 +80,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.maps.model.LatLng;
 import com.hotdeal.db.DatabaseHandler;
 import com.hotdeal.model.CateSildeModel;
+import com.hotdealapp.ui2.Main;
 import com.hotdealvn.hotdealapp.DataManager2;
 import com.hotdealvn.hotdealapp.HotDealFragmentActivity;
 import com.hotdealvn.hotdealapp.HotdealApp;
@@ -189,14 +190,11 @@ public class HotdealUtilities {
 		}
 	}
 
-	public static void moveToolbarTop(float toTranslationY, final View view,
-			final View sc, final Activity ac) {
+	public static void moveToolbarTop(float toTranslationY, final View view, final View sc, final Activity ac) {
 		if (ViewHelper.getTranslationY(view) == toTranslationY) {
 			return;
 		}
-		ValueAnimator animator = ValueAnimator.ofFloat(
-				ViewHelper.getTranslationY(view), toTranslationY).setDuration(
-				200);
+		ValueAnimator animator = ValueAnimator.ofFloat(ViewHelper.getTranslationY(view), toTranslationY).setDuration(200);
 		animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
@@ -205,28 +203,23 @@ public class HotdealUtilities {
 				ViewHelper.setTranslationY(view, translationY);
 				// ViewHelper.setTranslationY((View) sc, -translationY);
 
-				RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) ((View) sc)
-						.getLayoutParams();
+				RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) ((View) sc).getLayoutParams();
 				// HotdealUtilities.showALog(Math.abs(translationY)+"-"+getScreenHeight(ac)+"-"+lp.topMargin);
 				// lp.height = getScreenHeight(ac) ;
 				// lp.height = (int) (Math.abs(translationY))+
 				// getScreenHeight(ac) - lp.topMargin;
-				lp.height = (int) -translationY + getScreenHeight(ac)
-						- lp.topMargin;
+				lp.height = (int) -translationY + getScreenHeight(ac) - lp.topMargin;
 				((View) sc).requestLayout();
 			}
 		});
 		animator.start();
 	}
 
-	public static void moveToolbarTopLL(float toTranslationY, final View view,
-			final View sc, final Activity ac) {
+	public static void moveToolbarTopLL(float toTranslationY, final View view, final View sc, final Activity ac) {
 		if (ViewHelper.getTranslationY(view) == toTranslationY) {
 			return;
 		}
-		ValueAnimator animator = ValueAnimator.ofFloat(
-				ViewHelper.getTranslationY(view), toTranslationY).setDuration(
-				200);
+		ValueAnimator animator = ValueAnimator.ofFloat(ViewHelper.getTranslationY(view), toTranslationY).setDuration(200);
 		animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
 			@Override
@@ -234,14 +227,12 @@ public class HotdealUtilities {
 				float translationY = (float) animation.getAnimatedValue();
 				ViewHelper.setTranslationY(view, translationY);
 				ViewHelper.setTranslationY((View) sc, 0);
-				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) ((View) sc)
-						.getLayoutParams();
+				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) ((View) sc).getLayoutParams();
 				// HotdealUtilities.showALog(Math.abs(translationY)+"-"+getScreenHeight(ac)+"-"+lp.topMargin);
 				// lp.height = getScreenHeight(ac) ;
 				// lp.height = (int) (Math.abs(translationY))+
 				// getScreenHeight(ac) - lp.topMargin;
-				lp.height = (int) -translationY + getScreenHeight(ac)
-						- lp.topMargin;
+				lp.height = (int) -translationY + getScreenHeight(ac) - lp.topMargin;
 				((View) sc).requestLayout();
 			}
 		});
@@ -253,65 +244,56 @@ public class HotdealUtilities {
 	}
 
 	public static void hideKb(Activity ac, View v) {
-		InputMethodManager imm = (InputMethodManager) ac
-				.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(v.getWindowToken(),
-				InputMethodManager.RESULT_UNCHANGED_SHOWN);
+		InputMethodManager imm = (InputMethodManager) ac.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
 	}
 
-	public static AlertDialog showDialogConfirm(Activity ac,
-			final String message, final NotifySomesDataListener notify,
-			String okbutton) {
+	public static AlertDialog showDialogConfirm(Activity ac, final String message, final NotifySomesDataListener notify, String okbutton) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ac);
 		builder.setTitle(ac.getString(R.string.app_name));
 		builder.setIcon(R.drawable.ic_launcher);
 		builder.setMessage(message);
-		builder.setPositiveButton(okbutton,
-				new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(okbutton, new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(final DialogInterface dialog,
-							final int id) {
-						if (notify != null) {
-							notify.onReturnData(0);
-						}
-						dialog.dismiss();
-					}
-				});
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				if (notify != null) {
+					notify.onReturnData(0);
+				}
+				dialog.dismiss();
+			}
+		});
 
-		builder.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(final DialogInterface dialog,
-							final int which) {
-						if (notify != null) {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				if (notify != null) {
 
-						}
-						dialog.dismiss();
-					}
-				});
+				}
+				dialog.dismiss();
+			}
+		});
 
 		AlertDialog alert = builder.create();
 		return alert;
 	}
 
 	public static void loadImage(String url, ImageView img, Activity ac) {
-		// if(MainV2.imageLoader!=null){
-		// }else{
-		// MainV2.imageLoader = ImageLoader.getInstance();
-		// MainV2.imageLoader.init(ImageLoaderConfiguration.createDefault(ac));
-		// // options = new DisplayImageOptions.Builder()
-		// // .showImageForEmptyUrl(placeholder)
-		// // .showStubImage(placeholder).cacheOnDisc()
-		// // .decodingType(DecodingType.MEMORY_SAVING).build();
-		// MainV2.options = new
-		// DisplayImageOptions.Builder().showImageOnLoading(R.drawable.img_thumb).showImageForEmptyUri(R.drawable.img_thumb).showImageOnFail(R.drawable.img_thumb).cacheInMemory(true)
-		// .cacheOnDisc().considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
-		// }
-		// MainV2.imageLoader.displayImage(url, img, MainV2.options);
-		// // HotDealFragmentActivity.mImageLoader.get(url, new
-		// // com.hotdeal.libs.FadeInImageListener(img, ac));
+		if (Main.imageLoader != null) {
+		} else {
+			Main.imageLoader = ImageLoader.getInstance();
+			Main.imageLoader.init(ImageLoaderConfiguration.createDefault(ac));
+			// options = new DisplayImageOptions.Builder()
+			// .showImageForEmptyUrl(placeholder)
+			// .showStubImage(placeholder).cacheOnDisc()
+			// .decodingType(DecodingType.MEMORY_SAVING).build();
+			Main.options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.img_thumb).showImageForEmptyUri(R.drawable.img_thumb).showImageOnFail(R.drawable.img_thumb)
+					.cacheInMemory(true).cacheOnDisc().considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
+		}
+		Main.imageLoader.displayImage(url, img, Main.options);
+		// HotDealFragmentActivity.mImageLoader.get(url, new
+		// com.hotdeal.libs.FadeInImageListener(img, ac));
 	}
 
 	public static Boolean checkSDT(String num) {
@@ -377,8 +359,7 @@ public class HotdealUtilities {
 		}
 	}
 
-	public static String getQuery(HashMap<String, String> parameters)
-			throws UnsupportedEncodingException {
+	public static String getQuery(HashMap<String, String> parameters) throws UnsupportedEncodingException {
 		StringBuilder result = new StringBuilder();
 		boolean first = true;
 		// result.append("?token=" + this.token);
@@ -405,26 +386,19 @@ public class HotdealUtilities {
 		cont.sendBroadcast(intent);
 	}
 
-	public static void showDialogDownloadGGPlay(final String message,
-			final Activity ac) {
+	public static void showDialogDownloadGGPlay(final String message, final Activity ac) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ac);
-		builder.setMessage(message)
-				.setCancelable(false)
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						Intent intentMarket = new Intent(
-								Intent.ACTION_VIEW,
-								Uri.parse(ConstantValue.LINK_GOOGLE_PLAY_SERVICE));
-						ac.startActivity(intentMarket);
-					}
-				})
-				.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-								ac.finish();
-							}
-						});
+		builder.setMessage(message).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				Intent intentMarket = new Intent(Intent.ACTION_VIEW, Uri.parse(ConstantValue.LINK_GOOGLE_PLAY_SERVICE));
+				ac.startActivity(intentMarket);
+			}
+		}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+				ac.finish();
+			}
+		});
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
@@ -463,24 +437,21 @@ public class HotdealUtilities {
 		paramView.setLayoutParams(localLayoutParams);
 	}
 
-	public static void setWidthHeight(View paramView, double paramDouble1,
-			double paramDouble2) {
+	public static void setWidthHeight(View paramView, double paramDouble1, double paramDouble2) {
 		ViewGroup.LayoutParams localLayoutParams = paramView.getLayoutParams();
 		localLayoutParams.width = (int) (HotdealApp.device_width / paramDouble1);
 		localLayoutParams.height = (int) (HotdealApp.device_height / paramDouble2);
 		paramView.setLayoutParams(localLayoutParams);
 	}
 
-	public static void setWidthHeightHardCode(View paramView,
-			double paramDouble1, double paramDouble2) {
+	public static void setWidthHeightHardCode(View paramView, double paramDouble1, double paramDouble2) {
 		ViewGroup.LayoutParams localLayoutParams = paramView.getLayoutParams();
 		localLayoutParams.width = (int) paramDouble1;
 		localLayoutParams.height = (int) paramDouble2;
 		paramView.setLayoutParams(localLayoutParams);
 	}
 
-	public static Bitmap drawTextToBitmap(Context mContext, int hinh,
-			String mText) {
+	public static Bitmap drawTextToBitmap(Context mContext, int hinh, String mText) {
 		try {
 			Resources resources = mContext.getResources();
 			float scale = resources.getDisplayMetrics().density;
@@ -520,22 +491,19 @@ public class HotdealUtilities {
 		if (listAdapter == null)
 			return;
 
-		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(),
-				MeasureSpec.UNSPECIFIED);
+		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(), MeasureSpec.UNSPECIFIED);
 		int totalHeight = 0;
 		View view = null;
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			view = listAdapter.getView(i, view, listView);
 			if (i == 0)
-				view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth,
-						LayoutParams.WRAP_CONTENT));
+				view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, LayoutParams.WRAP_CONTENT));
 
 			view.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
 			totalHeight += view.getMeasuredHeight();
 		}
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		params.height = totalHeight
-				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 		listView.setLayoutParams(params);
 	}
 
@@ -548,10 +516,9 @@ public class HotdealUtilities {
 		for (int i = 0; i < mAdapter.getCount(); i++) {
 			View mView = mAdapter.getView(i, null, listView);
 
-			mView.measure(
-					MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+			mView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
 
-					MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+			MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
 
 			totalHeight += mView.getMeasuredHeight();
 			Log.w("HEIGHT" + i, String.valueOf(totalHeight));
@@ -559,8 +526,7 @@ public class HotdealUtilities {
 		}
 
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		params.height = totalHeight
-				+ (listView.getDividerHeight() * (mAdapter.getCount() - 1));
+		params.height = totalHeight + (listView.getDividerHeight() * (mAdapter.getCount() - 1));
 		listView.setLayoutParams(params);
 		listView.requestLayout();
 
@@ -571,40 +537,34 @@ public class HotdealUtilities {
 		if (listAdapter == null)
 			return;
 
-		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(),
-				MeasureSpec.UNSPECIFIED);
+		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(), MeasureSpec.UNSPECIFIED);
 		int totalHeight = 0;
 		View view = null;
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			view = listAdapter.getView(i, view, listView);
 			if (i == 0)
-				view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth,
-						LayoutParams.WRAP_CONTENT));
+				view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, LayoutParams.WRAP_CONTENT));
 
 			view.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
 			totalHeight += view.getMeasuredHeight();
 		}
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		int tt = totalHeight / 2;
-		params.height = tt
-				+ (listView.getVerticalSpacing() * (listAdapter.getCount() - 1));
+		params.height = tt + (listView.getVerticalSpacing() * (listAdapter.getCount() - 1));
 		listView.setLayoutParams(params);
 		listView.requestLayout();
 	}
 
 	public static void setListViewHeight(ExpandableListView listView) {
-		ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView
-				.getExpandableListAdapter();
+		ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
 		int totalHeight = 0;
-		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(),
-				MeasureSpec.EXACTLY);
+		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(), MeasureSpec.EXACTLY);
 		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
 			View groupItem = listAdapter.getGroupView(i, false, null, listView);
 			groupItem.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
 			totalHeight += groupItem.getMeasuredHeight();
 			for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
-				View listItem = listAdapter.getChildView(i, j, false, null,
-						listView);
+				View listItem = listAdapter.getChildView(i, j, false, null, listView);
 				listItem.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
 
 				totalHeight += listItem.getMeasuredHeight();
@@ -613,8 +573,7 @@ public class HotdealUtilities {
 		}
 
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		int height = totalHeight
-				+ (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+		int height = totalHeight + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
 		if (height < 10)
 			height = 200;
 		params.height = height;
@@ -623,24 +582,19 @@ public class HotdealUtilities {
 
 	}
 
-	public static void setExpandableListViewHeightOriginal(
-			ExpandableListView listView, int group) {
-		ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView
-				.getExpandableListAdapter();
+	public static void setExpandableListViewHeightOriginal(ExpandableListView listView, int group) {
+		ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
 		int totalHeight = 0;
-		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(),
-				MeasureSpec.EXACTLY);
+		int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(), MeasureSpec.EXACTLY);
 		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
 			View groupItem = listAdapter.getGroupView(i, false, null, listView);
 			groupItem.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
 
 			totalHeight += groupItem.getMeasuredHeight();
 
-			if (((listView.isGroupExpanded(i)) && (i != group))
-					|| ((!listView.isGroupExpanded(i)) && (i == group))) {
+			if (((listView.isGroupExpanded(i)) && (i != group)) || ((!listView.isGroupExpanded(i)) && (i == group))) {
 				for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
-					View listItem = listAdapter.getChildView(i, j, false, null,
-							listView);
+					View listItem = listAdapter.getChildView(i, j, false, null, listView);
 					listItem.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
 
 					totalHeight += listItem.getMeasuredHeight();
@@ -650,8 +604,7 @@ public class HotdealUtilities {
 		}
 
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		int height = totalHeight
-				+ (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+		int height = totalHeight + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
 		if (height < 10)
 			height = 200;
 		params.height = height;
@@ -662,7 +615,7 @@ public class HotdealUtilities {
 
 	public static void showLog(Object mess) {
 		try {
-			// Log.v("HAI", "HAILOG: " + mess);
+			 Log.v("HAI", "HAILOG: " + mess);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -715,11 +668,8 @@ public class HotdealUtilities {
 
 	public static boolean checkInternetConnection(final Context context) {
 
-		ConnectivityManager cm = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if ((cm.getActiveNetworkInfo() != null)
-				&& cm.getActiveNetworkInfo().isAvailable()
-				&& cm.getActiveNetworkInfo().isConnected()) {
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if ((cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {
 			return true;
 		} else {
 			return false;
@@ -740,14 +690,11 @@ public class HotdealUtilities {
 	}
 
 	public static String check3GorWifi(Context c) {
-		ConnectivityManager manager = (ConnectivityManager) c
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager manager = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
 		// For 3G check
-		boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-				.isConnectedOrConnecting();
+		boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
 		// For WiFi Check
-		boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-				.isConnectedOrConnecting();
+		boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 		if (is3g) {
 			return "3G";
 		} else if (isWifi) {
@@ -792,8 +739,7 @@ public class HotdealUtilities {
 		PackageInfo pInfo;
 		String version = "-1";
 		try {
-			pInfo = ac.getPackageManager().getPackageInfo(ac.getPackageName(),
-					0);
+			pInfo = ac.getPackageManager().getPackageInfo(ac.getPackageName(), 0);
 			version = pInfo.versionName;
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -811,15 +757,13 @@ public class HotdealUtilities {
 		}
 	}
 
-	public static void createEffectTouch(View v, final int inActiveDrawble,
-			final int activeDrawble) {
+	public static void createEffectTouch(View v, final int inActiveDrawble, final int activeDrawble) {
 		v.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
 					v.setBackgroundResource(activeDrawble);
-				if (event.getAction() == MotionEvent.ACTION_OUTSIDE
-						|| event.getAction() == MotionEvent.ACTION_UP)
+				if (event.getAction() == MotionEvent.ACTION_OUTSIDE || event.getAction() == MotionEvent.ACTION_UP)
 					v.setBackgroundResource(inActiveDrawble);
 				return false;
 			}
@@ -832,9 +776,7 @@ public class HotdealUtilities {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
 					v.setBackgroundResource(R.color.darkgrey);
-				if (event.getAction() == MotionEvent.ACTION_OUTSIDE
-						|| event.getAction() == MotionEvent.ACTION_UP
-						|| event.getAction() == MotionEvent.ACTION_MOVE)
+				if (event.getAction() == MotionEvent.ACTION_OUTSIDE || event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_MOVE)
 					v.setBackgroundResource(R.drawable.transparent);
 				return false;
 			}
@@ -858,8 +800,7 @@ public class HotdealUtilities {
 
 	}
 
-	public static void setClickAnimButon(final View v, final int click,
-			final int affterclick) {
+	public static void setClickAnimButon(final View v, final int click, final int affterclick) {
 		try {
 			v.setBackgroundResource(click);
 			v.post(new Runnable() {
@@ -903,60 +844,54 @@ public class HotdealUtilities {
 
 	public static void showDialogCustomListView(final Context c) {
 		AlertDialog.Builder builderSingle = new AlertDialog.Builder(c);
-//		builderSingle.setIcon(R.drawable.ic_launcher);
-//		builderSingle.setTitle("Select One Name:-");
+		// builderSingle.setIcon(R.drawable.ic_launcher);
+		// builderSingle.setTitle("Select One Name:-");
 
-		final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(c,
-				android.R.layout.select_dialog_singlechoice);
+		final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(c, android.R.layout.select_dialog_singlechoice);
 		arrayAdapter.add("Hardik");
 		arrayAdapter.add("Archit");
 		arrayAdapter.add("Jignesh");
 		arrayAdapter.add("Umang");
 		arrayAdapter.add("Gatti");
 
-		builderSingle.setNegativeButton("Hủy",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
+		builderSingle.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
 
-		builderSingle.setAdapter(arrayAdapter,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						String strName = arrayAdapter.getItem(which);
-						showToast(strName, Toast.LENGTH_SHORT, c);
-//						AlertDialog.Builder builderInner = new AlertDialog.Builder(
-//								c);
-//						builderInner.setMessage(strName);
-//						builderInner.setTitle("Your Selected Item is");
-//						builderInner.setPositiveButton("Ok",
-//								new DialogInterface.OnClickListener() {
-//									@Override
-//									public void onClick(DialogInterface dialog,
-//											int which) {
-//										dialog.dismiss();
-//									}
-//								});
-//						builderInner.show();
-					}
-				});
+		builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String strName = arrayAdapter.getItem(which);
+				showToast(strName, Toast.LENGTH_SHORT, c);
+				// AlertDialog.Builder builderInner = new AlertDialog.Builder(
+				// c);
+				// builderInner.setMessage(strName);
+				// builderInner.setTitle("Your Selected Item is");
+				// builderInner.setPositiveButton("Ok",
+				// new DialogInterface.OnClickListener() {
+				// @Override
+				// public void onClick(DialogInterface dialog,
+				// int which) {
+				// dialog.dismiss();
+				// }
+				// });
+				// builderInner.show();
+			}
+		});
 		builderSingle.show();
 	}
 
-	public static AlertDialog showDialogOk(final String message,
-			final Activity ac) {
+	public static AlertDialog showDialogOk(final String message, final Activity ac) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ac);
-		builder.setMessage(message).setNeutralButton("OK",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog,
-							final int id) {
-						// Do nothing.
-					}
-				});
+		builder.setMessage(message).setNeutralButton("OK", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				// Do nothing.
+			}
+		});
 
 		AlertDialog alert = builder.create();
 		builder.setTitle(ac.getString(R.string.app_name));
@@ -966,8 +901,7 @@ public class HotdealUtilities {
 		return alert;
 	}
 
-	public static void showToast(final String message, final int duration,
-			final Activity ac) {
+	public static void showToast(final String message, final int duration, final Activity ac) {
 		ac.runOnUiThread(new Runnable() {
 			public void run() {
 				Toast toast = Toast.makeText(ac, message, duration);
@@ -976,8 +910,8 @@ public class HotdealUtilities {
 			}
 		});
 	}
-	public static void showToast(final String message, final int duration,
-			final Context ac) {
+
+	public static void showToast(final String message, final int duration, final Context ac) {
 		((Activity) ac).runOnUiThread(new Runnable() {
 			public void run() {
 				Toast toast = Toast.makeText(ac, message, duration);
@@ -990,8 +924,7 @@ public class HotdealUtilities {
 	public static void showToastThieuThongTin(final Activity ac) {
 		ac.runOnUiThread(new Runnable() {
 			public void run() {
-				Toast toast = Toast.makeText(ac, "Thiếu thông tin",
-						Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(ac, "Thiếu thông tin", Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 				toast.show();
 			}
@@ -1001,11 +934,7 @@ public class HotdealUtilities {
 	public static void showToastNoInternet(final Activity ac) {
 		ac.runOnUiThread(new Runnable() {
 			public void run() {
-				Toast toast = Toast
-						.makeText(
-								ac,
-								"Không có kết nối mạng, vui lòng kiểm tra lại kết nối tới internet của bạn",
-								Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(ac, "Không có kết nối mạng, vui lòng kiểm tra lại kết nối tới internet của bạn", Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 				toast.show();
 			}
@@ -1016,8 +945,7 @@ public class HotdealUtilities {
 		try {
 			ac.runOnUiThread(new Runnable() {
 				public void run() {
-					Toast.makeText(ac, ac.getString(R.string.str_suco),
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(ac, ac.getString(R.string.str_suco), Toast.LENGTH_SHORT).show();
 				}
 			});
 		} catch (Exception e) {
@@ -1026,81 +954,6 @@ public class HotdealUtilities {
 
 	}
 
-	// public static void loadDataCache(final NotifyDataListener noti) {
-	// db = new DatabaseHandler(HotdealApp.context);
-	// DataManager2.getInstance().handleInfo(db.getCache(ConstantValue.GET_INFO),
-	// new NotifyDataListener() {
-	//
-	// @Override
-	// public void onNotify(int id) {
-	// getListBannerCache(noti);
-	//
-	// }
-	// });
-	//
-	// }
-	//
-	// private static void getListBannerCache(final NotifyDataListener noti) {
-	// DataManager2.getInstance().handleListBanner(db.getCache(ConstantValue.GET_BANNER),
-	// new NotifyDataListener() {
-	//
-	// @Override
-	// public void onNotify(int id) {
-	// getDealHomeCache(noti);
-	//
-	// }
-	// });
-	//
-	// }
-	//
-	// protected static void getDealHomeCache(final NotifyDataListener noti) {
-	// DataManager2.getInstance().handleListDealHome(db.getCache(ConstantValue.GET_DEAL_HOME),
-	// new NotifyDataListener() {
-	//
-	// @Override
-	// public void onNotify(int id) {
-	// getListSlide(noti);
-	// // getListAbout(noti);
-	// }
-	// });
-	//
-	// }
-	//
-	// protected static void getListAbout(final NotifyDataListener noti) {
-	// DataManager2.getInstance().handleListAbout(db.getCache(ConstantValue.GET_ABOUT),
-	// new NotifyDataListener() {
-	//
-	// @Override
-	// public void onNotify(int id) {
-	// getListSlide(noti);
-	// }
-	// });
-	//
-	// }
-	//
-	// protected static void getListSlide(final NotifyDataListener noti) {
-	// DataManager2.getInstance().handleListCateSlide(db.getCache(ConstantValue.GET_LIST_CATE_SLIDE),
-	// new NotifyDataListener() {
-	//
-	// @Override
-	// public void onNotify(int id) {
-	// getListLocation(noti);
-	// }
-	// });
-	//
-	// }
-	//
-	// protected static void getListLocation(final NotifyDataListener noti) {
-	// DataManager2.getInstance().handleListLocation(db.getCache(ConstantValue.GET_LIST_LOCATION),
-	// new NotifyDataListener() {
-	//
-	// @Override
-	// public void onNotify(int id) {
-	// noti.onNotify(1);
-	// }
-	// });
-	//
-	// }
 
 	public static void callPhone(String num, final Activity ac) {
 		Intent intent = new Intent(Intent.ACTION_CALL);
@@ -1127,24 +980,20 @@ public class HotdealUtilities {
 
 	}
 
-	public static void startActivityClearStack(Activity ac, Class<?> class1,
-			String data) {
+	public static void startActivityClearStack(Activity ac, Class<?> class1, String data) {
 		Intent intent = new Intent(ac, class1);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-				| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		intent.putExtra(ConstantValue.DATA_ACTIVITY, data);
 		ac.startActivity(intent);
 	}
 
 	public static void startActivityClearStack(Activity ac, Class<?> class1) {
 		Intent intent = new Intent(ac, class1);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-				| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		ac.startActivity(intent);
 	}
 
-	public static void startActivityForResult(Activity ac, Class<?> class1,
-			int request, String data) {
+	public static void startActivityForResult(Activity ac, Class<?> class1, int request, String data) {
 		Intent intent = new Intent(ac, class1);
 		intent.putExtra(ConstantValue.DATA_ACTIVITY, data);
 		ac.startActivityForResult(intent, request);
@@ -1172,9 +1021,7 @@ public class HotdealUtilities {
 	}
 
 	public static boolean isValidEmail(CharSequence target) {
-		return !TextUtils.isEmpty(target)
-				&& android.util.Patterns.EMAIL_ADDRESS.matcher(target)
-						.matches();
+		return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
 	}
 
 	public static String getDate(long milliSeconds, String dateFormat) {
@@ -1237,27 +1084,19 @@ public class HotdealUtilities {
 	}
 
 	public static void wakeUpScreen(final Activity ac) {
-		PowerManager pm = (PowerManager) ac.getApplicationContext()
-				.getSystemService(Context.POWER_SERVICE);
-		WakeLock wakeLock = pm
-				.newWakeLock(
-						(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-								| PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP),
-						"TAG");
+		PowerManager pm = (PowerManager) ac.getApplicationContext().getSystemService(Context.POWER_SERVICE);
+		WakeLock wakeLock = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
 		wakeLock.acquire();
 	}
 
 	public static String getKeyHashFacebook(Activity ac) {
 		String keyhash = "";
 		try {
-			PackageInfo info = ac.getPackageManager().getPackageInfo(
-					ac.getApplicationContext().getPackageName(),
-					PackageManager.GET_SIGNATURES);
+			PackageInfo info = ac.getPackageManager().getPackageInfo(ac.getApplicationContext().getPackageName(), PackageManager.GET_SIGNATURES);
 			for (Signature signature : info.signatures) {
 				MessageDigest md = MessageDigest.getInstance("SHA");
 				md.update(signature.toByteArray());
-				Log.d("KeyHash:",
-						Base64.encodeToString(md.digest(), Base64.DEFAULT));
+				Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
 				keyhash = Base64.encodeToString(md.digest(), Base64.DEFAULT);
 
 			}
@@ -1303,8 +1142,7 @@ public class HotdealUtilities {
 		return android.os.Build.VERSION.SDK_INT;
 	}
 
-	public static void setEvent(String cate, String action, String label,
-			final Activity ac, String value1) {
+	public static void setEvent(String cate, String action, String label, final Activity ac, String value1) {
 		long value = 0;
 		try {
 			value = Long.parseLong(value1);
@@ -1312,10 +1150,7 @@ public class HotdealUtilities {
 		}
 		try {
 			// mTracker = HotdealApp.getDefaultTracker(ac);
-			HotdealApp.getDefaultTracker().send(
-					new HitBuilders.EventBuilder().setCategory(cate)
-							.setAction(action).setLabel(label).setValue(value)
-							.build());
+			HotdealApp.getDefaultTracker().send(new HitBuilders.EventBuilder().setCategory(cate).setAction(action).setLabel(label).setValue(value).build());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1325,8 +1160,7 @@ public class HotdealUtilities {
 	public static void setScreen(String name) {
 		try {
 			HotdealApp.getDefaultTracker().setScreenName(name);
-			HotdealApp.getDefaultTracker().send(
-					new HitBuilders.ScreenViewBuilder().build());
+			HotdealApp.getDefaultTracker().send(new HitBuilders.ScreenViewBuilder().build());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

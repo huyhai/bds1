@@ -18,6 +18,7 @@ import com.hotdeal.adapter.MenuAdapter;
 import com.hotdeal.libs.HotdealUtilities;
 import com.hotdeal.libs.NotifySomesDataListener;
 import com.hotdeal.model.StateModel;
+import com.hotdealapp.ui.NhabanF;
 import com.hotdealvn.hotdealapp.DataManager2;
 import com.hotdealvn.hotdealapp.HotDealFragmentActivity;
 
@@ -93,10 +94,10 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 		((Main) getActivity()).closeMenu();
 		if (position == 0) {
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new SearchF());
+					.startFragment(new NhabanF());
 		} else if (position == 1) {
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new SearchF());
+					.startFragment(new NhabanF());
 		} else if (position == 2) {
 			((HotDealFragmentActivity) getActivity())
 					.startFragment(new DuAnMoiF());

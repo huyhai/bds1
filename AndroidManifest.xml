@@ -9,10 +9,10 @@
         android:targetSdkVersion="17" />
 
     <permission
-        android:name="com.android.hotdealapp.permission.MAPS_RECEIVE"
+        android:name="com.android.vrealapp.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.android.hotdealapp.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.android.vrealapp.permission.MAPS_RECEIVE" />
     <!-- Copied from Google Maps Library/AndroidManifest.xml. -->
     <!-- Required OpenGL ES 2.0. for Maps V2 -->
     <uses-feature
@@ -33,10 +33,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- Creates a custom permission so only this app can receive its messages. -->
     <permission
-        android:name="com.hotdealvn.hotdealapp.permission.C2D_MESSAGE"
+        android:name="com.android.vrealapp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.hotdealvn.hotdealapp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.android.vrealapp.permission.C2D_MESSAGE" />
 
     <!-- This app has permission to register and receive data message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -100,7 +100,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/mapkey" />
+            android:value="AIzaSyCmMc7bjs7-6VYuAFbe2FDdioYfJEObBPc" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -115,7 +115,7 @@
                 <!-- Receives the registration id. -->
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="com.hotdealvn.hotdealapp" />
+                <category android:name="com.android.vrealapp" />
             </intent-filter>
         </receiver>
 

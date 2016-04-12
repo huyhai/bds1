@@ -21,8 +21,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 	private RelativeLayout rlMap;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.duanmoi, container, false);
 		initView(rootView);
 		return rootView;
@@ -46,6 +45,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 		lvDuan.setAdapter(adapter);
 
 		rlFilter.setOnClickListener(this);
+		rlMap.setOnClickListener(this);
 	}
 
 	NotifySomesDataListener no = new NotifySomesDataListener() {
@@ -58,8 +58,8 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 
 		@Override
 		public void onReturnData(int id) {
-			((HotDealFragmentActivity)getActivity()).startFragment(new SearchF());
-//			HotdealUtilities.startActivity(getActivity(), DetailF.class, "");
+			((HotDealFragmentActivity) getActivity()).startFragment(new SearchF());
+			// HotdealUtilities.startActivity(getActivity(), DetailF.class, "");
 
 		}
 	};
@@ -74,8 +74,9 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == rlFilter) {
-			((HotDealFragmentActivity) getActivity())
-					.startFragment(new FilterF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF());
+		} else if (v == rlMap) {
+			((HotDealFragmentActivity) getActivity()).startFragment(new MapF());
 		}
 
 	}

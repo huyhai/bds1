@@ -12,8 +12,8 @@ public class DiaDiemModel implements Serializable {
 	private String name;
 	private String address;
 	private String phone;
-	private String lont;
-	private String latt;
+	private double lont;
+	private double latt;
 	private boolean click;
 	
 
@@ -25,8 +25,13 @@ public class DiaDiemModel implements Serializable {
 		 this.setName(HotdealUtilities.getDataString(jSonInfo, "partnerName"));
 		this.setAddress(HotdealUtilities.getDataString(jSonInfo, "partnerAddress"));
 		this.setPhone(HotdealUtilities.getDataString(jSonInfo, "partnerPhone"));
-		this.setLont(HotdealUtilities.getDataString(jSonInfo, "partnerLng"));
-		this.setLatt(HotdealUtilities.getDataString(jSonInfo, "partnerLat"));
+		try {
+			setLont(jSonInfo.getDouble("partnerLng"));
+			setLatt(jSonInfo.getDouble("partnerLat"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 
 	}
 
@@ -68,35 +73,6 @@ public class DiaDiemModel implements Serializable {
 		this.phone = phone;
 	}
 
-	/**
-	 * @return the lont
-	 */
-	public String getLont() {
-		return lont;
-	}
-
-	/**
-	 * @param lont
-	 *            the lont to set
-	 */
-	public void setLont(String lont) {
-		this.lont = lont;
-	}
-
-	/**
-	 * @return the latt
-	 */
-	public String getLatt() {
-		return latt;
-	}
-
-	/**
-	 * @param latt
-	 *            the latt to set
-	 */
-	public void setLatt(String latt) {
-		this.latt = latt;
-	}
 
 	/**
 	 * @return the click
@@ -110,6 +86,22 @@ public class DiaDiemModel implements Serializable {
 	 */
 	public void setClick(boolean click) {
 		this.click = click;
+	}
+
+	public double getLont() {
+		return lont;
+	}
+
+	public void setLont(double lont) {
+		this.lont = lont;
+	}
+
+	public double getLatt() {
+		return latt;
+	}
+
+	public void setLatt(double latt) {
+		this.latt = latt;
 	}
 
 }

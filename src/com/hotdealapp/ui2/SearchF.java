@@ -17,11 +17,11 @@ import com.hotdeal.pageindicator.TabPageIndicator;
 import com.hotdealapp.ui.NhabanF;
 
 public class SearchF extends Fragment {
-	private static final String[] CONTENT = new String[] { "Nhà bán",
-			"Cho thuê" };
+	private static final String[] CONTENT = new String[] { "Chi tiết",
+			"Tiện ích" };
 	private static final int[] ICONS = new int[] { R.drawable.ic_chitiet, R.drawable.ic_tienich};
 
-	private RelativeLayout rlRefresh;
+//	private RelativeLayout rlRefresh;
 	ViewPager pager;
 	TabPageIndicator indicator;
 	GoogleMusicAdapter adapter;
@@ -38,7 +38,7 @@ public class SearchF extends Fragment {
 	}
 
 	private void initView(View rootView) {
-		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
+//		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
 		pager = (ViewPager) rootView.findViewById(R.id.pager);
 		indicator = (TabPageIndicator) rootView.findViewById(R.id.indicator);
 
@@ -53,14 +53,14 @@ public class SearchF extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		rlRefresh.setVisibility(View.VISIBLE);
+//		rlRefresh.setVisibility(View.VISIBLE);
 		HotdealUtilities.showALog("S RESUME");
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		rlRefresh.setVisibility(View.GONE);
+//		rlRefresh.setVisibility(View.GONE);
 		HotdealUtilities.showALog("S PAUSE");
 	}
 
@@ -75,7 +75,7 @@ public class SearchF extends Fragment {
 			case 0:
 				return new DetailV2();
 			case 1:
-				return new NhabanF();
+				return new MapF();
 			}
 			return null;
 		}

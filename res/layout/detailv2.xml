@@ -60,14 +60,26 @@
             <RelativeLayout
                 android:id="@+id/rlPic"
                 android:layout_width="fill_parent"
-                android:layout_height="100dp" >
+                android:layout_height="wrap_content" >
 
-                <ImageView
-                    android:id="@+id/imgPic1"
+                <RelativeLayout
+                    android:id="@+id/rlSlide"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/banner_home" />
+                    android:layout_height="100dp" >
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pageSlide"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+
+                    <com.hotdeal.pageindicator.CirclePageIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/padding10" />
+                </RelativeLayout>
             </RelativeLayout>
 
             <LinearLayout
@@ -100,6 +112,66 @@
                         android:text="95 Nguyễn Phi Khanh - Phường Tân Định - Quận 01 - Tp.Hồ Chí Minh"
                         android:textColor="@color/darkgraytext"
                         android:textSize="@dimen/textsize_medium" />
+
+                    <LinearLayout
+                        android:id="@+id/llGia"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/padding10" >
+
+                        <RelativeLayout
+                            android:id="@+id/rlGia"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" >
+
+                            <TextView
+                                android:id="@+id/tvGia"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Giá bán: "
+                                android:textSize="@dimen/textsize_medium"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/tvGiaVl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/padding10"
+                                android:layout_toRightOf="@+id/tvGia"
+                                android:text="2 tỉ rưỡi"
+                                android:textColor="@color/vreal_orange"
+                                android:textSize="@dimen/textsize_medium"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlDT"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" >
+
+                            <TextView
+                                android:id="@+id/tvDT"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Diện tích: "
+                                android:textSize="@dimen/textsize_medium"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/tvDTVl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/padding10"
+                                android:layout_toRightOf="@+id/tvDT"
+                                android:text="300 m2"
+                                android:textColor="@color/vreal_orange"
+                                android:textSize="@dimen/textsize_medium"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -242,15 +314,103 @@ Tiện ích: Khu dân cư an ninh, sạch sẽ, thuận tiện mở văn phòng,
                 android:textSize="@dimen/textsize_medium"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/llDesLH2"
+            <RelativeLayout
+                android:id="@+id/rlll"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvThogtinlienhe2"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="@dimen/padding10" >
-            </LinearLayout>
+                android:layout_below="@+id/tvThogtinlienhe2" >
+
+                <LinearLayout
+                    android:id="@+id/llDesLH2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding7"
+                    android:paddingRight="@dimen/padding7"
+                    android:paddingTop="@dimen/padding10" >
+
+                    <LinearLayout
+                        android:id="@+id/llDesLH21"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llDesLH22"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+
+                        <CheckBox
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="check box" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvMore"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/llDesLH2"
+                    android:background="@color/white"
+                    android:gravity="right"
+                    android:padding="@dimen/padding10"
+                    android:text="Xem thêm >>"
+                    android:textColor="@color/vreal_orange"
+                    android:textSize="@dimen/textsize_medium"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
 

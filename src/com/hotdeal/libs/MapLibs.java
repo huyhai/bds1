@@ -2,6 +2,7 @@ package com.hotdeal.libs;
 
 import java.util.ArrayList;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
@@ -19,8 +20,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hotdeal.model.DiaDiemModel;
 
-public class MapLibs extends FragmentActivity implements OnInfoWindowClickListener {
-	protected GoogleMap mMap;
+public class MapLibs extends Fragment implements OnInfoWindowClickListener {
 	public static LatLng mCurrentPoint;
 	public static Boolean isSetMaker = false;
 	protected SupportMapFragment mMapFragment;
@@ -48,27 +48,22 @@ public class MapLibs extends FragmentActivity implements OnInfoWindowClickListen
 
 	LatLng latlogfocus = null;
 
-	public void setMultiMarkDiaDiem(final ArrayList<DiaDiemModel> listAddress) {
+	public void setMultiMarkDiaDiem(final ArrayList<DiaDiemModel> listAddress, final GoogleMap mMap) {
 		LatLng latlog = null;
 		mMap.clear();
 		final LatLngBounds.Builder builder = new LatLngBounds.Builder();
 		for (int i = 0; i < listAddress.size(); i++) {
 			try {
-				latlog = new LatLng(Double.parseDouble(listAddress.get(i).getLatt()),
-						Double.parseDouble(listAddress.get(i).getLont()));
+				latlog = new LatLng(listAddress.get(i).getLatt(), listAddress.get(i).getLont());
 			} catch (Exception e) {
 				latlog = new LatLng(0, 0);
 			}
 
 			if (listAddress.get(i).isClick()) {
-				mClickedMarker = mMap.addMarker(new MarkerOptions()
-						.title(listAddress.get(i).getAddress()).position(latlog)
-						.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_green_map_point)));
+				mClickedMarker = mMap.addMarker(new MarkerOptions().title(listAddress.get(i).getAddress()).position(latlog).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_green_map_point)));
 				latlogfocus = latlog;
 			} else {
-				mClickedMarker = mMap.addMarker(new MarkerOptions()
-						.title(listAddress.get(i).getAddress()).position(latlog)
-						.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_gray_map_point)));
+				mClickedMarker = mMap.addMarker(new MarkerOptions().title(listAddress.get(i).getAddress()).position(latlog).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_gray_map_point)));
 			}
 			// mClickedMarker.showInfoWindow();
 			builder.include(latlog);
@@ -76,16 +71,14 @@ public class MapLibs extends FragmentActivity implements OnInfoWindowClickListen
 		mMap.setOnMapLoadedCallback(new OnMapLoadedCallback() {
 			@Override
 			public void onMapLoaded() {
-//				LatLngBounds bounds = builder.build();
+				// LatLngBounds bounds = builder.build();
 				if (listAddress.size() > 1) {
 					// mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds,
 					// 50));
-					moveToMaker(latlogfocus);
+					moveToMaker(latlogfocus, mMap);
 				} else {
 					try {
-						mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-								new LatLng(Double.parseDouble(listAddress.get(0).getLatt()), Double
-										.parseDouble(listAddress.get(0).getLont())), 14));
+						mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(listAddress.get(0).getLatt(), listAddress.get(0).getLont()), 14));
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
@@ -97,14 +90,19 @@ public class MapLibs extends FragmentActivity implements OnInfoWindowClickListen
 
 	}
 
-	public void moveToMaker(LatLng pos) {
-		final CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(14)
-				.bearing(90) // Sets the orientation of the camera to east
-				.tilt(30) // Sets the tilt of the camera to 30 degrees
+	public void moveToMaker(LatLng pos, GoogleMap m) {
+		final CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(14).bearing(90) // Sets
+																											// the
+																											// orientation
+																											// of
+																											// the
+																											// camera
+																											// to
+																											// east
+				// .tilt(30) // Sets the tilt of the camera to 30 degrees
 				.build();
-		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+		m.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 	}
-
 
 	@Override
 	public void onInfoWindowClick(Marker arg0) {

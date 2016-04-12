@@ -20,10 +20,11 @@ public class HomeF extends Fragment implements OnClickListener {
 	private RelativeLayout llDuanmoi;
 	private RelativeLayout llMenu4;
 	private RelativeLayout llMenu3;
+	private RelativeLayout llTintuc;
+	private RelativeLayout llMenu4M;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.home_f, container, false);
 		initView(rootView);
 		HotdealUtilities.showALog("Home CREATE");
@@ -51,12 +52,15 @@ public class HomeF extends Fragment implements OnClickListener {
 		llDuanmoi = (RelativeLayout) rootView.findViewById(R.id.llDuanmoi);
 		llMenu4 = (RelativeLayout) rootView.findViewById(R.id.llMenu4);
 		llMenu3 = (RelativeLayout) rootView.findViewById(R.id.llMenu3);
-		// llMenu4 = (RelativeLayout) rootView.findViewById(R.id.llMenu4);
+		llTintuc = (RelativeLayout) rootView.findViewById(R.id.llTintuc);
+		llMenu4M = (RelativeLayout) rootView.findViewById(R.id.llMenu4M);
 		HotdealUtilities.setHeight(img, 3);
 		llBanthue.setOnClickListener(this);
 		llDuanmoi.setOnClickListener(this);
 		llMenu4.setOnClickListener(this);
 		llMenu3.setOnClickListener(this);
+		llTintuc.setOnClickListener(this);
+		llMenu4M.setOnClickListener(this);
 
 	}
 
@@ -65,17 +69,17 @@ public class HomeF extends Fragment implements OnClickListener {
 		HotdealUtilities.setClickAnim(v);
 		if (v == llBanthue) {
 
-			((HotDealFragmentActivity) getActivity())
-					.startFragment(new NhabanF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF());
 		} else if (v == llDuanmoi) {
-			((HotDealFragmentActivity) getActivity())
-					.startFragment(new DuAnMoiF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF());
 		} else if (v == llMenu4) {
-			((HotDealFragmentActivity) getActivity())
-					.startFragment(new TintucF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF());
 		} else if (v == llMenu3) {
-			((HotDealFragmentActivity) getActivity())
-					.startFragment(new DuAnMoiF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF());
+		} else if (v == llTintuc) {
+			((HotDealFragmentActivity) getActivity()).startFragment(new TintucF());
+		} else if (v == llMenu4M) {
+			((HotDealFragmentActivity) getActivity()).startFragment(new TimMoiGioiF());
 		}
 	}
 }
