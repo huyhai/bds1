@@ -7,7 +7,7 @@
         android:id="@+id/rlTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ebebeb"
+        android:background="@color/darkgrey"
         android:paddingBottom="@dimen/padding5"
         android:paddingLeft="@dimen/padding10"
         android:paddingRight="@dimen/padding10"
@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="1212 kết quả"
-         	
             android:textSize="@dimen/textsize_medium" />
 
         <TextView

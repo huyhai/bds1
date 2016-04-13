@@ -44,8 +44,8 @@ import com.hotdeal.libs.HotdealUtilities;
 import com.hotdealvn.hotdealapp.DataManager2;
 
 public class ACRAPostSender implements ReportSender {
-	private static String BASE_URL = "http://vanhoavietbooks.com.vn/tranhuyhai/anhgif/hotdeal_crash_report.php?email=huyhai.tran@hotdeal.vn";
-	private final static String SHARED_SECRET = "g8";
+	private static String BASE_URL = "";
+	private final static String SHARED_SECRET = "";
 	private Map<String, String> custom_data = null;
 	private String mess;
 
@@ -54,36 +54,6 @@ public class ACRAPostSender implements ReportSender {
 
 	public ACRAPostSender(HashMap<String, String> custom_data) {
 		this.custom_data = custom_data;
-	}
-
-	public ACRAPostSender(HashMap<String, String> custom_data, String url, String me, final Activity ac) {
-		this.custom_data = custom_data;
-		BASE_URL = "http://tranhuyhai.zz.mu/hotdeal_feedback.php?email=" + url;
-		mess = me;
-		final CrashReportData a = new CrashReportData();
-		a.put(ReportField.BRAND, HotdealUtilities.getDeviceName());
-		a.put(ReportField.PHONE_MODEL, HotdealUtilities.getDeviceModel());
-		a.put(ReportField.APP_VERSION_CODE, HotdealUtilities.getBuildVertion(ac));
-		try {
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		a.put(ReportField.INSTALLATION_ID, HotdealUtilities.check3GorWifi(ac));
-
-		Thread thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					send(ac, a);
-				} catch (ReportSenderException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-
-		thread.start();
-
 	}
 
 	private String getUrl() {
@@ -122,7 +92,6 @@ public class ACRAPostSender implements ReportSender {
 
 		try {
 
-			makeSampleHttpRequest(arg0, report.get(ReportField.STACK_TRACE));
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
 
@@ -196,40 +165,6 @@ public class ACRAPostSender implements ReportSender {
 		}
 
 	}
-	private RequestQueue mVolleyQueue;
-	JsonObjectRequest jsonObjRequest;
-	
-	private void makeSampleHttpRequest(Context c, String log) {
-		mVolleyQueue = Volley.newRequestQueue(c);
-		String url = "http://vanhoavietbooks.com.vn/tranhuyhai/anhgif";
-		Uri.Builder builder = Uri.parse(url).buildUpon();
-		builder.appendQueryParameter("tag", "addCrash");
-		builder.appendQueryParameter("log", log);
-		
-		
-		jsonObjRequest = new JsonObjectRequest(Request.Method.GET, builder.toString(), null, new Response.Listener<JSONObject>() {
-			@Override
-			public void onResponse(JSONObject response) {
-			}
-		}, new Response.ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				if( error instanceof NetworkError) {
-				} else if( error instanceof ClientError) { 
-				} else if( error instanceof ServerError) {
-				} else if( error instanceof AuthFailureError) {
-				} else if( error instanceof ParseError) {
-				} else if( error instanceof NoConnectionError) {
-				} else if( error instanceof TimeoutError) {
-				}
-
-			}
-		});
-		
-		jsonObjRequest.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-		jsonObjRequest.setTag("ccccc");	
-		mVolleyQueue.add(jsonObjRequest);
-	}
 
 }

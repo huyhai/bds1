@@ -3,6 +3,7 @@ package com.hotdealapp.ui2;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -17,20 +18,23 @@ import com.hotdeal.pageindicator.TabPageIndicator;
 import com.hotdealapp.ui.NhabanF;
 
 public class SearchF extends Fragment {
-	private static final String[] CONTENT = new String[] { "Chi tiết",
-			"Tiện ích" };
-	private static final int[] ICONS = new int[] { R.drawable.ic_chitiet, R.drawable.ic_tienich};
+	private static final String[] CONTENT = new String[] { "Chi tiết", "Tiện ích" };
+	private static final int[] ICONS = new int[] { R.drawable.ic_chitiet, R.drawable.ic_tienich };
 
-//	private RelativeLayout rlRefresh;
+	// private RelativeLayout rlRefresh;
 	ViewPager pager;
 	TabPageIndicator indicator;
 	GoogleMusicAdapter adapter;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater
-				.inflate(R.layout.simple_tabs, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//		if (savedInstanceState != null) {
+//			fragment = (CustomFragment) getSupportFragmentManager().findFragmentByTag("customtag");
+//		} else {
+//			fragment = new CustomFragment();
+//			getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, fragment, "customtag").commit();
+//		}
+		View rootView = inflater.inflate(R.layout.simple_tabs, container, false);
 		initView(rootView);
 		setData();
 		HotdealUtilities.showALog("S CREATE");
@@ -38,7 +42,8 @@ public class SearchF extends Fragment {
 	}
 
 	private void initView(View rootView) {
-//		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
+		// rlRefresh = (RelativeLayout)
+		// getActivity().findViewById(R.id.rlRefresh);
 		pager = (ViewPager) rootView.findViewById(R.id.pager);
 		indicator = (TabPageIndicator) rootView.findViewById(R.id.indicator);
 
@@ -51,20 +56,26 @@ public class SearchF extends Fragment {
 	}
 
 	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
-//		rlRefresh.setVisibility(View.VISIBLE);
+		// rlRefresh.setVisibility(View.VISIBLE);
 		HotdealUtilities.showALog("S RESUME");
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-//		rlRefresh.setVisibility(View.GONE);
+		// rlRefresh.setVisibility(View.GONE);
 		HotdealUtilities.showALog("S PAUSE");
 	}
 
-	class GoogleMusicAdapter extends FragmentStatePagerAdapter implements IconPagerAdapter{
+	class GoogleMusicAdapter extends FragmentPagerAdapter  implements IconPagerAdapter {
 		public GoogleMusicAdapter(FragmentManager fm) {
 			super(fm);
 		}

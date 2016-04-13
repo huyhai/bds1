@@ -3,10 +3,198 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <fragment
-        android:id="@+id/location_map"
+    <RelativeLayout
+        android:id="@+id/rlTop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/darkgrey"
+        android:padding="@dimen/padding10" >
+
+        <TextView
+            android:id="@+id/tvMore"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn tiện ích >>"
+            android:textColor="@color/vreal_orange"
+            android:textSize="@dimen/textsize_medium"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rlTop" >
+
+        <fragment
+            android:id="@+id/location_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlTienICh"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/darkgrey"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:id="@+id/rlTop1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/vreal_orange"
+            android:padding="@dimen/padding10" >
+
+            <TextView
+                android:id="@+id/tvEX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Thoát"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="Xong"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/rlTop1"
+            android:scrollbars="none" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible" >
+
+                <RelativeLayout
+                    android:id="@+id/rlTop22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding10" >
+
+                    <TextView
+                        android:id="@+id/tvThogtinlienhe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chọn bán kính"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/horizontalScrollView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvThogtinlienhe" >
+
+                        <LinearLayout
+                            android:id="@+id/llDistance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/tvThogtinlienhe1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/horizontalScrollView1"
+                        android:text="Chọn tiện ích"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/llDesLH2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvThogtinlienhe1"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:id="@+id/llDesLH21"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llDesLH22"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+
+                            <CheckBox
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="check box" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
 
 </RelativeLayout>

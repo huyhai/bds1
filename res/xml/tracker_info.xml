@@ -3,36 +3,12 @@
 
     <!-- End current session if app sleeps for a period of time -->
     <integer name="ga_sessionTimeout">300</integer>
-
     <!-- Enable automatic Activity measurement -->
     <bool name="ga_autoActivityTracking">false</bool>
 
-    <!-- The property id associated with this analytics tracker -->
-    <string name="ga_trackingId">UA-2029810-12</string>
-<!--     <string name="ga_trackingId">UA-71427194-1a</string> -->
+    <string name="ga_trackingId"></string>
     <string name="ga_sampleFrequency">100.0</string>
 
     <bool name="ga_reportUncaughtExceptions">true</bool>
-
-<!--     <screenName name="com.hotdealapp.ui2.LoginFrament">Login Screen</screenName>
-    <screenName name="com.hotdealapp.ui2.MainV2">Home Screen</screenName>
-    <screenName name="com.hotdealapp.ui.LocationActivity">Location Screen</screenName>
-    <screenName name="com.hotdealapp.ui2.CategoryActivity">Category Screen</screenName>
-    <screenName name="com.hotdealapp.ui2.DetailProductActivity">Detail Screen</screenName>
-    <screenName name="com.hotdealapp.ui.CartActivity">Cart Screen</screenName>
-    <screenName name="com.hotdealapp.ui.ProfilesFragment">Profile Screen</screenName>
-    <screenName name="com.hotdealapp.ui.PaymentsActivity">Payment Screen</screenName>
-    <screenName name="com.hotdealapp.ui.DeliveryInfoActivity">Delivery Info Screen</screenName>
-    <screenName name="com.hotdealapp.ui.DeliveryInfoEditActivity">Edit Delivery Info Screen</screenName>
-    <screenName name="com.hotdealapp.ui.ForgotPassActivity">Forgot Password Screen</screenName>
-    <screenName name="com.hotdealapp.ui2.RegisterFragment">Register Screen</screenName>
-    <screenName name="com.hotdealapp.ui.SearchFragment">Search Screen</screenName>
-    <screenName name="com.hotdealapp.ui.AboutActivity">Support Screen</screenName> -->
-
-
-    <!--
-      See Project Structure -> Analytics -> Google Analytics -> Learn More
-      to learn more about configuring this file.
-    -->
 
 </resources>

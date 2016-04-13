@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class HomeF extends Fragment implements OnClickListener {
@@ -22,6 +23,7 @@ public class HomeF extends Fragment implements OnClickListener {
 	private RelativeLayout llMenu3;
 	private RelativeLayout llTintuc;
 	private RelativeLayout llMenu4M;
+	private LinearLayout llTopBar;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,12 +39,14 @@ public class HomeF extends Fragment implements OnClickListener {
 		super.onResume();
 		HotdealUtilities.showALog("Home RESUME");
 		Main.setTextTop("Vreal.vn");
+		llTopBar.setBackgroundResource(R.drawable.bg_home11);
 	}
 
 	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		llTopBar.setBackgroundResource(R.color.vreal_orange);
 		HotdealUtilities.showALog("Home PAUSE");
 	}
 
@@ -54,6 +58,7 @@ public class HomeF extends Fragment implements OnClickListener {
 		llMenu3 = (RelativeLayout) rootView.findViewById(R.id.llMenu3);
 		llTintuc = (RelativeLayout) rootView.findViewById(R.id.llTintuc);
 		llMenu4M = (RelativeLayout) rootView.findViewById(R.id.llMenu4M);
+		llTopBar = (LinearLayout) getActivity().findViewById(R.id.llTopBar);
 		HotdealUtilities.setHeight(img, 3);
 		llBanthue.setOnClickListener(this);
 		llDuanmoi.setOnClickListener(this);
