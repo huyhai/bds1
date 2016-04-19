@@ -4,6 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.net.Uri;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -16,6 +19,7 @@ public class VolleyRequestCustom extends Request<JSONObject> {
 
 	private Listener<JSONObject> listener;
 	private Map<String, String> params;
+	private String urlMy;
 
 	public VolleyRequestCustom(String url, Map<String, String> params,
 			Listener<JSONObject> reponseListener, ErrorListener errorListener) {

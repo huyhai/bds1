@@ -3,7 +3,7 @@ package com.hotdeal.libs;
 public class ConstantValue {
 	public static final String DATA_FRAGMENT = "datafragment";
 	public static final String DATA_ACTIVITY = "dataac";
-	public static final String URL_SERVER = "";
+	public static final String URL_SERVER = "http://vreal.vn/ServicesHandler/VrealApi.asmx";
 	public static final String IS_SUCCESS = "is_success";
 	public static final String CHANGE_CATE = "changecate";
 	public static final String REFRESH_SLIDE = "REFRESH_SLIDE";
@@ -48,9 +48,13 @@ public class ConstantValue {
 	
 	//param key
 	//API name
+	public static final String API="api";
+	
+	//key Error
+	public static final int HEIGHT_TOP_BAR =13;
 
 	
-	public static final int HEIGHT_TOP_BAR =13;
+	public static final int SUCCESS =102;
 	public static final int WIDTH_BACK =7;
 	public static final String COD = "1";
 	public static final String ONEPAY = "2";

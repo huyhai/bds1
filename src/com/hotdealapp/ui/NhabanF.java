@@ -12,7 +12,9 @@ import android.widget.RelativeLayout;
 
 import com.android.vrealapp.R;
 import com.hotdeal.libs.HotdealUtilities;
+import com.hotdeal.libs.NotifyDataListener;
 import com.hotdealapp.ui2.LoaiNhaDat;
+import com.hotdealvn.hotdealapp.DataManager2;
 
 public class NhabanF extends Fragment implements OnClickListener {
 	private RelativeLayout rlBatki;
@@ -33,9 +35,20 @@ public class NhabanF extends Fragment implements OnClickListener {
 
 	// private RelativeLayout rl5;
 
+	// DATA
+	private String proviceID = "-1";
+	private String proviceName="Tỉnh/Thành phố";
+	private String disID = "-1";
+	private String disName="Quận/Huyện";
+	private String areaID = "-1";
+	private String areaName="Diện tích";
+	private String priceID = "-1";
+	private String priceName="Mức giá";
+	private String wayID = "-1";
+	private String wayName="Hướng nhà";
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.nhaban, container, false);
 		initView(rootView);
 		return rootView;
@@ -88,7 +101,23 @@ public class NhabanF extends Fragment implements OnClickListener {
 		// rlLoai.setOnClickListener(this);
 		// rlLoai.setOnClickListener(this);
 		// rlLoai.setOnClickListener(this);
+		getProvice();
 
+	}
+
+	private void getProvice() {
+		DataManager2.getInstance().getProvice(getActivity(), true, false, new NotifyDataListener() {
+
+			@Override
+			public void onNotify(int id) {
+				if (NotifyDataListener.NOTIFY_OK == id) {
+
+				} else {
+
+				}
+
+			}
+		});
 	}
 
 	private void setSP(int batki, int l1, int l2, int l3, int l4, int l5) {
@@ -107,51 +136,37 @@ public class NhabanF extends Fragment implements OnClickListener {
 			HotdealUtilities.startActivity(getActivity(), LoaiNhaDat.class, "");
 
 		} else if (v == rlTinh) {
-			HotdealUtilities.showDialogCustomListView(getActivity());
+			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices());
 
 		} else if (v == rlQuan) {
-			HotdealUtilities.showDialogCustomListView(getActivity());
+			HotdealUtilities.showDialogCustomListView(getActivity(), null);
 
 		} else if (v == rlDT) {
-			HotdealUtilities.showDialogCustomListView(getActivity());
+			HotdealUtilities.showDialogCustomListView(getActivity(), null);
 
 		} else if (v == rlMG) {
-			HotdealUtilities.showDialogCustomListView(getActivity());
+			HotdealUtilities.showDialogCustomListView(getActivity(), null);
 
 		} else if (v == rlHuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity());
+			HotdealUtilities.showDialogCustomListView(getActivity(), null);
 
 		} else if (v == rlBatki) {
-			setSP(R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl1) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl2) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_choosen,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl3) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_choosen,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl4) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl5) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
-					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen);
 
 		}
 

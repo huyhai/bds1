@@ -28,6 +28,7 @@ import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
+import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.ServerError;
@@ -44,7 +45,7 @@ import com.hotdeal.libs.NotifyDataListener;
 import com.hotdeal.libs.SessionManager;
 import com.hotdeal.model.BannerHomeModel;
 import com.hotdeal.model.CateSildeModel;
-import com.hotdeal.model.CheckOutModel;
+import com.hotdeal.model.VrealModel;
 import com.hotdeal.model.CommentsModel;
 import com.hotdeal.model.DeliveryAddressModel;
 import com.hotdeal.model.DetailsModel;
@@ -63,18 +64,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by G8 on 1/25/2016.
  */
 public class DataManager2 {
 	VolleyRequestCustom jsonObjRequest;
-	// private final String TAG_REQUEST = "fuck_bitch";
+	private final String TAG_REQUEST = "fuck_bitch";
 	private RequestQueue mVolleyQueue;
 	private static DataManager2 ourInstance = new DataManager2();
 	// private ProgressDialog mProgress;
-	private final String KEY_MESSAGE = "message";
-	private final String KEY_ERROR = "error";
+	private final String KEY_MESSAGE = "Status";
+	private final String KEY_ERROR = "Code";
 	private final String KEY_DATA = "data";
 	private DatabaseHandler db;
 	private SessionManager sm;
@@ -102,17 +104,11 @@ public class DataManager2 {
 
 	public void showProgress(Activity activity) {
 		isShowPro = true;
-		// mProgress = ProgressDialog.show(activity, "", "Loading...");
-		// int v = R.layout.chochay;
-		// mProgress.setContentView(v);
-		// mProgress = ProgressDialog.show(activity, "", "", true, false);
-
 		try {
 			showDialog(activity);
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
-		
+
 	}
 
 	private Dialog dialogSelectImage;
@@ -138,9 +134,7 @@ public class DataManager2 {
 	public void stopProgress() {
 		try {
 			dialogSelectImage.dismiss();
-			// mProgress.cancel();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 		isShowPro = false;
@@ -161,16 +155,24 @@ public class DataManager2 {
 			showProgress(activity);
 
 		}
-		jsonObjRequest = new VolleyRequestCustom(Request.Method.POST, ConstantValue.URL_SERVER, parameters, new Response.Listener<JSONObject>() {
+		String urlServer;
+		int method;
+		if (isPost) {
+			method = Method.POST;
+			urlServer = ConstantValue.URL_SERVER;
+		} else {
+			method = Method.GET;
+			urlServer = makeUrl(parameters, ConstantValue.URL_SERVER + "/" + parameters.remove(ConstantValue.API));
+		}
+		jsonObjRequest = new VolleyRequestCustom(method, urlServer, parameters, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				try {
 					try {
-						setMessage(response.getString("message").toString());
+						setMessage(response.getString(KEY_MESSAGE).toString());
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-
 					HotdealUtilities.showALog(response.toString());
 					jsonObjectInterface.callResultJOb(activity, response);
 				} catch (Exception e) {
@@ -221,9 +223,24 @@ public class DataManager2 {
 		// Exceptions. Volley does retry for you if you have specified the
 		// policy.
 
-		jsonObjRequest.setRetryPolicy(new DefaultRetryPolicy(120000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-		jsonObjRequest.setTag(activity.getClass().getSimpleName());
+		jsonObjRequest.setRetryPolicy(new DefaultRetryPolicy(12000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+		jsonObjRequest.setTag(TAG_REQUEST);
 		getVolleyQueue(activity).add(jsonObjRequest);
+	}
+
+	private String makeUrl(HashMap<String, String> parameters, String urrl) {
+		Uri.Builder builder = Uri.parse(urrl).buildUpon();
+		for (Map.Entry<String, String> entry : parameters.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+			builder.appendQueryParameter(key, value);
+		}
+		return builder.toString();
+
+	}
+
+	public HashMap<String, String> getDefauldParams(String API) {
+		return parameters;
 	}
 
 	private void notifiUI(NotifyDataListener no, int value) {
@@ -232,45 +249,47 @@ public class DataManager2 {
 		}
 	}
 
-//	long timeStart = 0;
-//	private long server_time = 0;
+	private ArrayList<VrealModel> listProvices = new ArrayList<>();
 
-//	public long getTimesTamp(Activity ac) {
-//		if (sm != null) {
-//		} else {
-//			sm = new SessionManager(ac);
-//		}
-//		long timetap = 0;
-//		final long cu = HotdealUtilities.getCurrentTime();
-//		if (sm.getTimeStart() == 0) {
-//			sm.setTimeStart(cu);
-//			timetap = sm.getSVTime();
-//		} else {
-//			timetap = sm.getSVTime() + (cu - sm.getTimeStart());
-//		}
-//
-//		return timetap;
-//	}
-	public long getTimesTamp(Context ac) {
-		if (sm != null) {
-		} else {
-			sm = new SessionManager(ac);
-		}
-		long timetap = 0;
-		final long cu = HotdealUtilities.getCurrentTime();
-		if (sm.getTimeStart() == 0) {
-			sm.setTimeStart(cu);
-			timetap = sm.getSVTime();
-		} else {
-			timetap = sm.getSVTime() + (cu - sm.getTimeStart());
-		}
+	public void getProvice(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, "V_Province_GetAll");
+		builder.put("search", "");
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-		return timetap;
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("ProvinceList");
+						getListProvices().clear();
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setDataProvince(jSonOb);
+							getListProvices().add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
+					e.printStackTrace();
+				}
+
+			}
+		});
 	}
 
-	public HashMap<String, String> getDefauldParams(String API, Activity ac) {
-		parameters = new HashMap<String, String>();
-		return parameters;
+	public ArrayList<VrealModel> getListProvices() {
+		return listProvices;
 	}
-	
+
+	public void setListProvices(ArrayList<VrealModel> listProvices) {
+		this.listProvices = listProvices;
+	}
 }

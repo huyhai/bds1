@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
@@ -80,6 +81,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.maps.model.LatLng;
 import com.hotdeal.db.DatabaseHandler;
 import com.hotdeal.model.CateSildeModel;
+import com.hotdeal.model.VrealModel;
 import com.hotdealapp.ui2.Main;
 import com.hotdealvn.hotdealapp.DataManager2;
 import com.hotdealvn.hotdealapp.HotDealFragmentActivity;
@@ -615,7 +617,7 @@ public class HotdealUtilities {
 
 	public static void showLog(Object mess) {
 		try {
-			 Log.v("HAI", "HAILOG: " + mess);
+			Log.v("HAI", "HAILOG: " + mess);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -682,6 +684,17 @@ public class HotdealUtilities {
 			if (!jSonOb.getString(key).equals(JSONObject.NULL)) {
 				result = jSonOb.getString(key);
 			}
+		} catch (JSONException e) {
+			// showALog("getDataStrign loi");
+			// e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static boolean getDataBool(JSONObject jSonOb, String key) {
+		boolean result = false;
+		try {
+			result = jSonOb.getBoolean(key);
 		} catch (JSONException e) {
 			// showALog("getDataStrign loi");
 			// e.printStackTrace();
@@ -842,17 +855,17 @@ public class HotdealUtilities {
 		});
 	}
 
-	public static void showDialogCustomListView(final Context c) {
+	public static void showDialogCustomListView(final Context c, final ArrayList<VrealModel> listData) {
 		AlertDialog.Builder builderSingle = new AlertDialog.Builder(c);
 		// builderSingle.setIcon(R.drawable.ic_launcher);
 		// builderSingle.setTitle("Select One Name:-");
 
 		final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(c, android.R.layout.select_dialog_singlechoice);
-		arrayAdapter.add("Hardik");
-		arrayAdapter.add("Archit");
-		arrayAdapter.add("Jignesh");
-		arrayAdapter.add("Umang");
-		arrayAdapter.add("Gatti");
+		if (null != listData) {
+			for (VrealModel name : listData) {
+				 arrayAdapter.add(name.getProvinceName());
+			}
+		}
 
 		builderSingle.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
 			@Override
@@ -864,7 +877,7 @@ public class HotdealUtilities {
 		builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String strName = arrayAdapter.getItem(which);
+				String strName = listData.get(which).getProvinceName();
 				showToast(strName, Toast.LENGTH_SHORT, c);
 				// AlertDialog.Builder builderInner = new AlertDialog.Builder(
 				// c);
@@ -953,7 +966,6 @@ public class HotdealUtilities {
 		}
 
 	}
-
 
 	public static void callPhone(String num, final Activity ac) {
 		Intent intent = new Intent(Intent.ACTION_CALL);
