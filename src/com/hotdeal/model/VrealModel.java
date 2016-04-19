@@ -11,11 +11,12 @@ import com.hotdeal.libs.HotdealUtilities;
 
 public class VrealModel implements Serializable {
 	private static final long serialVersionUID = 1L;
-	//provice
+	// provice
 	private String id;
 	private String ProvinceName;
 	private boolean IsEnable;
 	private String ProvinceCode;
+	private boolean isChoosen;
 
 	public VrealModel() {
 
@@ -23,13 +24,28 @@ public class VrealModel implements Serializable {
 
 	public void setDataProvince(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "ProvinceName"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
+				"ProvinceName"));
 		this.setIsEnable(HotdealUtilities.getDataBool(jSonInfo, "IsEnable"));
-		this.setProvinceCode(HotdealUtilities.getDataString(jSonInfo, "ProvinceCode"));
-//		this.setShipping_cost(HotdealUtilities.getDataString(jSonInfo, "shipping_cost"));
-//		this.setQuantity(HotdealUtilities.getDataString(jSonInfo, "quantity"));
-//		this.setDiscounts(HotdealUtilities.getDataString(jSonInfo, "discounts"));
+		this.setProvinceCode(HotdealUtilities.getDataString(jSonInfo,
+				"ProvinceCode"));
+		setChoosen(false);
+		// this.setShipping_cost(HotdealUtilities.getDataString(jSonInfo,
+		// "shipping_cost"));
+		// this.setQuantity(HotdealUtilities.getDataString(jSonInfo,
+		// "quantity"));
+		// this.setDiscounts(HotdealUtilities.getDataString(jSonInfo,
+		// "discounts"));
 
+	}
+
+	public void setDataDistrict(JSONObject jSonInfo) throws JSONException {
+		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
+				"DistrictName"));
+		this.setIsEnable(HotdealUtilities.getDataBool(jSonInfo, "IsEnable"));
+		setChoosen(false);
+		
 	}
 
 	public String getId() {
@@ -62,6 +78,14 @@ public class VrealModel implements Serializable {
 
 	public void setProvinceCode(String provinceCode) {
 		ProvinceCode = provinceCode;
+	}
+
+	public boolean isChoosen() {
+		return isChoosen;
+	}
+
+	public void setChoosen(boolean isChoosen) {
+		this.isChoosen = isChoosen;
 	}
 
 }
