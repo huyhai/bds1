@@ -20,7 +20,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <com.hotdeal.pageindicator.TabPageIndicator
+    <com.vreal.pageindicator.TabPageIndicator
         android:id="@+id/indicator"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

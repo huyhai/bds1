@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.hotdeal.menuslide.InfiniteViewPager
+    <com.vreall.menuslide.InfiniteViewPager
         android:id="@+id/daimajia_slider_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.hotdeal.menuslide.PagerIndicator
+    <com.vreall.menuslide.PagerIndicator
         android:id="@+id/default_center_bottom_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:paddingBottom="@dimen/padding10"
         custom:shape="oval" />
 
-    <com.hotdeal.menuslide.PagerIndicator
+    <com.vreall.menuslide.PagerIndicator
         android:id="@+id/default_bottom_right_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:paddingBottom="@dimen/padding10"
         android:paddingRight="@dimen/padding10" />
 
-    <com.hotdeal.menuslide.PagerIndicator
+    <com.vreall.menuslide.PagerIndicator
         android:id="@+id/default_bottom_left_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:paddingBottom="@dimen/padding10"
         android:paddingLeft="@dimen/padding10" />
 
-    <com.hotdeal.menuslide.PagerIndicator
+    <com.vreall.menuslide.PagerIndicator
         android:id="@+id/default_center_top_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:gravity="center"
         android:paddingTop="@dimen/padding10" />
 
-    <com.hotdeal.menuslide.PagerIndicator
+    <com.vreall.menuslide.PagerIndicator
         android:id="@+id/default_center_top_right_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         android:paddingRight="@dimen/padding10"
         android:paddingTop="@dimen/padding10" />
 
-    <com.hotdeal.menuslide.PagerIndicator
+    <com.vreall.menuslide.PagerIndicator
         android:id="@+id/default_center_top_left_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

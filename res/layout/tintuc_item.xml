@@ -32,7 +32,7 @@
             android:background="@drawable/ic_muitendo" />
     </RelativeLayout>
 
-    <com.hotdeal.libs.TwoWayView
+    <com.vreal.libs.TwoWayView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
