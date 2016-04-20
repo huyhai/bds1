@@ -8,22 +8,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.hotdeal.libs.HotdealUtilities;
 import com.hotdeal.libs.NotifyDataListener;
+import com.hotdeal.libs.NotifySomesDataListener;
 import com.hotdealapp.ui2.LoaiNhaDat;
+import com.hotdealapp.ui2.VrealFragment;
 import com.hotdealvn.hotdealapp.DataManager2;
 
-public class NhabanF extends Fragment implements OnClickListener {
+public class NhabanF extends VrealFragment implements OnClickListener,
+		OnCheckedChangeListener {
 	private RelativeLayout rlBatki;
 	private RelativeLayout rl1;
 	private RelativeLayout rl2;
 	private RelativeLayout rl3;
 	private RelativeLayout rl4;
 	private RelativeLayout rl5;
-
+	private TextView tvTP;
+	private TextView tvQuan;
 	private RelativeLayout rlLoai;
 
 	private RelativeLayout rlTinh;
@@ -32,23 +40,25 @@ public class NhabanF extends Fragment implements OnClickListener {
 	private RelativeLayout rlDT;
 	private RelativeLayout rlMG;
 	private RelativeLayout rlHuong;
+	private Switch swLuu;
 
 	// private RelativeLayout rl5;
 
 	// DATA
 	private String proviceID = "-1";
-	private String proviceName="Tỉnh/Thành phố";
+	private String proviceName = "Tỉnh/Thành phố";
 	private String disID = "-1";
-	private String disName="Quận/Huyện";
+	private String disName = "Quận/Huyện";
 	private String areaID = "-1";
-	private String areaName="Diện tích";
+	private String areaName = "Diện tích";
 	private String priceID = "-1";
-	private String priceName="Mức giá";
+	private String priceName = "Mức giá";
 	private String wayID = "-1";
-	private String wayName="Hướng nhà";
+	private String wayName = "Hướng nhà";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.nhaban, container, false);
 		initView(rootView);
 		return rootView;
@@ -68,14 +78,14 @@ public class NhabanF extends Fragment implements OnClickListener {
 		rlDT = (RelativeLayout) rootView.findViewById(R.id.rlDT);
 		rlMG = (RelativeLayout) rootView.findViewById(R.id.rlMG);
 		rlHuong = (RelativeLayout) rootView.findViewById(R.id.rlHuong);
+		tvTP = (TextView) rootView.findViewById(R.id.tv);
+		tvQuan = (TextView) rootView.findViewById(R.id.tva);
 		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
 		// rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
 		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
 		// rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
 		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
-		// rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
-		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
-		// rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
+		swLuu = (Switch) rootView.findViewById(R.id.swLuu);
 
 		// int h=10;
 		// HotdealUtilities.setHeight(rl1, h);
@@ -96,6 +106,7 @@ public class NhabanF extends Fragment implements OnClickListener {
 		rl3.setOnClickListener(this);
 		rl4.setOnClickListener(this);
 		rl5.setOnClickListener(this);
+		swLuu.setOnCheckedChangeListener(this);
 		// rlLoai.setOnClickListener(this);
 		// rlLoai.setOnClickListener(this);
 		// rlLoai.setOnClickListener(this);
@@ -106,18 +117,34 @@ public class NhabanF extends Fragment implements OnClickListener {
 	}
 
 	private void getProvice() {
-		DataManager2.getInstance().getProvice(getActivity(), true, false, new NotifyDataListener() {
+		DataManager2.getInstance().getProvice(getActivity(), true, false,
+				new NotifyDataListener() {
 
-			@Override
-			public void onNotify(int id) {
-				if (NotifyDataListener.NOTIFY_OK == id) {
+					@Override
+					public void onNotify(int id) {
+						if (NotifyDataListener.NOTIFY_OK == id) {
+						} else {
 
-				} else {
+						}
 
-				}
+					}
+				});
+	}
 
-			}
-		});
+	private void getDistric(String dis) {
+		DataManager2.getInstance().getDistrict(getActivity(), true, false,
+				new NotifyDataListener() {
+
+					@Override
+					public void onNotify(int id) {
+						if (NotifyDataListener.NOTIFY_OK == id) {
+
+						} else {
+
+						}
+
+					}
+				}, dis);
 	}
 
 	private void setSP(int batki, int l1, int l2, int l3, int l4, int l5) {
@@ -136,37 +163,134 @@ public class NhabanF extends Fragment implements OnClickListener {
 			HotdealUtilities.startActivity(getActivity(), LoaiNhaDat.class, "");
 
 		} else if (v == rlTinh) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices());
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListProvices(),
+					new NotifySomesDataListener() {
+
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onReturnData(int id) {
+							try {
+								tvQuan.setText(disName);
+								tvTP.setText(DataManager2.getInstance()
+										.getListProvices().get(id)
+										.getProvinceName());
+								getDistric(DataManager2.getInstance()
+										.getListProvices().get(id).getId());
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+
+						}
+					});
 
 		} else if (v == rlQuan) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), null);
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListDistrict(),
+					new NotifySomesDataListener() {
+
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onReturnData(int id) {
+							tvQuan.setText(DataManager2.getInstance()
+									.getListDistrict().get(id)
+									.getProvinceName());
+
+						}
+					});
 
 		} else if (v == rlDT) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), null);
+			HotdealUtilities.showDialogCustomListView(getActivity(), null,
+					new NotifySomesDataListener() {
+
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onReturnData(int id) {
+							// TODO Auto-generated method stub
+
+						}
+					});
 
 		} else if (v == rlMG) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), null);
+			HotdealUtilities.showDialogCustomListView(getActivity(), null,
+					new NotifySomesDataListener() {
+
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onReturnData(int id) {
+							// TODO Auto-generated method stub
+
+						}
+					});
 
 		} else if (v == rlHuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), null);
+			HotdealUtilities.showDialogCustomListView(getActivity(), null,
+					new NotifySomesDataListener() {
+
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onReturnData(int id) {
+							// TODO Auto-generated method stub
+
+						}
+					});
 
 		} else if (v == rlBatki) {
-			setSP(R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl1) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl2) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_choosen,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none);
 
 		} else if (v == rl3) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_choosen,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl4) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none);
 
 		} else if (v == rl5) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen);
+			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none,
+					R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen);
 
 		}
 
@@ -186,6 +310,16 @@ public class NhabanF extends Fragment implements OnClickListener {
 		// HotdealUtilities.showDialogCustomListView(getActivity());
 		//
 		// }
+
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if (isChecked) {
+			sm.setSaveSetting(true);
+		} else {
+			sm.setSaveSetting(false);
+		}
 
 	}
 }
