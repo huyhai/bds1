@@ -3,7 +3,6 @@ package com.vreal.connection;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.net.Uri;
 
@@ -15,21 +14,20 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
 
-public class VolleyRequestCustom extends Request<JSONObject> {
+public class VolleyRequestCustom extends Request<String> {
 
-	private Listener<JSONObject> listener;
+	private Listener<String> listener;
 	private Map<String, String> params;
-	private String urlMy;
 
 	public VolleyRequestCustom(String url, Map<String, String> params,
-			Listener<JSONObject> reponseListener, ErrorListener errorListener) {
+			Listener<String> reponseListener, ErrorListener errorListener) {
 		super(Method.GET, url, errorListener);
 		this.listener = reponseListener;
 		this.params = params;
 	}
 
 	public VolleyRequestCustom(int method, String url, Map<String, String> params,
-			Listener<JSONObject> reponseListener, ErrorListener errorListener) {
+			Listener<String> reponseListener, ErrorListener errorListener) {
 		super(method, url, errorListener);
 		this.listener = reponseListener;
 		this.params = params;
@@ -41,21 +39,19 @@ public class VolleyRequestCustom extends Request<JSONObject> {
 	};
 
 	@Override
-	protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+	protected Response<String> parseNetworkResponse(NetworkResponse response) {
 		try {
 			String jsonString = new String(response.data,
 					HttpHeaderParser.parseCharset(response.headers));
-			return Response.success(new JSONObject(jsonString),
+			return Response.success(new String(jsonString),
 					HttpHeaderParser.parseCacheHeaders(response));
 		} catch (UnsupportedEncodingException e) {
 			return Response.error(new ParseError(e));
-		} catch (JSONException je) {
-			return Response.error(new ParseError(je));
 		}
 	}
 
 	@Override
-	protected void deliverResponse(JSONObject response) {
+	protected void deliverResponse(String response) {
 		// TODO Auto-generated method stub
 		listener.onResponse(response);
 	}

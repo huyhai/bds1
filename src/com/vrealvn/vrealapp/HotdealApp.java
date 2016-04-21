@@ -34,7 +34,7 @@ public class HotdealApp extends Application {
 	public static String regId = "";
 	public static boolean isClickPush = false;
 	public static String countNotify;
-	private static Context c;
+	private static Context context;
 	// public static String diaDiem="ĐỊA ĐIỂM";
 	// public static String sapXep="SẮP XẾP";
 
@@ -49,7 +49,7 @@ public class HotdealApp extends Application {
 		super.onCreate();
 		HashMap<String, String> ACRAData = new HashMap<String, String>();
 		ACRAData.put("App Name", getString(R.string.app_name));
-		c = this;
+		setContext(this);
 		// ACRAData.put("EMAIL", HotdealUtilities.email);
 //		ACRA.getErrorReporter().setReportSender(new ACRAPostSender(ACRAData));
 
@@ -63,19 +63,27 @@ public class HotdealApp extends Application {
 //		});
 	}
 
+	public static Context getContext() {
+		return context;
+	}
+
+	public static void setContext(Context context) {
+		HotdealApp.context = context;
+	}
+
 	/**
 	 * Gets the default {@link Tracker} for this {@link Application}.
 	 * 
 	 * @return tracker
 	 */
-	synchronized public static Tracker getDefaultTracker() {
-		if (null == mTracker) {
-			GoogleAnalytics analytics = GoogleAnalytics.getInstance(c);
-			// To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-			mTracker = analytics.newTracker(R.xml.tracker_info);
-		}
-		return mTracker;
-	}
+//	synchronized public static Tracker getDefaultTracker() {
+//		if (null == mTracker) {
+//			GoogleAnalytics analytics = GoogleAnalytics.getInstance(c);
+//			// To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+//			mTracker = analytics.newTracker(R.xml.tracker_info);
+//		}
+//		return mTracker;
+//	}
 
 
 }

@@ -15,4 +15,10 @@
         <item>TỈNH KHÁC</item>
     </string-array>
 
+    <string name="str_province">Tỉnh/Thành phố</string>
+    <string name="str_district">Quận/Huyện</string>
+    <string name="str_ward">Phường/Xã</string>
+    <string name="str_khuvuc">Khu vực</string>
+    <string name="str_street">Đường</string>
+
 </resources>

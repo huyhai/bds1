@@ -68,23 +68,10 @@ public class HomeF extends Fragment implements OnClickListener {
 		llMenu3.setOnClickListener(this);
 		llTintuc.setOnClickListener(this);
 		llMenu4M.setOnClickListener(this);
-		getTypeProperty();
 
 	}
 
-	private void getTypeProperty() {
-		DataManager2.getInstance().getTypeProperty(getActivity(), true, false, new NotifyDataListener() {
 
-			@Override
-			public void onNotify(int id) {
-				if (NotifyDataListener.NOTIFY_OK == id) {
-				} else {
-
-				}
-
-			}
-		});
-	}
 
 	@Override
 	public void onClick(View v) {

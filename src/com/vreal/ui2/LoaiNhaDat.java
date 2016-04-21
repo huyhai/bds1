@@ -42,7 +42,7 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		HotdealUtilities.setHeight(btnOK, 12);
 		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
 		rlToogle.setOnClickListener(this);
-		ArrayList<CateSildeModel> list=new ArrayList<>();
+		ArrayList<CateSildeModel> list = new ArrayList<>();
 		CateSildeModel md1;
 		CateSildeSubModel mdsub;
 		md1 = new CateSildeModel();
@@ -54,28 +54,23 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		list.add(md1);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán nhà riêng");
-		list.get(1).getListSub()
-				.add(mdsub);
+		list.get(1).getListSub().add(mdsub);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán nhà biệt thự, liền kề");
-		list.get(1).getListSub()
-				.add(mdsub);
+		list.get(1).getListSub().add(mdsub);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán nhà mặt phố");
-		list.get(1).getListSub()
-				.add(mdsub);
+		list.get(1).getListSub().add(mdsub);
 
 		md1 = new CateSildeModel();
 		md1.setName("Tất cả các loại đất bán");
 		list.add(md1);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán đất nền dự án");
-		list.get(2).getListSub()
-				.add(mdsub);
+		list.get(2).getListSub().add(mdsub);
 		mdsub = new CateSildeSubModel();
 		mdsub.setName("Bán đất");
-		list.get(2).getListSub()
-				.add(mdsub);
+		list.get(2).getListSub().add(mdsub);
 
 		md1 = new CateSildeModel();
 		md1.setName("Bán trang trại nghỉ dưỡng");
@@ -89,8 +84,10 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		md1.setName("Bán các loại bất động sản khác");
 		list.add(md1);
 
-		LoaiNhadatAdapter adapter = new LoaiNhadatAdapter(this,list, null);
+		LoaiNhadatAdapter adapter = new LoaiNhadatAdapter(this, list, null);
 		epLoai.setAdapter(adapter);
+		for (int i = 0; i < adapter.getGroupCount(); i++)
+			epLoai.expandGroup(i);
 	}
 
 	@Override

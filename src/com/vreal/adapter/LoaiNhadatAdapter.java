@@ -105,11 +105,11 @@ public class LoaiNhadatAdapter extends BaseExpandableListAdapter {
 				.findViewById(R.id.llAll);
 		// Picasso.with(_context).load(header.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(imgIC);
 		// llAll.setBackgroundResource(header.getBackground());
-		if (isExpanded&&header.getListSub().size()>0) {
-			imgICDown.setVisibility(View.VISIBLE);
-		} else {
-			imgICDown.setVisibility(View.GONE);
-		}
+//		if (isExpanded&&header.getListSub().size()>0) {
+//			imgICDown.setVisibility(View.VISIBLE);
+//		} else {
+//			imgICDown.setVisibility(View.GONE);
+//		}
 
 		lblListHeader.setText(header.getName());
 		HotdealUtilities.setWidthHeight(imgICDown, 22, 70);

@@ -49,6 +49,21 @@ public class ConstantValue {
 	//param key
 	//API name
 	public static final String API="api";
+	public static final String GET_CITY="V_Province_GetAllStatic";
+	public static final String GET_DIS="V_District_GetAllStatic";
+	public static final String GET_WARD="V_Ward_GetAllStatic";
+	public static final String GET_TYPE="V_RealNewsType_GetAll";
+	
+	public static final String GET_STREET="V_Street_GetAllStatic";
+	public static final String GET_KHUVUC="V_Area_GetAllStatic";
+//	public static final String GET_DIS="V_District_GetAllStatic";
+//	public static final String GET_WARD="V_Ward_GetAllStatic";
+//	public static final String GET_TYPE="V_RealNewsType_GetAll";
+//	public static final String API="api";
+//	public static final String GET_CITY="V_Province_GetAll";
+//	public static final String GET_DIS="V_District_GetAllStatic";
+//	public static final String GET_WARD="V_Ward_GetAllStatic";
+//	public static final String GET_TYPE="V_RealNewsType_GetAll";
 	
 	//key Error
 	public static final int HEIGHT_TOP_BAR =13;

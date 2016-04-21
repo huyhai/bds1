@@ -99,7 +99,9 @@ public class DataManager2 {
 	}
 
 	private DataManager2() {
-
+		if (null == sm) {
+			sm = new SessionManager(HotdealApp.getContext());
+		}
 	}
 
 	public void showProgress(Activity activity) {
@@ -149,7 +151,8 @@ public class DataManager2 {
 
 	private boolean isShowPro = false;
 
-	public void callServer(final Activity activity, HashMap<String, String> parameters, final boolean showPro, boolean isPost, final JsonObjectInterface jsonObjectInterface) {
+	public void callServer(final Activity activity, HashMap<String, String> parameters, final boolean showPro, boolean isPost, final JsonObjectInterface jsonObjectInterface,
+			final boolean isGetJsonArray) {
 		HotdealUtilities.showALog(parameters.toString());
 		if (showPro && !isShowPro) {
 			showProgress(activity);
@@ -164,20 +167,29 @@ public class DataManager2 {
 			method = Method.GET;
 			urlServer = makeUrl(parameters, ConstantValue.URL_SERVER + "/" + parameters.remove(ConstantValue.API));
 		}
-		jsonObjRequest = new VolleyRequestCustom(method, urlServer, parameters, new Response.Listener<JSONObject>() {
+		jsonObjRequest = new VolleyRequestCustom(method, urlServer, parameters, new Response.Listener<String>() {
 			@Override
-			public void onResponse(JSONObject response) {
-				try {
+			public void onResponse(String response) {
+				HotdealUtilities.showALog(response);
+				if (isGetJsonArray) {
+					JSONArray jsonResponse = null;
 					try {
-						setMessage(response.getString(KEY_MESSAGE).toString());
+						jsonResponse = new JSONArray(response);
 					} catch (Exception e) {
-						// TODO: handle exception
+						e.printStackTrace();
 					}
-					HotdealUtilities.showALog(response.toString());
-					jsonObjectInterface.callResultJOb(activity, response);
-				} catch (Exception e) {
-					e.printStackTrace();
+					jsonObjectInterface.callResultJAr(activity, jsonResponse);
+				} else {
+					JSONObject jsonResponse = null;
+					try {
+						jsonResponse = new JSONObject(response);
+						setMessage(jsonResponse.getString(KEY_MESSAGE).toString());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					jsonObjectInterface.callResultJOb(activity, jsonResponse);
 				}
+
 				if (showPro)
 					stopProgress();
 
@@ -211,7 +223,7 @@ public class DataManager2 {
 				} else if (error instanceof TimeoutError) {
 					setMessage(errorMess + " (Timeout Error)");
 				}
-				// HotdealUtilities.showALog(error.getMessage());
+				HotdealUtilities.showALog(error.getMessage());
 
 				jsonObjectInterface.callResultJOb(activity, null);
 				if (showPro)
@@ -243,9 +255,9 @@ public class DataManager2 {
 		return parameters;
 	}
 
-	private void notifiUI(NotifyDataListener no, int value) {
+	private void notifiUI(NotifyDataListener no, int value, String api) {
 		if (no != null) {
-			no.onNotify(value);
+			no.onNotify(api, value);
 		}
 	}
 
@@ -253,79 +265,224 @@ public class DataManager2 {
 
 	public void getProvice(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
-		builder.put(ConstantValue.API, "V_Province_GetAll");
-		builder.put("search", "");
+		builder.put(ConstantValue.API, ConstantValue.GET_CITY);
 		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
 			@Override
 			public void callResultJOb(Context activity, JSONObject result) {
-				try {
-					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-						JSONArray listJson;
-						listJson = result.getJSONArray("ProvinceList");
-						getListProvices().clear();
-						for (int i = 0; i < listJson.length(); i++) {
-							JSONObject jSonOb = new JSONObject();
-							jSonOb = listJson.getJSONObject(i);
-							VrealModel md = new VrealModel();
-							md.setDataProvince(jSonOb);
-							getListProvices().add(md);
-						}
-						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK);
-					} else {
-						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
-					}
-
-				} catch (Exception e) {
-					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
-					e.printStackTrace();
-				}
+				
 
 			}
-		});
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleProvice(result, notifyDataListener);
+
+			}
+		}, true);
+	}
+
+	public void handleProvice(JSONArray result, final NotifyDataListener notifyDataListener) {
+		try {
+			if (null != result) {
+				getListProvices().clear();
+				for (int i = 0; i < result.length(); i++) {
+					JSONObject jSonOb = new JSONObject();
+					jSonOb = result.getJSONObject(i);
+					VrealModel md = new VrealModel();
+					md.setDataProvince(jSonOb);
+					getListProvices().add(md);
+				}
+				sm.setProviceJson(result.toString());
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_CITY);
+			} else {
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_CITY);
+			}
+
+		} catch (Exception e) {
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_CITY);
+			e.printStackTrace();
+		}
 	}
 
 	private ArrayList<VrealModel> listDistrict = new ArrayList<>();
 
 	public void getDistrict(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String proUD) {
 		HashMap<String, String> builder = new HashMap<>();
-		builder.put(ConstantValue.API, "V_District_GetByProvinceID");
+		builder.put(ConstantValue.API, ConstantValue.GET_DIS);
 		builder.put("proID", proUD);
 		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
 			@Override
 			public void callResultJOb(Context activity, JSONObject result) {
-				try {
-					getListDistrict().clear();
-					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-						JSONArray listJson;
-						listJson = result.getJSONArray("DistrictList");
-						for (int i = 0; i < listJson.length(); i++) {
-							JSONObject jSonOb = new JSONObject();
-							jSonOb = listJson.getJSONObject(i);
-							VrealModel md = new VrealModel();
-							md.setDataDistrict(jSonOb);
-							getListDistrict().add(md);
-						}
-						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK);
-					} else {
-						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
-					}
-
-				} catch (Exception e) {
-					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
-					e.printStackTrace();
-				}
 
 			}
-		});
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleDistrict(result, notifyDataListener);
+
+			}
+		}, true);
+	}
+
+	public void handleDistrict(JSONArray result, final NotifyDataListener notifyDataListener) {
+		try {
+			getListDistrict().clear();
+			if (null != result) {
+				for (int i = 0; i < result.length(); i++) {
+					JSONObject jSonOb = new JSONObject();
+					jSonOb = result.getJSONObject(i);
+					VrealModel md = new VrealModel();
+					md.setDataDistrict(jSonOb);
+					getListDistrict().add(md);
+				}
+				sm.setDisJson(result.toString());
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_DIS);
+			} else {
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DIS);
+			}
+
+		} catch (Exception e) {
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DIS);
+			e.printStackTrace();
+		}
+	}
+
+	private ArrayList<VrealModel> listWard = new ArrayList<>();
+
+	public void getWard(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_WARD);
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleWard(result, notifyDataListener);
+
+			}
+		}, true);
+	}
+
+	public void handleWard(JSONArray result, final NotifyDataListener notifyDataListener) {
+		try {
+			getListWard().clear();
+			if (null != result) {
+				for (int i = 0; i < result.length(); i++) {
+					JSONObject jSonOb = new JSONObject();
+					jSonOb = result.getJSONObject(i);
+					VrealModel md = new VrealModel();
+					md.setDataWard(jSonOb);
+					getListWard().add(md);
+				}
+				sm.setWardJson(result.toString());
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_WARD);
+			} else {
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_WARD);
+			}
+
+		} catch (Exception e) {
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_WARD);
+			e.printStackTrace();
+		}
+	}
+
+	private ArrayList<VrealModel> listStreet = new ArrayList<>();
+
+	public void getStreet(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_STREET);
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleStreet(result, notifyDataListener);
+
+			}
+		}, true);
+	}
+
+	public void handleStreet(JSONArray result, final NotifyDataListener notifyDataListener) {
+		try {
+			getListStreet().clear();
+			if (null != result) {
+				for (int i = 0; i < result.length(); i++) {
+					JSONObject jSonOb = new JSONObject();
+					jSonOb = result.getJSONObject(i);
+					VrealModel md = new VrealModel();
+					md.setDataStreet(jSonOb);
+					getListStreet().add(md);
+				}
+				sm.setStreetJson(result.toString());
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_STREET);
+			} else {
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_STREET);
+			}
+
+		} catch (Exception e) {
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_STREET);
+			e.printStackTrace();
+		}
+	}
+
+	private ArrayList<VrealModel> listKhuvuc = new ArrayList<>();
+
+	public void getKhuvuc(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_KHUVUC);
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleKV(result, notifyDataListener);
+
+			}
+		}, true);
+	}
+
+	public void handleKV(JSONArray result, final NotifyDataListener notifyDataListener) {
+		try {
+			getListKhuvuc().clear();
+			if (null != result) {
+				for (int i = 0; i < result.length(); i++) {
+					JSONObject jSonOb = new JSONObject();
+					jSonOb = result.getJSONObject(i);
+					VrealModel md = new VrealModel();
+					md.setDataWard(jSonOb);
+					getListKhuvuc().add(md);
+				}
+				sm.setKhuVucJson(result.toString());
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_KHUVUC);
+			} else {
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_KHUVUC);
+			}
+
+		} catch (Exception e) {
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_KHUVUC);
+			e.printStackTrace();
+		}
 	}
 
 	private ArrayList<VrealModel> listTypeProperty = new ArrayList<>();
 
 	public void getTypeProperty(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
-		builder.put(ConstantValue.API, "V_RealNewsType_GetAll");
+		builder.put(ConstantValue.API, ConstantValue.GET_TYPE);
 		// builder.put("proID", proUD);
 		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
@@ -343,55 +500,63 @@ public class DataManager2 {
 							md.setTypeProperty(jSonOb);
 							getListTypeProperty().add(md);
 						}
-						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK);
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_TYPE);
 					} else {
-						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_TYPE);
 					}
 
 				} catch (Exception e) {
-					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_TYPE);
 					e.printStackTrace();
 				}
 
 			}
-		});
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
 	}
 
-//	private ArrayList<VrealModel> listTypeProperty = new ArrayList<>();
-//
-//	public void getTypeProperty(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
-//		HashMap<String, String> builder = new HashMap<>();
-//		builder.put(ConstantValue.API, "V_RealNewsType_GetAll");
-//		// builder.put("proID", proUD);
-//		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
-//
-//			@Override
-//			public void callResultJOb(Context activity, JSONObject result) {
-//				try {
-//					getListTypeProperty().clear();
-//					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-//						JSONArray listJson;
-//						listJson = result.getJSONArray("RealNewsTypeList");
-//						for (int i = 0; i < listJson.length(); i++) {
-//							JSONObject jSonOb = new JSONObject();
-//							jSonOb = listJson.getJSONObject(i);
-//							VrealModel md = new VrealModel();
-//							md.setTypeProperty(jSonOb);
-//							getListTypeProperty().add(md);
-//						}
-//						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK);
-//					} else {
-//						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
-//					}
-//
-//				} catch (Exception e) {
-//					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
-//					e.printStackTrace();
-//				}
-//
-//			}
-//		});
-//	}
+	// private ArrayList<VrealModel> listTypeProperty = new ArrayList<>();
+	//
+	// public void getTypeProperty(Activity activity, boolean showPro, boolean
+	// isPost, final NotifyDataListener notifyDataListener) {
+	// HashMap<String, String> builder = new HashMap<>();
+	// builder.put(ConstantValue.API, "V_RealNewsType_GetAll");
+	// // builder.put("proID", proUD);
+	// callServer(activity, builder, showPro, isPost, new JsonObjectInterface()
+	// {
+	//
+	// @Override
+	// public void callResultJOb(Context activity, JSONObject result) {
+	// try {
+	// getListTypeProperty().clear();
+	// if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+	// JSONArray listJson;
+	// listJson = result.getJSONArray("RealNewsTypeList");
+	// for (int i = 0; i < listJson.length(); i++) {
+	// JSONObject jSonOb = new JSONObject();
+	// jSonOb = listJson.getJSONObject(i);
+	// VrealModel md = new VrealModel();
+	// md.setTypeProperty(jSonOb);
+	// getListTypeProperty().add(md);
+	// }
+	// notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK);
+	// } else {
+	// notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
+	// }
+	//
+	// } catch (Exception e) {
+	// notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED);
+	// e.printStackTrace();
+	// }
+	//
+	// }
+	// });
+	// }
 
 	public ArrayList<VrealModel> getListProvices() {
 		return listProvices;
@@ -415,5 +580,29 @@ public class DataManager2 {
 
 	public void setListTypeProperty(ArrayList<VrealModel> listTypeProperty) {
 		this.listTypeProperty = listTypeProperty;
+	}
+
+	public ArrayList<VrealModel> getListWard() {
+		return listWard;
+	}
+
+	public void setListWard(ArrayList<VrealModel> listWard) {
+		this.listWard = listWard;
+	}
+
+	public ArrayList<VrealModel> getListStreet() {
+		return listStreet;
+	}
+
+	public void setListStreet(ArrayList<VrealModel> listStreet) {
+		this.listStreet = listStreet;
+	}
+
+	public ArrayList<VrealModel> getListKhuvuc() {
+		return listKhuvuc;
+	}
+
+	public void setListKhuvuc(ArrayList<VrealModel> listKhuvuc) {
+		this.listKhuvuc = listKhuvuc;
 	}
 }

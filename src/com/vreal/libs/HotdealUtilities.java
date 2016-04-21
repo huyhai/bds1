@@ -1260,33 +1260,33 @@ public class HotdealUtilities {
 		return android.os.Build.VERSION.SDK_INT;
 	}
 
-	public static void setEvent(String cate, String action, String label,
-			final Activity ac, String value1) {
-		long value = 0;
-		try {
-			value = Long.parseLong(value1);
-		} catch (Exception e) {
-		}
-		try {
-			// mTracker = HotdealApp.getDefaultTracker(ac);
-			HotdealApp.getDefaultTracker().send(
-					new HitBuilders.EventBuilder().setCategory(cate)
-							.setAction(action).setLabel(label).setValue(value)
-							.build());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void setScreen(String name) {
-		try {
-			HotdealApp.getDefaultTracker().setScreenName(name);
-			HotdealApp.getDefaultTracker().send(
-					new HitBuilders.ScreenViewBuilder().build());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-	}
+//	public static void setEvent(String cate, String action, String label,
+//			final Activity ac, String value1) {
+//		long value = 0;
+//		try {
+//			value = Long.parseLong(value1);
+//		} catch (Exception e) {
+//		}
+//		try {
+//			// mTracker = HotdealApp.getDefaultTracker(ac);
+//			HotdealApp.getDefaultTracker().send(
+//					new HitBuilders.EventBuilder().setCategory(cate)
+//							.setAction(action).setLabel(label).setValue(value)
+//							.build());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+//
+//	public static void setScreen(String name) {
+//		try {
+//			HotdealApp.getDefaultTracker().setScreenName(name);
+//			HotdealApp.getDefaultTracker().send(
+//					new HitBuilders.ScreenViewBuilder().build());
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//
+//	}
 }
