@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,19 +14,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
-import com.squareup.picasso.Picasso;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifyDataListener;
-import com.vreal.model.CateSildeModel;
+import com.vreal.libs.NotifyVreal;
 import com.vreal.model.CateSildeSubModel;
+import com.vreal.model.VrealModel;
 
 public class LoaiNhadatAdapter extends BaseExpandableListAdapter {
 	private Activity _context;
-	private ArrayList<CateSildeModel> _listDataHeader;
-	private NotifyDataListener notifi;
+	private ArrayList<VrealModel> _listDataHeader;
+	private NotifyVreal notifi;
 
-	public LoaiNhadatAdapter(Activity paramActivity,
-			ArrayList<CateSildeModel> paramList, final NotifyDataListener no) {
+	public LoaiNhadatAdapter(Activity paramActivity, ArrayList<VrealModel> paramList, final NotifyVreal no) {
 		this._context = paramActivity;
 		this._listDataHeader = paramList;
 		notifi = no;
@@ -42,29 +40,27 @@ public class LoaiNhadatAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, final int childPosition,
-			boolean isLastChild, View convertView, ViewGroup parent) {
+	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-		final CateSildeSubModel child = (CateSildeSubModel) getChild(
-				groupPosition, childPosition);
+		final VrealModel child = (VrealModel) getChild(groupPosition, childPosition);
 
 		if (convertView == null) {
-			LayoutInflater infalInflater = (LayoutInflater) this._context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.menu_items, null);
 		}
 
-		TextView txtListChild = (TextView) convertView
-				.findViewById(R.id.lblListItem);
-		txtListChild.setText(child.getName());
-		// convertView.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		//
-		// return true;
-		// }
-		// });
+		TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
+		txtListChild.setText(child.getProvinceName());
+		convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (null != notifi) {
+					notifi.onNotify(child);
+				}
+
+			}
+		});
 		return convertView;
 	}
 
@@ -87,31 +83,38 @@ public class LoaiNhadatAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,
-			View convertView, ViewGroup parent) {
-		CateSildeModel header = (CateSildeModel) getGroup(groupPosition);
-		
+	public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		final VrealModel header = (VrealModel) getGroup(groupPosition);
+
 		if (convertView == null) {
-			LayoutInflater infalInflater = (LayoutInflater) this._context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.list_group, null);
 		}
 
-		TextView lblListHeader = (TextView) convertView
-				.findViewById(R.id.lblListHeader);
-		ImageView imgICDown = (ImageView) convertView
-				.findViewById(R.id.imgICDown);
-		LinearLayout llAll = (LinearLayout) convertView
-				.findViewById(R.id.llAll);
+		TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
+		ImageView imgICDown = (ImageView) convertView.findViewById(R.id.imgICDown);
+		LinearLayout llAll = (LinearLayout) convertView.findViewById(R.id.llAll);
 		// Picasso.with(_context).load(header.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(imgIC);
 		// llAll.setBackgroundResource(header.getBackground());
-//		if (isExpanded&&header.getListSub().size()>0) {
-//			imgICDown.setVisibility(View.VISIBLE);
-//		} else {
-//			imgICDown.setVisibility(View.GONE);
-//		}
+		// if (isExpanded&&header.getListSub().size()>0) {
+		// imgICDown.setVisibility(View.VISIBLE);
+		// } else {
+		// imgICDown.setVisibility(View.GONE);
+		// }
+		convertView.setOnClickListener(new OnClickListener() {
 
-		lblListHeader.setText(header.getName());
+			@Override
+			public void onClick(View v) {
+				if (header.getListSub().size() == 0) {
+					if (null != notifi) {
+						notifi.onNotify(header);
+					}
+				}
+
+			}
+		});
+
+		lblListHeader.setText(header.getProvinceName());
 		HotdealUtilities.setWidthHeight(imgICDown, 22, 70);
 
 		return convertView;

@@ -270,7 +270,6 @@ public class DataManager2 {
 
 			@Override
 			public void callResultJOb(Context activity, JSONObject result) {
-				
 
 			}
 
@@ -520,6 +519,48 @@ public class DataManager2 {
 		}, false);
 	}
 
+	private ArrayList<VrealModel> listLoainhadat = new ArrayList<>();
+
+	public void getLoaiNhaDat(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String idType) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_LOAINHADAT);
+		builder.put("typeID", idType);
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListLoainhadat().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("RealNewsCateList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setLoaiNhaDat(jSonOb);
+							getListLoainhadat().add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_LOAINHADAT);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_LOAINHADAT);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_LOAINHADAT);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
+
 	// private ArrayList<VrealModel> listTypeProperty = new ArrayList<>();
 	//
 	// public void getTypeProperty(Activity activity, boolean showPro, boolean
@@ -604,5 +645,13 @@ public class DataManager2 {
 
 	public void setListKhuvuc(ArrayList<VrealModel> listKhuvuc) {
 		this.listKhuvuc = listKhuvuc;
+	}
+
+	public ArrayList<VrealModel> getListLoainhadat() {
+		return listLoainhadat;
+	}
+
+	public void setListLoainhadat(ArrayList<VrealModel> listLoainhadat) {
+		this.listLoainhadat = listLoainhadat;
 	}
 }

@@ -94,19 +94,19 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 		((Main) getActivity()).closeMenu();
 		if (position == 0) {
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new NhabanF());
+					.startFragment(new NhabanF(),"");
 		} else if (position == 1) {
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new NhabanF());
+					.startFragment(new NhabanF(),"");
 		} else if (position == 2) {
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new DuAnMoiF());
+					.startFragment(new DuAnMoiF(),"");
 		} else if (position == 3) {
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new TintucF());
+					.startFragment(new TintucF(),"");
 		} else if (position == 4) {
 			((HotDealFragmentActivity) getActivity())
-					.startFragment(new TimMoiGioiF());
+					.startFragment(new TimMoiGioiF(),"");
 		} else if (position == 5) {
 			// ((HotDealFragmentActivity) getActivity())
 			// .startFragment(new TimMoiGioiF());

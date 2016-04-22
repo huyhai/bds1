@@ -7,6 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,9 @@ import com.vreal.ui2.LoaiNhaDat;
 import com.vreal.ui2.VrealFragment;
 import com.vrealvn.vrealapp.DataManager2;
 import com.vrealvn.vrealapp.HotdealApp;
+import com.wiim.adapter.EventAdapter;
+import com.wiim.common.Utilities;
+import com.wiim.controllibs.UserFunctions;
 
 public class NhabanF extends VrealFragment implements OnClickListener, OnCheckedChangeListener {
 	private RelativeLayout rlBatki;
@@ -65,6 +72,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	// private TextView tvWard;
 	// private TextView tvWard;
 	// private TextView tvWard;
+	private String idType;
 
 	// DATA
 	private String proviceID = "-1";
@@ -83,8 +91,9 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	private String streetName = HotdealApp.getContext().getString(R.string.str_street);
 	private String wardID = "-1";
 	private String wardName = HotdealApp.getContext().getString(R.string.str_ward);
-	private String tyoeID = "-1";
-	private String typeName = "Chọn hình thức";
+
+	// private String tyoeID = "-1";
+	// private String typeName = "Chọn hình thức";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,8 +122,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			streetName = edito.get(SessionManager.KEY_DUONG);
 			wardID = edito.get(SessionManager.KEY_WARDID);
 			wardName = edito.get(SessionManager.KEY_WARD);
-			tyoeID = edito.get(SessionManager.KEY_TYPEID);
-			typeName = edito.get(SessionManager.KEY_TYPE);
+			// tyoeID = edito.get(SessionManager.KEY_TYPEID);
+			// typeName = edito.get(SessionManager.KEY_TYPE);
 		}
 		notifyData();
 
@@ -122,6 +131,11 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 
 	@Override
 	public void onDestroy() {
+		try {
+			getActivity().unregisterReceiver(receiver);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		if (sm.isSaveSetting()) {
 			HashMap<String, String> editor = new HashMap<>();
 			editor.put(SessionManager.KEY_PROVICE, proviceName);
@@ -140,14 +154,15 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			editor.put(SessionManager.KEY_DUONGID, streetID);
 			editor.put(SessionManager.KEY_WARDID, wardID);
 			editor.put(SessionManager.KEY_WARD, wardName);
-			editor.put(SessionManager.KEY_TYPEID, tyoeID);
-			editor.put(SessionManager.KEY_TYPE, typeName);
+			// editor.put(SessionManager.KEY_TYPEID, tyoeID);
+			// editor.put(SessionManager.KEY_TYPE, typeName);
 			sm.setSettings(editor);
 		}
 		super.onDestroy();
 	}
 
 	private void initView(View rootView) {
+		idType = HotdealUtilities.getDataFragment(this);
 		rlBatki = (RelativeLayout) rootView.findViewById(R.id.rlBatki);
 		rl1 = (RelativeLayout) rootView.findViewById(R.id.rl1);
 		rl2 = (RelativeLayout) rootView.findViewById(R.id.rl2);
@@ -226,7 +241,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		tvKV.setText(KVName);
 		tvDuong.setText(streetName);
 		swLuu.setChecked(sm.isSaveSetting());
-		tvHinhthuc.setText(typeName);
+		// tvHinhthuc.setText(typeName);
 	}
 
 	NotifyDataListener notifyData = new NotifyDataListener() {
@@ -299,10 +314,11 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 				}
 
 			} else if (api.equals(ConstantValue.GET_KHUVUC)) {
-				getTypeProperty();
-				
+				// getTypeProperty();
+				DataManager2.getInstance().stopProgress();
+
 			} else if (api.equals(ConstantValue.GET_TYPE)) {
-				 DataManager2.getInstance().stopProgress();
+				// DataManager2.getInstance().stopProgress();
 			}
 			// else if (api.equals(ConstantValue.GET_DIS)) {
 			//
@@ -334,9 +350,10 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		DataManager2.getInstance().getKhuvuc(getActivity(), false, false, notifyData);
 	}
 
-	private void getTypeProperty() {
-		DataManager2.getInstance().getTypeProperty(getActivity(), false, false, notifyData);
-	}
+	// private void getTypeProperty() {
+	// DataManager2.getInstance().getTypeProperty(getActivity(), false, false,
+	// notifyData);
+	// }
 
 	private void setSP(int batki, int l1, int l2, int l3, int l4, int l5) {
 		rlBatki.setBackgroundResource(batki);
@@ -353,13 +370,36 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	// return aaa;
 	//
 	// }
-//	
+	//
+	BroadcastReceiver receiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equalsIgnoreCase("ABC")) {
+				if (intent.getExtras().getBoolean(ConstantValue.IS_SUCCESS)) {
+					EventAdapter adapter = new EventAdapter(getActivity(), UserFunctions.getInstance().getLishEventModel());
+					lvEvent.setAdapter(adapter);
+				} else {
+					Utilities.showDialogNoBack(getActivity(), UserFunctions.getInstance().getMessage()).show();
+				}
+			}
+		}
+	};
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		IntentFilter intentGetKeySend = new IntentFilter();
+		intentGetKeySend.addAction("ABC");
+		getActivity().registerReceiver(receiver, intentGetKeySend);
+	}
 
 	@Override
 	public void onClick(View v) {
 		// HotdealUtilities.setClickAnim(v);
 		if (v == rlLoai) {
-			HotdealUtilities.startActivity(getActivity(), LoaiNhaDat.class, "");
+			HotdealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, idType);
 
 		} else if (v == rlTinh) {
 			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
@@ -543,7 +583,6 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 						KVName = DataManager2.getInstance().getListKhuvuc().get(id).getProvinceName();
 						notifyData();
 					} catch (Exception e) {
-						// TODO: handle exception
 					}
 
 				}
@@ -554,7 +593,6 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 
 				@Override
 				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
 
 				}
 
@@ -572,27 +610,31 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			});
 
 		} else if (v == rlHT) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListTypeProperty(),new NotifySomesDataListener() {
-				
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onReturnData(int id) {
-					try {
-						tyoeID = DataManager2.getInstance().getListTypeProperty().get(id).getId();
-						typeName = DataManager2.getInstance().getListTypeProperty().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-
-					
-				}
-			});
+			// HotdealUtilities.showDialogCustomListView(getActivity(),
+			// DataManager2.getInstance().getListTypeProperty(),new
+			// NotifySomesDataListener() {
+			//
+			// @Override
+			// public void onReturnDataString(String id) {
+			// // TODO Auto-generated method stub
+			//
+			// }
+			//
+			// @Override
+			// public void onReturnData(int id) {
+			// try {
+			// tyoeID =
+			// DataManager2.getInstance().getListTypeProperty().get(id).getId();
+			// typeName =
+			// DataManager2.getInstance().getListTypeProperty().get(id).getProvinceName();
+			// notifyData();
+			// } catch (Exception e) {
+			// // TODO: handle exception
+			// }
+			//
+			//
+			// }
+			// });
 
 		}
 		// else if (v == rlTinh) {

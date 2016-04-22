@@ -56,7 +56,7 @@ public class ConstantValue {
 	
 	public static final String GET_STREET="V_Street_GetAllStatic";
 	public static final String GET_KHUVUC="V_Area_GetAllStatic";
-//	public static final String GET_DIS="V_District_GetAllStatic";
+	public static final String GET_LOAINHADAT="V_RealNewsCate_GetByTypeID";
 //	public static final String GET_WARD="V_Ward_GetAllStatic";
 //	public static final String GET_TYPE="V_RealNewsType_GetAll";
 //	public static final String API="api";

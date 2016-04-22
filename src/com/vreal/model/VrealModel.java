@@ -22,6 +22,8 @@ public class VrealModel implements Serializable {
 	private String streetID;
 	private String wardID;
 
+	private ArrayList<VrealModel> listSub;
+
 	public VrealModel() {
 
 	}
@@ -75,6 +77,25 @@ public class VrealModel implements Serializable {
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "TypeName"));
 		setChoosen(false);
 
+	}
+
+	public void setListSub(JSONObject jSonInfo) throws JSONException {
+		setChoosen(false);
+
+	}
+
+	public void setLoaiNhaDat(JSONObject jSonInfo) throws JSONException {
+		this.setId(HotdealUtilities.getDataString(jSonInfo, "RealNewsTypeID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "RealsCateName"));
+		JSONArray listJson = jSonInfo.getJSONArray("V_RealNews");
+		getListSub().clear();
+		for (int i = 0; i < listJson.length(); i++) {
+			JSONObject jSonOb = new JSONObject();
+			jSonOb = listJson.getJSONObject(i);
+			VrealModel md = new VrealModel();
+			md.setListSub(jSonOb);
+			getListSub().add(md);
+		}
 	}
 
 	public String getId() {
@@ -147,6 +168,18 @@ public class VrealModel implements Serializable {
 
 	public void setWardID(String wardID) {
 		this.wardID = wardID;
+	}
+
+	public ArrayList<VrealModel> getListSub() {
+		if (null != listSub) {
+			return listSub;
+		} else {
+			return listSub = new ArrayList<VrealModel>();
+		}
+	}
+
+	public void setListSub(ArrayList<VrealModel> listSub) {
+		this.listSub = listSub;
 	}
 
 }

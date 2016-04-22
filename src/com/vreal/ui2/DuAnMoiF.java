@@ -58,7 +58,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 
 		@Override
 		public void onReturnData(int id) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new SearchF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new SearchF(),"");
 			// HotdealUtilities.startActivity(getActivity(), DetailF.class, "");
 
 		}
@@ -74,9 +74,9 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == rlFilter) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF(),"");
 		} else if (v == rlMap) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new MapF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new MapF(),"");
 		}
 
 	}

@@ -1,5 +1,7 @@
 package com.vreal.ui2;
 
+import java.util.StringTokenizer;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -12,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hotdealvn.hotdealapp.DataManager2;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -19,6 +22,8 @@ import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vrealvn.vrealapp.HotDealFragmentActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 
 import com.android.vrealapp.R;
@@ -45,7 +50,7 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 		setContentView(R.layout.activity_main_v2);
 		init();
 		initView();
-		startFragment(new HomeF());
+		startFragment(new HomeF(), "");
 		startSlide(new MenuSlide());
 	}
 
@@ -133,5 +138,14 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 	public void closeMenu() {
 		mDrawerLayout.closeDrawer(left_drawerV2);
 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		if (requestCode == 1) {
+//			if (resultCode == Activity.RESULT_OK) {
+//				String pos1 = data.getStringExtra("result");
+//			}
+//		}
 	}
 }

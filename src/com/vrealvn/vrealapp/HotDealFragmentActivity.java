@@ -157,7 +157,7 @@ public class HotDealFragmentActivity extends FragmentActivity {
 		// fragmentTS.commit();
 	}
 
-	public void startFragment(Fragment fragment) {
+	public void startFragment(Fragment fragment, String dataString) {
 		String backStateName = fragment.getClass().getName();
 
 		FragmentManager manager = getSupportFragmentManager();
@@ -168,6 +168,9 @@ public class HotDealFragmentActivity extends FragmentActivity {
 			ft.replace(R.id.fragment_container, fragment);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.addToBackStack(backStateName);
+			Bundle bundle = new Bundle();
+			bundle.putString(ConstantValue.DATA_FRAGMENT, dataString);
+			fragment.setArguments(bundle);
 			ft.commit();
 		}
 	}

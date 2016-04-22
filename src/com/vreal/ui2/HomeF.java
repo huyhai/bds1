@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class HomeF extends Fragment implements OnClickListener {
 	private ImageView img;
@@ -26,6 +27,8 @@ public class HomeF extends Fragment implements OnClickListener {
 	private RelativeLayout llTintuc;
 	private RelativeLayout llMenu4M;
 	private LinearLayout llTopBar;
+	private TextView tv1;
+	private TextView tv2;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class HomeF extends Fragment implements OnClickListener {
 		llTintuc = (RelativeLayout) rootView.findViewById(R.id.llTintuc);
 		llMenu4M = (RelativeLayout) rootView.findViewById(R.id.llMenu4M);
 		llTopBar = (LinearLayout) getActivity().findViewById(R.id.llTopBar);
+		tv1 = (TextView) rootView.findViewById(R.id.tv1);
+		tv2 = (TextView) rootView.findViewById(R.id.tv2);
 		HotdealUtilities.setHeight(img, 3);
 		llBanthue.setOnClickListener(this);
 		llDuanmoi.setOnClickListener(this);
@@ -69,26 +74,54 @@ public class HomeF extends Fragment implements OnClickListener {
 		llTintuc.setOnClickListener(this);
 		llMenu4M.setOnClickListener(this);
 
+		getTypeProperty();
 	}
 
+	private void getTypeProperty() {
+		DataManager2.getInstance().getTypeProperty(getActivity(), true, false, new NotifyDataListener() {
 
+			@Override
+			public void onNotify(String api, int id) {
+				if (DataManager2.getInstance().getListTypeProperty().size() > 0) {
+					try {
+						tv1.setText(DataManager2.getInstance().getListTypeProperty().get(0).getProvinceName());
+						tv2.setText(DataManager2.getInstance().getListTypeProperty().get(1).getProvinceName());
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+
+			}
+		});
+	}
 
 	@Override
 	public void onClick(View v) {
 		HotdealUtilities.setClickAnim(v);
 		if (v == llBanthue) {
-
-			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF());
+			String id="";
+			try {
+				id=DataManager2.getInstance().getListTypeProperty().get(0).getId();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
 		} else if (v == llDuanmoi) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF());
+			String id="";
+			try {
+				id=DataManager2.getInstance().getListTypeProperty().get(1).getId();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
 		} else if (v == llMenu4) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
 		} else if (v == llMenu3) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
 		} else if (v == llTintuc) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new TintucF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new TintucF(), "");
 		} else if (v == llMenu4M) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new TimMoiGioiF());
+			((HotDealFragmentActivity) getActivity()).startFragment(new TimMoiGioiF(), "");
 		}
 	}
 }
