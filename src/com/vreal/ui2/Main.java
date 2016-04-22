@@ -1,7 +1,7 @@
 package com.vreal.ui2;
 
-import java.util.StringTokenizer;
-
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -11,22 +11,14 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hotdealvn.hotdealapp.DataManager2;
+import com.android.vrealapp.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.vreal.libs.HotdealUtilities;
-import com.vreal.libs.NotifySomesDataListener;
 import com.vrealvn.vrealapp.HotDealFragmentActivity;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-
-import com.android.vrealapp.R;
 
 public class Main extends HotDealFragmentActivity implements OnClickListener {
 	public static ImageLoader imageLoader;

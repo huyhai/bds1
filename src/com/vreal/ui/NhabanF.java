@@ -2,10 +2,12 @@ package com.vreal.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xml.sax.DTDHandler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
@@ -23,27 +26,28 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
+import com.vreal.adapter.DealHomeItemAdapter;
+import com.vreal.adapter.SoPhongAdapter;
 import com.vreal.libs.ConstantValue;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.libs.SessionManager;
+import com.vreal.libs.TwoWayView;
 import com.vreal.model.VrealModel;
 import com.vreal.ui2.LoaiNhaDat;
 import com.vreal.ui2.VrealFragment;
 import com.vrealvn.vrealapp.DataManager2;
 import com.vrealvn.vrealapp.HotdealApp;
-import com.wiim.adapter.EventAdapter;
-import com.wiim.common.Utilities;
-import com.wiim.controllibs.UserFunctions;
 
-public class NhabanF extends VrealFragment implements OnClickListener, OnCheckedChangeListener {
-	private RelativeLayout rlBatki;
-	private RelativeLayout rl1;
-	private RelativeLayout rl2;
-	private RelativeLayout rl3;
-	private RelativeLayout rl4;
-	private RelativeLayout rl5;
+public class NhabanF extends VrealFragment implements OnClickListener,
+		OnCheckedChangeListener {
+	// private RelativeLayout rlBatki;
+	// private RelativeLayout rl1;
+	// private RelativeLayout rl2;
+	// private RelativeLayout rl3;
+	// private RelativeLayout rl4;
+	// private RelativeLayout rl5;
 	private TextView tvTP;
 	private TextView tvQuan;
 	private RelativeLayout rlLoai;
@@ -64,39 +68,52 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	private RelativeLayout rlDuong;
 	private TextView tvHinhthuc;
 	private RelativeLayout rlHT;
-	// private TextView tvWard;
-	// private TextView tvWard;
-	// private TextView tvWard;
-	// private TextView tvWard;
-	// private TextView tvWard;
-	// private TextView tvWard;
+	private TextView tvLoai;
+	private TextView tvDientich;
+	private TextView tvMucgia;
+	private TextView tvHuongnha;
+	private TwoWayView lvSP;
+	private Button btnTimkiem;
 	// private TextView tvWard;
 	// private TextView tvWard;
 	private String idType;
 
 	// DATA
-	private String proviceID = "-1";
-	private String proviceName = HotdealApp.getContext().getString(R.string.str_province);
-	private String disID = "-1";
-	private String disName = HotdealApp.getContext().getString(R.string.str_district);
-	// private String areaID = "-1";
+	private String defauldID="";
+	private String proviceID = defauldID;
+	private String proviceName = HotdealApp.getContext().getString(
+			R.string.str_province);
+	private String disID = defauldID;
+	private String disName = HotdealApp.getContext().getString(
+			R.string.str_district);
 	private String areaName = "Diện tích";
-	// private String priceID = "-1";
 	private String priceName = "Mức giá";
-	private String wayID = "-1";
+	private String wayID = defauldID;
 	private String wayName = "Hướng nhà";
-	private String KVID = "-1";
-	private String KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
-	private String streetID = "-1";
-	private String streetName = HotdealApp.getContext().getString(R.string.str_street);
-	private String wardID = "-1";
-	private String wardName = HotdealApp.getContext().getString(R.string.str_ward);
-
-	// private String tyoeID = "-1";
-	// private String typeName = "Chọn hình thức";
+	private String KVID = defauldID;
+	private String KVName = HotdealApp.getContext().getString(
+			R.string.str_khuvuc);
+	private String streetID = defauldID;
+	private String streetName = HotdealApp.getContext().getString(
+			R.string.str_street);
+	private String wardID = defauldID;
+	private String wardName = HotdealApp.getContext().getString(
+			R.string.str_ward);
+	private String loaiID = defauldID;
+	private String loaiName = "Chọn loại";
+	private String dientichFrom = defauldID;
+	private String dientichTo = defauldID;
+	private String dientichName = "Chọn diện tích";
+	private String giaFrom = defauldID;
+	private String giaTo = defauldID;
+	private String giaName = "Chọn giá";
+	private String huongID = defauldID;
+	private String huongName = "Chọn hướng nhà";
+	private String soPhong = "0";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.nhaban, container, false);
 		initView(rootView);
 		initSaveData();
@@ -110,9 +127,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			proviceName = edito.get(SessionManager.KEY_PROVICE);
 			disID = edito.get(SessionManager.KEY_DISID);
 			disName = edito.get(SessionManager.KEY_DIS);
-			// areaID = "-1";
 			areaName = edito.get(SessionManager.KEY_AREA);
-			// priceID = "-1";
 			priceName = edito.get(SessionManager.KEY_PRICE);
 			wayID = edito.get(SessionManager.KEY_WAYID);
 			wayName = edito.get(SessionManager.KEY_WAY);
@@ -122,8 +137,17 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			streetName = edito.get(SessionManager.KEY_DUONG);
 			wardID = edito.get(SessionManager.KEY_WARDID);
 			wardName = edito.get(SessionManager.KEY_WARD);
-			// tyoeID = edito.get(SessionManager.KEY_TYPEID);
-			// typeName = edito.get(SessionManager.KEY_TYPE);
+			loaiID = edito.get(SessionManager.KEY_TYPEID);
+			loaiName = edito.get(SessionManager.KEY_TYPE);
+			dientichFrom = edito.get(SessionManager.KEY_DTFROM);
+			dientichTo = edito.get(SessionManager.KEY_DTTO);
+			dientichName = edito.get(SessionManager.KEY_DTNAME);
+			giaFrom = edito.get(SessionManager.KEY_GIAFROM);
+			giaTo = edito.get(SessionManager.KEY_GIATO);
+			giaName = edito.get(SessionManager.KEY_GIANAME);
+			huongID = edito.get(SessionManager.HUONGID);
+			huongName = edito.get(SessionManager.HUONGNAME);
+			soPhong = edito.get(SessionManager.SOPHONG);
 		}
 		notifyData();
 
@@ -154,8 +178,17 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			editor.put(SessionManager.KEY_DUONGID, streetID);
 			editor.put(SessionManager.KEY_WARDID, wardID);
 			editor.put(SessionManager.KEY_WARD, wardName);
-			// editor.put(SessionManager.KEY_TYPEID, tyoeID);
-			// editor.put(SessionManager.KEY_TYPE, typeName);
+			editor.put(SessionManager.KEY_TYPEID, loaiID);
+			editor.put(SessionManager.KEY_TYPE, loaiName);
+			editor.put(SessionManager.KEY_DTFROM, dientichFrom);
+			editor.put(SessionManager.KEY_DTTO, dientichTo);
+			editor.put(SessionManager.KEY_DTNAME, dientichName);
+			editor.put(SessionManager.KEY_GIAFROM, giaFrom);
+			editor.put(SessionManager.KEY_GIATO, giaTo);
+			editor.put(SessionManager.KEY_GIANAME, giaName);
+			editor.put(SessionManager.HUONGID, huongID);
+			editor.put(SessionManager.HUONGNAME, huongName);
+			editor.put(SessionManager.SOPHONG, soPhong);
 			sm.setSettings(editor);
 		}
 		super.onDestroy();
@@ -163,12 +196,12 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 
 	private void initView(View rootView) {
 		idType = HotdealUtilities.getDataFragment(this);
-		rlBatki = (RelativeLayout) rootView.findViewById(R.id.rlBatki);
-		rl1 = (RelativeLayout) rootView.findViewById(R.id.rl1);
-		rl2 = (RelativeLayout) rootView.findViewById(R.id.rl2);
-		rl3 = (RelativeLayout) rootView.findViewById(R.id.rl3);
-		rl4 = (RelativeLayout) rootView.findViewById(R.id.rl4);
-		rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
+		// rlBatki = (RelativeLayout) rootView.findViewById(R.id.rlBatki);
+		// rl1 = (RelativeLayout) rootView.findViewById(R.id.rl1);
+		// rl2 = (RelativeLayout) rootView.findViewById(R.id.rl2);
+		// rl3 = (RelativeLayout) rootView.findViewById(R.id.rl3);
+		// rl4 = (RelativeLayout) rootView.findViewById(R.id.rl4);
+		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
 		rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
 
 		rlTinh = (RelativeLayout) rootView.findViewById(R.id.rlTinh);
@@ -187,9 +220,18 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		rlDuong = (RelativeLayout) rootView.findViewById(R.id.rlDuong);
 		tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
 		rlHT = (RelativeLayout) rootView.findViewById(R.id.rlHT);
+		lvSP = (TwoWayView) rootView.findViewById(R.id.lvSP);
+		btnTimkiem = (Button) rootView.findViewById(R.id.btnTimkiem);
 		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
-		// rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
-		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
+		tvLoai = (TextView) rootView.findViewById(R.id.tvLoai);
+		tvDientich = (TextView) rootView.findViewById(R.id.tvDientich);
+		tvMucgia = (TextView) rootView.findViewById(R.id.tvMucgia);
+		tvHuongnha = (TextView) rootView.findViewById(R.id.tvHuongnha);
+		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
+		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
+		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
+		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
+
 		swLuu = (Switch) rootView.findViewById(R.id.swLuu);
 
 		// int h=10;
@@ -205,18 +247,18 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		rlDT.setOnClickListener(this);
 		rlMG.setOnClickListener(this);
 		rlHuong.setOnClickListener(this);
-		rlBatki.setOnClickListener(this);
-		rl1.setOnClickListener(this);
-		rl2.setOnClickListener(this);
-		rl3.setOnClickListener(this);
-		rl4.setOnClickListener(this);
-		rl5.setOnClickListener(this);
+		// rlBatki.setOnClickListener(this);
+		// rl1.setOnClickListener(this);
+		// rl2.setOnClickListener(this);
+		// rl3.setOnClickListener(this);
+		// rl4.setOnClickListener(this);
+		// rl5.setOnClickListener(this);
 		rlKhuVuc.setOnClickListener(this);
 		swLuu.setOnCheckedChangeListener(this);
 		rlHuyen.setOnClickListener(this);
 		rlDuong.setOnClickListener(this);
 		rlHT.setOnClickListener(this);
-		// rlLoai.setOnClickListener(this);
+		btnTimkiem.setOnClickListener(this);
 		// rlLoai.setOnClickListener(this);
 		// rlLoai.setOnClickListener(this);
 		DataManager2.getInstance().showProgress(getActivity());
@@ -241,7 +283,11 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		tvKV.setText(KVName);
 		tvDuong.setText(streetName);
 		swLuu.setChecked(sm.isSaveSetting());
-		// tvHinhthuc.setText(typeName);
+		tvLoai.setText(loaiName);
+		tvDientich.setText(dientichName);
+		tvMucgia.setText(giaName);
+		tvHuongnha.setText(huongName);
+
 	}
 
 	NotifyDataListener notifyData = new NotifyDataListener() {
@@ -259,7 +305,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}
-						DataManager2.getInstance().handleDistrict(job, notifyData);
+						DataManager2.getInstance().handleDistrict(job,
+								notifyData);
 					}
 				} else {
 
@@ -291,7 +338,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}
-						DataManager2.getInstance().handleStreet(job, notifyData);
+						DataManager2.getInstance()
+								.handleStreet(job, notifyData);
 					}
 				} else {
 
@@ -314,11 +362,12 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 				}
 
 			} else if (api.equals(ConstantValue.GET_KHUVUC)) {
-				// getTypeProperty();
-				DataManager2.getInstance().stopProgress();
+				getHuong();
 
-			} else if (api.equals(ConstantValue.GET_TYPE)) {
-				// DataManager2.getInstance().stopProgress();
+			} else if (api.equals(ConstantValue.GET_HUONG)) {
+				setDataDienTichAndGia();
+
+				DataManager2.getInstance().stopProgress();
 			}
 			// else if (api.equals(ConstantValue.GET_DIS)) {
 			//
@@ -329,25 +378,80 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		}
 
 	};
+	SoPhongAdapter adapterList;
+
+	private void setDataDienTichAndGia() {
+		DataManager2.getInstance().getListGia()
+				.addAll(HotdealUtilities.setDataGia());
+		DataManager2.getInstance().getListDientich()
+				.addAll(HotdealUtilities.setDataDienTich());
+		adapterList = new SoPhongAdapter(getActivity(),
+				HotdealUtilities.setDataSoPhong(), notifySP,
+				Integer.parseInt(soPhong));
+		lvSP.setAdapter(adapterList);
+		lvSP.setHorizontalScrollBarEnabled(false);
+		lvSP.setItemMargin(10);
+	}
+
+	NotifyDataListener notifySP = new NotifyDataListener() {
+
+		@Override
+		public void onNotify(String api, final int id) {
+			soPhong = id + "";
+			lvSP.post(new Runnable() {
+
+				@Override
+				public void run() {
+					lvSP.setSelection(id);
+
+				}
+			});
+			// adapterList.notifyDataSetChanged();
+		}
+	};
 
 	private void getProvice() {
-		DataManager2.getInstance().getProvice(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getProvice(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getDistric() {
-		DataManager2.getInstance().getDistrict(getActivity(), false, false, notifyData, "");
+		DataManager2.getInstance().getDistrict(getActivity(), false, false,
+				notifyData, "");
 	}
 
 	private void getWard() {
-		DataManager2.getInstance().getWard(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getWard(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getStreet() {
-		DataManager2.getInstance().getStreet(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getStreet(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getKhuvuc() {
-		DataManager2.getInstance().getKhuvuc(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getKhuvuc(getActivity(), false, false,
+				notifyData);
+	}
+
+	private void getHuong() {
+		DataManager2.getInstance().getHuong(getActivity(), false, false,
+				notifyData);
+	}
+
+	private void search() {
+		DataManager2.getInstance().seach(getActivity(), true, false,
+				new NotifyDataListener() {
+
+					@Override
+					public void onNotify(String api, int id) {
+						// TODO Auto-generated method stub
+
+					}
+				}, idType, loaiID, proviceID, disID, wardID, streetID, huongID,
+				"", dientichFrom, dientichTo, soPhong, "", giaFrom, giaTo, 0,
+				10);
 	}
 
 	// private void getTypeProperty() {
@@ -355,14 +459,14 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	// notifyData);
 	// }
 
-	private void setSP(int batki, int l1, int l2, int l3, int l4, int l5) {
-		rlBatki.setBackgroundResource(batki);
-		rl1.setBackgroundResource(l1);
-		rl2.setBackgroundResource(l2);
-		rl3.setBackgroundResource(l3);
-		rl4.setBackgroundResource(l4);
-		rl5.setBackgroundResource(l5);
-	}
+	// private void setSP(int batki, int l1, int l2, int l3, int l4, int l5) {
+	// rlBatki.setBackgroundResource(batki);
+	// rl1.setBackgroundResource(l1);
+	// rl2.setBackgroundResource(l2);
+	// rl3.setBackgroundResource(l3);
+	// rl4.setBackgroundResource(l4);
+	// rl5.setBackgroundResource(l5);
+	// }
 
 	// private ArrayList<VrealModel> getList(ArrayList<VrealModel> list, String
 	// arg){
@@ -376,12 +480,18 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equalsIgnoreCase("ABC")) {
-				if (intent.getExtras().getBoolean(ConstantValue.IS_SUCCESS)) {
-					EventAdapter adapter = new EventAdapter(getActivity(), UserFunctions.getInstance().getLishEventModel());
-					lvEvent.setAdapter(adapter);
-				} else {
-					Utilities.showDialogNoBack(getActivity(), UserFunctions.getInstance().getMessage()).show();
+				HotdealUtilities.showALog(intent.getExtras().get(
+						ConstantValue.IS_SUCCESS));
+				try {
+					String loai = (String) intent.getExtras().get(
+							ConstantValue.IS_SUCCESS);
+					StringTokenizer tokens = new StringTokenizer(loai, "-");
+					loaiName = tokens.nextToken();
+					loaiID = tokens.nextToken();
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
+				notifyData();
 			}
 		}
 	};
@@ -399,40 +509,47 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	public void onClick(View v) {
 		// HotdealUtilities.setClickAnim(v);
 		if (v == rlLoai) {
-			HotdealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, idType);
+			HotdealUtilities.startActivityForResult(getActivity(),
+					LoaiNhaDat.class, 1, idType);
 
 		} else if (v == rlTinh) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListProvices(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-				}
+						@Override
+						public void onReturnDataString(String id) {
+						}
 
-				@Override
-				public void onReturnData(int id) {
+						@Override
+						public void onReturnData(int id) {
 
-					try {
-						proviceID = DataManager2.getInstance().getListProvices().get(id).getProvinceID();
-						proviceName = DataManager2.getInstance().getListProvices().get(id).getProvinceName();
-						// disID = "-1";
-						// disName =
-						// HotdealApp.getContext().getString(R.string.str_district);
-						// wardID = "-1";
-						// wardName =
-						// HotdealApp.getContext().getString(R.string.str_ward);
-						// KVID = "-1";
-						// KVName =
-						// HotdealApp.getContext().getString(R.string.str_khuvuc);
-						// streetID = "-1";
-						// streetName =
-						// HotdealApp.getContext().getString(R.string.str_street);
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+							try {
+								proviceID = DataManager2.getInstance()
+										.getListProvices().get(id)
+										.getProvinceID();
+								proviceName = DataManager2.getInstance()
+										.getListProvices().get(id)
+										.getProvinceName();
+								// disID = "-1";
+								// disName =
+								// HotdealApp.getContext().getString(R.string.str_district);
+								// wardID = "-1";
+								// wardName =
+								// HotdealApp.getContext().getString(R.string.str_ward);
+								// KVID = "-1";
+								// KVName =
+								// HotdealApp.getContext().getString(R.string.str_khuvuc);
+								// streetID = "-1";
+								// streetName =
+								// HotdealApp.getContext().getString(R.string.str_street);
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlQuan) {
 			final ArrayList<VrealModel> listDisFilter = new ArrayList<>();
@@ -441,206 +558,210 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 					listDisFilter.add(md);
 				}
 			}
-			HotdealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					listDisFilter, new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						disID = listDisFilter.get(id).getId();
-						disName = listDisFilter.get(id).getProvinceName();
-						// wardID = "-1";
-						// wardName =
-						// HotdealApp.getContext().getString(R.string.str_ward);
-						// KVID = "-1";
-						// KVName =
-						// HotdealApp.getContext().getString(R.string.str_khuvuc);
-						// streetID = "-1";
-						// streetName =
-						// HotdealApp.getContext().getString(R.string.str_street);
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								disID = listDisFilter.get(id).getDistrictID();
+								disName = listDisFilter.get(id)
+										.getProvinceName();
+								// wardID = "-1";
+								// wardName =
+								// HotdealApp.getContext().getString(R.string.str_ward);
+								// KVID = "-1";
+								// KVName =
+								// HotdealApp.getContext().getString(R.string.str_khuvuc);
+								// streetID = "-1";
+								// streetName =
+								// HotdealApp.getContext().getString(R.string.str_street);
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlDT) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), null, new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListDientich(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnData(int id) {
+							try {
+								dientichFrom = DataManager2.getInstance()
+										.getListDientich().get(id).getValue1()
+										+ "";
+								dientichTo = DataManager2.getInstance()
+										.getListDientich().get(id).getValue2()
+										+ "";
+								dientichName = DataManager2.getInstance()
+										.getListDientich().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlMG) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), null, new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListGia(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnData(int id) {
+							try {
+								giaFrom = DataManager2.getInstance()
+										.getListGia().get(id).getValue1()
+										+ "";
+								giaTo = DataManager2.getInstance().getListGia()
+										.get(id).getValue2()
+										+ "";
+								giaName = DataManager2.getInstance()
+										.getListGia().get(id).getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlHuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), null, new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListHuong(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+						}
 
-				}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								huongID = DataManager2.getInstance()
+										.getListHuong().get(id).getId()
+										+ "";
+								huongName = DataManager2.getInstance()
+										.getListHuong().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				@Override
-				public void onReturnData(int id) {
-					// TODO Auto-generated method stub
+						}
+					});
 
-				}
-			});
+		} else if (v == rlHuyen) {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListWard(),
+					new NotifySomesDataListener() {
 
-		} else if (v == rlBatki) {
-			setSP(R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-		} else if (v == rl1) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+						}
 
-		} else if (v == rl2) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
+						@Override
+						public void onReturnData(int id) {
+							try {
+								wardID = DataManager2.getInstance()
+										.getListWard().get(id).getWardID();
+								wardName = DataManager2.getInstance()
+										.getListWard().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-		} else if (v == rl3) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none);
-
-		} else if (v == rl4) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen, R.drawable.ic_phongngu_none);
-
-		} else if (v == rl5) {
-			setSP(R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_none, R.drawable.ic_phongngu_choosen);
-
-		}
-
-		else if (v == rlHuyen) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListWard(), new NotifySomesDataListener() {
-
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void onReturnData(int id) {
-					try {
-						wardID = DataManager2.getInstance().getListWard().get(id).getId();
-						wardName = DataManager2.getInstance().getListWard().get(id).getProvinceName();
-						// KVID = "-1";
-						// KVName =
-						// HotdealApp.getContext().getString(R.string.str_khuvuc);
-						// streetID = "-1";
-						// streetName =
-						// HotdealApp.getContext().getString(R.string.str_street);
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-
-				}
-			});
+						}
+					});
 
 		} else if (v == rlKhuVuc) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListKhuvuc(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						KVID = DataManager2.getInstance().getListKhuvuc().get(id).getId();
-						KVName = DataManager2.getInstance().getListKhuvuc().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								KVID = DataManager2.getInstance()
+										.getListKhuvuc().get(id).getId();
+								KVName = DataManager2.getInstance()
+										.getListKhuvuc().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlDuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListStreet(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListStreet(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
+						@Override
+						public void onReturnDataString(String id) {
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						streetID = DataManager2.getInstance().getListStreet().get(id).getId();
-						streetName = DataManager2.getInstance().getListStreet().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								streetID = DataManager2.getInstance()
+										.getListStreet().get(id).getId();
+								streetName = DataManager2.getInstance()
+										.getListStreet().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlHT) {
-			// HotdealUtilities.showDialogCustomListView(getActivity(),
-			// DataManager2.getInstance().getListTypeProperty(),new
-			// NotifySomesDataListener() {
-			//
-			// @Override
-			// public void onReturnDataString(String id) {
-			// // TODO Auto-generated method stub
-			//
-			// }
-			//
-			// @Override
-			// public void onReturnData(int id) {
-			// try {
-			// tyoeID =
-			// DataManager2.getInstance().getListTypeProperty().get(id).getId();
-			// typeName =
-			// DataManager2.getInstance().getListTypeProperty().get(id).getProvinceName();
-			// notifyData();
-			// } catch (Exception e) {
-			// // TODO: handle exception
-			// }
-			//
-			//
-			// }
-			// });
+
+		} else if (v == btnTimkiem) {
+			search();
 
 		}
-		// else if (v == rlTinh) {
-		// HotdealUtilities.showDialogCustomListView(getActivity());o
-		//
-		// }
 		// else if (v == rlTinh) {
 		// HotdealUtilities.showDialogCustomListView(getActivity());
 		//

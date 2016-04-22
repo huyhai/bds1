@@ -39,6 +39,15 @@ public class SessionManager {
 	public static final String KEY_WARDID = "wardi";
 	public static final String KEY_TYPE= "type";
 	public static final String KEY_TYPEID = "typei";
+	public static final String KEY_DTFROM = "dtF";
+	public static final String KEY_DTTO= "dtT";
+	public static final String KEY_DTNAME = "dtN";
+	public static final String KEY_GIAFROM = "GF";
+	public static final String KEY_GIATO= "GT";
+	public static final String KEY_GIANAME = "GN";
+	public static final String HUONGID= "huongi";
+	public static final String HUONGNAME = "huongN";
+	public static final String SOPHONG = "sophong";
 	
 	public static final String KEY_SAVESETTINGS = "saves";
 	private static final String KEY_PROVICEJSON = "proJson";
@@ -71,6 +80,16 @@ public class SessionManager {
 		pic.put(KEY_WARDID, pref.getString(KEY_WARDID, ""));
 		pic.put(KEY_TYPE, pref.getString(KEY_TYPE, ""));
 		pic.put(KEY_TYPEID, pref.getString(KEY_TYPEID, ""));
+		pic.put(KEY_DTFROM, pref.getString(KEY_DTFROM, ""));
+		pic.put(KEY_DTTO, pref.getString(KEY_DTTO, ""));
+		pic.put(KEY_DTNAME, pref.getString(KEY_DTNAME, ""));
+		pic.put(KEY_GIAFROM, pref.getString(KEY_GIAFROM, ""));
+		pic.put(KEY_GIATO, pref.getString(KEY_GIATO, ""));
+		pic.put(KEY_GIANAME, pref.getString(KEY_GIANAME, ""));
+		
+		pic.put(HUONGID, pref.getString(HUONGID, ""));
+		pic.put(HUONGNAME, pref.getString(HUONGNAME, ""));
+		pic.put(SOPHONG, pref.getString(SOPHONG, "0"));
 		return pic;
 	}
 
@@ -93,6 +112,15 @@ public class SessionManager {
 		editor.putString(KEY_WARDID, set.get(KEY_WARDID));
 		editor.putString(KEY_TYPE, set.get(KEY_TYPE));
 		editor.putString(KEY_TYPEID, set.get(KEY_TYPEID));
+		editor.putString(KEY_DTFROM, set.get(KEY_DTFROM));
+		editor.putString(KEY_DTTO, set.get(KEY_DTTO));
+		editor.putString(KEY_DTNAME, set.get(KEY_DTNAME));
+		editor.putString(KEY_GIAFROM, set.get(KEY_GIAFROM));
+		editor.putString(KEY_GIATO, set.get(KEY_GIATO));
+		editor.putString(KEY_GIANAME, set.get(KEY_GIANAME));
+		editor.putString(HUONGID, set.get(HUONGID));
+		editor.putString(HUONGNAME, set.get(HUONGNAME));
+		editor.putString(SOPHONG, set.get(SOPHONG));
 		editor.commit();
 	}
 

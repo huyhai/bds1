@@ -62,58 +62,9 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		HotdealUtilities.setHeight(btnOK, 12);
 		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
 		rlToogle.setOnClickListener(this);
-		// ArrayList<CateSildeModel> list = new ArrayList<>();
-		// CateSildeModel md1;
-		// CateSildeSubModel mdsub;
-		// md1 = new CateSildeModel();
-		// md1.setName("Bán căn hộ chung cư");
-		// list.add(md1);
-		//
-		// md1 = new CateSildeModel();
-		// md1.setName("Tất cả các loại nhà bán");
-		// list.add(md1);
-		// mdsub = new CateSildeSubModel();
-		// mdsub.setName("Bán nhà riêng");
-		// list.get(1).getListSub().add(mdsub);
-		// mdsub = new CateSildeSubModel();
-		// mdsub.setName("Bán nhà biệt thự, liền kề");
-		// list.get(1).getListSub().add(mdsub);
-		// mdsub = new CateSildeSubModel();
-		// mdsub.setName("Bán nhà mặt phố");
-		// list.get(1).getListSub().add(mdsub);
-		//
-		// md1 = new CateSildeModel();
-		// md1.setName("Tất cả các loại đất bán");
-		// list.add(md1);
-		// mdsub = new CateSildeSubModel();
-		// mdsub.setName("Bán đất nền dự án");
-		// list.get(2).getListSub().add(mdsub);
-		// mdsub = new CateSildeSubModel();
-		// mdsub.setName("Bán đất");
-		// list.get(2).getListSub().add(mdsub);
-		//
-		// md1 = new CateSildeModel();
-		// md1.setName("Bán trang trại nghỉ dưỡng");
-		// list.add(md1);
-		//
-		// md1 = new CateSildeModel();
-		// md1.setName("Bán kho nhà xưởng");
-		// list.add(md1);
-		//
-		// md1 = new CateSildeModel();
-		// md1.setName("Bán các loại bất động sản khác");
-		// list.add(md1);
 
 		getData();
 		
-//		epLoai.setOnGroupClickListener(new OnGroupClickListener() {
-//			
-//			@Override
-//			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-//				// TODO Auto-generated method stub
-//				return false;
-//			}
-//		});
 	}
 
 	NotifyVreal notify = new NotifyVreal() {
@@ -121,6 +72,7 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		@Override
 		public void onNotify(VrealModel md) {
 			HotdealUtilities.sendMessage(LoaiNhaDat.this, "ABC", md.getProvinceName()+"-"+md.getId());
+			LoaiNhaDat.this.finish();
 		}
 	};
 
