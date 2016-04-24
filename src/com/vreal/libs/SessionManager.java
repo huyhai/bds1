@@ -48,6 +48,8 @@ public class SessionManager {
 	public static final String HUONGID= "huongi";
 	public static final String HUONGNAME = "huongN";
 	public static final String SOPHONG = "sophong";
+	public static final String DUANID = "duanI";
+	public static final String DUANNAME = "duanN";
 	
 	public static final String KEY_SAVESETTINGS = "saves";
 	private static final String KEY_PROVICEJSON = "proJson";
@@ -86,10 +88,12 @@ public class SessionManager {
 		pic.put(KEY_GIAFROM, pref.getString(KEY_GIAFROM, ""));
 		pic.put(KEY_GIATO, pref.getString(KEY_GIATO, ""));
 		pic.put(KEY_GIANAME, pref.getString(KEY_GIANAME, ""));
-		
 		pic.put(HUONGID, pref.getString(HUONGID, ""));
 		pic.put(HUONGNAME, pref.getString(HUONGNAME, ""));
 		pic.put(SOPHONG, pref.getString(SOPHONG, "0"));
+		
+		pic.put(DUANID, pref.getString(DUANID, ""));
+		pic.put(DUANNAME, pref.getString(DUANNAME, "0"));
 		return pic;
 	}
 
@@ -121,6 +125,9 @@ public class SessionManager {
 		editor.putString(HUONGID, set.get(HUONGID));
 		editor.putString(HUONGNAME, set.get(HUONGNAME));
 		editor.putString(SOPHONG, set.get(SOPHONG));
+		
+		editor.putString(DUANID, set.get(DUANID));
+		editor.putString(DUANNAME, set.get(DUANNAME));
 		editor.commit();
 	}
 

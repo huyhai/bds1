@@ -322,8 +322,9 @@
                     android:layout_toRightOf="@+id/tvDuan"
                     android:gravity="right"
                     android:paddingRight="@dimen/padding5"
-                    android:text=""
-                    android:textSize="@dimen/textsize_medium" />
+                    android:text="aaaaaaaaaaaaa"
+                    android:textSize="@dimen/textsize_medium"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imgDuan"

@@ -102,6 +102,14 @@ public class VrealModel implements Serializable {
 
 	}
 
+	public void setDuan(JSONObject jSonInfo) throws JSONException {
+		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
+				"Name"));
+		setChoosen(false);
+
+	}
+
 	public void setListSub(JSONObject jSonInfo) throws JSONException {
 		setChoosen(false);
 

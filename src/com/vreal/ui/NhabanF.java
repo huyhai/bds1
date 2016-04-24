@@ -42,8 +42,8 @@ import com.vrealvn.vrealapp.HotdealApp;
 
 public class NhabanF extends VrealFragment implements OnClickListener,
 		OnCheckedChangeListener {
-	// private RelativeLayout rlBatki;
-	// private RelativeLayout rl1;
+	private RelativeLayout rlDuan;
+	private RelativeLayout rlRefresh;
 	// private RelativeLayout rl2;
 	// private RelativeLayout rl3;
 	// private RelativeLayout rl4;
@@ -74,12 +74,12 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 	private TextView tvHuongnha;
 	private TwoWayView lvSP;
 	private Button btnTimkiem;
-	// private TextView tvWard;
+	private TextView tvDuanValue;
 	// private TextView tvWard;
 	private String idType;
 
 	// DATA
-	private String defauldID="";
+	private String defauldID = "";
 	private String proviceID = defauldID;
 	private String proviceName = HotdealApp.getContext().getString(
 			R.string.str_province);
@@ -110,6 +110,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 	private String huongID = defauldID;
 	private String huongName = "Chọn hướng nhà";
 	private String soPhong = "0";
+	private String duanID = defauldID;
+	private String duanName = "Chọn dự án";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -148,6 +150,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 			huongID = edito.get(SessionManager.HUONGID);
 			huongName = edito.get(SessionManager.HUONGNAME);
 			soPhong = edito.get(SessionManager.SOPHONG);
+			duanID = edito.get(SessionManager.DUANID);
+			duanName = edito.get(SessionManager.DUANNAME);
 		}
 		notifyData();
 
@@ -155,6 +159,7 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 
 	@Override
 	public void onDestroy() {
+		rlRefresh.setVisibility(View.GONE);
 		try {
 			getActivity().unregisterReceiver(receiver);
 		} catch (Throwable e) {
@@ -189,6 +194,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 			editor.put(SessionManager.HUONGID, huongID);
 			editor.put(SessionManager.HUONGNAME, huongName);
 			editor.put(SessionManager.SOPHONG, soPhong);
+			editor.put(SessionManager.DUANID, duanID);
+			editor.put(SessionManager.DUANNAME, duanName);
 			sm.setSettings(editor);
 		}
 		super.onDestroy();
@@ -196,8 +203,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 
 	private void initView(View rootView) {
 		idType = HotdealUtilities.getDataFragment(this);
-		// rlBatki = (RelativeLayout) rootView.findViewById(R.id.rlBatki);
-		// rl1 = (RelativeLayout) rootView.findViewById(R.id.rl1);
+		rlDuan = (RelativeLayout) rootView.findViewById(R.id.rlDuan);
+		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
 		// rl2 = (RelativeLayout) rootView.findViewById(R.id.rl2);
 		// rl3 = (RelativeLayout) rootView.findViewById(R.id.rl3);
 		// rl4 = (RelativeLayout) rootView.findViewById(R.id.rl4);
@@ -227,7 +234,7 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 		tvDientich = (TextView) rootView.findViewById(R.id.tvDientich);
 		tvMucgia = (TextView) rootView.findViewById(R.id.tvMucgia);
 		tvHuongnha = (TextView) rootView.findViewById(R.id.tvHuongnha);
-		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
+		tvDuanValue = (TextView) rootView.findViewById(R.id.tvDuanValue);
 		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
 		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
 		// tvHinhthuc = (TextView) rootView.findViewById(R.id.tvHinhthuc);
@@ -259,8 +266,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 		rlDuong.setOnClickListener(this);
 		rlHT.setOnClickListener(this);
 		btnTimkiem.setOnClickListener(this);
-		// rlLoai.setOnClickListener(this);
-		// rlLoai.setOnClickListener(this);
+		rlDuan.setOnClickListener(this);
+		rlRefresh.setOnClickListener(this);
 		DataManager2.getInstance().showProgress(getActivity());
 		if (sm.getProviceJson().equals("")) {
 			getProvice();
@@ -287,6 +294,7 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 		tvDientich.setText(dientichName);
 		tvMucgia.setText(giaName);
 		tvHuongnha.setText(huongName);
+		tvDuanValue.setText(duanName);
 
 	}
 
@@ -365,13 +373,13 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 				getHuong();
 
 			} else if (api.equals(ConstantValue.GET_HUONG)) {
+				getDuan();
+			} else if (api.equals(ConstantValue.GET_DUAN)) {
 				setDataDienTichAndGia();
 
 				DataManager2.getInstance().stopProgress();
 			}
 			// else if (api.equals(ConstantValue.GET_DIS)) {
-			//
-			// } else if (api.equals(ConstantValue.GET_DIS)) {
 			//
 			// }
 
@@ -440,6 +448,11 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 				notifyData);
 	}
 
+	private void getDuan() {
+		DataManager2.getInstance().getDuan(getActivity(), false, false,
+				notifyData);
+	}
+
 	private void search() {
 		DataManager2.getInstance().seach(getActivity(), true, false,
 				new NotifyDataListener() {
@@ -450,8 +463,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 
 					}
 				}, idType, loaiID, proviceID, disID, wardID, streetID, huongID,
-				"", dientichFrom, dientichTo, soPhong, "", giaFrom, giaTo, 0,
-				10);
+				duanID, dientichFrom, dientichTo, soPhong, "", giaFrom, giaTo,
+				0, 10);
 	}
 
 	// private void getTypeProperty() {
@@ -500,6 +513,7 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		rlRefresh.setVisibility(View.VISIBLE);
 		IntentFilter intentGetKeySend = new IntentFilter();
 		intentGetKeySend.addAction("ABC");
 		getActivity().registerReceiver(receiver, intentGetKeySend);
@@ -761,15 +775,37 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 		} else if (v == btnTimkiem) {
 			search();
 
+		} else if (v == rlDuan) {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListDuAn(),
+					new NotifySomesDataListener() {
+
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onReturnData(int id) {
+							try {
+								duanID = DataManager2.getInstance()
+										.getListDuAn().get(id).getId();
+								duanName = DataManager2.getInstance()
+										.getListDuAn().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+
+						}
+					});
+
+		} else if (v == rlRefresh) {
+//			HotdealUtilities.showDialogCustomListView(getActivity());
+
 		}
-		// else if (v == rlTinh) {
-		// HotdealUtilities.showDialogCustomListView(getActivity());
-		//
-		// }
-		// else if (v == rlTinh) {
-		// HotdealUtilities.showDialogCustomListView(getActivity());
-		//
-		// }
 		// else if (v == rlTinh) {
 		// HotdealUtilities.showDialogCustomListView(getActivity());
 		//

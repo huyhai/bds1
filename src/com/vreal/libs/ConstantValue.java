@@ -59,7 +59,7 @@ public class ConstantValue {
 	public static final String GET_LOAINHADAT="V_RealNewsCate_GetByTypeID";
 	public static final String GET_HUONG="V_Direction_GetAll";
 	public static final String SEARCG="V_RealNews_Search";
-//	public static final String API="api";
+	public static final String GET_DUAN="V_ProjectType_GetAll";
 //	public static final String GET_CITY="V_Province_GetAll";
 //	public static final String GET_DIS="V_District_GetAllStatic";
 //	public static final String GET_WARD="V_Ward_GetAllStatic";

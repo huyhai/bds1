@@ -683,6 +683,58 @@ public class DataManager2 {
 				}, false);
 	}
 
+	private ArrayList<VrealModel> listDuAn = new ArrayList<>();
+
+	public void getDuan(Activity activity, boolean showPro, boolean isPost,
+			final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_DUAN);
+		builder.put("search", "");
+		callServer(activity, builder, showPro, isPost,
+				new JsonObjectInterface() {
+
+					@Override
+					public void callResultJOb(Context activity,
+							JSONObject result) {
+						try {
+							getListDuAn().clear();
+							if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+								JSONArray listJson;
+								listJson = result
+										.getJSONArray("ProjectTypeList");
+								for (int i = 0; i < listJson.length(); i++) {
+									JSONObject jSonOb = new JSONObject();
+									jSonOb = listJson.getJSONObject(i);
+									VrealModel md = new VrealModel();
+									md.setDuan(jSonOb);
+									getListDuAn().add(md);
+								}
+								notifiUI(notifyDataListener,
+										NotifyDataListener.NOTIFY_OK,
+										ConstantValue.GET_DUAN);
+							} else {
+								notifiUI(notifyDataListener,
+										NotifyDataListener.NOTIFY_FAILED,
+										ConstantValue.GET_DUAN);
+							}
+
+						} catch (Exception e) {
+							notifiUI(notifyDataListener,
+									NotifyDataListener.NOTIFY_FAILED,
+									ConstantValue.GET_DUAN);
+							e.printStackTrace();
+						}
+
+					}
+
+					@Override
+					public void callResultJAr(Context activity, JSONArray result) {
+						// TODO Auto-generated method stub
+
+					}
+				}, false);
+	}
+
 	private ArrayList<VrealModel> listGia = new ArrayList<>();
 
 	private ArrayList<VrealModel> listDientich = new ArrayList<>();
@@ -844,5 +896,13 @@ public class DataManager2 {
 
 	public void setListSearch(ArrayList<VrealModel> listSearch) {
 		this.listSearch = listSearch;
+	}
+
+	public ArrayList<VrealModel> getListDuAn() {
+		return listDuAn;
+	}
+
+	public void setListDuAn(ArrayList<VrealModel> listDuAn) {
+		this.listDuAn = listDuAn;
 	}
 }
