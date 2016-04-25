@@ -8,6 +8,7 @@ import com.vrealvn.vrealapp.DataManager2;
 import com.vrealvn.vrealapp.HotDealFragmentActivity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class HomeF extends Fragment implements OnClickListener {
 	private LinearLayout llTopBar;
 	private TextView tv1;
 	private TextView tv2;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,17 +101,17 @@ public class HomeF extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		HotdealUtilities.setClickAnim(v);
 		if (v == llBanthue) {
-			String id="";
+			String id = "";
 			try {
-				id=DataManager2.getInstance().getListTypeProperty().get(0).getId();
+				id = DataManager2.getInstance().getListTypeProperty().get(0).getId();
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
 		} else if (v == llDuanmoi) {
-			String id="";
+			String id = "";
 			try {
-				id=DataManager2.getInstance().getListTypeProperty().get(1).getId();
+				id = DataManager2.getInstance().getListTypeProperty().get(1).getId();
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

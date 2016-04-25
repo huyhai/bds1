@@ -25,6 +25,11 @@ public class VrealModel implements Serializable {
 	// listDienTichANDGia
 	private int value1;
 	private int value2;
+	
+	//detai
+	private String address;
+	private String price;
+	private String Description;
 
 	private ArrayList<VrealModel> listSub;
 
@@ -32,13 +37,22 @@ public class VrealModel implements Serializable {
 
 	}
 
+	public void setSeachData(JSONObject jSonInfo) throws JSONException {
+//		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "RealName"));
+		setChoosen(false);
+		this.setAddress(HotdealUtilities.getDataString(jSonInfo, "Address"));
+		this.setPrice(HotdealUtilities.getDataString(jSonInfo, "Price"));
+		this.setDescription(HotdealUtilities.getDataString(jSonInfo, "Description"));
+
+
+	}
+
 	public void setDataProvince(JSONObject jSonInfo) throws JSONException {
 		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"ProvinceName"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "ProvinceName"));
 		this.setIsEnable(HotdealUtilities.getDataBool(jSonInfo, "IsEnable"));
-		this.setProvinceCode(HotdealUtilities.getDataString(jSonInfo,
-				"ProvinceCode"));
+		this.setProvinceCode(HotdealUtilities.getDataString(jSonInfo, "ProvinceCode"));
 		setChoosen(false);
 		// this.setShipping_cost(HotdealUtilities.getDataString(jSonInfo,
 		// "shipping_cost"));
@@ -50,11 +64,9 @@ public class VrealModel implements Serializable {
 	}
 
 	public void setDataDistrict(JSONObject jSonInfo) throws JSONException {
-		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo,
-				"ProvinceID"));
+		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo, "ProvinceID"));
 		this.setDistrictID(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"DistrictName"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "DistrictName"));
 		this.setIsEnable(HotdealUtilities.getDataBool(jSonInfo, "IsEnable"));
 		setChoosen(false);
 
@@ -62,12 +74,9 @@ public class VrealModel implements Serializable {
 
 	public void setDataWard(JSONObject jSonInfo) throws JSONException {
 		this.setWardID(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo,
-				"ProvinceID"));
-		this.setDistrictID(HotdealUtilities.getDataString(jSonInfo,
-				"DistrictID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"WardName"));
+		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo, "ProvinceID"));
+		this.setDistrictID(HotdealUtilities.getDataString(jSonInfo, "DistrictID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "WardName"));
 		this.setIsEnable(HotdealUtilities.getDataBool(jSonInfo, "IsEnable"));
 		setChoosen(false);
 
@@ -75,37 +84,31 @@ public class VrealModel implements Serializable {
 
 	public void setDataStreet(JSONObject jSonInfo) throws JSONException {
 		this.setStreetID(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"StreetName"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "StreetName"));
 		this.setIsEnable(HotdealUtilities.getDataBool(jSonInfo, "IsEnable"));
-		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo,
-				"ProvinceID"));
-		this.setDistrictID(HotdealUtilities.getDataString(jSonInfo,
-				"DistrictID"));
+		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo, "ProvinceID"));
+		this.setDistrictID(HotdealUtilities.getDataString(jSonInfo, "DistrictID"));
 		setChoosen(false);
 
 	}
 
 	public void setTypeProperty(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"TypeName"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "TypeName"));
 		setChoosen(false);
 
 	}
 
 	public void setHuong(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"DirectionName"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "DirectionName"));
 		setChoosen(false);
 
 	}
 
 	public void setDuan(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"Name"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
 		setChoosen(false);
 
 	}
@@ -117,8 +120,7 @@ public class VrealModel implements Serializable {
 
 	public void setLoaiNhaDat(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo,
-				"RealsCateName"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "RealsCateName"));
 		JSONArray listJson = jSonInfo.getJSONArray("V_RealNews");
 		getListSub().clear();
 		for (int i = 0; i < listJson.length(); i++) {
@@ -228,6 +230,30 @@ public class VrealModel implements Serializable {
 
 	public void setValue2(int value2) {
 		this.value2 = value2;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
 	}
 
 }

@@ -35,9 +35,11 @@ import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.libs.SessionManager;
 import com.vreal.libs.TwoWayView;
 import com.vreal.model.VrealModel;
+import com.vreal.ui2.DuAnMoiF;
 import com.vreal.ui2.LoaiNhaDat;
 import com.vreal.ui2.VrealFragment;
 import com.vrealvn.vrealapp.DataManager2;
+import com.vrealvn.vrealapp.HotDealFragmentActivity;
 import com.vrealvn.vrealapp.HotdealApp;
 
 public class NhabanF extends VrealFragment implements OnClickListener,
@@ -459,7 +461,11 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 
 					@Override
 					public void onNotify(String api, int id) {
-						// TODO Auto-generated method stub
+						if (NotifyDataListener.NOTIFY_OK == id) {
+							((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
+						} else {
+
+						}
 
 					}
 				}, idType, loaiID, proviceID, disID, wardID, streetID, huongID,
@@ -517,6 +523,12 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 		IntentFilter intentGetKeySend = new IntentFilter();
 		intentGetKeySend.addAction("ABC");
 		getActivity().registerReceiver(receiver, intentGetKeySend);
+	}
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		rlRefresh.setVisibility(View.GONE);
 	}
 
 	@Override

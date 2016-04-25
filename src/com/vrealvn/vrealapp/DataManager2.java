@@ -781,7 +781,7 @@ public class DataManager2 {
 									JSONObject jSonOb = new JSONObject();
 									jSonOb = listJson.getJSONObject(i);
 									VrealModel md = new VrealModel();
-									md.setHuong(jSonOb);
+									md.setSeachData(jSonOb);
 									getListSearch().add(md);
 								}
 								notifiUI(notifyDataListener,

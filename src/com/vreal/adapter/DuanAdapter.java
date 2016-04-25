@@ -17,9 +17,10 @@ import com.squareup.picasso.Picasso;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.model.StateModel;
+import com.vreal.model.VrealModel;
 
 public class DuanAdapter extends BaseAdapter {
-	private ArrayList<StateModel> listData;
+	private ArrayList<VrealModel> listData;
 	private Activity ac;
 	ViewHolder holder;
 	NotifySomesDataListener notify;
@@ -28,9 +29,11 @@ public class DuanAdapter extends BaseAdapter {
 		TextView tvName;
 		ImageView imgPic;
 		RelativeLayout a;
+		TextView tvDiachi;
+		TextView tvGia;
 	}
 
-	public DuanAdapter(final Activity _ac, ArrayList<StateModel> _list, NotifySomesDataListener no) {
+	public DuanAdapter(final Activity _ac, ArrayList<VrealModel> _list, NotifySomesDataListener no) {
 		this.listData = _list;
 		this.ac = _ac;
 		notify = no;
@@ -39,7 +42,7 @@ public class DuanAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return 30;
+		return listData.size();
 	}
 
 	@Override
@@ -60,15 +63,20 @@ public class DuanAdapter extends BaseAdapter {
 			LayoutInflater inflater = LayoutInflater.from(ac);
 			convertView = inflater.inflate(R.layout.duan_item, null);
 			holder.a = (RelativeLayout) convertView.findViewById(R.id.a);
-//			holder.imgPic = (ImageView) convertView.findViewById(R.id.imgPic);
+			holder.tvName = (TextView) convertView.findViewById(R.id.tvTen);
+			holder.tvDiachi = (TextView) convertView.findViewById(R.id.tvDiachi);
+//			holder.tvDiachi = (TextView) convertView.findViewById(R.id.tvDiachi);
+			holder.tvGia= (TextView) convertView.findViewById(R.id.tvGia);
 			HotdealUtilities.setHeight(holder.a, 3);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-//		final StateModel ca = listData.get(position);
-//		holder.tvName.setText(ca.getStateName());
-//		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
+		final VrealModel ca = listData.get(position);
+		holder.tvName.setText(ca.getProvinceName());
+		holder.tvGia.setText(ca.getPrice());
+		holder.tvDiachi.setText(ca.getAddress());
+		// Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
 		convertView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -83,8 +91,8 @@ public class DuanAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	public void setItemList(ArrayList<StateModel> countryList) {
-		this.listData = new ArrayList<StateModel>(countryList);
+	public void setItemList(ArrayList<VrealModel> countryList) {
+		this.listData = new ArrayList<VrealModel>(countryList);
 		notifyDataSetChanged();
 	}
 
