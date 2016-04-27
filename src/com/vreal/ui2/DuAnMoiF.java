@@ -52,7 +52,6 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 		rlFilter = (RelativeLayout) getActivity().findViewById(R.id.rlFilter);
 		rlMap = (RelativeLayout) getActivity().findViewById(R.id.rlMap);
 
-
 		rlFilter.setOnClickListener(this);
 		rlMap.setOnClickListener(this);
 	}
@@ -67,7 +66,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 
 		@Override
 		public void onReturnData(int id) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new SearchF(), "");
+			((HotDealFragmentActivity) getActivity()).startFragment(new SearchF(), id+"");
 			// HotdealUtilities.startActivity(getActivity(), DetailF.class, "");
 
 		}
@@ -85,7 +84,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 		if (v == rlFilter) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF(), "");
 		} else if (v == rlMap) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new MapF(), "");
+			((HotDealFragmentActivity) getActivity()).startFragment(new MapF(-1), "");
 		}
 
 	}

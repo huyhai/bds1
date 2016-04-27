@@ -25,6 +25,7 @@ public class SearchF extends Fragment {
 	ViewPager pager;
 	TabPageIndicator indicator;
 	GoogleMusicAdapter adapter;
+	int pos;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class SearchF extends Fragment {
 	private void initView(View rootView) {
 		// rlRefresh = (RelativeLayout)
 		// getActivity().findViewById(R.id.rlRefresh);
+		pos=HotdealUtilities.parseInt(HotdealUtilities.getDataFragment(this));
 		pager = (ViewPager) rootView.findViewById(R.id.pager);
 		indicator = (TabPageIndicator) rootView.findViewById(R.id.indicator);
 
@@ -84,9 +86,9 @@ public class SearchF extends Fragment {
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
-				return new DetailV2();
+				return new DetailV2(pos);
 			case 1:
-				return new MapF();
+				return new MapF(pos);
 			}
 			return null;
 		}

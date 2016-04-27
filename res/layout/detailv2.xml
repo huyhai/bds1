@@ -198,12 +198,6 @@
                     android:id="@+id/tvDes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bán nhà MT Phan Chu Trinh, P. Tân Thành, Q. Tân Phú.
-Vị trí: MT Phan Chu Trinh, P. Tân Thành, Q. Tân Phú.
-Diện tích: 5*19m.
-Kết cấu: Trệt + 3 lầu.
-Hướng: Nam.
-Tiện ích: Khu dân cư an ninh, sạch sẽ, thuận tiện mở văn phòng, công ty, gần Lũy Bán Bích, giáp Tân Bình...."
                     android:textSize="@dimen/textsize_medium"
                     android:textStyle="normal" />
             </LinearLayout>

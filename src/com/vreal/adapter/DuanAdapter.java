@@ -65,8 +65,8 @@ public class DuanAdapter extends BaseAdapter {
 			holder.a = (RelativeLayout) convertView.findViewById(R.id.a);
 			holder.tvName = (TextView) convertView.findViewById(R.id.tvTen);
 			holder.tvDiachi = (TextView) convertView.findViewById(R.id.tvDiachi);
-//			holder.tvDiachi = (TextView) convertView.findViewById(R.id.tvDiachi);
-			holder.tvGia= (TextView) convertView.findViewById(R.id.tvGia);
+			holder.imgPic = (ImageView) convertView.findViewById(R.id.imgAvatar);
+			holder.tvGia = (TextView) convertView.findViewById(R.id.tvGia);
 			HotdealUtilities.setHeight(holder.a, 3);
 			convertView.setTag(holder);
 		} else {
@@ -74,9 +74,10 @@ public class DuanAdapter extends BaseAdapter {
 		}
 		final VrealModel ca = listData.get(position);
 		holder.tvName.setText(ca.getProvinceName());
-		holder.tvGia.setText(ca.getPrice());
+		holder.tvGia.setText(HotdealUtilities.formatMoney(ca.getPrice()));
 		holder.tvDiachi.setText(ca.getAddress());
-		// Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
+		HotdealUtilities.loadImagePicaso(ca.getIcon(), holder.imgPic, ac);
+		// Picasso.with(ac).load(ca.getIcon()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
 		convertView.setOnClickListener(new OnClickListener() {
 
 			@Override

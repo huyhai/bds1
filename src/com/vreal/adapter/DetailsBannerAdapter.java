@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.android.vrealapp.R;
 import com.vreal.libs.HotdealUtilities;
+import com.vreal.model.VrealModel;
 import com.vreal.pageindicator.IconPagerAdapter;
 
 public class DetailsBannerAdapter extends PagerAdapter implements IconPagerAdapter{

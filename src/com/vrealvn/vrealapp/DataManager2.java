@@ -108,7 +108,7 @@ public class DataManager2 {
 	public void showProgress(Activity activity) {
 		isShowPro = true;
 		try {
-			pg = ProgressDialog.show(activity, "Loading... ",
+			pg = ProgressDialog.show(activity, "Loading",
 					"please wait....", true);
 			// showDialog(activity);
 		} catch (Exception e) {
