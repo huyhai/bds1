@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -133,11 +134,12 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		if (requestCode == 1) {
-//			if (resultCode == Activity.RESULT_OK) {
-//				String pos1 = data.getStringExtra("result");
-//			}
-//		}
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(arg0, arg1, arg2);
+		Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentByTag(new PostPro().getClass().getSimpleName());
+		if (fragment != null) {
+			fragment.onActivityResult(arg0, arg1, arg2);
+		}
 	}
 }

@@ -26,6 +26,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.vreal.libs.ConstantValue;
 import com.vreal.libs.HotdealUtilities;
+import com.vreal.ui2.PostPro;
 
 public class HotDealFragmentActivity extends FragmentActivity {
 
@@ -165,7 +166,7 @@ public class HotDealFragmentActivity extends FragmentActivity {
 
 		if (!fragmentPopped) { // fragment not in back stack, create it.
 			FragmentTransaction ft = manager.beginTransaction();
-			ft.replace(R.id.fragment_container, fragment);
+			ft.replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName());
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.addToBackStack(backStateName);
 			Bundle bundle = new Bundle();
@@ -219,4 +220,6 @@ public class HotDealFragmentActivity extends FragmentActivity {
 		intent.putExtra(ConstantValue.IS_SUCCESS, idCate);
 		cont.sendBroadcast(intent);
 	}
+
+
 }

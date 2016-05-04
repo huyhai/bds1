@@ -31,7 +31,6 @@ public class HomeF extends Fragment implements OnClickListener {
 	private TextView tv1;
 	private TextView tv2;
 
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.home_f, container, false);
@@ -76,7 +75,10 @@ public class HomeF extends Fragment implements OnClickListener {
 		llTintuc.setOnClickListener(this);
 		llMenu4M.setOnClickListener(this);
 
-		getTypeProperty();
+		if (null != DataManager2.getInstance().getListTypeProperty() && DataManager2.getInstance().getListTypeProperty().size() == 0) {
+			getTypeProperty();
+		}
+
 	}
 
 	private void getTypeProperty() {
@@ -117,9 +119,10 @@ public class HomeF extends Fragment implements OnClickListener {
 			}
 			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
 		} else if (v == llMenu4) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
+			((HotDealFragmentActivity) getActivity()).startFragment(new PostPro(), "");
 		} else if (v == llMenu3) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
+			// HotdealUtilities.startActivity(getActivity(), PostPro.class, "");
 		} else if (v == llTintuc) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new TintucF(), "");
 		} else if (v == llMenu4M) {
