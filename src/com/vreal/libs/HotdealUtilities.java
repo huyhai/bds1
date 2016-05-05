@@ -13,7 +13,6 @@ import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +21,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -70,34 +70,17 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.ClientError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.maps.model.LatLng;
 import com.android.vrealapp.R;
+import com.google.android.gms.maps.model.LatLng;
 import com.nineoldandroids.animation.ValueAnimator;
 import com.nineoldandroids.view.ViewHelper;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.squareup.picasso.Picasso;
-import com.vreal.adapter.PopupAdapter;
 import com.vreal.db.DatabaseHandler;
-import com.vreal.model.CateSildeModel;
 import com.vreal.model.VrealModel;
 import com.vreal.ui2.Main;
-import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
 import com.vrealvn.vrealapp.HotdealApp;
 
 public class HotdealUtilities {
@@ -106,6 +89,11 @@ public class HotdealUtilities {
 	public static String FORMAT_DATE = "dd/MM/yyyy";
 
 	public static void addLogOut() {
+	}
+
+	public static void pickerDate(Context c, DatePickerDialog.OnDateSetListener date) {
+		Calendar myCalendar = Calendar.getInstance();
+		new DatePickerDialog(c, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
 
 	public static final int SELECT_PHOTO = 100;

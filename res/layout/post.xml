@@ -343,7 +343,7 @@
                         android:layout_toRightOf="@+id/tvDuan"
                         android:gravity="right"
                         android:paddingRight="@dimen/padding5"
-                        android:text="aaaaaaaaaaaaa"
+                        android:text=""
                         android:textSize="@dimen/textsize_medium"
                         android:textStyle="bold" />
 
@@ -530,7 +530,7 @@
                 <RelativeLayout
                     android:id="@+id/rlMota"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="@dimen/padding5"
                     android:background="@drawable/ed_loainhadat"
                     android:padding="@dimen/padding5" >
@@ -538,7 +538,7 @@
                     <EditText
                         android:id="@+id/edMota"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="fill_parent"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:paddingRight="@dimen/padding5"
@@ -1038,14 +1038,13 @@
                             android:textSize="@dimen/textsize_medium"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/edBatdau"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvBatdau"
                             android:background="@drawable/ed_tinh_tp"
-                            android:inputType="numberSigned"
-                            android:padding="@dimen/padding5" />
+                            android:gravity="center" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -1063,14 +1062,14 @@
                             android:textSize="@dimen/textsize_medium"
                             android:textStyle="bold" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/edKetthuc"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvKetthuc"
                             android:background="@drawable/ed_tinh_tp"
-                            android:inputType="numberSigned"
-                            android:padding="@dimen/padding5" />
+                            android:gravity="center"
+                            android:text="" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -1191,6 +1190,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_top1"
             android:text="XEM TRƯỚC"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_medium_large" />
     </LinearLayout>
