@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -15,6 +16,11 @@ import android.widget.TextView;
 import com.android.vrealapp.R;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.model.DetailsModel;
+import com.vreal.ui2.Main;
+import com.vreal.ui2.NewsDetailF;
+import com.vreal.ui2.TintucF;
+import com.vrealvn.vrealapp.DataManager2;
+import com.vrealvn.vrealapp.HotDealFragmentActivity;
 
 public class DealHomeItemAdapter extends BaseAdapter {
 	private ArrayList<DetailsModel> listData;
@@ -34,7 +40,7 @@ public class DealHomeItemAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return 20;
+		return listData.size();
 	}
 
 	@Override
@@ -64,13 +70,22 @@ public class DealHomeItemAdapter extends BaseAdapter {
 		HotdealUtilities.setHeight(holder.imgPic, 5);
 		HotdealUtilities.setWidth(holder.rlAll, 2.5);
 
-//		final DetailsModel md = listData.get(position);
-//		HotdealUtilities.loadImage(md.getImage(), holder.imgPic, ac);
-//		HotDealFragmentActivity.imageLoader.displayImage(md.getImage(), holder.imgPic);
+		final DetailsModel md = listData.get(position);
+		HotdealUtilities.loadImage(md.getImage(), holder.imgPic, ac);
+		// Main.imageLoader.displayImage(md.getImage(), holder.imgPic);
 
-//		holder.tvName.setText(md.getName());
-//		holder.tvName.setEllipsize(TextUtils.TruncateAt.END);
+		holder.tvName.setText(md.getName());
+		holder.tvName.setEllipsize(TextUtils.TruncateAt.END);
 
+		convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				DataManager2.getInstance().setMd(md);
+				((HotDealFragmentActivity) ac).startFragment(new NewsDetailF(), "");
+
+			}
+		});
 
 		return convertView;
 	}

@@ -9,22 +9,6 @@ public class CalculatorUtils {
 	private static int tongTam = 0;
 	private static int tong = 0;
 
-	public static boolean preOderGetCalc(ArrayList<DetailsModel> list) {
-		setTongSp(0);
-		setTongTam(0);
-		setTong(0);
-		try {
-			for (DetailsModel md : list) {
-				setTongSp(getTongSp() + md.getQuantityUserChoosen());
-				setTongTam(getTongTam() + Integer.parseInt(md.getPrice())
-						* md.getQuantityUserChoosen());
-				setTong(getTong() + Integer.parseInt(md.getPrice()) * md.getQuantityUserChoosen());
-			}
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
 
 //	public static boolean deliveryInfoGetCalc(DetailsModel md) {
 //		setTongSp(0);

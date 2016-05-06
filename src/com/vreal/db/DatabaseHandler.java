@@ -131,68 +131,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	// db.close(); // Closing database connection
 	// }
 
-	public ArrayList<DetailsModel> getAllCart() {
-		ArrayList<DetailsModel> list = new ArrayList<DetailsModel>();
-		// String selectQuery = "SELECT  * FROM " + TABLE_CART + " ORDER BY " +
-		// KEY_ID + " DESC";
-		String selectQuery = "SELECT  * FROM " + TABLE_CART;
-		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor cursor = db.rawQuery(selectQuery, null);
-		try {
-			if (cursor.moveToFirst()) {
-				do {
-					try {
-						DetailsModel md = new DetailsModel();
-						md.setId(cursor.getString(0));
-						md.setProductId(cursor.getString(1));
-						md.setName(cursor.getString(2));
-						md.setPrice(cursor.getString(3));
-						md.setQuantityUserChoosen(cursor.getInt(4));
-						md.setImage(cursor.getString(5));
-						md.setNgayNhan(Integer.parseInt(cursor.getString(7)));
-						md.setNgayTra(Integer.parseInt(cursor.getString(8)));
-						md.setProductType(cursor.getString(9));
-						md.setMaxQty(cursor.getString(10));
-						list.add(md);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
 
-				} while (cursor.moveToNext());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (cursor != null)
-				cursor.close();
-		}
-
-		return list;
-	}
-
-	public void addANewCart(final DetailsModel user) {
-		// check if exists
-		SQLiteDatabase db = this.getWritableDatabase();
-		if (checkProductExists(user.getProductId(), db)) {
-			updateCartViaProductID(user.getProductId(), user.getQuantityUserChoosen(), db);
-			// db.close();
-		} else {
-			ContentValues values = new ContentValues();
-			values.put(PRODUCT_ID, user.getProductId());
-			values.put(NAME, user.getName());
-			values.put(PRICE, user.getPrice());
-			values.put(QUANTITY, user.getQuantityUserChoosen());
-			values.put(IMAGE, user.getImage());
-			values.put(NGAYNHAN, user.getNgayNhan() + "");
-			values.put(NGAYTRA, user.getNgayTra() + "");
-			values.put(PRODUCT_TYPE, user.getProductType() + "");
-			values.put(MAXQUANTITY, user.getMaxQty() + "");
-			// Inserting Row
-			db.insert(TABLE_CART, null, values);
-			db.close(); // Closing database connection
-		}
-
-	}
 
 	public boolean checkProductExists(String producID, SQLiteDatabase db) {
 		String selectQuery = "SELECT * FROM " + TABLE_CART + " WHERE " + PRODUCT_ID + "='" + producID + "'";

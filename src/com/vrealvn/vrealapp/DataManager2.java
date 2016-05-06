@@ -46,6 +46,7 @@ import com.vreal.libs.SessionManager;
 import com.vreal.model.BannerHomeModel;
 import com.vreal.model.CateSildeModel;
 import com.vreal.model.CommentsModel;
+import com.vreal.model.DealHomeModel;
 import com.vreal.model.DeliveryAddressModel;
 import com.vreal.model.DetailsModel;
 import com.vreal.model.FilterModel;
@@ -81,6 +82,7 @@ public class DataManager2 {
 	private DatabaseHandler db;
 	private SessionManager sm;
 	private ProgressDialog pg;
+	private DetailsModel md=new DetailsModel();
 
 	HashMap<String, String> parameters;
 	private String errorMess = "Lỗi trong quá trình tải dữ liệu, Vui lòng thử lại";
@@ -108,8 +110,7 @@ public class DataManager2 {
 	public void showProgress(Activity activity) {
 		isShowPro = true;
 		try {
-			pg = ProgressDialog.show(activity, "Loading",
-					"please wait....", true);
+			pg = ProgressDialog.show(activity, "Loading", "please wait....", true);
 			// showDialog(activity);
 		} catch (Exception e) {
 		}
@@ -124,13 +125,10 @@ public class DataManager2 {
 			dialogSelectImage.getWindow();
 			dialogSelectImage.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialogSelectImage.setContentView(R.layout.chochay);
-			dialogSelectImage.getWindow().setBackgroundDrawable(
-					new ColorDrawable(android.graphics.Color.TRANSPARENT));
-			ImageView img = (ImageView) dialogSelectImage
-					.findViewById(R.id.webView1);
+			dialogSelectImage.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+			ImageView img = (ImageView) dialogSelectImage.findViewById(R.id.webView1);
 			img.setBackgroundResource(R.drawable.cho_chay);
-			AnimationDrawable frameAnimation = (AnimationDrawable) img
-					.getBackground();
+			AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
 			frameAnimation.start();
 			dialogSelectImage.setCancelable(false);
 			dialogSelectImage.setCanceledOnTouchOutside(false);
@@ -158,9 +156,7 @@ public class DataManager2 {
 
 	private boolean isShowPro = false;
 
-	public void callServer(final Activity activity,
-			HashMap<String, String> parameters, final boolean showPro,
-			boolean isPost, final JsonObjectInterface jsonObjectInterface,
+	public void callServer(final Activity activity, HashMap<String, String> parameters, final boolean showPro, boolean isPost, final JsonObjectInterface jsonObjectInterface,
 			final boolean isGetJsonArray) {
 		HotdealUtilities.showALog(parameters.toString());
 		if (showPro && !isShowPro) {
@@ -174,83 +170,77 @@ public class DataManager2 {
 			urlServer = ConstantValue.URL_SERVER;
 		} else {
 			method = Method.GET;
-			urlServer = makeUrl(parameters, ConstantValue.URL_SERVER + "/"
-					+ parameters.remove(ConstantValue.API));
+			urlServer = makeUrl(parameters, ConstantValue.URL_SERVER + "/" + parameters.remove(ConstantValue.API));
 		}
-		jsonObjRequest = new VolleyRequestCustom(method, urlServer, parameters,
-				new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						HotdealUtilities.showALog(response);
-						if (isGetJsonArray) {
-							JSONArray jsonResponse = null;
-							try {
-								jsonResponse = new JSONArray(response);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							jsonObjectInterface.callResultJAr(activity,
-									jsonResponse);
-						} else {
-							JSONObject jsonResponse = null;
-							try {
-								jsonResponse = new JSONObject(response);
-								setMessage(jsonResponse.getString(KEY_MESSAGE)
-										.toString());
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							jsonObjectInterface.callResultJOb(activity,
-									jsonResponse);
-						}
-
-						if (showPro)
-							stopProgress();
-
+		jsonObjRequest = new VolleyRequestCustom(method, urlServer, parameters, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				HotdealUtilities.showALog(response);
+				if (isGetJsonArray) {
+					JSONArray jsonResponse = null;
+					try {
+						jsonResponse = new JSONArray(response);
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				}, new Response.ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						// Handle your error types accordingly.For Timeout & No
-						// connection error, you can show 'retry' button.
-						// For AuthFailure, you can re login with user
-						// credentials.
-						// For ClientError, 400 & 401, Errors happening on
-						// client side when sending api request.
-						// In this case you can check how client is forming the
-						// api and debug accordingly.
-						// For ServerError 5xx, you can do retry or handle
-						// accordingly.
-						if (error instanceof NetworkError) {
-							setMessage(errorMess + " (Network Error)");
-						} else if (error instanceof ClientError) {
-							setMessage(errorMess + " (Client Error)");
-						} else if (error instanceof ServerError) {
-							setMessage(errorMess + " (Server Error)");
-						} else if (error instanceof AuthFailureError) {
-							setMessage(errorMess + " (AuthFailure Error)");
-						} else if (error instanceof ParseError) {
-							setMessage(errorMess + " (Parse Error)");
-						} else if (error instanceof NoConnectionError) {
-							setMessage(errorMess + " (No Connection Error)");
-						} else if (error instanceof TimeoutError) {
-							setMessage(errorMess + " (Timeout Error)");
-						}
-						HotdealUtilities.showALog(error.getMessage());
-
-						jsonObjectInterface.callResultJOb(activity, null);
-						if (showPro)
-							stopProgress();
+					jsonObjectInterface.callResultJAr(activity, jsonResponse);
+				} else {
+					JSONObject jsonResponse = null;
+					try {
+						jsonResponse = new JSONObject(response);
+						setMessage(jsonResponse.getString(KEY_MESSAGE).toString());
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				});
+					jsonObjectInterface.callResultJOb(activity, jsonResponse);
+				}
+
+				if (showPro)
+					stopProgress();
+
+			}
+		}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// Handle your error types accordingly.For Timeout & No
+				// connection error, you can show 'retry' button.
+				// For AuthFailure, you can re login with user
+				// credentials.
+				// For ClientError, 400 & 401, Errors happening on
+				// client side when sending api request.
+				// In this case you can check how client is forming the
+				// api and debug accordingly.
+				// For ServerError 5xx, you can do retry or handle
+				// accordingly.
+				if (error instanceof NetworkError) {
+					setMessage(errorMess + " (Network Error)");
+				} else if (error instanceof ClientError) {
+					setMessage(errorMess + " (Client Error)");
+				} else if (error instanceof ServerError) {
+					setMessage(errorMess + " (Server Error)");
+				} else if (error instanceof AuthFailureError) {
+					setMessage(errorMess + " (AuthFailure Error)");
+				} else if (error instanceof ParseError) {
+					setMessage(errorMess + " (Parse Error)");
+				} else if (error instanceof NoConnectionError) {
+					setMessage(errorMess + " (No Connection Error)");
+				} else if (error instanceof TimeoutError) {
+					setMessage(errorMess + " (Timeout Error)");
+				}
+				HotdealUtilities.showALog(error.getMessage());
+
+				jsonObjectInterface.callResultJOb(activity, null);
+				if (showPro)
+					stopProgress();
+			}
+		});
 
 		// Set a retry policy in case of SocketTimeout & ConnectionTimeout
 		// Exceptions. Volley does retry for you if you have specified the
 		// policy.
 
-		jsonObjRequest.setRetryPolicy(new DefaultRetryPolicy(12000, 0,
-				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+		jsonObjRequest.setRetryPolicy(new DefaultRetryPolicy(12000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		jsonObjRequest.setTag(TAG_REQUEST);
 		getVolleyQueue(activity).add(jsonObjRequest);
 	}
@@ -278,29 +268,25 @@ public class DataManager2 {
 
 	private ArrayList<VrealModel> listProvices = new ArrayList<>();
 
-	public void getProvice(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener) {
+	public void getProvice(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_CITY);
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
 
-					}
+			}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						handleProvice(result, notifyDataListener);
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleProvice(result, notifyDataListener);
 
-					}
-				}, true);
+			}
+		}, true);
 	}
 
-	public void handleProvice(JSONArray result,
-			final NotifyDataListener notifyDataListener) {
+	public void handleProvice(JSONArray result, final NotifyDataListener notifyDataListener) {
 		try {
 			if (null != result) {
 				getListProvices().clear();
@@ -312,46 +298,39 @@ public class DataManager2 {
 					getListProvices().add(md);
 				}
 				sm.setProviceJson(result.toString());
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK,
-						ConstantValue.GET_CITY);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_CITY);
 			} else {
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-						ConstantValue.GET_CITY);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_CITY);
 			}
 
 		} catch (Exception e) {
-			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-					ConstantValue.GET_CITY);
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_CITY);
 			e.printStackTrace();
 		}
 	}
 
 	private ArrayList<VrealModel> listDistrict = new ArrayList<>();
 
-	public void getDistrict(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener, String proUD) {
+	public void getDistrict(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String proUD) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_DIS);
 		builder.put("proID", proUD);
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
 
-					}
+			}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						handleDistrict(result, notifyDataListener);
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleDistrict(result, notifyDataListener);
 
-					}
-				}, true);
+			}
+		}, true);
 	}
 
-	public void handleDistrict(JSONArray result,
-			final NotifyDataListener notifyDataListener) {
+	public void handleDistrict(JSONArray result, final NotifyDataListener notifyDataListener) {
 		try {
 			getListDistrict().clear();
 			if (null != result) {
@@ -363,45 +342,38 @@ public class DataManager2 {
 					getListDistrict().add(md);
 				}
 				sm.setDisJson(result.toString());
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK,
-						ConstantValue.GET_DIS);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_DIS);
 			} else {
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-						ConstantValue.GET_DIS);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DIS);
 			}
 
 		} catch (Exception e) {
-			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-					ConstantValue.GET_DIS);
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DIS);
 			e.printStackTrace();
 		}
 	}
 
 	private ArrayList<VrealModel> listWard = new ArrayList<>();
 
-	public void getWard(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener) {
+	public void getWard(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_WARD);
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
 
-					}
+			}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						handleWard(result, notifyDataListener);
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleWard(result, notifyDataListener);
 
-					}
-				}, true);
+			}
+		}, true);
 	}
 
-	public void handleWard(JSONArray result,
-			final NotifyDataListener notifyDataListener) {
+	public void handleWard(JSONArray result, final NotifyDataListener notifyDataListener) {
 		try {
 			getListWard().clear();
 			if (null != result) {
@@ -413,45 +385,38 @@ public class DataManager2 {
 					getListWard().add(md);
 				}
 				sm.setWardJson(result.toString());
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK,
-						ConstantValue.GET_WARD);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_WARD);
 			} else {
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-						ConstantValue.GET_WARD);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_WARD);
 			}
 
 		} catch (Exception e) {
-			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-					ConstantValue.GET_WARD);
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_WARD);
 			e.printStackTrace();
 		}
 	}
 
 	private ArrayList<VrealModel> listStreet = new ArrayList<>();
 
-	public void getStreet(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener) {
+	public void getStreet(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_STREET);
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
 
-					}
+			}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						handleStreet(result, notifyDataListener);
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleStreet(result, notifyDataListener);
 
-					}
-				}, true);
+			}
+		}, true);
 	}
 
-	public void handleStreet(JSONArray result,
-			final NotifyDataListener notifyDataListener) {
+	public void handleStreet(JSONArray result, final NotifyDataListener notifyDataListener) {
 		try {
 			getListStreet().clear();
 			if (null != result) {
@@ -463,45 +428,38 @@ public class DataManager2 {
 					getListStreet().add(md);
 				}
 				sm.setStreetJson(result.toString());
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK,
-						ConstantValue.GET_STREET);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_STREET);
 			} else {
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-						ConstantValue.GET_STREET);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_STREET);
 			}
 
 		} catch (Exception e) {
-			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-					ConstantValue.GET_STREET);
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_STREET);
 			e.printStackTrace();
 		}
 	}
 
 	private ArrayList<VrealModel> listKhuvuc = new ArrayList<>();
 
-	public void getKhuvuc(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener) {
+	public void getKhuvuc(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_KHUVUC);
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
 
-					}
+			}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						handleKV(result, notifyDataListener);
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				handleKV(result, notifyDataListener);
 
-					}
-				}, true);
+			}
+		}, true);
 	}
 
-	public void handleKV(JSONArray result,
-			final NotifyDataListener notifyDataListener) {
+	public void handleKV(JSONArray result, final NotifyDataListener notifyDataListener) {
 		try {
 			getListKhuvuc().clear();
 			if (null != result) {
@@ -513,226 +471,183 @@ public class DataManager2 {
 					getListKhuvuc().add(md);
 				}
 				sm.setKhuVucJson(result.toString());
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK,
-						ConstantValue.GET_KHUVUC);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_KHUVUC);
 			} else {
-				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-						ConstantValue.GET_KHUVUC);
+				notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_KHUVUC);
 			}
 
 		} catch (Exception e) {
-			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED,
-					ConstantValue.GET_KHUVUC);
+			notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_KHUVUC);
 			e.printStackTrace();
 		}
 	}
 
 	private ArrayList<VrealModel> listTypeProperty = new ArrayList<>();
 
-	public void getTypeProperty(Activity activity, boolean showPro,
-			boolean isPost, final NotifyDataListener notifyDataListener) {
+	public void getTypeProperty(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_TYPE);
 		// builder.put("proID", proUD);
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
-						try {
-							getListTypeProperty().clear();
-							if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-								JSONArray listJson;
-								listJson = result
-										.getJSONArray("RealNewsTypeList");
-								for (int i = 0; i < listJson.length(); i++) {
-									JSONObject jSonOb = new JSONObject();
-									jSonOb = listJson.getJSONObject(i);
-									VrealModel md = new VrealModel();
-									md.setTypeProperty(jSonOb);
-									getListTypeProperty().add(md);
-								}
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_OK,
-										ConstantValue.GET_TYPE);
-							} else {
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_FAILED,
-										ConstantValue.GET_TYPE);
-							}
-
-						} catch (Exception e) {
-							notifiUI(notifyDataListener,
-									NotifyDataListener.NOTIFY_FAILED,
-									ConstantValue.GET_TYPE);
-							e.printStackTrace();
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListTypeProperty().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("RealNewsTypeList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setTypeProperty(jSonOb);
+							getListTypeProperty().add(md);
 						}
-
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_TYPE);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_TYPE);
 					}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						// TODO Auto-generated method stub
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_TYPE);
+					e.printStackTrace();
+				}
 
-					}
-				}, false);
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
 	}
 
 	private ArrayList<VrealModel> listLoainhadat = new ArrayList<>();
 
-	public void getLoaiNhaDat(Activity activity, boolean showPro,
-			boolean isPost, final NotifyDataListener notifyDataListener,
-			String idType) {
+	public void getLoaiNhaDat(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String idType) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_LOAINHADAT);
 		builder.put("typeID", idType);
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
-						try {
-							getListLoainhadat().clear();
-							if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-								JSONArray listJson;
-								listJson = result
-										.getJSONArray("RealNewsCateList");
-								for (int i = 0; i < listJson.length(); i++) {
-									JSONObject jSonOb = new JSONObject();
-									jSonOb = listJson.getJSONObject(i);
-									VrealModel md = new VrealModel();
-									md.setLoaiNhaDat(jSonOb);
-									getListLoainhadat().add(md);
-								}
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_OK,
-										ConstantValue.GET_LOAINHADAT);
-							} else {
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_FAILED,
-										ConstantValue.GET_LOAINHADAT);
-							}
-
-						} catch (Exception e) {
-							notifiUI(notifyDataListener,
-									NotifyDataListener.NOTIFY_FAILED,
-									ConstantValue.GET_LOAINHADAT);
-							e.printStackTrace();
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListLoainhadat().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("RealNewsCateList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setLoaiNhaDat(jSonOb);
+							getListLoainhadat().add(md);
 						}
-
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_LOAINHADAT);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_LOAINHADAT);
 					}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						// TODO Auto-generated method stub
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_LOAINHADAT);
+					e.printStackTrace();
+				}
 
-					}
-				}, false);
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
 	}
 
 	private ArrayList<VrealModel> listHuong = new ArrayList<>();
 
-	public void getHuong(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener) {
+	public void getHuong(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_HUONG);
 		builder.put("search", "");
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
-						try {
-							getListHuong().clear();
-							if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-								JSONArray listJson;
-								listJson = result.getJSONArray("DirectionList");
-								for (int i = 0; i < listJson.length(); i++) {
-									JSONObject jSonOb = new JSONObject();
-									jSonOb = listJson.getJSONObject(i);
-									VrealModel md = new VrealModel();
-									md.setHuong(jSonOb);
-									getListHuong().add(md);
-								}
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_OK,
-										ConstantValue.GET_HUONG);
-							} else {
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_FAILED,
-										ConstantValue.GET_HUONG);
-							}
-
-						} catch (Exception e) {
-							notifiUI(notifyDataListener,
-									NotifyDataListener.NOTIFY_FAILED,
-									ConstantValue.GET_HUONG);
-							e.printStackTrace();
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListHuong().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("DirectionList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setHuong(jSonOb);
+							getListHuong().add(md);
 						}
-
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_HUONG);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_HUONG);
 					}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						// TODO Auto-generated method stub
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_HUONG);
+					e.printStackTrace();
+				}
 
-					}
-				}, false);
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
 	}
 
 	private ArrayList<VrealModel> listDuAn = new ArrayList<>();
 
-	public void getDuan(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener) {
+	public void getDuan(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_DUAN);
 		builder.put("search", "");
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
-						try {
-							getListDuAn().clear();
-							if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-								JSONArray listJson;
-								listJson = result
-										.getJSONArray("ProjectTypeList");
-								for (int i = 0; i < listJson.length(); i++) {
-									JSONObject jSonOb = new JSONObject();
-									jSonOb = listJson.getJSONObject(i);
-									VrealModel md = new VrealModel();
-									md.setDuan(jSonOb);
-									getListDuAn().add(md);
-								}
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_OK,
-										ConstantValue.GET_DUAN);
-							} else {
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_FAILED,
-										ConstantValue.GET_DUAN);
-							}
-
-						} catch (Exception e) {
-							notifiUI(notifyDataListener,
-									NotifyDataListener.NOTIFY_FAILED,
-									ConstantValue.GET_DUAN);
-							e.printStackTrace();
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListDuAn().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("ProjectTypeList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setDuan(jSonOb);
+							getListDuAn().add(md);
 						}
-
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_DUAN);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DUAN);
 					}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						// TODO Auto-generated method stub
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DUAN);
+					e.printStackTrace();
+				}
 
-					}
-				}, false);
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
 	}
 
 	private ArrayList<VrealModel> listGia = new ArrayList<>();
@@ -741,13 +656,9 @@ public class DataManager2 {
 
 	private ArrayList<VrealModel> listSearch = new ArrayList<>();
 
-	public void seach(Activity activity, boolean showPro, boolean isPost,
-			final NotifyDataListener notifyDataListener, String typeID,
-			String cateID, String province, String districtId, String ward,
-			String street, String homeDirection, String project,
-			String AcreageStart, String AcreageEnd, String NoOfRoom,
-			String NoOfRestRoom, String PriceFrom, String PriceTo,
-			int pageIndex, int pageSize) {
+	public void seach(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String typeID, String cateID, String province, String districtId, String ward,
+			String street, String homeDirection, String project, String AcreageStart, String AcreageEnd, String NoOfRoom, String NoOfRestRoom, String PriceFrom, String PriceTo, int pageIndex,
+			int pageSize) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.SEARCG);
 		builder.put("typeID", typeID);
@@ -766,48 +677,82 @@ public class DataManager2 {
 		builder.put("PriceTo", PriceTo);
 		builder.put("pageIndex", pageIndex + "");
 		builder.put("pageSize", pageSize + "");
-		callServer(activity, builder, showPro, isPost,
-				new JsonObjectInterface() {
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
 
-					@Override
-					public void callResultJOb(Context activity,
-							JSONObject result) {
-						try {
-							getListSearch().clear();
-							if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-								JSONArray listJson;
-								listJson = result.getJSONArray("RealsNewsList");
-								for (int i = 0; i < listJson.length(); i++) {
-									JSONObject jSonOb = new JSONObject();
-									jSonOb = listJson.getJSONObject(i);
-									VrealModel md = new VrealModel();
-									md.setSeachData(jSonOb);
-									getListSearch().add(md);
-								}
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_OK,
-										ConstantValue.SEARCG);
-							} else {
-								notifiUI(notifyDataListener,
-										NotifyDataListener.NOTIFY_FAILED,
-										ConstantValue.SEARCG);
-							}
-
-						} catch (Exception e) {
-							notifiUI(notifyDataListener,
-									NotifyDataListener.NOTIFY_FAILED,
-									ConstantValue.SEARCG);
-							e.printStackTrace();
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListSearch().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("RealsNewsList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setSeachData(jSonOb);
+							getListSearch().add(md);
 						}
-
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.SEARCG);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCG);
 					}
 
-					@Override
-					public void callResultJAr(Context activity, JSONArray result) {
-						// TODO Auto-generated method stub
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCG);
+					e.printStackTrace();
+				}
 
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
+
+	private ArrayList<DealHomeModel> listTintuc = new ArrayList<>();
+
+	public void getTintuc(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_NEWS);
+		builder.put("search", "");
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListTintuc().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("NewsTypeList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							DealHomeModel md = new DealHomeModel();
+							md.setData(jSonOb);
+							getListTintuc().add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_NEWS);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_NEWS);
 					}
-				}, false);
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_NEWS);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
 	}
 
 	public ArrayList<VrealModel> getListProvices() {
@@ -904,5 +849,21 @@ public class DataManager2 {
 
 	public void setListDuAn(ArrayList<VrealModel> listDuAn) {
 		this.listDuAn = listDuAn;
+	}
+
+	public ArrayList<DealHomeModel> getListTintuc() {
+		return listTintuc;
+	}
+
+	public void setListTintuc(ArrayList<DealHomeModel> listTintuc) {
+		this.listTintuc = listTintuc;
+	}
+
+	public DetailsModel getMd() {
+		return md;
+	}
+
+	public void setMd(DetailsModel md) {
+		this.md = md;
 	}
 }

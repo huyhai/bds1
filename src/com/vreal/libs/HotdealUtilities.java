@@ -14,6 +14,7 @@ import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -929,6 +930,28 @@ public class HotdealUtilities {
 			if (!jSonOb.getString(key).equals("null")) {
 				result = jSonOb.getString(key);
 			}
+		} catch (JSONException e) {
+			// showALog("getDataStrign loi");
+			// e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static int getDataInt(JSONObject jSonOb, String key) {
+		int result =0;
+		try {
+			result = jSonOb.getInt(key);
+		} catch (JSONException e) {
+			// showALog("getDataStrign loi");
+			// e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static JSONArray getArray(JSONObject jSonOb, String key) {
+		JSONArray result = new JSONArray();
+		try {
+			result = jSonOb.getJSONArray(key);
 		} catch (JSONException e) {
 			// showALog("getDataStrign loi");
 			// e.printStackTrace();

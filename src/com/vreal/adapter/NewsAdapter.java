@@ -57,8 +57,7 @@ public class NewsAdapter extends BaseAdapter {
 			LayoutInflater inflater = LayoutInflater.from(ac);
 			convertView = inflater.inflate(R.layout.tintuc_item, null);
 			holder.tvDeal = (TextView) convertView.findViewById(R.id.tvDeal);
-			holder.lvDealhot = (TwoWayView) convertView
-					.findViewById(R.id.lvDealhot);
+			holder.lvDealhot = (TwoWayView) convertView.findViewById(R.id.lvDealhot);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -66,12 +65,10 @@ public class NewsAdapter extends BaseAdapter {
 		final DealHomeModel ca = listData.get(position);
 		holder.tvDeal.setText(ca.getName());
 
-		final DealHomeItemAdapter adapterList = new DealHomeItemAdapter(ac,
-				null);
+		final DealHomeItemAdapter adapterList = new DealHomeItemAdapter(ac, ca.getListTintuc());
 		holder.lvDealhot.setAdapter(adapterList);
 		holder.lvDealhot.setHorizontalScrollBarEnabled(false);
 		holder.lvDealhot.setItemMargin(10);
-
 
 		return convertView;
 	}

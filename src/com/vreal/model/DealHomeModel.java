@@ -13,25 +13,26 @@ public class DealHomeModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String categoryId;
 	private String name;
-	private ArrayList<DetailsModel> listDeal;
+	private ArrayList<DetailsModel> listTintuc;
 	
 	public DealHomeModel() {
 
 	}
 
 	public void setData(JSONObject jSonInfo) throws JSONException {
-		this.setCategoryId(HotdealUtilities.getDataString(jSonInfo, "categoryId"));
-		this.setName(HotdealUtilities.getDataString(jSonInfo, "name"));
-		setListDeal(new ArrayList<DetailsModel>());
+		this.setCategoryId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setName(HotdealUtilities.getDataString(jSonInfo, "NewsTypeName"));
+		setListTintuc(new ArrayList<DetailsModel>());
 		JSONArray listJson;
-		listJson = jSonInfo.getJSONArray("listProduct");
-		getListDeal().clear();
+		listJson=HotdealUtilities.getArray(jSonInfo, "DSTin");
+//		listJson = jSonInfo.getJSONArray("DSTin");
+		getListTintuc().clear();
 		for (int i = 0; i < listJson.length(); i++) {
 			JSONObject jSonOb = new JSONObject();
 			jSonOb = listJson.getJSONObject(i);
 			DetailsModel md=new DetailsModel();
 			md.setData(jSonOb);
-			getListDeal().add(md);
+			getListTintuc().add(md);
 		}
 	}
 
@@ -51,19 +52,14 @@ public class DealHomeModel implements Serializable {
 		this.categoryId = categoryId;
 	}
 
-	/**
-	 * @return the listDeal
-	 */
-	public ArrayList<DetailsModel> getListDeal() {
-		return listDeal;
+	public ArrayList<DetailsModel> getListTintuc() {
+		return listTintuc;
 	}
 
-	/**
-	 * @param listDeal the listDeal to set
-	 */
-	public void setListDeal(ArrayList<DetailsModel> listDeal) {
-		this.listDeal = listDeal;
+	public void setListTintuc(ArrayList<DetailsModel> listTintuc) {
+		this.listTintuc = listTintuc;
 	}
+
 
 
 }
