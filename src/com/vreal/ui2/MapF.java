@@ -32,12 +32,17 @@ import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
 
 public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener {
-	private LinearLayout llDistance;
+	// private LinearLayout llDistance;
 	private TextView tvD;
 	private RelativeLayout rlTienICh;
 	private RelativeLayout rlTop;
 	private TextView tvEX;
 	int pos;
+	private TextView tvKm1;
+	private TextView tvKm2;
+	private TextView tvKm3;
+	private TextView tvKm4;
+	private TextView tvKm5;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,24 +82,34 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 	}
 
 	private void initView(View rootView) {
-		llDistance = (LinearLayout) rootView.findViewById(R.id.llDistance);
+		// llDistance = (LinearLayout) rootView.findViewById(R.id.llDistance);
 		rlTienICh = (RelativeLayout) rootView.findViewById(R.id.rlTienICh);
 		rlTop = (RelativeLayout) rootView.findViewById(R.id.rlTop);
 		tvD = (TextView) rootView.findViewById(R.id.tvD);
 		tvEX = (TextView) rootView.findViewById(R.id.tvEX);
+		tvKm1 = (TextView) rootView.findViewById(R.id.tvKm1);
+		tvKm2 = (TextView) rootView.findViewById(R.id.tvKm2);
+		tvKm3 = (TextView) rootView.findViewById(R.id.tvKm3);
+		tvKm4 = (TextView) rootView.findViewById(R.id.tvKm4);
+		tvKm5 = (TextView) rootView.findViewById(R.id.tvKm5);
 		rlTop.setOnClickListener(this);
 		tvEX.setOnClickListener(this);
 		tvD.setOnClickListener(this);
+		tvKm1.setOnClickListener(this);
+		tvKm2.setOnClickListener(this);
+		tvKm3.setOnClickListener(this);
+		tvKm4.setOnClickListener(this);
+		tvKm5.setOnClickListener(this);
 
 		HotdealUtilities.setHeight(rlTienICh, 2.5);
 
-		for (int i = 0; i < 6; i++) {
-			TextView tv = new TextView(getActivity());
-			tv.setText(i + " km");
-			tv.setPadding(5, 5, 5, 5);
-			tv.setTextSize(tvD.getTextSize());
-			llDistance.addView(tv);
-		}
+		// for (int i = 0; i < 6; i++) {
+		// TextView tv = new TextView(getActivity());
+		// tv.setText(i + " km");
+		// tv.setPadding(5, 5, 5, 5);
+		// tv.setTextSize(tvD.getTextSize());
+		// llDistance.addView(tv);
+		// }
 		// GoogleMap mMap = ((SupportMapFragment)
 		// getFragmentManager().findFragmentById(R.id.location_map)).getMap();
 		// MapFragment mapFragment = (MapFragment)
@@ -114,20 +129,20 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 			list.add(vmd);
 			setMultiMarkDiaDiem(list, arg0);
 		}
-		
-//		LatLng latlng = HotdealUtilities.getCurrentLocation(getActivity());
-//		arg0.addMarker(new MarkerOptions().position(latlng).title("SG"));
+
+		// LatLng latlng = HotdealUtilities.getCurrentLocation(getActivity());
+		// arg0.addMarker(new MarkerOptions().position(latlng).title("SG"));
 		// moveToMaker(latlng, arg0);
-//		ArrayList<DiaDiemModel> list = new ArrayList<>();
-//		DiaDiemModel md;
-//
-//		md = new DiaDiemModel();
-//		md.setAddress(vmd.getProvinceName());
-//		md.setClick(true);
-//		md.setLatt(vmd.getLatitude());
-//		md.setLont(vmd.getLongitude());
-//		list.add(md);
-		
+		// ArrayList<DiaDiemModel> list = new ArrayList<>();
+		// DiaDiemModel md;
+		//
+		// md = new DiaDiemModel();
+		// md.setAddress(vmd.getProvinceName());
+		// md.setClick(true);
+		// md.setLatt(vmd.getLatitude());
+		// md.setLont(vmd.getLongitude());
+		// list.add(md);
+
 		// md = new DiaDiemModel();
 		// md.setAddress("bbbbbbbb");
 		// md.setClick(true);
@@ -147,7 +162,6 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		// md.setLont(106.6804863);
 		// list.add(md);
 
-		
 		// Circle circle = arg0.addCircle(new CircleOptions().center(new
 		// LatLng(md.getLatt(),
 		// md.getLont())).radius(1500).strokeColor(R.color.vreal_orange).strokeWidth(2).fillColor(Color.TRANSPARENT));
@@ -168,6 +182,13 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 
 		} else if (tvEX == v) {
 			rlTienICh.setVisibility(View.GONE);
+		} else if (tvKm1 == v) {
+			
+		} else if (tvKm2 == v) {
+			
+		} else if (tvKm3 == v) {
+		} else if (tvKm4 == v) {
+		} else if (tvKm5 == v) {
 		}
 
 	}

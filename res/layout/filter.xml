@@ -13,6 +13,7 @@
         android:visibility="visible" >
 
         <RelativeLayout
+            android:id="@+id/rlKhuvuc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding5"
@@ -49,6 +50,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rlMuagia"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding5"
@@ -85,6 +87,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rlLoai"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding5"
@@ -108,7 +111,7 @@
                 android:layout_toRightOf="@+id/tvL"
                 android:gravity="right"
                 android:paddingRight="@dimen/padding5"
-                android:text="Căn hộ chung cơ cao cấp"
+                android:text=""
                 android:textSize="@dimen/textsize_medium"
                 android:textStyle="bold" />
 
@@ -122,6 +125,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rlNam"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding5"
@@ -156,6 +160,16 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/ic_muitenden_right" />
         </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnTimkiem"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding15"
+            android:background="@drawable/bg_top1"
+            android:padding="@dimen/padding10"
+            android:text="LỌC"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

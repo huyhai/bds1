@@ -459,7 +459,14 @@ public class PostPro extends Fragment implements OnClickListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+//		DataManager2.getInstance().post(getActivity(), true, true, new NotifyDataListener() {
+//			
+//			@Override
+//			public void onNotify(String api, int id) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		}, hinhthucID, realCateID, realPriorityID, projectID, provinceID, districtID, wardID, streetID, unitID, areaID, acreage, realName, description, MatTien, DuongVao, SoTang, interior, address, price, homeDirectionID, balconyID, noOfRoom, noOfRest, latitude, longitude, isVisible, start, end, contactName, contactAddress, contactPhone, contactEmail, creatorID, userID)
 		
 	}
 

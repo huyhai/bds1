@@ -532,7 +532,8 @@ public class HotdealUtilities {
 
 	public static void loadImagePicaso(String url, ImageView img, Activity ac) {
 		try {
-			Picasso.with(ac).load(url).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(img);
+			String ui=ConstantValue.domainIMG+url;
+			Picasso.with(ac).load(ui).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(img);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

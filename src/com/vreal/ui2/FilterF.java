@@ -1,17 +1,53 @@
 package com.vreal.ui2;
 
+import java.util.Calendar;
+import java.util.StringTokenizer;
+
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.NumberPicker;
+import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
+import com.vreal.libs.ConstantValue;
+import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.NotifySomesDataListener;
+import com.vrealvn.vrealapp.DataManager2;
+import com.vrealvn.vrealapp.HotdealApp;
 
-public class FilterF extends Fragment {
+public class FilterF extends Fragment implements OnClickListener {
 	private RelativeLayout rlRefresh;
+	private RelativeLayout rlKhuvuc;
+	private RelativeLayout rlMuagia;
+	private RelativeLayout rlLoai;
+	private RelativeLayout rlNam;
+	private TextView tvKhuvuc;
+	private TextView tvMucgia;
+	private TextView tvLoai;
+	private TextView tvNam;
+	private Button btnTimkiem;
+
+	private String defauldID = "";
+	private String loaiID = defauldID;
+	private String loaiName = "Chọn loại";
+	private String KVID = defauldID;
+	private String KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+	private String giaFrom = defauldID;
+	private String giaTo = defauldID;
+	private String giaName = "Chọn giá";
+	private String namXD = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,7 +58,23 @@ public class FilterF extends Fragment {
 
 	private void initView(View rootView) {
 		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
+		rlKhuvuc = (RelativeLayout) rootView.findViewById(R.id.rlKhuvuc);
+		rlMuagia = (RelativeLayout) rootView.findViewById(R.id.rlMuagia);
+		rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
+		rlNam = (RelativeLayout) rootView.findViewById(R.id.rlNam);
+		tvKhuvuc = (TextView) rootView.findViewById(R.id.tvKhuvuc);
+		tvMucgia = (TextView) rootView.findViewById(R.id.tvMucgia);
+		tvLoai = (TextView) rootView.findViewById(R.id.tvLoai);
+		tvNam = (TextView) rootView.findViewById(R.id.tvNam);
+		btnTimkiem = (Button) rootView.findViewById(R.id.btnTimkiem);
 
+		rlKhuvuc.setOnClickListener(this);
+		rlMuagia.setOnClickListener(this);
+		rlLoai.setOnClickListener(this);
+		rlNam.setOnClickListener(this);
+		rlRefresh.setOnClickListener(this);
+		btnTimkiem.setOnClickListener(this);
+		notifyData();
 	}
 
 	@Override
@@ -30,11 +82,148 @@ public class FilterF extends Fragment {
 		super.onResume();
 		rlRefresh.setVisibility(View.VISIBLE);
 		Main.setTextTop("Bộ lọc");
+		IntentFilter intentGetKeySend = new IntentFilter();
+		intentGetKeySend.addAction("ABC");
+		getActivity().registerReceiver(receiver, intentGetKeySend);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		rlRefresh.setVisibility(View.GONE);
+		try {
+			getActivity().unregisterReceiver(receiver);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 	}
+
+	@Override
+	public void onClick(View v) {
+		if (v == rlKhuvuc) {
+			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
+
+				@Override
+				public void onReturnDataString(String id) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onReturnData(int id) {
+					try {
+						KVID = DataManager2.getInstance().getListKhuvuc().get(id).getId();
+						KVName = DataManager2.getInstance().getListKhuvuc().get(id).getProvinceName();
+						notifyData();
+					} catch (Exception e) {
+					}
+
+				}
+			});
+		} else if (v == rlMuagia) {
+			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
+
+				@Override
+				public void onReturnDataString(String id) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onReturnData(int id) {
+					try {
+						giaFrom = DataManager2.getInstance().getListGia().get(id).getId() + "";
+						giaTo = DataManager2.getInstance().getListGia().get(id).getValue2() + "";
+						giaName = DataManager2.getInstance().getListGia().get(id).getProvinceName();
+						notifyData();
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+
+				}
+			});
+
+		} else if (v == rlLoai) {
+			HotdealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, HotdealUtilities.getDataFragment(this));
+
+		} else if (v == rlNam) {
+			show();
+		} else if (v == rlRefresh) {
+			setDefault();
+		} else if (v == btnTimkiem) {
+
+		}
+
+	}
+
+	public void show() {
+		Calendar calendar = Calendar.getInstance();
+		int thisYear = calendar.get(Calendar.YEAR);
+		final Dialog d = new Dialog(getActivity());
+		d.setTitle("NumberPicker");
+		d.setContentView(R.layout.dialog);
+		Button b1 = (Button) d.findViewById(R.id.button1);
+		Button b2 = (Button) d.findViewById(R.id.button2);
+		final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+		np.setMaxValue(thisYear);
+		np.setMinValue(thisYear - 20);
+		np.setWrapSelectorWheel(false);
+		b1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// tv.setText(String.valueOf(np.getValue()));
+				d.dismiss();
+				namXD=String.valueOf(np.getValue());
+				notifyData();
+			}
+		});
+		b2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				d.dismiss();
+			}
+		});
+		d.show();
+
+	}
+
+	private void setDefault() {
+		defauldID = "";
+		loaiID = defauldID;
+		loaiName = "Chọn loại";
+		KVID = defauldID;
+		KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+		giaFrom = defauldID;
+		giaTo = defauldID;
+		giaName = "Chọn giá";
+		notifyData();
+	}
+
+	BroadcastReceiver receiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equalsIgnoreCase("ABC")) {
+				HotdealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
+				try {
+					String loai = (String) intent.getExtras().get(ConstantValue.IS_SUCCESS);
+					StringTokenizer tokens = new StringTokenizer(loai, "-");
+					loaiName = tokens.nextToken();
+					loaiID = tokens.nextToken();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				notifyData();
+			}
+		}
+
+	};
+
+	private void notifyData() {
+		tvKhuvuc.setText(KVName);
+		tvMucgia.setText(giaName);
+		tvLoai.setText(loaiName);
+		tvNam.setText(namXD);
+	}
+
 }

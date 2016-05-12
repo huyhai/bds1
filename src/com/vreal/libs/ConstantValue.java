@@ -13,6 +13,7 @@ public class ConstantValue {
 	public static final int UPLOAD_PHOTO = 10;
 	public static final int UPLOAD_PHOTO_CAMERA = 11;
 	public static final int OFFSET = 15;
+	public static final String domainIMG="http://www.vreal.vn";
 	
 	public static final String YES = "Y";
 	public static final String NO = "N";
@@ -61,8 +62,8 @@ public class ConstantValue {
 	public static final String SEARCG="V_RealNews_Search";
 	public static final String GET_DUAN="V_ProjectType_GetAll";
 	public static final String GET_NEWS="V_NewsType_GetAllWithNews";
-//	public static final String GET_DIS="V_District_GetAllStatic";
-//	public static final String GET_WARD="V_Ward_GetAllStatic";
+	public static final String GET_GIA="V_UnitList_GetAll";
+	public static final String GET_DIENTICH="V_Acreage_GetAll";
 //	public static final String GET_TYPE="V_RealNewsType_GetAll";
 	
 	//key Error

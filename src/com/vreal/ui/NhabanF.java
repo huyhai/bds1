@@ -263,7 +263,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		btnTimkiem.setOnClickListener(this);
 		rlDuan.setOnClickListener(this);
 		rlRefresh.setOnClickListener(this);
-		DataManager2.getInstance().showProgress(getActivity());
+//		DataManager2.getInstance().showProgress(getActivity());
 		if (sm.getProviceJson().equals("")) {
 			getProvice();
 		} else {
@@ -368,6 +368,10 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			} else if (api.equals(ConstantValue.GET_HUONG)) {
 				getDuan();
 			} else if (api.equals(ConstantValue.GET_DUAN)) {
+				getGia();
+			} else if (api.equals(ConstantValue.GET_GIA)) {
+				getDienTich();
+			} else if (api.equals(ConstantValue.GET_DIENTICH)) {
 				setDataDienTichAndGia();
 
 				DataManager2.getInstance().stopProgress();
@@ -382,8 +386,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	SoPhongAdapter adapterList;
 
 	private void setDataDienTichAndGia() {
-		DataManager2.getInstance().getListGia().addAll(HotdealUtilities.setDataGia());
-		DataManager2.getInstance().getListDientich().addAll(HotdealUtilities.setDataDienTich());
+//		DataManager2.getInstance().getListGia().addAll(HotdealUtilities.setDataGia());
+//		DataManager2.getInstance().getListDientich().addAll(HotdealUtilities.setDataDienTich());
 		adapterList = new SoPhongAdapter(getActivity(), HotdealUtilities.setDataSoPhong(), notifySP, Integer.parseInt(soPhong));
 		lvSP.setAdapter(adapterList);
 		lvSP.setHorizontalScrollBarEnabled(false);
@@ -406,7 +410,12 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			// adapterList.notifyDataSetChanged();
 		}
 	};
-
+	private void getDienTich() {
+		DataManager2.getInstance().getDienTich(getActivity(), false, false, notifyData);
+	}
+	private void getGia() {
+		DataManager2.getInstance().getGia(getActivity(), false, false, notifyData);
+	}
 	private void getProvice() {
 		DataManager2.getInstance().getProvice(getActivity(), false, false, notifyData);
 	}
@@ -441,13 +450,13 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			@Override
 			public void onNotify(String api, int id) {
 				if (NotifyDataListener.NOTIFY_OK == id) {
-					((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
+					((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(),idType);
 				} else {
 
 				}
 
 			}
-		}, idType, loaiID, proviceID, disID, wardID, streetID, huongID, duanID, dientichFrom, dientichTo, soPhong, "", giaFrom, giaTo, 0, 10);
+		}, idType, loaiID, proviceID, disID, wardID, streetID, huongID, duanID, dientichFrom, soPhong, "", giaFrom, 0, 10);
 	}
 
 	// private void getTypeProperty() {
@@ -595,7 +604,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 				@Override
 				public void onReturnData(int id) {
 					try {
-						dientichFrom = DataManager2.getInstance().getListDientich().get(id).getValue1() + "";
+						dientichFrom = DataManager2.getInstance().getListDientich().get(id).getId()+ "";
 						dientichTo = DataManager2.getInstance().getListDientich().get(id).getValue2() + "";
 						dientichName = DataManager2.getInstance().getListDientich().get(id).getProvinceName();
 						notifyData();
@@ -618,7 +627,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 				@Override
 				public void onReturnData(int id) {
 					try {
-						giaFrom = DataManager2.getInstance().getListGia().get(id).getValue1() + "";
+						giaFrom = DataManager2.getInstance().getListGia().get(id).getId() + "";
 						giaTo = DataManager2.getInstance().getListGia().get(id).getValue2() + "";
 						giaName = DataManager2.getInstance().getListGia().get(id).getProvinceName();
 						notifyData();

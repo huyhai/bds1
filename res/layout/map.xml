@@ -96,17 +96,78 @@
                         android:textSize="@dimen/textsize_medium"
                         android:textStyle="bold" />
 
+                    <LinearLayout
+                        android:id="@+id/llDistance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvThogtinlienhe"
+                        android:orientation="horizontal"
+                        android:visibility="visible" >
+
+                        <TextView
+                            android:id="@+id/tvKm1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="1 KM"
+                            android:textSize="@dimen/textsize_medium"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tvKm2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="2 KM"
+                            android:textSize="@dimen/textsize_medium"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tvKm3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="3 KM"
+                            android:textSize="@dimen/textsize_medium"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tvKm4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="4 KM"
+                            android:textSize="@dimen/textsize_medium"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tvKm5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="5 KM"
+                            android:textSize="@dimen/textsize_medium"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
                     <HorizontalScrollView
                         android:id="@+id/horizontalScrollView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvThogtinlienhe" >
+                        android:layout_below="@+id/tvThogtinlienhe"
+                        android:visibility="gone" >
 
                         <LinearLayout
-                            android:id="@+id/llDistance"
+                            android:id="@+id/llDistancea"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal"
+                            android:visibility="gone" >
                         </LinearLayout>
                     </HorizontalScrollView>
 
@@ -114,7 +175,7 @@
                         android:id="@+id/tvThogtinlienhe1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/horizontalScrollView1"
+                        android:layout_below="@+id/llDistance"
                         android:text="Chọn tiện ích"
                         android:textSize="@dimen/textsize_medium"
                         android:textStyle="bold" />

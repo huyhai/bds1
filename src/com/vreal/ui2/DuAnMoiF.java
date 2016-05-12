@@ -82,7 +82,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == rlFilter) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF(), "");
+			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF(), HotdealUtilities.getDataFragment(this));
 		} else if (v == rlMap) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new MapF(-1), "");
 		}

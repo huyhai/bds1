@@ -82,7 +82,7 @@ public class DataManager2 {
 	private DatabaseHandler db;
 	private SessionManager sm;
 	private ProgressDialog pg;
-	private DetailsModel md=new DetailsModel();
+	private DetailsModel md = new DetailsModel();
 
 	HashMap<String, String> parameters;
 	private String errorMess = "Lỗi trong quá trình tải dữ liệu, Vui lòng thử lại";
@@ -650,6 +650,86 @@ public class DataManager2 {
 		}, false);
 	}
 
+	public void getGia(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_GIA);
+		builder.put("search", "");
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					listGia.clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("UnitList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setGia(jSonOb);
+							listGia.add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_GIA);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_GIA);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_GIA);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
+	public void getDienTich(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_DIENTICH);
+		builder.put("search", "");
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					listDientich.clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("AcreageList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setDIENTICH(jSonOb);
+							listDientich.add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_DIENTICH);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DIENTICH);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_DIENTICH);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
+
+
 	private ArrayList<VrealModel> listGia = new ArrayList<>();
 
 	private ArrayList<VrealModel> listDientich = new ArrayList<>();
@@ -657,7 +737,7 @@ public class DataManager2 {
 	private ArrayList<VrealModel> listSearch = new ArrayList<>();
 
 	public void seach(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String typeID, String cateID, String province, String districtId, String ward,
-			String street, String homeDirection, String project, String AcreageStart, String AcreageEnd, String NoOfRoom, String NoOfRestRoom, String PriceFrom, String PriceTo, int pageIndex,
+			String street, String homeDirection, String project, String dientichID, String NoOfRoom, String NoOfRestRoom, String giaID, int pageIndex,
 			int pageSize) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.SEARCG);
@@ -669,12 +749,13 @@ public class DataManager2 {
 		builder.put("street", street);
 		builder.put("homeDirection", homeDirection);
 		builder.put("project", project);
-		builder.put("AcreageStart", AcreageStart);
-		builder.put("AcreageEnd", AcreageEnd);
+		builder.put("dientichID", dientichID);
+		builder.put("AcreageEnd", "");
+		builder.put("AcreageStart", "");
 		builder.put("NoOfRoom", NoOfRoom);
 		builder.put("NoOfRestRoom", NoOfRestRoom);
-		builder.put("PriceFrom", PriceFrom);
-		builder.put("PriceTo", PriceTo);
+		builder.put("priceID", giaID);
+//		builder.put("PriceTo", PriceTo);
 		builder.put("pageIndex", pageIndex + "");
 		builder.put("pageSize", pageSize + "");
 		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
@@ -693,6 +774,84 @@ public class DataManager2 {
 							md.setSeachData(jSonOb);
 							getListSearch().add(md);
 						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.SEARCG);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCG);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCG);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
+
+	public void post(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String realTypeID, String realCateID, String realPriorityID, String projectID,
+			String provinceID, String districtID, String wardID, String streetID, String unitID, String areaID, String acreage, String realName, String description, String MatTien, String DuongVao,
+			String SoTang, String interior, String address, String price, String homeDirectionID, String balconyID, String noOfRoom, String noOfRest, String latitude, String longitude,
+			String isVisible, String start,String end,String contactName,String contactAddress,String contactPhone,String contactEmail,String creatorID,String userID) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.SEARCG);
+		builder.put("realTypeID", realTypeID);
+		builder.put("realCateID", realCateID);
+		builder.put("realPriorityID", realPriorityID);
+		builder.put("projectID", projectID);
+		builder.put("provinceID", provinceID);
+		builder.put("districtID", districtID);
+		builder.put("wardID", wardID);
+		builder.put("streetID", streetID);
+		builder.put("unitID", unitID);
+		builder.put("areaID", areaID);
+		builder.put("acreage", acreage);
+		builder.put("realName", realName);
+		builder.put("description", description);
+		builder.put("MatTien", MatTien);
+		builder.put("DuongVao", DuongVao);
+		builder.put("SoTang", SoTang);
+		builder.put("interior", interior);
+		builder.put("address", address);
+		builder.put("price", price);
+		builder.put("homeDirectionID", homeDirectionID);
+		builder.put("balconyID", balconyID);
+		builder.put("noOfRoom", noOfRoom);
+		builder.put("noOfRest", noOfRest);
+		builder.put("latitude", latitude);
+		builder.put("longitude", longitude);
+		builder.put("isVisible", isVisible);
+		builder.put("start", start);
+		builder.put("end", end);
+		builder.put("contactName", contactName);
+		builder.put("contactAddress", contactAddress);
+		builder.put("contactPhone", contactPhone);
+		builder.put("contactEmail", contactEmail);
+		builder.put("creatorID", creatorID);
+		builder.put("userID", userID);
+		builder.put("FeaturesInHouseID", contactName);
+		builder.put("photoList", contactAddress);
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListSearch().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+//						JSONArray listJson;
+//						listJson = result.getJSONArray("RealsNewsList");
+//						for (int i = 0; i < listJson.length(); i++) {
+//							JSONObject jSonOb = new JSONObject();
+//							jSonOb = listJson.getJSONObject(i);
+//							VrealModel md = new VrealModel();
+//							md.setSeachData(jSonOb);
+//							getListSearch().add(md);
+//						}
 						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.SEARCG);
 					} else {
 						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCG);
