@@ -26,6 +26,7 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 	private Button btnOK;
 	private LinearLayout rlToogle;
 	LoaiNhadatAdapter adapter;
+	String idType = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 	}
 
 	private void getData() {
+	
 		DataManager2.getInstance().getLoaiNhaDat(this, true, false, new NotifyDataListener() {
 
 			@Override
@@ -50,7 +52,21 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 				}
 
 			}
-		},HotdealUtilities.getDataBundle(this));
+		}, idType);
+	}
+
+	private void getLoaiProject() {
+		DataManager2.getInstance().getLoaiDuan(this, false, false, new NotifyDataListener() {
+			
+			@Override
+			public void onNotify(String api, int id) {
+				adapter = new LoaiNhadatAdapter(LoaiNhaDat.this, DataManager2.getInstance().getListLoaiDuAn(), notify);
+				epLoai.setAdapter(adapter);
+				for (int i = 0; i < adapter.getGroupCount(); i++)
+					epLoai.expandGroup(i);
+				
+			}
+		});
 	}
 
 	private void initView() {
@@ -62,16 +78,24 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		HotdealUtilities.setHeight(btnOK, 12);
 		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
 		rlToogle.setOnClickListener(this);
+		try {
+			idType = HotdealUtilities.getDataBundle(this);
+		} catch (Exception e) {
+		}
+		if(idType.equals("-1")){
+			getLoaiProject();
+		}else{
+			getData();
+		}
+	
 
-		getData();
-		
 	}
 
 	NotifyVreal notify = new NotifyVreal() {
 
 		@Override
 		public void onNotify(VrealModel md) {
-			HotdealUtilities.sendMessage(LoaiNhaDat.this, "ABC", md.getProvinceName()+"-"+md.getId());
+			HotdealUtilities.sendMessage(LoaiNhaDat.this, "ABC", md.getProvinceName() + "-" + md.getId());
 			LoaiNhaDat.this.finish();
 		}
 	};

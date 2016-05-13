@@ -75,9 +75,9 @@ public class HomeF extends Fragment implements OnClickListener {
 		llTintuc.setOnClickListener(this);
 		llMenu4M.setOnClickListener(this);
 
-		if (null != DataManager2.getInstance().getListTypeProperty() && DataManager2.getInstance().getListTypeProperty().size() == 0) {
-			getTypeProperty();
-		}
+//		if (null != DataManager2.getInstance().getListTypeProperty() && DataManager2.getInstance().getListTypeProperty().size() == 0) {
+//			getTypeProperty();
+//		}
 
 	}
 
@@ -105,7 +105,8 @@ public class HomeF extends Fragment implements OnClickListener {
 		if (v == llBanthue) {
 			String id = "";
 			try {
-				id = DataManager2.getInstance().getListTypeProperty().get(0).getId();
+//				id = DataManager2.getInstance().getListTypeProperty().get(0).getId();
+				id = "1";
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -113,7 +114,8 @@ public class HomeF extends Fragment implements OnClickListener {
 		} else if (v == llDuanmoi) {
 			String id = "";
 			try {
-				id = DataManager2.getInstance().getListTypeProperty().get(1).getId();
+//				id = DataManager2.getInstance().getListTypeProperty().get(1).getId();
+				id = "2";
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -121,7 +123,7 @@ public class HomeF extends Fragment implements OnClickListener {
 		} else if (v == llMenu4) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new PostPro(), "");
 		} else if (v == llMenu3) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
+			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiSearch(), "");
 			// HotdealUtilities.startActivity(getActivity(), PostPro.class, "");
 		} else if (v == llTintuc) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new TintucF(), "");

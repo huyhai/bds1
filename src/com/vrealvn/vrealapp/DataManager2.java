@@ -689,6 +689,7 @@ public class DataManager2 {
 			}
 		}, false);
 	}
+
 	public void getDienTich(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.GET_DIENTICH);
@@ -729,7 +730,6 @@ public class DataManager2 {
 		}, false);
 	}
 
-
 	private ArrayList<VrealModel> listGia = new ArrayList<>();
 
 	private ArrayList<VrealModel> listDientich = new ArrayList<>();
@@ -737,8 +737,7 @@ public class DataManager2 {
 	private ArrayList<VrealModel> listSearch = new ArrayList<>();
 
 	public void seach(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String typeID, String cateID, String province, String districtId, String ward,
-			String street, String homeDirection, String project, String dientichID, String NoOfRoom, String NoOfRestRoom, String giaID, int pageIndex,
-			int pageSize) {
+			String street, String homeDirection, String project, String dientichID, String NoOfRoom, String NoOfRestRoom, String giaID, int pageIndex, int pageSize) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.SEARCG);
 		builder.put("typeID", typeID);
@@ -755,7 +754,7 @@ public class DataManager2 {
 		builder.put("NoOfRoom", NoOfRoom);
 		builder.put("NoOfRestRoom", NoOfRestRoom);
 		builder.put("priceID", giaID);
-//		builder.put("PriceTo", PriceTo);
+		// builder.put("PriceTo", PriceTo);
 		builder.put("pageIndex", pageIndex + "");
 		builder.put("pageSize", pageSize + "");
 		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
@@ -794,10 +793,57 @@ public class DataManager2 {
 		}, false);
 	}
 
+//	private ArrayList<VrealModel> listSearchProject = new ArrayList<>();
+
+	public void seach_project(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String projectTypeID, String ProvinceId, String DistrictID,
+			int pageIndex, int pageSize) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.SEARCH_PROJECT);
+		builder.put("projectTypeID", projectTypeID);
+		builder.put("ProvinceId", ProvinceId);
+		builder.put("DistrictID", DistrictID);
+		builder.put("pageIndex", pageIndex + "");
+		builder.put("pageSize", pageSize + "");
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListSearch().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("ProjectList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setSeachProData(jSonOb);
+							getListSearch().add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.SEARCH_PROJECT);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCH_PROJECT);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCH_PROJECT);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
+
 	public void post(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener, String realTypeID, String realCateID, String realPriorityID, String projectID,
 			String provinceID, String districtID, String wardID, String streetID, String unitID, String areaID, String acreage, String realName, String description, String MatTien, String DuongVao,
 			String SoTang, String interior, String address, String price, String homeDirectionID, String balconyID, String noOfRoom, String noOfRest, String latitude, String longitude,
-			String isVisible, String start,String end,String contactName,String contactAddress,String contactPhone,String contactEmail,String creatorID,String userID) {
+			String isVisible, String start, String end, String contactName, String contactAddress, String contactPhone, String contactEmail, String creatorID, String userID) {
 		HashMap<String, String> builder = new HashMap<>();
 		builder.put(ConstantValue.API, ConstantValue.SEARCG);
 		builder.put("realTypeID", realTypeID);
@@ -843,15 +889,15 @@ public class DataManager2 {
 				try {
 					getListSearch().clear();
 					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
-//						JSONArray listJson;
-//						listJson = result.getJSONArray("RealsNewsList");
-//						for (int i = 0; i < listJson.length(); i++) {
-//							JSONObject jSonOb = new JSONObject();
-//							jSonOb = listJson.getJSONObject(i);
-//							VrealModel md = new VrealModel();
-//							md.setSeachData(jSonOb);
-//							getListSearch().add(md);
-//						}
+						// JSONArray listJson;
+						// listJson = result.getJSONArray("RealsNewsList");
+						// for (int i = 0; i < listJson.length(); i++) {
+						// JSONObject jSonOb = new JSONObject();
+						// jSonOb = listJson.getJSONObject(i);
+						// VrealModel md = new VrealModel();
+						// md.setSeachData(jSonOb);
+						// getListSearch().add(md);
+						// }
 						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.SEARCG);
 					} else {
 						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.SEARCG);
@@ -901,6 +947,48 @@ public class DataManager2 {
 
 				} catch (Exception e) {
 					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_NEWS);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
+
+	private ArrayList<VrealModel> listLoaiDuAn = new ArrayList<>();
+
+	public void getLoaiDuan(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_LOAIDUAN);
+		builder.put("search", "");
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListLoaiDuAn().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("ProjectTypeList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setLoaiDuan(jSonOb);
+							getListLoaiDuAn().add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_LOAIDUAN);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_LOAIDUAN);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_LOAIDUAN);
 					e.printStackTrace();
 				}
 
@@ -1025,4 +1113,13 @@ public class DataManager2 {
 	public void setMd(DetailsModel md) {
 		this.md = md;
 	}
+
+	public ArrayList<VrealModel> getListLoaiDuAn() {
+		return listLoaiDuAn;
+	}
+
+	public void setListLoaiDuAn(ArrayList<VrealModel> listLoaiDuAn) {
+		this.listLoaiDuAn = listLoaiDuAn;
+	}
+
 }

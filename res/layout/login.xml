@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login" >
+
+    <RelativeLayout
+        android:id="@+id/rlContent"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/tvDangKi"
+        android:gravity="center" >
+
+        <RelativeLayout
+            android:id="@+id/rlContent1"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:background="@drawable/ed_login"
+            android:padding="@dimen/padding10" >
+
+            <LinearLayout
+                android:id="@+id/rlContent11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding10"
+                android:paddingRight="@dimen/padding10" >
+
+                <ImageView
+                    android:id="@+id/imgUsser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_user_login" />
+
+                <RelativeLayout
+                    android:id="@+id/rlLine"
+                    android:layout_width="@dimen/line"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/padding7"
+                    android:background="@color/white" >
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edUser"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding7"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_medium" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlContent2"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_below="@+id/rlContent1"
+            android:layout_marginTop="@dimen/padding7"
+            android:background="@drawable/ed_login"
+            android:padding="@dimen/padding10" >
+
+            <LinearLayout
+                android:id="@+id/rlContent112"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding10"
+                android:paddingRight="@dimen/padding10" >
+
+                <ImageView
+                    android:id="@+id/imgUs2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_pass_login" />
+
+                <RelativeLayout
+                    android:id="@+id/rlLine2"
+                    android:layout_width="@dimen/line"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/padding7"
+                    android:background="@color/white" >
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edPass"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding7"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_medium" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlContent3"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_below="@+id/rlContent2"
+            android:layout_marginTop="@dimen/padding20" >
+
+            <Button
+                android:id="@+id/btnDangNhap"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_dangnhap"
+                android:text="ĐĂNG NHẬP" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvDangKi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/padding10"
+        android:text="ĐĂNG KÍ"
+        android:textColor="@color/vreal_orange" />
+
+</RelativeLayout>

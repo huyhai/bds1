@@ -22,6 +22,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 	private RelativeLayout rlFilter;
 	private RelativeLayout rlMap;
 	private TextView tvKq;
+	String idType;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,10 +33,11 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 	}
 
 	private void setData() {
-		tvKq.setText(DataManager2.getInstance().getListSearch().size()+" kết quả");
+		idType = HotdealUtilities.getDataFragment(this);
+		tvKq.setText(DataManager2.getInstance().getListSearch().size() + " kết quả");
 		DuanAdapter adapter = new DuanAdapter(getActivity(), DataManager2.getInstance().getListSearch(), no);
 		lvDuan.setAdapter(adapter);
-		
+
 	}
 
 	@Override
@@ -66,7 +68,13 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 
 		@Override
 		public void onReturnData(int id) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new SearchF(), id+"");
+			if (idType.equals("")) {
+				HotdealUtilities.startActivity(getActivity(), DetailF.class, "");
+//				((HotDealFragmentActivity) getActivity()).startFragment(new DetailF(), id + "");
+			} else {
+				((HotDealFragmentActivity) getActivity()).startFragment(new SearchF(), id + "");
+			}
+			
 			// HotdealUtilities.startActivity(getActivity(), DetailF.class, "");
 
 		}
@@ -82,7 +90,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == rlFilter) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF(), HotdealUtilities.getDataFragment(this));
+			((HotDealFragmentActivity) getActivity()).startFragment(new FilterF(), idType);
 		} else if (v == rlMap) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new MapF(-1), "");
 		}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding10" >
+
+    <RelativeLayout
+        android:id="@+id/rlLoai"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ed_loainhadat"
+        android:padding="@dimen/padding5" >
+
+        <TextView
+            android:id="@+id/tvL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Loại nhà đất"
+            android:textSize="@dimen/textsize_medium" />
+
+        <TextView
+            android:id="@+id/tvLoai"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgL"
+            android:layout_toRightOf="@+id/tvL"
+            android:gravity="right"
+            android:paddingRight="@dimen/padding5"
+            android:text=""
+            android:textSize="@dimen/textsize_medium"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_muitenden_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlTinh"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding5"
+        android:background="@drawable/ed_tinh_tp"
+        android:padding="@dimen/padding5" >
+
+        <Spinner
+            android:id="@+id/spTP"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Tỉnh/Thành phố"
+            android:textSize="@dimen/textsize_medium" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/padding10"
+            android:background="@drawable/ic_muitenden_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlQuan"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding5"
+        android:background="@drawable/ed_tinh_tp"
+        android:padding="@dimen/padding5" >
+
+        <TextView
+            android:id="@+id/tva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Quận/Huyện"
+            android:textSize="@dimen/textsize_medium" />
+
+        <Spinner
+            android:id="@+id/spQ"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/padding10"
+            android:background="@drawable/ic_muitenden_right" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnTimkiem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding15"
+        android:background="@drawable/bg_top1"
+        android:padding="@dimen/padding10"
+        android:text="TÌM KIẾM"
+        android:textColor="@color/white" />
+
+</LinearLayout>

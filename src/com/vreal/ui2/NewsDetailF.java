@@ -2,12 +2,14 @@ package com.vreal.ui2;
 
 import com.android.vrealapp.R;
 import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.SessionManager;
 import com.vreal.model.DetailsModel;
 import com.vrealvn.vrealapp.DataManager2;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ public class NewsDetailF extends Fragment {
 	private ImageView imgPic;
 	private TextView tvCondi;
 	private WebView tvContent;
+	private SessionManager sm;
 
 	// private TextView tvName;
 
@@ -35,13 +38,17 @@ public class NewsDetailF extends Fragment {
 
 	private void setData() {
 		try {
+			sm=new SessionManager(getActivity());
 			DetailsModel md = DataManager2.getInstance().getMd();
 			tvName.setText(md.getName());
 			tvDate.setText(md.getIntroduce());
 			tvCondi.setText(Html.fromHtml(md.getConditions()));
 //			tvContent.setText(Html.fromHtml(md.getDescription()));
-			tvContent.setInitialScale(100);
-			String formatHTML = "<html><head><style type=\"text/css\">body {font-size: " + (tvCondi.getTextSize()) + "px;}</style></head><body>" + md.getDescription() + "</body></html>";
+			HotdealUtilities.showALog(sm.getTextSize() + md.getDescription());
+//			String formatHTML = "<html><head><style type=\"text/css\">body {font-size: " + (sm.getTextSize()) + "px;} img{width: 100% !important; height: auto !important;}</style></head><body>" + md.getDescription() + "</body></html>";
+//			String des=md.getDescription().replaceAll("", replacement);
+			String sss="<style> h1 {font-size::21px;} </style>";
+			String formatHTML = "<html><head><style type=\"text/css\">body {font-size: " + (sm.getTextSize()) + "px;} img{width: 100% !important; height: auto !important;}</style></head><body>" + md.getDescription() + sss+ " </body></html>";
 			String aa = formatHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 			WebSettings webSettings = tvContent.getSettings();
 			webSettings.setJavaScriptEnabled(true);
@@ -56,7 +63,7 @@ public class NewsDetailF extends Fragment {
 
 				}
 			});
-			HotdealUtilities.loadImage(md.getImage(), imgPic, getActivity());
+//			HotdealUtilities.loadImage(md.getImage(), imgPic, getActivity());
 		} catch (Exception e) {
 		}
 
@@ -68,6 +75,7 @@ public class NewsDetailF extends Fragment {
 		imgPic = (ImageView) rootView.findViewById(R.id.imgPic);
 		tvCondi = (TextView) rootView.findViewById(R.id.tvCondi);
 		tvContent = (WebView) rootView.findViewById(R.id.tvContent);
+		tvContent.setInitialScale(100);
 		// tvName = (TextView) rootView.findViewById(R.id.tvName);
 
 	}

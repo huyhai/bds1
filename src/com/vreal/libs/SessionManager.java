@@ -184,5 +184,13 @@ public class SessionManager {
 		editor.putBoolean(KEY_SAVESETTINGS, islog);
 		editor.commit();
 	}
+	public float getTextSize() {
+		return pref.getFloat("TES", 0);
+	}
+
+	public void setTextSize(float tinh) {
+		editor.putFloat("TES", tinh);
+		editor.commit();
+	}
 
 }

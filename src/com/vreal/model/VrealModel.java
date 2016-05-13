@@ -78,6 +78,35 @@ public class VrealModel implements Serializable {
 
 
 	}
+	public void setSeachProData(JSONObject jSonInfo) throws JSONException {
+		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "ProjectName"));
+		setChoosen(false);
+		this.setAddress(HotdealUtilities.getDataString(jSonInfo, "Address"));
+		this.setPrice(HotdealUtilities.getDataDouble(jSonInfo, "Price"));
+		this.setDescription(HotdealUtilities.getDataString(jSonInfo, "Content"));
+		this.setIcon(HotdealUtilities.getDataString(jSonInfo, "Icon"));
+		this.setAcreage(HotdealUtilities.getDataString(jSonInfo, "Summary"));
+		this.setContactName(HotdealUtilities.getDataString(jSonInfo, "ContactName"));
+		this.setContactAddress(HotdealUtilities.getDataString(jSonInfo, "ContactAddress"));
+		this.setContacPhone(HotdealUtilities.getDataString(jSonInfo, "ContacPhone"));
+		this.setContactEmail(HotdealUtilities.getDataString(jSonInfo, "ContactEmail"));
+		this.setLongitude(HotdealUtilities.getDataDouble(jSonInfo, "Longitude"));
+		this.setLatitude(HotdealUtilities.getDataDouble(jSonInfo, "Latitude"));
+		
+		setListPhoto(new ArrayList<String>());
+		JSONArray listJson;
+		try {
+			listJson = jSonInfo.getJSONArray("RealPhoto");
+			for (int i = 0; i < listJson.length(); i++) {
+				String jSonOb = listJson.getString(i);
+				getListPhoto().add(jSonOb);
+			}
+		} catch (Exception e) {
+		}
+
+
+	}
 
 	public void setDataProvince(JSONObject jSonInfo) throws JSONException {
 		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo, "ID"));
@@ -138,6 +167,12 @@ public class VrealModel implements Serializable {
 	}
 
 	public void setDuan(JSONObject jSonInfo) throws JSONException {
+		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
+		setChoosen(false);
+
+	}
+	public void setLoaiDuan(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
 		setChoosen(false);

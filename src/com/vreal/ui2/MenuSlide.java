@@ -11,12 +11,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.vrealapp.R;
 import com.vreal.adapter.MenuAdapter;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
+import com.vreal.libs.SessionManager;
 import com.vreal.model.StateModel;
 import com.vreal.ui.NhabanF;
 import com.vrealvn.vrealapp.DataManager2;
@@ -25,6 +27,8 @@ import com.vrealvn.vrealapp.HotDealFragmentActivity;
 public class MenuSlide extends Fragment implements OnItemClickListener {
 	private LinearLayout llTop;
 	private ListView lvMenu;
+	private SessionManager sm;
+	private TextView tvUser;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,8 +39,10 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 	}
 
 	private void initView(View rootView) {
+		sm=new SessionManager(getActivity());
 		llTop = (LinearLayout) rootView.findViewById(R.id.llTop);
 		lvMenu = (ListView) rootView.findViewById(R.id.lvMenu);
+		tvUser= (TextView) rootView.findViewById(R.id.tvUser);
 
 		HotdealUtilities.setHeight(llTop, 5);
 
@@ -86,6 +92,18 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 		MenuAdapter adapter = new MenuAdapter(getActivity(), listData, null);
 		lvMenu.setAdapter(adapter);
 		lvMenu.setOnItemClickListener(this);
+		tvUser.post(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					sm.setTextSize(tvUser.getTextSize());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			}
+		});
 	}
 
 	@Override

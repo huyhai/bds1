@@ -46,8 +46,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding20"
-                android:text="Many people sign up for affiliate programs with the hopes."
-                android:textColor="@color/black"
                 android:textSize="@dimen/textsize_medium" />
 
 
