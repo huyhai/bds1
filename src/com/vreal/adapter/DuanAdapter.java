@@ -18,6 +18,7 @@ import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.model.StateModel;
 import com.vreal.model.VrealModel;
+import com.vrealvn.vrealapp.DataManager2;
 
 public class DuanAdapter extends BaseAdapter {
 	private ArrayList<VrealModel> listData;
@@ -84,7 +85,7 @@ public class DuanAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				if (notify != null) {
 					notify.onReturnData(position);
-
+					DataManager2.getInstance().setVrealModel(ca);
 				}
 
 			}

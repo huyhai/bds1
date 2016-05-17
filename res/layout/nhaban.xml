@@ -213,6 +213,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvMorong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding5"
@@ -221,390 +222,398 @@
                 android:textSize="@dimen/textsize_medium"
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:id="@+id/rlHT"
+            <LinearLayout
+                android:id="@+id/pdBar1"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:background="@drawable/ed_loainhadat"
-                android:padding="@dimen/padding5"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
                 android:visibility="gone" >
 
-                <TextView
-                    android:id="@+id/tvHT"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Hình thức"
-                    android:textSize="@dimen/textsize_medium" />
-
-                <TextView
-                    android:id="@+id/tvHinhthuc"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imgLht"
-                    android:layout_toRightOf="@+id/tvHT"
-                    android:gravity="right"
-                    android:paddingRight="@dimen/padding5"
-                    android:text=""
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/imgLht"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_muitenden_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlLoai"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:background="@drawable/ed_loainhadat"
-                android:padding="@dimen/padding5" >
-
-                <TextView
-                    android:id="@+id/tvL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Loại nhà đất"
-                    android:textSize="@dimen/textsize_medium" />
-
-                <TextView
-                    android:id="@+id/tvLoai"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imgL"
-                    android:layout_toRightOf="@+id/tvL"
-                    android:gravity="right"
-                    android:paddingRight="@dimen/padding5"
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/imgL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_muitenden_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlDuan"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:background="@drawable/ed_loainhadat"
-                android:padding="@dimen/padding5" >
-
-                <TextView
-                    android:id="@+id/tvDuan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Dự án"
-                    android:textSize="@dimen/textsize_medium" />
-
-                <TextView
-                    android:id="@+id/tvDuanValue"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imgDuan"
-                    android:layout_toRightOf="@+id/tvDuan"
-                    android:gravity="right"
-                    android:paddingRight="@dimen/padding5"
-                    android:text="aaaaaaaaaaaaa"
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/imgDuan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_muitenden_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlDT"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:background="@drawable/ed_loainhadat"
-                android:padding="@dimen/padding5" >
-
-                <TextView
-                    android:id="@+id/tvDt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Diện tích"
-                    android:textSize="@dimen/textsize_medium" />
-
-                <TextView
-                    android:id="@+id/tvDientich"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imgDt"
-                    android:layout_toRightOf="@+id/tvDt"
-                    android:gravity="right"
-                    android:paddingRight="@dimen/padding5"
-                    android:text=""
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/imgDt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_muitenden_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlMG"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:background="@drawable/ed_loainhadat"
-                android:padding="@dimen/padding5" >
-
-                <TextView
-                    android:id="@+id/tvMG"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Mức giá"
-                    android:textSize="@dimen/textsize_medium" />
-
-                <TextView
-                    android:id="@+id/tvMucgia"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imgMG"
-                    android:layout_toRightOf="@+id/tvMG"
-                    android:gravity="right"
-                    android:paddingRight="@dimen/padding5"
-                    android:text=""
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/imgMG"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_muitenden_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlHuong"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:background="@drawable/ed_loainhadat"
-                android:padding="@dimen/padding5" >
-
-                <TextView
-                    android:id="@+id/tvHN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Hướng nhà"
-                    android:textSize="@dimen/textsize_medium" />
-
-                <TextView
-                    android:id="@+id/tvHuongnha"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imgHN"
-                    android:layout_toRightOf="@+id/tvHN"
-                    android:gravity="right"
-                    android:paddingRight="@dimen/padding5"
-                    android:text=""
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/imgHN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_muitenden_right" />
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:text="Số phòng ngủ"
-                android:textSize="@dimen/textsize_medium"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/llSp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <com.vreal.libs.TwoWayView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/lvSP"
-                    style="@style/TwoWayView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants"
-                    android:drawSelectorOnTop="false"
-                    android:scrollbars="none" />
-
                 <RelativeLayout
-                    android:id="@+id/rlBatki"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rlHT"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/padding2"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_phongngu_choosen"
+                    android:layout_marginTop="@dimen/padding5"
+                    android:background="@drawable/ed_loainhadat"
+                    android:padding="@dimen/padding5"
                     android:visibility="gone" >
 
                     <TextView
+                        android:id="@+id/tvHT"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Bất kì"
+                        android:layout_centerVertical="true"
+                        android:text="Hình thức"
                         android:textSize="@dimen/textsize_medium" />
+
+                    <TextView
+                        android:id="@+id/tvHinhthuc"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imgLht"
+                        android:layout_toRightOf="@+id/tvHT"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/padding5"
+                        android:text=""
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgLht"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_muitenden_right" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rl1"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rlLoai"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/padding2"
-                    android:layout_marginRight="@dimen/padding2"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_phongngu_none"
-                    android:visibility="gone" >
+                    android:layout_marginTop="@dimen/padding5"
+                    android:background="@drawable/ed_loainhadat"
+                    android:padding="@dimen/padding5" >
 
                     <TextView
+                        android:id="@+id/tvL"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="1+"
+                        android:layout_centerVertical="true"
+                        android:text="Loại nhà đất"
                         android:textSize="@dimen/textsize_medium" />
+
+                    <TextView
+                        android:id="@+id/tvLoai"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imgL"
+                        android:layout_toRightOf="@+id/tvL"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/padding5"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_muitenden_right" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rl2"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rlDuan"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/padding2"
-                    android:layout_marginRight="@dimen/padding2"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_phongngu_none"
-                    android:visibility="gone" >
+                    android:layout_marginTop="@dimen/padding5"
+                    android:background="@drawable/ed_loainhadat"
+                    android:padding="@dimen/padding5" >
 
                     <TextView
+                        android:id="@+id/tvDuan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="2+"
+                        android:layout_centerVertical="true"
+                        android:text="Dự án"
                         android:textSize="@dimen/textsize_medium" />
+
+                    <TextView
+                        android:id="@+id/tvDuanValue"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imgDuan"
+                        android:layout_toRightOf="@+id/tvDuan"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/padding5"
+                        android:text="aaaaaaaaaaaaa"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgDuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_muitenden_right" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rl3"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rlDT"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/padding2"
-                    android:layout_marginRight="@dimen/padding2"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_phongngu_none"
-                    android:visibility="gone" >
+                    android:layout_marginTop="@dimen/padding5"
+                    android:background="@drawable/ed_loainhadat"
+                    android:padding="@dimen/padding5" >
 
                     <TextView
+                        android:id="@+id/tvDt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="3+"
+                        android:layout_centerVertical="true"
+                        android:text="Diện tích"
                         android:textSize="@dimen/textsize_medium" />
+
+                    <TextView
+                        android:id="@+id/tvDientich"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imgDt"
+                        android:layout_toRightOf="@+id/tvDt"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/padding5"
+                        android:text=""
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgDt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_muitenden_right" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rl4"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rlMG"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/padding2"
-                    android:layout_marginRight="@dimen/padding2"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_phongngu_none"
-                    android:visibility="gone" >
+                    android:layout_marginTop="@dimen/padding5"
+                    android:background="@drawable/ed_loainhadat"
+                    android:padding="@dimen/padding5" >
 
                     <TextView
+                        android:id="@+id/tvMG"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="4+"
+                        android:layout_centerVertical="true"
+                        android:text="Mức giá"
                         android:textSize="@dimen/textsize_medium" />
+
+                    <TextView
+                        android:id="@+id/tvMucgia"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imgMG"
+                        android:layout_toRightOf="@+id/tvMG"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/padding5"
+                        android:text=""
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgMG"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_muitenden_right" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rl5"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rlHuong"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/padding2"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_phongngu_none"
-                    android:visibility="gone" >
+                    android:layout_marginTop="@dimen/padding5"
+                    android:background="@drawable/ed_loainhadat"
+                    android:padding="@dimen/padding5" >
 
                     <TextView
+                        android:id="@+id/tvHN"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="5+"
+                        android:layout_centerVertical="true"
+                        android:text="Hướng nhà"
                         android:textSize="@dimen/textsize_medium" />
+
+                    <TextView
+                        android:id="@+id/tvHuongnha"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imgHN"
+                        android:layout_toRightOf="@+id/tvHN"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/padding5"
+                        android:text=""
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgHN"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_muitenden_right" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding5"
+                    android:text="Số phòng ngủ"
+                    android:textSize="@dimen/textsize_medium"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/llSp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <com.vreal.libs.TwoWayView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/lvSP"
+                        style="@style/TwoWayView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants"
+                        android:drawSelectorOnTop="false"
+                        android:scrollbars="none" />
+
+                    <RelativeLayout
+                        android:id="@+id/rlBatki"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/padding2"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_phongngu_choosen"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="Bất kì"
+                            android:textSize="@dimen/textsize_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding2"
+                        android:layout_marginRight="@dimen/padding2"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_phongngu_none"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="1+"
+                            android:textSize="@dimen/textsize_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding2"
+                        android:layout_marginRight="@dimen/padding2"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_phongngu_none"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="2+"
+                            android:textSize="@dimen/textsize_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding2"
+                        android:layout_marginRight="@dimen/padding2"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_phongngu_none"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="3+"
+                            android:textSize="@dimen/textsize_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding2"
+                        android:layout_marginRight="@dimen/padding2"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_phongngu_none"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="4+"
+                            android:textSize="@dimen/textsize_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding2"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_phongngu_none"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="5+"
+                            android:textSize="@dimen/textsize_medium" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding5"
+                    android:paddingBottom="@dimen/padding5"
+                    android:paddingTop="@dimen/padding5" >
+
+                    <TextView
+                        android:id="@+id/tvHNa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Lưu tìm kiếm"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textStyle="bold" />
+
+                    <Switch
+                        android:id="@+id/swLuu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
                 </RelativeLayout>
             </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding5"
-                android:paddingBottom="@dimen/padding5"
-                android:paddingTop="@dimen/padding5" >
-
-                <TextView
-                    android:id="@+id/tvHNa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Lưu tìm kiếm"
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
-
-                <Switch
-                    android:id="@+id/swLuu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
-            </RelativeLayout>
 
             <Button
                 android:id="@+id/btnTimkiem"

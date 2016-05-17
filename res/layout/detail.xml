@@ -67,7 +67,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/banner_home" />
+                    android:scaleType="fitXY" />
 
                 <RelativeLayout
                     android:id="@+id/rlPic1"
@@ -414,6 +414,7 @@
                 android:layout_below="@+id/llDes"
                 android:background="@color/white"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:padding="@dimen/padding10" >
 
                 <ImageView

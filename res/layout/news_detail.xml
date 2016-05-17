@@ -37,6 +37,7 @@
                 android:id="@+id/imgPic"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/padding20"
                 android:background="@drawable/banner_home"
                 android:scaleType="fitXY" />
@@ -46,6 +47,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding20"
+                android:visibility="gone"
                 android:textSize="@dimen/textsize_medium" />
 
 

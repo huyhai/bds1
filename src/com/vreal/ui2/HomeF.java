@@ -121,7 +121,7 @@ public class HomeF extends Fragment implements OnClickListener {
 			}
 			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
 		} else if (v == llMenu4) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new PostPro(), "");
+//			((HotDealFragmentActivity) getActivity()).startFragment(new PostPro(), "");
 		} else if (v == llMenu3) {
 			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiSearch(), "");
 			// HotdealUtilities.startActivity(getActivity(), PostPro.class, "");

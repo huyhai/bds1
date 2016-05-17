@@ -47,8 +47,9 @@ public class NewsDetailF extends Fragment {
 			HotdealUtilities.showALog(sm.getTextSize() + md.getDescription());
 //			String formatHTML = "<html><head><style type=\"text/css\">body {font-size: " + (sm.getTextSize()) + "px;} img{width: 100% !important; height: auto !important;}</style></head><body>" + md.getDescription() + "</body></html>";
 //			String des=md.getDescription().replaceAll("", replacement);
-			String sss="<style> h1 {font-size::21px;} </style>";
-			String formatHTML = "<html><head><style type=\"text/css\">body {font-size: " + (sm.getTextSize()) + "px;} img{width: 100% !important; height: auto !important;}</style></head><body>" + md.getDescription() + sss+ " </body></html>";
+//			String sss="<style> h1 {font-size::21px;} </style>";
+//			String av=md.getDescription().replaceAll("font-size", "");
+			String formatHTML = "<html><head><style type=\"text/css\">body {font-size: " + (sm.getTextSize()) + "px;} img{width: 100% !important; height: auto !important;}</style></head><body>" + md.getDescription() + " </body></html>";
 			String aa = formatHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 			WebSettings webSettings = tvContent.getSettings();
 			webSettings.setJavaScriptEnabled(true);

@@ -521,7 +521,8 @@ public class HotdealUtilities {
 					.cacheInMemory(true).cacheOnDisc().considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
 		}
 		try {
-			Main.imageLoader.displayImage(url, img, Main.options);
+			String ui=ConstantValue.domainIMG+url;
+			Main.imageLoader.displayImage(ui, img, Main.options);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

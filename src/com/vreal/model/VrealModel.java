@@ -39,9 +39,10 @@ public class VrealModel implements Serializable {
 	private String ContactEmail;
 	private double Latitude;
 	private double Longitude;
+	private String Developer;
 //	private String ContactAddress;
 //	private String ContactAddress;
-//	private String ContactAddress;
+	private ArrayList<String> listTienIch;
 
 	private ArrayList<VrealModel> listSub;
 
@@ -87,20 +88,32 @@ public class VrealModel implements Serializable {
 		this.setDescription(HotdealUtilities.getDataString(jSonInfo, "Content"));
 		this.setIcon(HotdealUtilities.getDataString(jSonInfo, "Icon"));
 		this.setAcreage(HotdealUtilities.getDataString(jSonInfo, "Summary"));
-		this.setContactName(HotdealUtilities.getDataString(jSonInfo, "ContactName"));
-		this.setContactAddress(HotdealUtilities.getDataString(jSonInfo, "ContactAddress"));
-		this.setContacPhone(HotdealUtilities.getDataString(jSonInfo, "ContacPhone"));
-		this.setContactEmail(HotdealUtilities.getDataString(jSonInfo, "ContactEmail"));
-		this.setLongitude(HotdealUtilities.getDataDouble(jSonInfo, "Longitude"));
-		this.setLatitude(HotdealUtilities.getDataDouble(jSonInfo, "Latitude"));
+		this.setDeveloper(HotdealUtilities.getDataString(jSonInfo, "Developer"));
+//		this.setContactAddress(HotdealUtilities.getDataString(jSonInfo, "ContactAddress"));
+//		this.setContacPhone(HotdealUtilities.getDataString(jSonInfo, "ContacPhone"));
+//		this.setContactEmail(HotdealUtilities.getDataString(jSonInfo, "ContactEmail"));
+//		this.setLongitude(HotdealUtilities.getDataDouble(jSonInfo, "Longitude"));
+//		this.setLatitude(HotdealUtilities.getDataDouble(jSonInfo, "Latitude"));
 		
 		setListPhoto(new ArrayList<String>());
 		JSONArray listJson;
 		try {
-			listJson = jSonInfo.getJSONArray("RealPhoto");
+			listJson = jSonInfo.getJSONArray("GalleryList");
 			for (int i = 0; i < listJson.length(); i++) {
-				String jSonOb = listJson.getString(i);
+				JSONObject job=listJson.getJSONObject(i);
+				String jSonOb = HotdealUtilities.getDataString(job, "Url");
 				getListPhoto().add(jSonOb);
+			}
+		} catch (Exception e) {
+		}
+		
+		setListTienIch(new ArrayList<String>());
+		JSONArray listJsonTC;
+		try {
+			listJsonTC = jSonInfo.getJSONArray("FacilitiesList");
+			for (int i = 0; i < listJsonTC.length(); i++) {
+				String jSonOb = listJsonTC.getString(i);
+				getListTienIch().add(jSonOb);
 			}
 		} catch (Exception e) {
 		}
@@ -405,6 +418,22 @@ public class VrealModel implements Serializable {
 
 	public void setLongitude(double longitude) {
 		Longitude = longitude;
+	}
+
+	public ArrayList<String> getListTienIch() {
+		return listTienIch;
+	}
+
+	public void setListTienIch(ArrayList<String> listTienIch) {
+		this.listTienIch = listTienIch;
+	}
+
+	public String getDeveloper() {
+		return Developer;
+	}
+
+	public void setDeveloper(String developer) {
+		Developer = developer;
 	}
 
 }

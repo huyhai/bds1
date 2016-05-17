@@ -83,6 +83,7 @@ public class DataManager2 {
 	private SessionManager sm;
 	private ProgressDialog pg;
 	private DetailsModel md = new DetailsModel();
+	private VrealModel vrealModel=new VrealModel();
 
 	HashMap<String, String> parameters;
 	private String errorMess = "Lỗi trong quá trình tải dữ liệu, Vui lòng thử lại";
@@ -1120,6 +1121,14 @@ public class DataManager2 {
 
 	public void setListLoaiDuAn(ArrayList<VrealModel> listLoaiDuAn) {
 		this.listLoaiDuAn = listLoaiDuAn;
+	}
+
+	public VrealModel getVrealModel() {
+		return vrealModel;
+	}
+
+	public void setVrealModel(VrealModel vrealModel) {
+		this.vrealModel = vrealModel;
 	}
 
 }

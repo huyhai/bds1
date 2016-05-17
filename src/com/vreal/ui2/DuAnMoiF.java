@@ -68,6 +68,7 @@ public class DuAnMoiF extends Fragment implements OnClickListener {
 
 		@Override
 		public void onReturnData(int id) {
+		
 			if (idType.equals("")) {
 				HotdealUtilities.startActivity(getActivity(), DetailF.class, "");
 //				((HotDealFragmentActivity) getActivity()).startFragment(new DetailF(), id + "");

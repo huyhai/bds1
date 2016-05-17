@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -42,11 +43,12 @@ import com.vrealvn.vrealapp.DataManager2;
 import com.vrealvn.vrealapp.HotDealFragmentActivity;
 import com.vrealvn.vrealapp.HotdealApp;
 
-public class NhabanF extends VrealFragment implements OnClickListener, OnCheckedChangeListener {
+public class NhabanF extends VrealFragment implements OnClickListener,
+		OnCheckedChangeListener {
 	private RelativeLayout rlDuan;
 	private RelativeLayout rlRefresh;
-	// private RelativeLayout rl2;
-	// private RelativeLayout rl3;
+	private LinearLayout pdBar1;
+	private TextView tvMorong;
 	// private RelativeLayout rl4;
 	// private RelativeLayout rl5;
 	private TextView tvTP;
@@ -82,19 +84,24 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	// DATA
 	private String defauldID = "";
 	private String proviceID = defauldID;
-	private String proviceName = HotdealApp.getContext().getString(R.string.str_province);
+	private String proviceName = HotdealApp.getContext().getString(
+			R.string.str_province);
 	private String disID = defauldID;
-	private String disName = HotdealApp.getContext().getString(R.string.str_district);
+	private String disName = HotdealApp.getContext().getString(
+			R.string.str_district);
 	private String areaName = "Diện tích";
 	private String priceName = "Mức giá";
 	private String wayID = defauldID;
 	private String wayName = "Hướng nhà";
 	private String KVID = defauldID;
-	private String KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+	private String KVName = HotdealApp.getContext().getString(
+			R.string.str_khuvuc);
 	private String streetID = defauldID;
-	private String streetName = HotdealApp.getContext().getString(R.string.str_street);
+	private String streetName = HotdealApp.getContext().getString(
+			R.string.str_street);
 	private String wardID = defauldID;
-	private String wardName = HotdealApp.getContext().getString(R.string.str_ward);
+	private String wardName = HotdealApp.getContext().getString(
+			R.string.str_ward);
 	private String loaiID = defauldID;
 	private String loaiName = "Chọn loại";
 	private String dientichFrom = defauldID;
@@ -110,7 +117,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	private String duanName = "Chọn dự án";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.nhaban, container, false);
 		initView(rootView);
 		initSaveData();
@@ -200,11 +208,12 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		idType = HotdealUtilities.getDataFragment(this);
 		rlDuan = (RelativeLayout) rootView.findViewById(R.id.rlDuan);
 		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
-		// rl2 = (RelativeLayout) rootView.findViewById(R.id.rl2);
+		tvMorong = (TextView) rootView.findViewById(R.id.tvMorong);
 		// rl3 = (RelativeLayout) rootView.findViewById(R.id.rl3);
 		// rl4 = (RelativeLayout) rootView.findViewById(R.id.rl4);
 		// rl5 = (RelativeLayout) rootView.findViewById(R.id.rl5);
 		rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
+		pdBar1 = (LinearLayout) rootView.findViewById(R.id.pdBar1);
 
 		rlTinh = (RelativeLayout) rootView.findViewById(R.id.rlTinh);
 		rlQuan = (RelativeLayout) rootView.findViewById(R.id.rlQuan);
@@ -249,8 +258,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		rlDT.setOnClickListener(this);
 		rlMG.setOnClickListener(this);
 		rlHuong.setOnClickListener(this);
-		// rlBatki.setOnClickListener(this);
-		// rl1.setOnClickListener(this);
+		pdBar1.setOnClickListener(this);
+		tvMorong.setOnClickListener(this);
 		// rl2.setOnClickListener(this);
 		// rl3.setOnClickListener(this);
 		// rl4.setOnClickListener(this);
@@ -263,7 +272,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		btnTimkiem.setOnClickListener(this);
 		rlDuan.setOnClickListener(this);
 		rlRefresh.setOnClickListener(this);
-//		DataManager2.getInstance().showProgress(getActivity());
+		// DataManager2.getInstance().showProgress(getActivity());
 		if (sm.getProviceJson().equals("")) {
 			getProvice();
 		} else {
@@ -308,7 +317,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}
-						DataManager2.getInstance().handleDistrict(job, notifyData);
+						DataManager2.getInstance().handleDistrict(job,
+								notifyData);
 					}
 				} else {
 
@@ -340,7 +350,8 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}
-						DataManager2.getInstance().handleStreet(job, notifyData);
+						DataManager2.getInstance()
+								.handleStreet(job, notifyData);
 					}
 				} else {
 
@@ -386,9 +397,11 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	SoPhongAdapter adapterList;
 
 	private void setDataDienTichAndGia() {
-//		DataManager2.getInstance().getListGia().addAll(HotdealUtilities.setDataGia());
-//		DataManager2.getInstance().getListDientich().addAll(HotdealUtilities.setDataDienTich());
-		adapterList = new SoPhongAdapter(getActivity(), HotdealUtilities.setDataSoPhong(), notifySP, Integer.parseInt(soPhong));
+		// DataManager2.getInstance().getListGia().addAll(HotdealUtilities.setDataGia());
+		// DataManager2.getInstance().getListDientich().addAll(HotdealUtilities.setDataDienTich());
+		adapterList = new SoPhongAdapter(getActivity(),
+				HotdealUtilities.setDataSoPhong(), notifySP,
+				Integer.parseInt(soPhong));
 		lvSP.setAdapter(adapterList);
 		lvSP.setHorizontalScrollBarEnabled(false);
 		lvSP.setItemMargin(10);
@@ -410,53 +423,71 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			// adapterList.notifyDataSetChanged();
 		}
 	};
+
 	private void getDienTich() {
-		DataManager2.getInstance().getDienTich(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getDienTich(getActivity(), false, false,
+				notifyData);
 	}
+
 	private void getGia() {
-		DataManager2.getInstance().getGia(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getGia(getActivity(), false, false,
+				notifyData);
 	}
+
 	private void getProvice() {
-		DataManager2.getInstance().getProvice(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getProvice(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getDistric() {
-		DataManager2.getInstance().getDistrict(getActivity(), false, false, notifyData, "");
+		DataManager2.getInstance().getDistrict(getActivity(), false, false,
+				notifyData, "");
 	}
 
 	private void getWard() {
-		DataManager2.getInstance().getWard(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getWard(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getStreet() {
-		DataManager2.getInstance().getStreet(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getStreet(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getKhuvuc() {
-		DataManager2.getInstance().getKhuvuc(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getKhuvuc(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getHuong() {
-		DataManager2.getInstance().getHuong(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getHuong(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void getDuan() {
-		DataManager2.getInstance().getDuan(getActivity(), false, false, notifyData);
+		DataManager2.getInstance().getDuan(getActivity(), false, false,
+				notifyData);
 	}
 
 	private void search() {
-		DataManager2.getInstance().seach(getActivity(), true, false, new NotifyDataListener() {
+		DataManager2.getInstance().seach(
+				getActivity(),
+				true,
+				false,
+				new NotifyDataListener() {
 
-			@Override
-			public void onNotify(String api, int id) {
-				if (NotifyDataListener.NOTIFY_OK == id) {
-					((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(),idType);
-				} else {
+					@Override
+					public void onNotify(String api, int id) {
+						if (NotifyDataListener.NOTIFY_OK == id) {
+							((HotDealFragmentActivity) getActivity())
+									.startFragment(new DuAnMoiF(), idType);
+						} else {
 
-				}
+						}
 
-			}
-		}, idType, loaiID, proviceID, disID, wardID, streetID, huongID, duanID, dientichFrom, soPhong, "", giaFrom, 0, 10);
+					}
+				}, idType, loaiID, proviceID, disID, wardID, streetID, huongID,
+				duanID, dientichFrom, soPhong, "", giaFrom, 0, 10);
 	}
 
 	// private void getTypeProperty() {
@@ -485,9 +516,11 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equalsIgnoreCase("ABC")) {
-				HotdealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
+				HotdealUtilities.showALog(intent.getExtras().get(
+						ConstantValue.IS_SUCCESS));
 				try {
-					String loai = (String) intent.getExtras().get(ConstantValue.IS_SUCCESS);
+					String loai = (String) intent.getExtras().get(
+							ConstantValue.IS_SUCCESS);
 					StringTokenizer tokens = new StringTokenizer(loai, "-");
 					loaiName = tokens.nextToken();
 					loaiID = tokens.nextToken();
@@ -520,40 +553,47 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	public void onClick(View v) {
 		// HotdealUtilities.setClickAnim(v);
 		if (v == rlLoai) {
-			HotdealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, idType);
+			HotdealUtilities.startActivityForResult(getActivity(),
+					LoaiNhaDat.class, 1, idType);
 
 		} else if (v == rlTinh) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListProvices(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-				}
+						@Override
+						public void onReturnDataString(String id) {
+						}
 
-				@Override
-				public void onReturnData(int id) {
+						@Override
+						public void onReturnData(int id) {
 
-					try {
-						proviceID = DataManager2.getInstance().getListProvices().get(id).getProvinceID();
-						proviceName = DataManager2.getInstance().getListProvices().get(id).getProvinceName();
-						// disID = "-1";
-						// disName =
-						// HotdealApp.getContext().getString(R.string.str_district);
-						// wardID = "-1";
-						// wardName =
-						// HotdealApp.getContext().getString(R.string.str_ward);
-						// KVID = "-1";
-						// KVName =
-						// HotdealApp.getContext().getString(R.string.str_khuvuc);
-						// streetID = "-1";
-						// streetName =
-						// HotdealApp.getContext().getString(R.string.str_street);
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+							try {
+								proviceID = DataManager2.getInstance()
+										.getListProvices().get(id)
+										.getProvinceID();
+								proviceName = DataManager2.getInstance()
+										.getListProvices().get(id)
+										.getProvinceName();
+								// disID = "-1";
+								// disName =
+								// HotdealApp.getContext().getString(R.string.str_district);
+								// wardID = "-1";
+								// wardName =
+								// HotdealApp.getContext().getString(R.string.str_ward);
+								// KVID = "-1";
+								// KVName =
+								// HotdealApp.getContext().getString(R.string.str_khuvuc);
+								// streetID = "-1";
+								// streetName =
+								// HotdealApp.getContext().getString(R.string.str_street);
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlQuan) {
 			final ArrayList<VrealModel> listDisFilter = new ArrayList<>();
@@ -562,165 +602,203 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 					listDisFilter.add(md);
 				}
 			}
-			HotdealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					listDisFilter, new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						disID = listDisFilter.get(id).getDistrictID();
-						disName = listDisFilter.get(id).getProvinceName();
-						// wardID = "-1";
-						// wardName =
-						// HotdealApp.getContext().getString(R.string.str_ward);
-						// KVID = "-1";
-						// KVName =
-						// HotdealApp.getContext().getString(R.string.str_khuvuc);
-						// streetID = "-1";
-						// streetName =
-						// HotdealApp.getContext().getString(R.string.str_street);
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								disID = listDisFilter.get(id).getDistrictID();
+								disName = listDisFilter.get(id)
+										.getProvinceName();
+								// wardID = "-1";
+								// wardName =
+								// HotdealApp.getContext().getString(R.string.str_ward);
+								// KVID = "-1";
+								// KVName =
+								// HotdealApp.getContext().getString(R.string.str_khuvuc);
+								// streetID = "-1";
+								// streetName =
+								// HotdealApp.getContext().getString(R.string.str_street);
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlDT) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDientich(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListDientich(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						dientichFrom = DataManager2.getInstance().getListDientich().get(id).getId()+ "";
-						dientichTo = DataManager2.getInstance().getListDientich().get(id).getValue2() + "";
-						dientichName = DataManager2.getInstance().getListDientich().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								dientichFrom = DataManager2.getInstance()
+										.getListDientich().get(id).getId()
+										+ "";
+								dientichTo = DataManager2.getInstance()
+										.getListDientich().get(id).getValue2()
+										+ "";
+								dientichName = DataManager2.getInstance()
+										.getListDientich().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlMG) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListGia(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						giaFrom = DataManager2.getInstance().getListGia().get(id).getId() + "";
-						giaTo = DataManager2.getInstance().getListGia().get(id).getValue2() + "";
-						giaName = DataManager2.getInstance().getListGia().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								giaFrom = DataManager2.getInstance()
+										.getListGia().get(id).getId()
+										+ "";
+								giaTo = DataManager2.getInstance().getListGia()
+										.get(id).getValue2()
+										+ "";
+								giaName = DataManager2.getInstance()
+										.getListGia().get(id).getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlHuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListHuong(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListHuong(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-				}
+						@Override
+						public void onReturnDataString(String id) {
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						huongID = DataManager2.getInstance().getListHuong().get(id).getId() + "";
-						huongName = DataManager2.getInstance().getListHuong().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								huongID = DataManager2.getInstance()
+										.getListHuong().get(id).getId()
+										+ "";
+								huongName = DataManager2.getInstance()
+										.getListHuong().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlHuyen) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListWard(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListWard(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						wardID = DataManager2.getInstance().getListWard().get(id).getWardID();
-						wardName = DataManager2.getInstance().getListWard().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								wardID = DataManager2.getInstance()
+										.getListWard().get(id).getWardID();
+								wardName = DataManager2.getInstance()
+										.getListWard().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlKhuVuc) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListKhuvuc(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						KVID = DataManager2.getInstance().getListKhuvuc().get(id).getId();
-						KVName = DataManager2.getInstance().getListKhuvuc().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								KVID = DataManager2.getInstance()
+										.getListKhuvuc().get(id).getId();
+								KVName = DataManager2.getInstance()
+										.getListKhuvuc().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlDuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListStreet(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListStreet(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
+						@Override
+						public void onReturnDataString(String id) {
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						streetID = DataManager2.getInstance().getListStreet().get(id).getId();
-						streetName = DataManager2.getInstance().getListStreet().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								streetID = DataManager2.getInstance()
+										.getListStreet().get(id).getId();
+								streetName = DataManager2.getInstance()
+										.getListStreet().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlHT) {
 
@@ -728,35 +806,43 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			search();
 
 		} else if (v == rlDuan) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDuAn(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(getActivity(),
+					DataManager2.getInstance().getListDuAn(),
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-					// TODO Auto-generated method stub
+						@Override
+						public void onReturnDataString(String id) {
+							// TODO Auto-generated method stub
 
-				}
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					try {
-						duanID = DataManager2.getInstance().getListDuAn().get(id).getId();
-						duanName = DataManager2.getInstance().getListDuAn().get(id).getProvinceName();
-						notifyData();
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+						@Override
+						public void onReturnData(int id) {
+							try {
+								duanID = DataManager2.getInstance()
+										.getListDuAn().get(id).getId();
+								duanName = DataManager2.getInstance()
+										.getListDuAn().get(id)
+										.getProvinceName();
+								notifyData();
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
 
-				}
-			});
+						}
+					});
 
 		} else if (v == rlRefresh) {
 			// HotdealUtilities.showDialogCustomListView(getActivity());
 
+		} else if (v == tvMorong) {
+			if (pdBar1.isShown()) {
+				pdBar1.setVisibility(View.GONE);
+			} else {
+				pdBar1.setVisibility(View.VISIBLE);
+			}
+
 		}
-		// else if (v == rlTinh) {
-		// HotdealUtilities.showDialogCustomListView(getActivity());
-		//
-		// }
 		// else if (v == rlTinh) {
 		// HotdealUtilities.showDialogCustomListView(getActivity());
 		//
