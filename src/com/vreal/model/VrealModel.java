@@ -154,7 +154,15 @@ public class VrealModel implements Serializable {
 		setChoosen(false);
 
 	}
+	public void setDataAREA(JSONObject jSonInfo) throws JSONException {
+		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo, "ProvinceID"));
+		this.setDistrictID(HotdealUtilities.getDataString(jSonInfo, "DistrictID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "AreaName"));
+		this.setIsEnable(HotdealUtilities.getDataBool(jSonInfo, "IsEnable"));
+		setChoosen(false);
 
+	}
 	public void setDataStreet(JSONObject jSonInfo) throws JSONException {
 		this.setStreetID(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "StreetName"));
@@ -186,6 +194,12 @@ public class VrealModel implements Serializable {
 
 	}
 	public void setLoaiDuan(JSONObject jSonInfo) throws JSONException {
+		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
+		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
+		setChoosen(false);
+
+	}
+	public void setTienich(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
 		setChoosen(false);

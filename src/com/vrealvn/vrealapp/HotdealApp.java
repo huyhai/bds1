@@ -28,7 +28,7 @@ public class HotdealApp extends Application {
 	// public static boolean isLoadFilter ;
 	public static int height1 = 0;
 	public static int height2 = 0;
-	public static int height1ColCalendar = 0;
+	public static boolean isExpand=false;
 	// public static float textsizeMediumPixel = 0;
 	public static String titleAbout;
 	public static String regId = "";

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,8 +26,10 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.vreal.adapter.TienIchAdapter;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.MapLibs;
+import com.vreal.libs.NotifyDataListener;
 import com.vreal.model.DiaDiemModel;
 import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
@@ -43,6 +46,7 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 	private TextView tvKm3;
 	private TextView tvKm4;
 	private TextView tvKm5;
+	private GridView gvTienich;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,6 +96,7 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		tvKm3 = (TextView) rootView.findViewById(R.id.tvKm3);
 		tvKm4 = (TextView) rootView.findViewById(R.id.tvKm4);
 		tvKm5 = (TextView) rootView.findViewById(R.id.tvKm5);
+		gvTienich= (GridView) rootView.findViewById(R.id.gvTienich);
 		rlTop.setOnClickListener(this);
 		tvEX.setOnClickListener(this);
 		tvD.setOnClickListener(this);
@@ -117,10 +122,22 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		SupportMapFragment m = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.location_map));
 		m.getMapAsync(this);
 	}
+	private void getTienich(){
+		DataManager2.getInstance().getTienich(getActivity(), true, false, new NotifyDataListener() {
+			
+			@Override
+			public void onNotify(String api, int id) {
+				TienIchAdapter adapter=new TienIchAdapter(getActivity(), DataManager2.getInstance().getListTienich(), null);
+				gvTienich.setAdapter(adapter);
+				
+			}
+		});
+	}
 
 	@Override
 	public void onMapReady(GoogleMap arg0) {
 		arg0.getUiSettings().setMyLocationButtonEnabled(true);
+		getTienich();
 		if (pos == -1) {
 			setMultiMarkDiaDiem(DataManager2.getInstance().getListSearch(), arg0);
 		} else {

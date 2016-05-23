@@ -125,6 +125,37 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 		return rootView;
 	}
 
+	private void setDefault() {
+		defauldID = "";
+		proviceID = defauldID;
+		proviceName = HotdealApp.getContext().getString(R.string.str_province);
+		disID = defauldID;
+		disName = HotdealApp.getContext().getString(R.string.str_district);
+		areaName = "Diện tích";
+		priceName = "Mức giá";
+		wayID = defauldID;
+		wayName = "Hướng nhà";
+		KVID = defauldID;
+		KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+		streetID = defauldID;
+		streetName = HotdealApp.getContext().getString(R.string.str_street);
+		wardID = defauldID;
+		wardName = HotdealApp.getContext().getString(R.string.str_ward);
+		loaiID = defauldID;
+		loaiName = "Chọn loại";
+		dientichFrom = defauldID;
+		dientichTo = defauldID;
+		dientichName = "Chọn diện tích";
+		giaFrom = defauldID;
+		giaTo = defauldID;
+		giaName = "Chọn giá";
+		huongID = defauldID;
+		huongName = "Chọn hướng nhà";
+		soPhong = "0";
+		duanID = defauldID;
+		duanName = "Chọn dự án";
+	}
+
 	private void initSaveData() {
 		if (sm.isSaveSetting()) {
 			HashMap<String, String> edito = sm.getSettings();
@@ -273,18 +304,23 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 		rlDuan.setOnClickListener(this);
 		rlRefresh.setOnClickListener(this);
 		// DataManager2.getInstance().showProgress(getActivity());
-		if (sm.getProviceJson().equals("")) {
-			getProvice();
-		} else {
-			JSONArray job = null;
-			try {
-				job = new JSONArray(sm.getProviceJson());
-			} catch (JSONException e1) {
-				e1.printStackTrace();
+		if (DataManager2.getInstance().getListProvices().size() == 0) {
+			if (sm.getProviceJson().equals("")) {
+				getProvice();
+			} else {
+				JSONArray job = null;
+				try {
+					job = new JSONArray(sm.getProviceJson());
+				} catch (JSONException e1) {
+					e1.printStackTrace();
+				}
+				DataManager2.getInstance().handleProvice(job, notifyData);
 			}
-			DataManager2.getInstance().handleProvice(job, notifyData);
 		}
-
+		if (HotdealApp.isExpand) {
+			HotdealApp.isExpand = true;
+			pdBar1.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void notifyData() {
@@ -722,9 +758,14 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 					});
 
 		} else if (v == rlHuyen) {
+			final ArrayList<VrealModel> listDisFilter = new ArrayList<>();
+			for (VrealModel md : DataManager2.getInstance().getListWard()) {
+				if (md.getDistrictID().equals(disID)) {
+					listDisFilter.add(md);
+				}
+			}
 			HotdealUtilities.showDialogCustomListView(getActivity(),
-					DataManager2.getInstance().getListWard(),
-					new NotifySomesDataListener() {
+					listDisFilter, new NotifySomesDataListener() {
 
 						@Override
 						public void onReturnDataString(String id) {
@@ -735,10 +776,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 						@Override
 						public void onReturnData(int id) {
 							try {
-								wardID = DataManager2.getInstance()
-										.getListWard().get(id).getWardID();
-								wardName = DataManager2.getInstance()
-										.getListWard().get(id)
+								wardID = listDisFilter.get(id).getWardID();
+								wardName = listDisFilter.get(id)
 										.getProvinceName();
 								notifyData();
 							} catch (Exception e) {
@@ -749,9 +788,17 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 					});
 
 		} else if (v == rlKhuVuc) {
+			final ArrayList<VrealModel> listDisFilter = new ArrayList<>();
+			for (VrealModel md : DataManager2.getInstance().getListKhuvuc()) {
+				if (null != md && md.getProvinceID().equals(proviceID)) {
+					if (md.getDistrictID().equals(disID)) {
+						listDisFilter.add(md);
+					}
+				}
+
+			}
 			HotdealUtilities.showDialogCustomListView(getActivity(),
-					DataManager2.getInstance().getListKhuvuc(),
-					new NotifySomesDataListener() {
+					listDisFilter, new NotifySomesDataListener() {
 
 						@Override
 						public void onReturnDataString(String id) {
@@ -762,10 +809,8 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 						@Override
 						public void onReturnData(int id) {
 							try {
-								KVID = DataManager2.getInstance()
-										.getListKhuvuc().get(id).getId();
-								KVName = DataManager2.getInstance()
-										.getListKhuvuc().get(id)
+								KVID = listDisFilter.get(id).getId();
+								KVName = listDisFilter.get(id)
 										.getProvinceName();
 								notifyData();
 							} catch (Exception e) {
@@ -833,12 +878,16 @@ public class NhabanF extends VrealFragment implements OnClickListener,
 					});
 
 		} else if (v == rlRefresh) {
+			setDefault();
+			notifyData();
 			// HotdealUtilities.showDialogCustomListView(getActivity());
 
 		} else if (v == tvMorong) {
 			if (pdBar1.isShown()) {
+				HotdealApp.isExpand = false;
 				pdBar1.setVisibility(View.GONE);
 			} else {
+				HotdealApp.isExpand = true;
 				pdBar1.setVisibility(View.VISIBLE);
 			}
 

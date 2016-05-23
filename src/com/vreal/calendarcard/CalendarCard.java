@@ -211,7 +211,6 @@ public class CalendarCard extends RelativeLayout {
 		super.onLayout(changed, l, t, r, b);
 		if (changed && cells.size() > 0) {
 			int size = (r - l) / 7;
-			HotdealApp.height1ColCalendar=size;
 			for(CheckableLayout cell : cells) {
 				cell.getLayoutParams().height = size;
 			}

@@ -468,7 +468,7 @@ public class DataManager2 {
 					JSONObject jSonOb = new JSONObject();
 					jSonOb = result.getJSONObject(i);
 					VrealModel md = new VrealModel();
-					md.setDataWard(jSonOb);
+					md.setDataAREA(jSonOb);
 					getListKhuvuc().add(md);
 				}
 				sm.setKhuVucJson(result.toString());
@@ -1002,6 +1002,47 @@ public class DataManager2 {
 			}
 		}, false);
 	}
+	private ArrayList<VrealModel> listTienich= new ArrayList<>();
+
+	public void getTienich(Activity activity, boolean showPro, boolean isPost, final NotifyDataListener notifyDataListener) {
+		HashMap<String, String> builder = new HashMap<>();
+		builder.put(ConstantValue.API, ConstantValue.GET_TIENICH);
+//		builder.put("search", "");
+		callServer(activity, builder, showPro, isPost, new JsonObjectInterface() {
+
+			@Override
+			public void callResultJOb(Context activity, JSONObject result) {
+				try {
+					getListTienich().clear();
+					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
+						JSONArray listJson;
+						listJson = result.getJSONArray("CityFacCateList");
+						for (int i = 0; i < listJson.length(); i++) {
+							JSONObject jSonOb = new JSONObject();
+							jSonOb = listJson.getJSONObject(i);
+							VrealModel md = new VrealModel();
+							md.setTienich(jSonOb);
+							getListTienich().add(md);
+						}
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_OK, ConstantValue.GET_TIENICH);
+					} else {
+						notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_TIENICH);
+					}
+
+				} catch (Exception e) {
+					notifiUI(notifyDataListener, NotifyDataListener.NOTIFY_FAILED, ConstantValue.GET_TIENICH);
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void callResultJAr(Context activity, JSONArray result) {
+				// TODO Auto-generated method stub
+
+			}
+		}, false);
+	}
 
 	public ArrayList<VrealModel> getListProvices() {
 		return listProvices;
@@ -1129,6 +1170,14 @@ public class DataManager2 {
 
 	public void setVrealModel(VrealModel vrealModel) {
 		this.vrealModel = vrealModel;
+	}
+
+	public ArrayList<VrealModel> getListTienich() {
+		return listTienich;
+	}
+
+	public void setListTienich(ArrayList<VrealModel> listTienich) {
+		this.listTienich = listTienich;
 	}
 
 }

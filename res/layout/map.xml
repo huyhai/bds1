@@ -75,17 +75,18 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/rlTop1"
+            android:fillViewport="true"
             android:scrollbars="none" >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:visibility="visible" >
 
                 <RelativeLayout
                     android:id="@+id/rlTop22"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:padding="@dimen/padding10" >
 
                     <TextView
@@ -187,71 +188,12 @@
                         android:layout_below="@+id/tvThogtinlienhe1"
                         android:orientation="horizontal" >
 
-                        <LinearLayout
-                            android:id="@+id/llDesLH21"
+                        <GridView
+                            android:id="@+id/gvTienich"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical" >
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/llDesLH22"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical" >
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-
-                            <CheckBox
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="check box" />
-                        </LinearLayout>
+                            android:layout_height="fill_parent"
+                            android:numColumns="2" >
+                        </GridView>
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>

@@ -66,7 +66,7 @@ public class ConstantValue {
 	public static final String GET_DIENTICH="V_Acreage_GetAll";
 	public static final String GET_LOAIDUAN="V_ProjectType_GetAll";
 	public static final String SEARCH_PROJECT="V_Project_Search";
-//	public static final String GET_TYPE="V_RealNewsType_GetAll";
+	public static final String GET_TIENICH="V_CityFacCate_GetAll";
 //	public static final String GET_TYPE="V_RealNewsType_GetAll";
 //	public static final String GET_TYPE="V_RealNewsType_GetAll";
 //	public static final String GET_TYPE="V_RealNewsType_GetAll";
