@@ -3,52 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <RelativeLayout
-        android:id="@+id/a"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="200dp" >
-
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/banner_home" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:padding="@dimen/padding10" >
-
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="23 tháng 9, 2015"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize_small_medium" />
-
-            <TextView
-                android:id="@+id/tv12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv1"
-                android:text="Dự án chung cư cao cấp Novaland"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize_medium"
-                android:textStyle="normal" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <ListView
-        android:id="@+id/lvNews"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scrollbars="none"
-        android:layout_below="@+id/a"
-        android:divider="@android:color/transparent" >
-    </ListView>
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pageSlide"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/lvNews"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:divider="@android:color/transparent"
+                android:scrollbars="none" >
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
