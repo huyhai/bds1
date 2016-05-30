@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.LruCache;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.volley.toolbox.DiskBasedCache;
@@ -31,6 +32,7 @@ import com.vreal.ui2.PostPro;
 
 public class HotDealFragmentActivity extends FragmentActivity {
 	public LinearLayout llTopBar;
+	public ImageView imgTooggle;
 
 	@Override
 	protected void onCreate(@Nullable Bundle arg0) {
@@ -161,7 +163,8 @@ public class HotDealFragmentActivity extends FragmentActivity {
 	}
 
 	public void startFragment(Fragment fragment, String dataString) {
-		String backStateName = fragment.getClass().getName();
+		String backStateName="";
+		backStateName = fragment.getClass().getName();
 
 		FragmentManager manager = getSupportFragmentManager();
 		boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);

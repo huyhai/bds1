@@ -85,9 +85,9 @@ public class PostF extends Fragment {
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
-				return new DetailV2(pos);
+				return new DetailV2();
 			case 1:
-				return new DetailV2(pos);
+				return new DetailV2();
 			}
 			return null;
 		}

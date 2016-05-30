@@ -137,6 +137,14 @@
             android:theme="@style/AppBaseTheme"
             android:windowSoftInputMode="adjustPan" >
         </activity>
+        <activity
+            android:name="com.vreal.ui2.NewsDetailF"
+            android:configChanges="keyboardHidden|orientation"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
         <!--
              <activity
             android:name="com.vreal.ui2.Main"
@@ -145,7 +153,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme"
             android:windowSoftInputMode="adjustPan" >
-        </activity>
+        </activity>
         -->
         <!--
              <activity
@@ -155,7 +163,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme"
             android:windowSoftInputMode="adjustPan" >
-        </activity>
+        </activity>
         -->
 
         <meta-data
@@ -183,7 +191,7 @@
 
         <!--
           Optionally, register AnalyticsReceiver and AnalyticsService to support background
-          dispatching on non-Google Play devices
+          dispatching on non-Google Play devices
         -->
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
@@ -200,7 +208,7 @@
 
         <!--
              Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
-             installation campaign reporting
+             installation campaign reporting
         -->
         <receiver
             android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"

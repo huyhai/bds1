@@ -85,7 +85,7 @@ public class DuanAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				if (notify != null) {
 					notify.onReturnData(position);
-					DataManager2.getInstance().setVrealModel(ca);
+					
 				}
 
 			}

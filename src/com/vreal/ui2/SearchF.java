@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -59,6 +61,16 @@ public class SearchF extends HotDealFragmentActivity {
 		
 		pager = (ViewPager) findViewById(R.id.pager);
 		indicator = (TabPageIndicator) findViewById(R.id.indicator);
+		imgTooggle=(ImageView)findViewById(R.id.imgTooggle);
+		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				SearchF.this.finish();
+
+			}
+		});
 
 	}
 
@@ -95,7 +107,7 @@ public class SearchF extends HotDealFragmentActivity {
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
-				return new DetailV2(pos);
+				return new DetailV2();
 			case 1:
 				return new MapF(pos);
 			}

@@ -74,7 +74,8 @@ public class HeaderTintucAdapter extends PagerAdapter implements IconPagerAdapte
 				// Intent i=new Intent(ac, ViewImageActivity.class);
 				// ac.startActivity(i);
 				DataManager2.getInstance().setMd(md);
-				((HotDealFragmentActivity) ac).startFragment(new NewsDetailF(), "");
+				HotdealUtilities.startActivity(ac, NewsDetailF.class, "");
+//				((HotDealFragmentActivity) ac).startFragment(new NewsDetailF(), "");
 
 			}
 		});

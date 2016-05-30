@@ -309,7 +309,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		btnTimkiem.setOnClickListener(this);
 		rlDuan.setOnClickListener(this);
 		rlRefresh.setOnClickListener(this);
-		// DataManager2.getInstance().showProgress(getActivity());
+//		 DataManager2.getInstance().showProgress(getActivity());
 		if (DataManager2.getInstance().getListProvices().size() == 0) {
 			if (sm.getProviceJson().equals("")) {
 				getProvice();
@@ -324,8 +324,10 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			}
 		}
 		if (HotdealApp.isExpand) {
-			HotdealApp.isExpand = true;
+//			HotdealApp.isExpand = true;
 			pdBar1.setVisibility(View.VISIBLE);
+		}else{
+			pdBar1.setVisibility(View.GONE);
 		}
 	}
 
@@ -447,6 +449,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			//
 			// }
 
+//			DataManager2.getInstance().stopProgress();
 		}
 
 	};

@@ -21,8 +21,9 @@ import com.vreal.libs.HotdealUtilities;
 import com.vreal.model.StateModel;
 import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
+import com.vrealvn.vrealapp.HotDealFragmentActivity;
 
-public class DetailF extends FragmentActivity implements OnClickListener {
+public class DetailF extends HotDealFragmentActivity implements OnClickListener {
 	private RelativeLayout rlHome;
 	private RelativeLayout rlPic;
 	private RelativeLayout rlPic1;
@@ -137,6 +138,16 @@ public class DetailF extends FragmentActivity implements OnClickListener {
 		// rlPic=(RelativeLayout)this.findViewById(R.id.rlPic);
 		// rlHome=(RelativeLayout)this.findViewById(R.id.rlHome);
 		imgPic1 = (ImageView) this.findViewById(R.id.imgPic1);
+		imgTooggle=(ImageView)findViewById(R.id.imgTooggle);
+		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				DetailF.this.finish();
+
+			}
+		});
 		double w = 2.2;
 		HotdealUtilities.setWidth(a, w);
 		HotdealUtilities.setWidth(aa, w);

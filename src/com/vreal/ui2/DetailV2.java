@@ -27,7 +27,7 @@ public class DetailV2 extends Fragment {
 	PageIndicator mIndicator;
 	private ViewPager pageSlide;
 	private RelativeLayout rlSlide;
-	int pos;
+//	int pos;
 	private TextView tvName;
 	private TextView tvAddress;
 	private TextView tvGiaVl;
@@ -45,9 +45,9 @@ public class DetailV2 extends Fragment {
 	 private TextView tvAddress1;
 	 private GridView gvTienich;
 
-	public DetailV2(int string) {
-		pos = string;
-	}
+//	public DetailV2(int string) {
+//		pos = string;
+//	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class DetailV2 extends Fragment {
 	}
 
 	private void initData() {
-		VrealModel md = DataManager2.getInstance().getListSearch().get(pos);
+		VrealModel md = DataManager2.getInstance().getVrealModel();
 		DetailsBannerAdapter adapter = new DetailsBannerAdapter(getActivity(), md.getListPhoto());
 		pageSlide.setAdapter(adapter);
 		mIndicator.setViewPager(pageSlide);
@@ -66,7 +66,7 @@ public class DetailV2 extends Fragment {
 
 		tvName.setText(md.getProvinceName());
 		tvAddress.setText(md.getAddress());
-		tvGiaVl.setText(HotdealUtilities.formatMoney(md.getPrice())+" "+md.getUnitName());
+		tvGiaVl.setText(md.getPrice()+" "+md.getUnitName());
 		tvDTVl.setText(HotdealUtilities.formatDientich(md.getAcreage()));
 		tvDes.setText(Html.fromHtml(md.getDescription()));
 		tvFong.setText(md.getContactName());

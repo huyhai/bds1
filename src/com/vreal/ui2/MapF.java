@@ -151,7 +151,7 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 			setMultiMarkDiaDiem(DataManager2.getInstance().getListSearch(), arg0);
 		} else {
 			ArrayList<VrealModel> list = new ArrayList<>();
-			VrealModel vmd = DataManager2.getInstance().getListSearch().get(pos);
+			VrealModel vmd = DataManager2.getInstance().getVrealModel();
 			list.add(vmd);
 			setMultiMarkDiaDiem(list, arg0);
 		}

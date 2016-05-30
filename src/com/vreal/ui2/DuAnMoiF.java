@@ -25,7 +25,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener {
+public class DuAnMoiF extends HotDealFragmentActivity implements
+		OnClickListener {
 	private ListView lvDuan;
 	private RelativeLayout rlFilter;
 	private RelativeLayout rlMap;
@@ -50,7 +51,8 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 		// listData.addAll(DataManager2.getInstance().getListSearch());
 		// idType = HotdealUtilities.getDataFragment(this);
 		idType = HotdealUtilities.getDataBundle(this);
-		tvKq.setText(DataManager2.getInstance().getListSearch().size() + " kết quả");
+		tvKq.setText(DataManager2.getInstance().getListSearch().size()
+				+ " kết quả");
 		adapter = new DuanAdapter(this, listData, no);
 		lvDuan.setAdapter(adapter);
 
@@ -73,14 +75,23 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 		imgFilter = (ImageView) this.findViewById(R.id.imgFilter);
 		imgLocation = (ImageView) this.findViewById(R.id.imgLocation);
 		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
+		imgTooggle = (ImageView) this.findViewById(R.id.imgTooggle);
 		HotdealUtilities.setHeight(llTopBar, 11.5);
-
+		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
 		HotdealUtilities.setWidthHeight(imgLocation, 17, 24);
 		HotdealUtilities.setWidthHeight(imgFilter, 15, 32);
 
 		rlFilter.setOnClickListener(this);
 		rlMap.setOnClickListener(this);
 		tvSX.setOnClickListener(this);
+		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				DuAnMoiF.this.finish();
+
+			}
+		});
 	}
 
 	NotifySomesDataListener no = new NotifySomesDataListener() {
@@ -91,12 +102,15 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 
 		@Override
 		public void onReturnData(int id) {
+			DataManager2.getInstance().setVrealModel(listData.get(id));
 			if (idType.equals("")) {
-				HotdealUtilities.startActivity(DuAnMoiF.this, DetailF.class, "");
+				HotdealUtilities
+						.startActivity(DuAnMoiF.this, DetailF.class, "");
 				// ((HotDealFragmentActivity) this).startFragment(new
 				// DetailF(), id + "");
 			} else {
-				HotdealUtilities.startActivity(DuAnMoiF.this, SearchF.class, id + "");
+				HotdealUtilities.startActivity(DuAnMoiF.this, SearchF.class, id
+						+ "");
 				// ((HotDealFragmentActivity) this).startFragment(new SearchF(),
 				// id + "");
 			}
@@ -115,12 +129,14 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 	@Override
 	public void onClick(View v) {
 		if (v == rlFilter) {
-			HotdealUtilities.startActivity(DuAnMoiF.this, FilterF.class, idType);
+			HotdealUtilities
+					.startActivity(DuAnMoiF.this, FilterF.class, idType);
 			// ((HotDealFragmentActivity) this).startFragment(new FilterF(),
 			// idType);
 		} else if (v == rlMap) {
-			 HotdealUtilities.startActivity(DuAnMoiF.this, MapActivity.class, "-1");
-//			startFragment(new MapF(-1), "");
+			HotdealUtilities.startActivity(DuAnMoiF.this, MapActivity.class,
+					"-1");
+			// startFragment(new MapF(-1), "");
 		} else if (v == tvSX) {
 			ArrayList<VrealModel> list = new ArrayList<>();
 			list.add(new VrealModel("Tin mới nhất"));
@@ -128,80 +144,92 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 			list.add(new VrealModel("Giá cao nhất"));
 			list.add(new VrealModel("Diện tích lớn nhất"));
 			list.add(new VrealModel("Diện tích nhỏ nhất"));
-			HotdealUtilities.showDialogCustomListView(this, list, new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(this, list,
+					new NotifySomesDataListener() {
 
-				@Override
-				public void onReturnDataString(String id) {
-				}
+						@Override
+						public void onReturnDataString(String id) {
+						}
 
-				@Override
-				public void onReturnData(int id) {
-					if (id == 0) {
-						listData.clear();
-						listData.addAll(DataManager2.getInstance().getListSearch());
-					} else if (id == 1) {
-						Collections.sort(listData, new Comparator<VrealModel>() {
-							@Override
-							public int compare(VrealModel s1, VrealModel s2) {
-								if (s1.getPrice() < s2.getPrice()) {
-									return -1;
-								} else if (s1.getPrice() > s2.getPrice()) {
-									return 1;
-								} else {
-									return 0;
-								}
+						@Override
+						public void onReturnData(int id) {
+							if (id == 0) {
+								listData.clear();
+								listData.addAll(DataManager2.getInstance()
+										.getListSearch());
+							} else if (id == 1) {
+								Collections.sort(listData,
+										new Comparator<VrealModel>() {
+											@Override
+											public int compare(VrealModel s1,
+													VrealModel s2) {
+												if (s1.getPrice() < s2
+														.getPrice()) {
+													return -1;
+												} else if (s1.getPrice() > s2
+														.getPrice()) {
+													return 1;
+												} else {
+													return 0;
+												}
 
+											}
+										});
+							} else if (id == 2) {
+								Collections.sort(listData,
+										new Comparator<VrealModel>() {
+											@Override
+											public int compare(VrealModel s1,
+													VrealModel s2) {
+												if (s2.getPrice() < s1
+														.getPrice()) {
+													return -1;
+												} else if (s2.getPrice() > s1
+														.getPrice()) {
+													return 1;
+												} else {
+													return 0;
+												}
+
+											}
+										});
+							} else if (id == 3) {
+								// Collections.sort(listData, new
+								// Comparator<VrealModel>() {
+								// @Override
+								// public int compare(VrealModel s1, VrealModel
+								// s2) {
+								// if (s2.getPrice() < s1.getPrice()) {
+								// return -1;
+								// } else if (s2.getPrice() > s1.getPrice()) {
+								// return 1;
+								// } else {
+								// return 0;
+								// }
+								//
+								// }
+								// });
+							} else if (id == 4) {
+								// Collections.sort(listData, new
+								// Comparator<VrealModel>() {
+								// @Override
+								// public int compare(VrealModel s1, VrealModel
+								// s2) {
+								// if (s2.getPrice() < s1.getPrice()) {
+								// return -1;
+								// } else if (s2.getPrice() > s1.getPrice()) {
+								// return 1;
+								// } else {
+								// return 0;
+								// }
+								//
+								// }
+								// });
 							}
-						});
-					} else if (id == 2) {
-						Collections.sort(listData, new Comparator<VrealModel>() {
-							@Override
-							public int compare(VrealModel s1, VrealModel s2) {
-								if (s2.getPrice() < s1.getPrice()) {
-									return -1;
-								} else if (s2.getPrice() > s1.getPrice()) {
-									return 1;
-								} else {
-									return 0;
-								}
 
-							}
-						});
-					} else if (id == 3) {
-						// Collections.sort(listData, new
-						// Comparator<VrealModel>() {
-						// @Override
-						// public int compare(VrealModel s1, VrealModel s2) {
-						// if (s2.getPrice() < s1.getPrice()) {
-						// return -1;
-						// } else if (s2.getPrice() > s1.getPrice()) {
-						// return 1;
-						// } else {
-						// return 0;
-						// }
-						//
-						// }
-						// });
-					} else if (id == 4) {
-						// Collections.sort(listData, new
-						// Comparator<VrealModel>() {
-						// @Override
-						// public int compare(VrealModel s1, VrealModel s2) {
-						// if (s2.getPrice() < s1.getPrice()) {
-						// return -1;
-						// } else if (s2.getPrice() > s1.getPrice()) {
-						// return 1;
-						// } else {
-						// return 0;
-						// }
-						//
-						// }
-						// });
-					}
-
-					adapter.notifyDataSetChanged();
-				}
-			});
+							adapter.notifyDataSetChanged();
+						}
+					});
 		}
 
 	}

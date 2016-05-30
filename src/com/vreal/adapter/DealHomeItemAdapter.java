@@ -82,7 +82,8 @@ public class DealHomeItemAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				DataManager2.getInstance().setMd(md);
-				((HotDealFragmentActivity) ac).startFragment(new NewsDetailF(), "");
+				HotdealUtilities.startActivity(ac, NewsDetailF.class, "");
+//				((HotDealFragmentActivity) ac).startFragment(new NewsDetailF(), "");
 
 			}
 		});

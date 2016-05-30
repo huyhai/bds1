@@ -113,7 +113,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding15"
-        android:background="@drawable/bg_top1"
+        android:background="@color/vreal_orange"
         android:padding="@dimen/padding10"
         android:text="TÌM KIẾM"
         android:textColor="@color/white" />

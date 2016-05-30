@@ -24,14 +24,14 @@
                 android:id="@+id/rlTooggle"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:layout_marginLeft="@dimen/padding5" >
+                android:layout_marginLeft="@dimen/padding10" >
 
                 <ImageView
                     android:id="@+id/imgTooggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/icon_back" />
+                    android:background="@drawable/ic_backmenu" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -414,8 +414,8 @@
                 android:layout_below="@+id/llDes"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                android:padding="@dimen/padding10" >
+                android:padding="@dimen/padding10"
+                android:visibility="gone" >
 
                 <ImageView
                     android:id="@+id/imgPicS1"

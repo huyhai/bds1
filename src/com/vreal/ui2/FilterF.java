@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnValueChangeListener;
@@ -77,7 +78,17 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 		tvNam = (TextView) findViewById(R.id.tvNam);
 		btnTimkiem = (Button) findViewById(R.id.btnTimkiem);
 		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
+		imgTooggle=(ImageView)findViewById(R.id.imgTooggle);
 		HotdealUtilities.setHeight(llTopBar, 11.5);
+		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				FilterF.this.finish();
+
+			}
+		});
 
 		rlKhuvuc.setOnClickListener(this);
 		rlMuagia.setOnClickListener(this);
