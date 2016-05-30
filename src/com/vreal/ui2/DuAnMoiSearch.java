@@ -92,7 +92,8 @@ public class DuAnMoiSearch extends Fragment implements OnClickListener {
 
 			} else if (api.equals(ConstantValue.SEARCH_PROJECT)) {
 				if (id == NOTIFY_OK) {
-					((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
+					HotdealUtilities.startActivity(getActivity(), DuAnMoiF.class, "");
+//					((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
 				} else {
 					
 				}

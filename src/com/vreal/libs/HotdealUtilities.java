@@ -521,7 +521,7 @@ public class HotdealUtilities {
 					.cacheInMemory(true).cacheOnDisc().considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
 		}
 		try {
-			String ui=ConstantValue.domainIMG+url;
+			String ui = ConstantValue.domainIMG + url;
 			Main.imageLoader.displayImage(ui, img, Main.options);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -533,7 +533,7 @@ public class HotdealUtilities {
 
 	public static void loadImagePicaso(String url, ImageView img, Activity ac) {
 		try {
-			String ui=ConstantValue.domainIMG+url;
+			String ui = ConstantValue.domainIMG + url;
 			showALog(ui);
 			Picasso.with(ac).load(ui).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(img);
 		} catch (Exception e) {
@@ -941,7 +941,7 @@ public class HotdealUtilities {
 	}
 
 	public static int getDataInt(JSONObject jSonOb, String key) {
-		int result =0;
+		int result = 0;
 		try {
 			result = jSonOb.getInt(key);
 		} catch (JSONException e) {
@@ -1141,10 +1141,11 @@ public class HotdealUtilities {
 		AlertDialog.Builder builderSingle = new AlertDialog.Builder(c);
 		// builderSingle.setIcon(R.drawable.ic_launcher);
 		// builderSingle.setTitle("Select One Name:-");
-
+//		final String koxacdinh = "Không xác định";
 		// PopupAdapter arrayAdapter=new PopupAdapter(c, listData);
 		final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_activated_1);
 		if (null != listData) {
+//			arrayAdapter.add(koxacdinh);
 			for (VrealModel name : listData) {
 				arrayAdapter.add(name.getProvinceName());
 			}
@@ -1169,7 +1170,12 @@ public class HotdealUtilities {
 				// listData.get(which).getProvinceName();
 				// showToast(strName, Toast.LENGTH_SHORT, c);
 				if (null != notifi) {
+					// if(arrayAdapter.getItem(which).equals(koxacdinh)){
+					// notifi.onReturnData(-1);
+					// }else{
 					notifi.onReturnData(which);
+					// }
+
 				}
 				// AlertDialog.Builder builderInner = new
 				// AlertDialog.Builder(

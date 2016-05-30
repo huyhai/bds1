@@ -5,6 +5,104 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/llTopBar"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:background="@color/vreal_orange"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/rlHome"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:id="@+id/rlToogle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/padding10" >
+
+                <RelativeLayout
+                    android:id="@+id/rlTooggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/padding5" >
+
+                    <ImageView
+                        android:id="@+id/imgTooggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_tongo" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/imgLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Vreal.vn"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/rlFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padding5"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:id="@+id/imgFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_filter" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padding5"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:id="@+id/imgRefresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_re_fresh" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlMap"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="@dimen/padding10"
+                android:layout_toLeftOf="@+id/rlFilter"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:id="@+id/imgLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_location" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/pdBar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -166,7 +264,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding15"
-            android:background="@drawable/bg_top1"
+            android:background="@color/vreal_orange"
             android:padding="@dimen/padding10"
             android:text="LỌC"
             android:textColor="@color/white" />

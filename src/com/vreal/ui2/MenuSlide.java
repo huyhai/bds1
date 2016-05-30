@@ -117,8 +117,9 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 			((HotDealFragmentActivity) getActivity())
 					.startFragment(new NhabanF(),"2");
 		} else if (position == 2) {
-			((HotDealFragmentActivity) getActivity())
-					.startFragment(new DuAnMoiF(),"");
+			HotdealUtilities.startActivity(getActivity(), DuAnMoiF.class, "");
+//			((HotDealFragmentActivity) getActivity())
+//					.startFragment(new DuAnMoiF(),"");
 		} else if (position == 3) {
 			((HotDealFragmentActivity) getActivity())
 					.startFragment(new TintucF(),"");

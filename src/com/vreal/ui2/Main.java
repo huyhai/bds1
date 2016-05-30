@@ -58,10 +58,10 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 		imgLocation = (ImageView) findViewById(R.id.imgLocation);
 		imgRefresh = (ImageView) findViewById(R.id.imgRefresh);
 		imgFilter = (ImageView) findViewById(R.id.imgFilter);
-		HotdealUtilities.setWidthHeight(imgTooggle, 12, 26);
-		HotdealUtilities.setWidthHeight(imgLocation, 16, 22);
-		HotdealUtilities.setWidthHeight(imgRefresh, 12.5, 22);
-		HotdealUtilities.setWidthHeight(imgFilter, 12.5, 22);
+		HotdealUtilities.setWidthHeight(imgTooggle, 16, 37);
+		HotdealUtilities.setWidthHeight(imgLocation, 17, 24);
+		HotdealUtilities.setWidthHeight(imgRefresh, 12.5, 25);
+		HotdealUtilities.setWidthHeight(imgFilter, 15, 32);
 
 		HotdealUtilities.setHeight(llTopBar, 11.5);
 

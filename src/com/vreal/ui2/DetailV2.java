@@ -1,5 +1,7 @@
 package com.vreal.ui2;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -7,11 +9,13 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.vreal.adapter.DetailsBannerAdapter;
+import com.vreal.adapter.TienIchAdapter;
 import com.vreal.libs.DepthPageTransformer;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.model.VrealModel;
@@ -31,11 +35,15 @@ public class DetailV2 extends Fragment {
 
 	private TextView tvDes;
 
-	 private TextView tvFong;
-	 private TextView tvPhone;
-	 private TextView tvCellPhone;
-	// private TextView tvName;
-	// private TextView tvName;
+	private TextView tvFong;
+	private TextView tvPhone;
+	private TextView tvCellPhone;
+	private TextView tvLoai;
+	private TextView tvDateStart;
+	private TextView tvDateEnd;
+
+	 private TextView tvAddress1;
+	 private GridView gvTienich;
 
 	public DetailV2(int string) {
 		pos = string;
@@ -58,13 +66,27 @@ public class DetailV2 extends Fragment {
 
 		tvName.setText(md.getProvinceName());
 		tvAddress.setText(md.getAddress());
-		tvGiaVl.setText(HotdealUtilities.formatMoney(md.getPrice()));
+		tvGiaVl.setText(HotdealUtilities.formatMoney(md.getPrice())+" "+md.getUnitName());
 		tvDTVl.setText(HotdealUtilities.formatDientich(md.getAcreage()));
 		tvDes.setText(Html.fromHtml(md.getDescription()));
 		tvFong.setText(md.getContactName());
 		tvPhone.setText(md.getContacPhone());
 		tvCellPhone.setText(md.getContactEmail());
-		// tvName.setText(md.getProvinceName());
+		if(md.getRealNewsTypeID()==1){
+			tvLoai.setText("Nhà đất bán");
+		}else{
+			tvLoai.setText("Nhà đất cho thuê");
+		}
+		
+		tvDateStart.setText(md.getPublishStart());
+		tvDateEnd.setText(md.getPublishEnd());
+		tvAddress1.setText(md.getAddress());
+		ArrayList<VrealModel> listTI=new ArrayList<>();
+		for(String a:md.getListTienIch()){
+			listTI.add(new VrealModel(a));
+		}
+		TienIchAdapter adapter1=new TienIchAdapter(getActivity(), listTI, null,true);
+		gvTienich.setAdapter(adapter1);
 		// tvName.setText(md.getProvinceName());
 		// tvName.setText(md.getProvinceName());
 		// tvName.setText(md.getProvinceName());
@@ -72,6 +94,10 @@ public class DetailV2 extends Fragment {
 	}
 
 	private void initView(View rootView) {
+		tvAddress1= (TextView) rootView.findViewById(R.id.tvAddress1);
+		tvLoai= (TextView) rootView.findViewById(R.id.tvLoai);
+		tvDateStart= (TextView) rootView.findViewById(R.id.tvDateStart);
+		tvDateEnd= (TextView) rootView.findViewById(R.id.tvDateEnd);
 		pageSlide = (ViewPager) rootView.findViewById(R.id.pageSlide);
 		mIndicator = (CirclePageIndicator) rootView.findViewById(R.id.indicator);
 		rlSlide = (RelativeLayout) rootView.findViewById(R.id.rlSlide);
@@ -83,7 +109,7 @@ public class DetailV2 extends Fragment {
 		tvFong = (TextView) rootView.findViewById(R.id.tvFong);
 		tvPhone = (TextView) rootView.findViewById(R.id.tvPhone);
 		tvCellPhone = (TextView) rootView.findViewById(R.id.tvCellPhone);
-		// tvName = (TextView) rootView.findViewById(R.id.tvName);
+		gvTienich = (GridView) rootView.findViewById(R.id.gvTienich);
 		// tvName = (TextView) rootView.findViewById(R.id.tvName);
 
 		HotdealUtilities.setHeight(rlSlide, 3);

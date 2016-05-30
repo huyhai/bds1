@@ -26,15 +26,17 @@ public class TienIchAdapter extends BaseAdapter {
 	private Activity ac;
 	ViewHolder holder;
 	NotifySomesDataListener notify;
+	private boolean isStatic;
 
 	static class ViewHolder {
 		CheckBox cbTi;
 	}
 
-	public TienIchAdapter(final Activity _ac, ArrayList<VrealModel> _list, NotifySomesDataListener no) {
+	public TienIchAdapter(final Activity _ac, ArrayList<VrealModel> _list, NotifySomesDataListener no, boolean istatic) {
 		this.listData = _list;
 		this.ac = _ac;
 		notify = no;
+		this.isStatic=istatic;
 
 	}
 
@@ -67,6 +69,10 @@ public class TienIchAdapter extends BaseAdapter {
 		}
 		final VrealModel ca = listData.get(position);
 		holder.cbTi.setText(ca.getProvinceName());
+		if(isStatic){
+			holder.cbTi.setChecked(true);
+			holder.cbTi.setClickable(false);
+		}
 //		convertView.setOnClickListener(new OnClickListener() {
 //
 //			@Override

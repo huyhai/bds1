@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -48,6 +49,10 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 	private TextView tvKm5;
 	private GridView gvTienich;
 
+	public MapF(int pos2) {
+		pos = pos2;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.map, container, false);
@@ -55,9 +60,11 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		return rootView;
 	}
 
-	public MapF(int string) {
-		pos = string;
-	}
+	/*
+	 * @Override protected void onCreate(@Nullable Bundle arg0) { // TODO
+	 * Auto-generated method stub super.onCreate(arg0);
+	 * setContentView(R.layout.map); initView(); }
+	 */
 
 	@Override
 	public void onPause() {
@@ -85,18 +92,19 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		}
 	}
 
-	private void initView(View rootView) {
+	private void initView(View v) {
+//		pos = Integer.parseInt(HotdealUtilities.getDataFragment(this));
 		// llDistance = (LinearLayout) rootView.findViewById(R.id.llDistance);
-		rlTienICh = (RelativeLayout) rootView.findViewById(R.id.rlTienICh);
-		rlTop = (RelativeLayout) rootView.findViewById(R.id.rlTop);
-		tvD = (TextView) rootView.findViewById(R.id.tvD);
-		tvEX = (TextView) rootView.findViewById(R.id.tvEX);
-		tvKm1 = (TextView) rootView.findViewById(R.id.tvKm1);
-		tvKm2 = (TextView) rootView.findViewById(R.id.tvKm2);
-		tvKm3 = (TextView) rootView.findViewById(R.id.tvKm3);
-		tvKm4 = (TextView) rootView.findViewById(R.id.tvKm4);
-		tvKm5 = (TextView) rootView.findViewById(R.id.tvKm5);
-		gvTienich= (GridView) rootView.findViewById(R.id.gvTienich);
+		rlTienICh = (RelativeLayout) v.findViewById(R.id.rlTienICh);
+		rlTop = (RelativeLayout) v.findViewById(R.id.rlTop);
+		tvD = (TextView) v.findViewById(R.id.tvD);
+		tvEX = (TextView) v.findViewById(R.id.tvEX);
+		tvKm1 = (TextView) v.findViewById(R.id.tvKm1);
+		tvKm2 = (TextView) v.findViewById(R.id.tvKm2);
+		tvKm3 = (TextView) v.findViewById(R.id.tvKm3);
+		tvKm4 = (TextView) v.findViewById(R.id.tvKm4);
+		tvKm5 = (TextView) v.findViewById(R.id.tvKm5);
+		gvTienich = (GridView) v.findViewById(R.id.gvTienich);
 		rlTop.setOnClickListener(this);
 		tvEX.setOnClickListener(this);
 		tvD.setOnClickListener(this);
@@ -122,14 +130,15 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		SupportMapFragment m = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.location_map));
 		m.getMapAsync(this);
 	}
-	private void getTienich(){
+
+	private void getTienich() {
 		DataManager2.getInstance().getTienich(getActivity(), true, false, new NotifyDataListener() {
-			
+
 			@Override
 			public void onNotify(String api, int id) {
-				TienIchAdapter adapter=new TienIchAdapter(getActivity(), DataManager2.getInstance().getListTienich(), null);
+				TienIchAdapter adapter = new TienIchAdapter(getActivity(), DataManager2.getInstance().getListTienich(), null, false);
 				gvTienich.setAdapter(adapter);
-				
+
 			}
 		});
 	}
@@ -200,9 +209,9 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		} else if (tvEX == v) {
 			rlTienICh.setVisibility(View.GONE);
 		} else if (tvKm1 == v) {
-			
+
 		} else if (tvKm2 == v) {
-			
+
 		} else if (tvKm3 == v) {
 		} else if (tvKm4 == v) {
 		} else if (tvKm5 == v) {

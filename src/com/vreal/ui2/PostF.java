@@ -87,7 +87,7 @@ public class PostF extends Fragment {
 			case 0:
 				return new DetailV2(pos);
 			case 1:
-				return new MapF(pos);
+				return new DetailV2(pos);
 			}
 			return null;
 		}

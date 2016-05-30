@@ -41,7 +41,6 @@
     <!-- This app has permission to register and receive data message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-  
 
     <application
         android:name="com.vrealvn.vrealapp.HotdealApp"
@@ -51,7 +50,7 @@
         android:largeHeap="true"
         android:theme="@style/AppBaseTheme" >
         <activity
-            android:name="com.vreal.ui2.LoginA"
+            android:name="com.vreal.ui2.Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme" >
@@ -107,7 +106,31 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.vreal.ui2.Main"
+            android:name="com.vreal.ui2.DuAnMoiF"
+            android:configChanges="keyboardHidden|orientation"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.vreal.ui2.SearchF"
+            android:configChanges="keyboardHidden|orientation"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.vreal.ui2.FilterF"
+            android:configChanges="keyboardHidden|orientation"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.vreal.ui2.MapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
@@ -116,13 +139,23 @@
         </activity>
         <!--
              <activity
+            android:name="com.vreal.ui2.Main"
+            android:configChanges="keyboardHidden|orientation"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        -->
+        <!--
+             <activity
             android:name="com.vreal.ui2.PostPro"
             android:configChanges="keyboardHidden|orientation"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme"
             android:windowSoftInputMode="adjustPan" >
-        </activity>
+        </activity>
         -->
 
         <meta-data
@@ -150,7 +183,7 @@
 
         <!--
           Optionally, register AnalyticsReceiver and AnalyticsService to support background
-          dispatching on non-Google Play devices
+          dispatching on non-Google Play devices
         -->
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
@@ -167,7 +200,7 @@
 
         <!--
              Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
-             installation campaign reporting
+             installation campaign reporting
         -->
         <receiver
             android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"

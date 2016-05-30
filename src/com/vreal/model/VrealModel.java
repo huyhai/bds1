@@ -12,36 +12,43 @@ import com.vreal.libs.HotdealUtilities;
 public class VrealModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// provice
-	private String id;
-	private String ProvinceName;
+	private String id = "";
+	private String ProvinceName = "";
 	private boolean IsEnable;
-	private String ProvinceCode;
+	private String ProvinceCode = "";
 	private boolean isChoosen;
-	private String ProvinceID;
-	private String DistrictID;
-	private String streetID;
-	private String wardID;
+	private String ProvinceID = "";
+	private String DistrictID = "";
+	private String streetID = "";
+	private String wardID = "";
 
 	// listDienTichANDGia
 	private int value1;
 	private int value2;
-	
-	//detai
-	private String address;
+
+	// detai
+	private String address = "";
 	private double price;
-	private String Description;
-	private String Icon;
+	private String Description = "";
+	private String Icon = "";
 	private ArrayList<String> listPhoto;
-	private String Acreage;
-	private String ContactName;
-	private String ContactAddress;
-	private String ContacPhone;
-	private String ContactEmail;
+	private String Acreage = "";
+	private String ContactName = "";
+	private String ContactAddress = "";
+	private String ContacPhone = "";
+	private String ContactEmail = "";
 	private double Latitude;
 	private double Longitude;
-	private String Developer;
-//	private String ContactAddress;
-//	private String ContactAddress;
+	private String Developer = "";
+
+	private int RealNewsTypeID;
+	private String PublishStart = "";
+	private String PublishEnd = "";
+	private String UnitName = "";
+	// private String ContactAddress;
+	// private String ContactAddress;
+	// private String ContactAddress;
+
 	private ArrayList<String> listTienIch;
 
 	private ArrayList<VrealModel> listSub;
@@ -50,7 +57,12 @@ public class VrealModel implements Serializable {
 
 	}
 
+	public VrealModel(String name) {
+		this.setProvinceName(name);
+	}
+
 	public void setSeachData(JSONObject jSonInfo) throws JSONException {
+		this.setUnitName(HotdealUtilities.getDataString(jSonInfo, "UnitName"));
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "RealID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "RealName"));
 		setChoosen(false);
@@ -65,7 +77,11 @@ public class VrealModel implements Serializable {
 		this.setContactEmail(HotdealUtilities.getDataString(jSonInfo, "ContactEmail"));
 		this.setLongitude(HotdealUtilities.getDataDouble(jSonInfo, "Longitude"));
 		this.setLatitude(HotdealUtilities.getDataDouble(jSonInfo, "Latitude"));
-		
+
+		this.setRealNewsTypeID(HotdealUtilities.getDataInt(jSonInfo, "RealNewsTypeID"));
+		this.setPublishStart(HotdealUtilities.getDataString(jSonInfo, "PublishStart"));
+		this.setPublishEnd(HotdealUtilities.getDataString(jSonInfo, "PublishEnd"));
+
 		setListPhoto(new ArrayList<String>());
 		JSONArray listJson;
 		try {
@@ -77,8 +93,19 @@ public class VrealModel implements Serializable {
 		} catch (Exception e) {
 		}
 
+		setListTienIch(new ArrayList<String>());
+		JSONArray listJsonTC;
+		try {
+			listJsonTC = jSonInfo.getJSONArray("FeatureInHouseList");
+			for (int i = 0; i < listJsonTC.length(); i++) {
+				String jSonOb = listJsonTC.getString(i);
+				getListTienIch().add(jSonOb);
+			}
+		} catch (Exception e) {
+		}
 
 	}
+
 	public void setSeachProData(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "ProjectName"));
@@ -89,24 +116,29 @@ public class VrealModel implements Serializable {
 		this.setIcon(HotdealUtilities.getDataString(jSonInfo, "Icon"));
 		this.setAcreage(HotdealUtilities.getDataString(jSonInfo, "Summary"));
 		this.setDeveloper(HotdealUtilities.getDataString(jSonInfo, "Developer"));
-//		this.setContactAddress(HotdealUtilities.getDataString(jSonInfo, "ContactAddress"));
-//		this.setContacPhone(HotdealUtilities.getDataString(jSonInfo, "ContacPhone"));
-//		this.setContactEmail(HotdealUtilities.getDataString(jSonInfo, "ContactEmail"));
-//		this.setLongitude(HotdealUtilities.getDataDouble(jSonInfo, "Longitude"));
-//		this.setLatitude(HotdealUtilities.getDataDouble(jSonInfo, "Latitude"));
-		
+		// this.setContactAddress(HotdealUtilities.getDataString(jSonInfo,
+		// "ContactAddress"));
+		// this.setContacPhone(HotdealUtilities.getDataString(jSonInfo,
+		// "ContacPhone"));
+		// this.setContactEmail(HotdealUtilities.getDataString(jSonInfo,
+		// "ContactEmail"));
+		// this.setLongitude(HotdealUtilities.getDataDouble(jSonInfo,
+		// "Longitude"));
+		// this.setLatitude(HotdealUtilities.getDataDouble(jSonInfo,
+		// "Latitude"));
+
 		setListPhoto(new ArrayList<String>());
 		JSONArray listJson;
 		try {
 			listJson = jSonInfo.getJSONArray("GalleryList");
 			for (int i = 0; i < listJson.length(); i++) {
-				JSONObject job=listJson.getJSONObject(i);
+				JSONObject job = listJson.getJSONObject(i);
 				String jSonOb = HotdealUtilities.getDataString(job, "Url");
 				getListPhoto().add(jSonOb);
 			}
 		} catch (Exception e) {
 		}
-		
+
 		setListTienIch(new ArrayList<String>());
 		JSONArray listJsonTC;
 		try {
@@ -117,7 +149,6 @@ public class VrealModel implements Serializable {
 			}
 		} catch (Exception e) {
 		}
-
 
 	}
 
@@ -154,6 +185,7 @@ public class VrealModel implements Serializable {
 		setChoosen(false);
 
 	}
+
 	public void setDataAREA(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceID(HotdealUtilities.getDataString(jSonInfo, "ProvinceID"));
@@ -163,6 +195,7 @@ public class VrealModel implements Serializable {
 		setChoosen(false);
 
 	}
+
 	public void setDataStreet(JSONObject jSonInfo) throws JSONException {
 		this.setStreetID(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "StreetName"));
@@ -193,24 +226,28 @@ public class VrealModel implements Serializable {
 		setChoosen(false);
 
 	}
+
 	public void setLoaiDuan(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
 		setChoosen(false);
 
 	}
+
 	public void setTienich(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
 		setChoosen(false);
 
 	}
+
 	public void setGia(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
 		setChoosen(false);
 
 	}
+
 	public void setDIENTICH(JSONObject jSonInfo) throws JSONException {
 		this.setId(HotdealUtilities.getDataString(jSonInfo, "ID"));
 		this.setProvinceName(HotdealUtilities.getDataString(jSonInfo, "Name"));
@@ -345,7 +382,6 @@ public class VrealModel implements Serializable {
 		this.address = address;
 	}
 
-
 	public String getDescription() {
 		return Description;
 	}
@@ -448,6 +484,38 @@ public class VrealModel implements Serializable {
 
 	public void setDeveloper(String developer) {
 		Developer = developer;
+	}
+
+	public String getPublishStart() {
+		return PublishStart;
+	}
+
+	public void setPublishStart(String publishStart) {
+		PublishStart = publishStart;
+	}
+
+	public String getPublishEnd() {
+		return PublishEnd;
+	}
+
+	public void setPublishEnd(String publishEnd) {
+		PublishEnd = publishEnd;
+	}
+
+	public int getRealNewsTypeID() {
+		return RealNewsTypeID;
+	}
+
+	public void setRealNewsTypeID(int realNewsTypeID) {
+		RealNewsTypeID = realNewsTypeID;
+	}
+
+	public String getUnitName() {
+		return UnitName;
+	}
+
+	public void setUnitName(String unitName) {
+		UnitName = unitName;
 	}
 
 }

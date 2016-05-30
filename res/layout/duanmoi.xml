@@ -3,10 +3,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <LinearLayout
+        android:id="@+id/llTopBar"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:background="@color/vreal_orange"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/rlHome"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:id="@+id/rlToogle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:paddingRight="@dimen/padding10" >
+
+                <RelativeLayout
+                    android:id="@+id/rlTooggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/padding5" >
+
+                    <ImageView
+                        android:id="@+id/imgTooggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_tongo" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/imgLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Dự án mới"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/rlFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padding5"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/imgFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_filter" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlMap"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="@dimen/padding10"
+                android:layout_toLeftOf="@+id/rlFilter"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:id="@+id/imgLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_location" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/rlTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/llTopBar"
         android:background="@color/darkgrey"
         android:paddingBottom="@dimen/padding5"
         android:paddingLeft="@dimen/padding10"
@@ -18,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:padding="@dimen/padding10"
             android:text="1212 kết quả"
             android:textSize="@dimen/textsize_medium" />
 
@@ -27,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:padding="@dimen/padding10"
             android:text="Sắp xếp"
             android:textColor="#346357"
             android:textSize="@dimen/textsize_medium" />

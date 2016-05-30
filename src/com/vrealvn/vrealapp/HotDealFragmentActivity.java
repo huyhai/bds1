@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.LruCache;
+import android.widget.LinearLayout;
 
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.ImageLoader.ImageCache;
@@ -29,6 +30,7 @@ import com.vreal.libs.HotdealUtilities;
 import com.vreal.ui2.PostPro;
 
 public class HotDealFragmentActivity extends FragmentActivity {
+	public LinearLayout llTopBar;
 
 	@Override
 	protected void onCreate(@Nullable Bundle arg0) {

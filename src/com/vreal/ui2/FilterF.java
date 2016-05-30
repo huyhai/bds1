@@ -3,6 +3,7 @@ package com.vreal.ui2;
 import java.util.Calendar;
 import java.util.StringTokenizer;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.RelativeLayout;
@@ -25,10 +27,11 @@ import com.vreal.libs.ConstantValue;
 import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vrealvn.vrealapp.DataManager2;
+import com.vrealvn.vrealapp.HotDealFragmentActivity;
 import com.vrealvn.vrealapp.HotdealApp;
 
-public class FilterF extends Fragment implements OnClickListener {
-	private RelativeLayout rlRefresh;
+public class FilterF extends HotDealFragmentActivity implements OnClickListener {
+//	private RelativeLayout rlRefresh;
 	private RelativeLayout rlKhuvuc;
 	private RelativeLayout rlMuagia;
 	private RelativeLayout rlLoai;
@@ -50,29 +53,37 @@ public class FilterF extends Fragment implements OnClickListener {
 	private String namXD = "";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.filter, container, false);
-		initView(rootView);
-		return rootView;
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.filter);
+		initView();
 	}
+//	@Override
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//		View rootView = inflater.inflate(R.layout.filter, container, false);
+//		initView(rootView);
+//		return rootView;
+//	}
 
-	private void initView(View rootView) {
-		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
-		rlKhuvuc = (RelativeLayout) rootView.findViewById(R.id.rlKhuvuc);
-		rlMuagia = (RelativeLayout) rootView.findViewById(R.id.rlMuagia);
-		rlLoai = (RelativeLayout) rootView.findViewById(R.id.rlLoai);
-		rlNam = (RelativeLayout) rootView.findViewById(R.id.rlNam);
-		tvKhuvuc = (TextView) rootView.findViewById(R.id.tvKhuvuc);
-		tvMucgia = (TextView) rootView.findViewById(R.id.tvMucgia);
-		tvLoai = (TextView) rootView.findViewById(R.id.tvLoai);
-		tvNam = (TextView) rootView.findViewById(R.id.tvNam);
-		btnTimkiem = (Button) rootView.findViewById(R.id.btnTimkiem);
+	private void initView() {
+//		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
+		rlKhuvuc = (RelativeLayout) findViewById(R.id.rlKhuvuc);
+		rlMuagia = (RelativeLayout) findViewById(R.id.rlMuagia);
+		rlLoai = (RelativeLayout) findViewById(R.id.rlLoai);
+		rlNam = (RelativeLayout) findViewById(R.id.rlNam);
+		tvKhuvuc = (TextView) findViewById(R.id.tvKhuvuc);
+		tvMucgia = (TextView) findViewById(R.id.tvMucgia);
+		tvLoai = (TextView) findViewById(R.id.tvLoai);
+		tvNam = (TextView) findViewById(R.id.tvNam);
+		btnTimkiem = (Button) findViewById(R.id.btnTimkiem);
+		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
+		HotdealUtilities.setHeight(llTopBar, 11.5);
 
 		rlKhuvuc.setOnClickListener(this);
 		rlMuagia.setOnClickListener(this);
 		rlLoai.setOnClickListener(this);
 		rlNam.setOnClickListener(this);
-		rlRefresh.setOnClickListener(this);
+//		rlRefresh.setOnClickListener(this);
 		btnTimkiem.setOnClickListener(this);
 		notifyData();
 	}
@@ -80,28 +91,28 @@ public class FilterF extends Fragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		rlRefresh.setVisibility(View.VISIBLE);
+//		rlRefresh.setVisibility(View.VISIBLE);
 		Main.setTextTop("Bộ lọc");
 		IntentFilter intentGetKeySend = new IntentFilter();
 		intentGetKeySend.addAction("ABC");
-		getActivity().registerReceiver(receiver, intentGetKeySend);
+		registerReceiver(receiver, intentGetKeySend);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		rlRefresh.setVisibility(View.GONE);
-		try {
-			getActivity().unregisterReceiver(receiver);
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+//		rlRefresh.setVisibility(View.GONE);
+//		try {
+//			getActivity().unregisterReceiver(receiver);
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		if (v == rlKhuvuc) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(this, DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -121,7 +132,7 @@ public class FilterF extends Fragment implements OnClickListener {
 				}
 			});
 		} else if (v == rlMuagia) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
+			HotdealUtilities.showDialogCustomListView(this, DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -144,13 +155,15 @@ public class FilterF extends Fragment implements OnClickListener {
 			});
 
 		} else if (v == rlLoai) {
-			HotdealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, HotdealUtilities.getDataFragment(this));
+			HotdealUtilities.startActivityForResult(this, LoaiNhaDat.class, 1, HotdealUtilities.getDataBundle(this));
 
 		} else if (v == rlNam) {
 			show();
-		} else if (v == rlRefresh) {
-			setDefault();
-		} else if (v == btnTimkiem) {
+		} 
+//		else if (v == rlRefresh) {
+//			setDefault();
+//		}
+		else if (v == btnTimkiem) {
 
 		}
 
@@ -159,7 +172,7 @@ public class FilterF extends Fragment implements OnClickListener {
 	public void show() {
 		Calendar calendar = Calendar.getInstance();
 		int thisYear = calendar.get(Calendar.YEAR);
-		final Dialog d = new Dialog(getActivity());
+		final Dialog d = new Dialog(this);
 		d.setTitle("NumberPicker");
 		d.setContentView(R.layout.dialog);
 		Button b1 = (Button) d.findViewById(R.id.button1);

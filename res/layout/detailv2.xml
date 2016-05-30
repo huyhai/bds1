@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkgrey" >
+    android:background="@color/white" >
 
     <RelativeLayout
         android:id="@+id/rlHome"
@@ -55,7 +55,8 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="fill_parent"
+            android:paddingBottom="@dimen/padding10" >
 
             <RelativeLayout
                 android:id="@+id/rlPic"
@@ -177,11 +178,13 @@
 
             <TextView
                 android:id="@+id/tvTieude"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llTieude"
+                android:background="@color/vreal_orange"
                 android:padding="@dimen/padding10"
                 android:text="Thông tin mô tả"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textsize_medium"
                 android:textStyle="bold" />
 
@@ -204,11 +207,13 @@
 
             <TextView
                 android:id="@+id/tvThogtinlienhe"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llDes"
+                android:background="@color/vreal_orange"
                 android:padding="@dimen/padding10"
                 android:text="Thông tin liên hệ"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textsize_medium"
                 android:textStyle="bold" />
 
@@ -300,11 +305,13 @@
 
             <TextView
                 android:id="@+id/tvThogtinlienhe2"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llTTLH"
+                android:background="@color/vreal_orange"
                 android:padding="@dimen/padding10"
-                android:text="Thông tin liên hệ"
+                android:text="Đặc điểm bất động sản"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textsize_medium"
                 android:textStyle="bold" />
 
@@ -319,92 +326,67 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:paddingLeft="@dimen/padding7"
                     android:paddingRight="@dimen/padding7"
                     android:paddingTop="@dimen/padding10" >
 
-                    <LinearLayout
-                        android:id="@+id/llDesLH21"
-                        android:layout_width="fill_parent"
+                    <TextView
+                        android:id="@+id/tvLoai"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical" >
+                        android:text="Phòng sale và Marketing"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
 
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llDesLH22"
-                        android:layout_width="fill_parent"
+                    <TextView
+                        android:id="@+id/tvAddress1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical" >
+                        android:layout_marginTop="@dimen/padding5"
+                        android:text="Phòng sale và Marketing"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
 
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
+                    <TextView
+                        android:id="@+id/tvDateStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding5"
+                        android:text="Phòng sale và Marketing"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
 
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-
-                        <CheckBox
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="check box" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvDateEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding5"
+                        android:text="Phòng sale và Marketing"
+                        android:textColor="@color/darkgraytext"
+                        android:textSize="@dimen/textsize_medium" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvMore"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/llDesLH2"
-                    android:background="@color/white"
-                    android:gravity="right"
-                    android:padding="@dimen/padding10"
-                    android:text="Xem thêm >>"
-                    android:textColor="@color/vreal_orange"
-                    android:textSize="@dimen/textsize_medium"
-                    android:textStyle="bold" />
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvThogtinlienhe3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlll"
+                android:background="@color/vreal_orange"
+                android:padding="@dimen/padding10"
+                android:text="Tiện ích"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_medium"
+                android:textStyle="bold" />
+
+            <GridView
+                android:id="@+id/gvTienich"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/tvThogtinlienhe3"
+                android:numColumns="2" >
+            </GridView>
         </RelativeLayout>
     </ScrollView>
 

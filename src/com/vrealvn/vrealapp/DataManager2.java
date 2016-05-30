@@ -291,6 +291,9 @@ public class DataManager2 {
 		try {
 			if (null != result) {
 				getListProvices().clear();
+				VrealModel md1 = new VrealModel();
+				md1.setProvinceName("Không xác định");
+				getListProvices().add(md1);
 				for (int i = 0; i < result.length(); i++) {
 					JSONObject jSonOb = new JSONObject();
 					jSonOb = result.getJSONObject(i);
@@ -335,6 +338,9 @@ public class DataManager2 {
 		try {
 			getListDistrict().clear();
 			if (null != result) {
+				VrealModel md1 = new VrealModel();
+				md1.setProvinceName("Không xác định");
+				getListDistrict().add(md1);
 				for (int i = 0; i < result.length(); i++) {
 					JSONObject jSonOb = new JSONObject();
 					jSonOb = result.getJSONObject(i);
@@ -378,6 +384,9 @@ public class DataManager2 {
 		try {
 			getListWard().clear();
 			if (null != result) {
+				VrealModel md1 = new VrealModel();
+				md1.setProvinceName("Không xác định");
+				getListWard().add(md1);
 				for (int i = 0; i < result.length(); i++) {
 					JSONObject jSonOb = new JSONObject();
 					jSonOb = result.getJSONObject(i);
@@ -421,6 +430,9 @@ public class DataManager2 {
 		try {
 			getListStreet().clear();
 			if (null != result) {
+				VrealModel md1 = new VrealModel();
+				md1.setProvinceName("Không xác định");
+				getListStreet().add(md1);
 				for (int i = 0; i < result.length(); i++) {
 					JSONObject jSonOb = new JSONObject();
 					jSonOb = result.getJSONObject(i);
@@ -464,6 +476,9 @@ public class DataManager2 {
 		try {
 			getListKhuvuc().clear();
 			if (null != result) {
+				VrealModel md1 = new VrealModel();
+				md1.setProvinceName("Không xác định");
+				getListKhuvuc().add(md1);
 				for (int i = 0; i < result.length(); i++) {
 					JSONObject jSonOb = new JSONObject();
 					jSonOb = result.getJSONObject(i);
@@ -582,6 +597,9 @@ public class DataManager2 {
 					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
 						JSONArray listJson;
 						listJson = result.getJSONArray("DirectionList");
+						VrealModel md1 = new VrealModel();
+						md1.setProvinceName("Không xác định");
+						getListHuong().add(md1);
 						for (int i = 0; i < listJson.length(); i++) {
 							JSONObject jSonOb = new JSONObject();
 							jSonOb = listJson.getJSONObject(i);
@@ -624,6 +642,9 @@ public class DataManager2 {
 					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
 						JSONArray listJson;
 						listJson = result.getJSONArray("ProjectTypeList");
+						VrealModel md1 = new VrealModel();
+						md1.setProvinceName("Không xác định");
+						getListDuAn().add(md1);
 						for (int i = 0; i < listJson.length(); i++) {
 							JSONObject jSonOb = new JSONObject();
 							jSonOb = listJson.getJSONObject(i);
@@ -664,6 +685,10 @@ public class DataManager2 {
 					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
 						JSONArray listJson;
 						listJson = result.getJSONArray("UnitList");
+						VrealModel md1 = new VrealModel();
+						md1.setId("-1");
+						md1.setProvinceName("Không xác định");
+						listGia.add(md1);
 						for (int i = 0; i < listJson.length(); i++) {
 							JSONObject jSonOb = new JSONObject();
 							jSonOb = listJson.getJSONObject(i);
@@ -704,6 +729,10 @@ public class DataManager2 {
 					if (result.getInt(KEY_ERROR) == ConstantValue.SUCCESS) {
 						JSONArray listJson;
 						listJson = result.getJSONArray("AcreageList");
+						VrealModel md1 = new VrealModel();
+						md1.setId("-1");
+						md1.setProvinceName("Không xác định");
+						listDientich.add(md1);
 						for (int i = 0; i < listJson.length(); i++) {
 							JSONObject jSonOb = new JSONObject();
 							jSonOb = listJson.getJSONObject(i);
