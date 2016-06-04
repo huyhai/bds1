@@ -1,5 +1,8 @@
 package com.vreal.ui2;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -18,7 +21,10 @@ import com.android.vrealapp.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.vreal.libs.ConstantValue;
 import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.NotifyDataListener;
+import com.vrealvn.vrealapp.DataManager2;
 import com.vrealvn.vrealapp.HotDealFragmentActivity;
 
 public class Main extends HotDealFragmentActivity implements OnClickListener {
@@ -84,9 +90,148 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		
+		DataManager2.getInstance().showProgress(this);
+		if (DataManager2.getInstance().getListProvices().size() == 0) {
+			if (sm.getProviceJson().equals("")) {
+				getProvice();
+			} else {
+				JSONArray job = null;
+				try {
+					job = new JSONArray(sm.getProviceJson());
+				} catch (JSONException e1) {
+					e1.printStackTrace();
+				}
+				DataManager2.getInstance().handleProvice(job, notifyData);
+			}
+		}
 
 	}
+	NotifyDataListener notifyData = new NotifyDataListener() {
 
+		@Override
+		public void onNotify(String api, int id) {
+			if (api.equals(ConstantValue.GET_CITY)) {
+				if (NotifyDataListener.NOTIFY_OK == id) {
+					if (sm.getDisJson().equals("")) {
+						getDistric();
+					} else {
+						JSONArray job = null;
+						try {
+							job = new JSONArray(sm.getDisJson());
+						} catch (JSONException e1) {
+							e1.printStackTrace();
+						}
+						DataManager2.getInstance().handleDistrict(job, notifyData);
+					}
+				} else {
+
+				}
+			} else if (api.equals(ConstantValue.GET_DIS)) {
+				if (NotifyDataListener.NOTIFY_OK == id) {
+					if (sm.getWardJson().equals("")) {
+						getWard();
+					} else {
+						JSONArray job = null;
+						try {
+							job = new JSONArray(sm.getWardJson());
+						} catch (JSONException e1) {
+							e1.printStackTrace();
+						}
+						DataManager2.getInstance().handleWard(job, notifyData);
+					}
+				} else {
+
+				}
+			} else if (api.equals(ConstantValue.GET_WARD)) {
+				if (NotifyDataListener.NOTIFY_OK == id) {
+					if (sm.getStreetJson().equals("")) {
+						getStreet();
+					} else {
+						JSONArray job = null;
+						try {
+							job = new JSONArray(sm.getStreetJson());
+						} catch (JSONException e1) {
+							e1.printStackTrace();
+						}
+						DataManager2.getInstance().handleStreet(job, notifyData);
+					}
+				} else {
+
+				}
+			} else if (api.equals(ConstantValue.GET_STREET)) {
+				if (NotifyDataListener.NOTIFY_OK == id) {
+					if (sm.getKhuVucJson().equals("")) {
+						getKhuvuc();
+					} else {
+						JSONArray job = null;
+						try {
+							job = new JSONArray(sm.getKhuVucJson());
+						} catch (JSONException e1) {
+							e1.printStackTrace();
+						}
+						DataManager2.getInstance().handleKV(job, notifyData);
+					}
+				} else {
+
+				}
+
+			} else if (api.equals(ConstantValue.GET_KHUVUC)) {
+				getHuong();
+
+			} else if (api.equals(ConstantValue.GET_HUONG)) {
+				getDuan();
+			} else if (api.equals(ConstantValue.GET_DUAN)) {
+				getGia();
+			} else if (api.equals(ConstantValue.GET_GIA)) {
+				getDienTich();
+			} else if (api.equals(ConstantValue.GET_DIENTICH)) {
+
+				DataManager2.getInstance().stopProgress();
+			}
+			// else if (api.equals(ConstantValue.GET_DIS)) {
+			//
+			// }
+
+//			DataManager2.getInstance().stopProgress();
+		}
+
+	};
+	private void getDienTich() {
+		DataManager2.getInstance().getDienTich(this, false, false, notifyData);
+	}
+
+	private void getGia() {
+		DataManager2.getInstance().getGia(this, false, false, notifyData);
+	}
+
+	private void getProvice() {
+		DataManager2.getInstance().getProvice(this, false, false, notifyData);
+	}
+
+	private void getDistric() {
+		DataManager2.getInstance().getDistrict(this, false, false, notifyData, "");
+	}
+
+	private void getWard() {
+		DataManager2.getInstance().getWard(this, false, false, notifyData);
+	}
+
+	private void getStreet() {
+		DataManager2.getInstance().getStreet(this, false, false, notifyData);
+	}
+
+	private void getKhuvuc() {
+		DataManager2.getInstance().getKhuvuc(this, false, false, notifyData);
+	}
+
+	private void getHuong() {
+		DataManager2.getInstance().getHuong(this, false, false, notifyData);
+	}
+
+	private void getDuan() {
+		DataManager2.getInstance().getDuan(this, false, false, notifyData);
+	}
 	private void init() {
 		HotdealUtilities.setWH(this);
 

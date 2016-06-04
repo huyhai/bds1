@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,17 @@ public class PostPro extends Fragment implements OnClickListener {
 	private RelativeLayout rlMota;
 	private RelativeLayout rlHuongnha;
 
+	private RelativeLayout rlDonvi;
+	// private RelativeLayout rlHuongnha;
+	// private RelativeLayout rlMota;
+	// private RelativeLayout rlHuongnha;
+	// private RelativeLayout rlMota;
+	// private RelativeLayout rlHuongnha;
+	// private RelativeLayout rlMota;
+	// private RelativeLayout rlHuongnha;
+	// private RelativeLayout rlMota;
+	// private RelativeLayout rlHuongnha;
+
 	private RelativeLayout rlHuongbancong;
 
 	private TextView tvHinhthuc;
@@ -62,10 +74,26 @@ public class PostPro extends Fragment implements OnClickListener {
 	private TextView tvHuongbancong;
 	private Button btnDangTin;
 
-	 private TextView tvDientich;
-	// private TextView rlBatdau;
-	// private TextView rlBatdau;
-	// private TextView rlBatdau;
+	private TextView tvDientich;
+
+	private EditText edKhuvuc;
+	private EditText edMota;
+	private EditText edMattien;
+
+	private EditText edDuongvao;
+	private EditText edSoTang;
+	private EditText edNoithat;
+	private EditText edDiachi;
+	private EditText edSoPngu;
+	private EditText edToilet;
+
+	private EditText edTenLh;
+	private EditText edDiachiLh;
+	private EditText edDienThoai;
+	private EditText edEmailLh;
+
+	// private EditText edSoPngu;
+	// private EditText edToilet;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,9 +160,39 @@ public class PostPro extends Fragment implements OnClickListener {
 		tvHuongbancong = (TextView) rootView.findViewById(R.id.tvHuongbancong);
 		btnDangTin = (Button) rootView.findViewById(R.id.btnDangTin);
 		tvDientich = (TextView) rootView.findViewById(R.id.tvDientich);
-		// rlBatdau = (TextView) rootView.findViewById(R.id.rlBatdau);
-		// rlBatdau = (TextView) rootView.findViewById(R.id.rlBatdau);
-		// rlBatdau = (TextView) rootView.findViewById(R.id.rlBatdau);
+		edKhuvuc = (EditText) rootView.findViewById(R.id.edKhuvuc);
+		edMota = (EditText) rootView.findViewById(R.id.edMota);
+		edMattien = (EditText) rootView.findViewById(R.id.edMattien);
+		rlDonvi = (RelativeLayout) rootView.findViewById(R.id.rlDonvi);
+		// rlDuong = (RelativeLayout) rootView.findViewById(R.id.rlDuong);
+		// rlDuan = (RelativeLayout) rootView.findViewById(R.id.rlDuan);
+		// rlDT = (RelativeLayout) rootView.findViewById(R.id.rlDT);
+		// rlMota = (RelativeLayout) rootView.findViewById(R.id.rlMota);
+		// rlHuongnha = (RelativeLayout) rootView.findViewById(R.id.rlHuongnha);
+		// rlHuongbancong = (RelativeLayout)
+		// rootView.findViewById(R.id.rlHuongbancong);
+		// rlQuan1 = (RelativeLayout) rootView.findViewById(R.id.rlQuan1);
+		// rlDuong = (RelativeLayout) rootView.findViewById(R.id.rlDuong);
+		// rlDuan = (RelativeLayout) rootView.findViewById(R.id.rlDuan);
+		// rlDT = (RelativeLayout) rootView.findViewById(R.id.rlDT);
+		// rlMota = (RelativeLayout) rootView.findViewById(R.id.rlMota);
+		// rlHuongnha = (RelativeLayout) rootView.findViewById(R.id.rlHuongnha);
+		// rlHuongbancong = (RelativeLayout)
+		// rootView.findViewById(R.id.rlHuongbancong);
+		edDuongvao = (EditText) rootView.findViewById(R.id.edDuongvao);
+		edSoTang = (EditText) rootView.findViewById(R.id.edSoTang);
+		edNoithat = (EditText) rootView.findViewById(R.id.edNoithat);
+		edDiachi = (EditText) rootView.findViewById(R.id.edDiachi);
+		edSoPngu = (EditText) rootView.findViewById(R.id.edSoPngu);
+		edToilet = (EditText) rootView.findViewById(R.id.edToilet);
+		edTenLh = (EditText) rootView.findViewById(R.id.edTenLh);
+		edDiachiLh = (EditText) rootView.findViewById(R.id.edDiachiLh);
+
+		edDienThoai = (EditText) rootView.findViewById(R.id.edDienThoai);
+		edEmailLh = (EditText) rootView.findViewById(R.id.edEmailLh);
+		// edToilet = (EditText) rootView.findViewById(R.id.edToilet);
+		// edTenLh = (EditText) rootView.findViewById(R.id.edTenLh);
+		// edDiachiLh = (EditText) rootView.findViewById(R.id.edDiachiLh);
 
 		tvAddIMG.setOnClickListener(this);
 		rlBatdau.setOnClickListener(this);
@@ -151,7 +209,7 @@ public class PostPro extends Fragment implements OnClickListener {
 		rlHuongnha.setOnClickListener(this);
 		rlHuongbancong.setOnClickListener(this);
 		btnDangTin.setOnClickListener(this);
-		// tvAddIMG.setOnClickListener(this);
+		rlDonvi.setOnClickListener(this);
 		// tvAddIMG.setOnClickListener(this);
 		// tvAddIMG.setOnClickListener(this);
 		// tvAddIMG.setOnClickListener(this);
@@ -188,7 +246,8 @@ public class PostPro extends Fragment implements OnClickListener {
 	private int posHuongnha = 0;
 	private int posHuongbancong = 0;
 
-	 private int posDientich = 0;
+	private int posDientich = 0;
+
 	// private int posHinhthuc = 0;
 	// private int posTinh = 0;
 
@@ -205,6 +264,14 @@ public class PostPro extends Fragment implements OnClickListener {
 		}
 
 		else if (v == rlHinhthuc) {
+			DataManager2.getInstance().setListTypeProperty(new ArrayList<VrealModel>());
+			VrealModel md;
+			md = new VrealModel();
+			md.setProvinceName("Nhà bán");
+			md.setId("1");
+			md = new VrealModel();
+			md.setProvinceName("Nhà cho thuê");
+			md.setId("2");
 			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListTypeProperty(), new NotifySomesDataListener() {
 
 				@Override
@@ -406,10 +473,9 @@ public class PostPro extends Fragment implements OnClickListener {
 			});
 		} else if (v == btnDangTin) {
 			submit();
+		} else if (v == rlDonvi) {
+
 		}
-		// else if (v == rlBatdau) {
-		//
-		// }
 		// else if (v == rlBatdau) {
 		//
 		// }
@@ -435,39 +501,47 @@ public class PostPro extends Fragment implements OnClickListener {
 	}
 
 	private void submit() {
-		String hinhthucID="";
-		String tinhID="";
-		String khuvucID="";
-		String phuongID="";
-		String quanID="";
-		String duongID="";
-		String duanID="";
-		String huongnhaID="";
-		String huongbancongID="";
-		int dientichID=0;
+		String hinhthucID = "";
+		String tinhID = "";
+		String khuvucID = "";
+		String phuongID = "";
+		String quanID = "";
+		String duongID = "";
+		String duanID = "";
+		String huongnhaID = "";
+		String huongbancongID = "";
+		int dientichID = 0;
 		try {
-			hinhthucID=DataManager2.getInstance().getListTypeProperty().get(posHinhthuc).getId();
-			tinhID=DataManager2.getInstance().getListProvices().get(posTinh).getProvinceID();
-			khuvucID=DataManager2.getInstance().getListKhuvuc().get(posKhuvuc).getId();
-			phuongID=DataManager2.getInstance().getListWard().get(posXa).getWardID();
-			quanID=DataManager2.getInstance().getListDistrict().get(posQuan).getDistrictID();
-			duongID=DataManager2.getInstance().getListStreet().get(posDuong).getStreetID();
-			duanID=DataManager2.getInstance().getListDuAn().get(posDuan).getId();
-			huongnhaID=DataManager2.getInstance().getListHuong().get(posHuongnha).getId();
-			huongbancongID=DataManager2.getInstance().getListHuong().get(posHuongbancong).getId();
-			dientichID=DataManager2.getInstance().getListDientich().get(posDientich).getValue1();
+			hinhthucID = DataManager2.getInstance().getListTypeProperty().get(posHinhthuc).getId();
+			tinhID = DataManager2.getInstance().getListProvices().get(posTinh).getProvinceID();
+			khuvucID = DataManager2.getInstance().getListKhuvuc().get(posKhuvuc).getId();
+			phuongID = DataManager2.getInstance().getListWard().get(posXa).getWardID();
+			quanID = DataManager2.getInstance().getListDistrict().get(posQuan).getDistrictID();
+			duongID = DataManager2.getInstance().getListStreet().get(posDuong).getStreetID();
+			duanID = DataManager2.getInstance().getListDuAn().get(posDuan).getId();
+			huongnhaID = DataManager2.getInstance().getListHuong().get(posHuongnha).getId();
+			huongbancongID = DataManager2.getInstance().getListHuong().get(posHuongbancong).getId();
+			dientichID = DataManager2.getInstance().getListDientich().get(posDientich).getValue1();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		DataManager2.getInstance().post(getActivity(), true, true, new NotifyDataListener() {
-//			
-//			@Override
-//			public void onNotify(String api, int id) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		}, hinhthucID, realCateID, realPriorityID, projectID, provinceID, districtID, wardID, streetID, unitID, areaID, acreage, realName, description, MatTien, DuongVao, SoTang, interior, address, price, homeDirectionID, balconyID, noOfRoom, noOfRest, latitude, longitude, isVisible, start, end, contactName, contactAddress, contactPhone, contactEmail, creatorID, userID)
+		DataManager2.getInstance().post(getActivity(), true, true, new NotifyDataListener() {
+
+			@Override
+			public void onNotify(String api, int id) {
 		
+				if (NOTIFY_OK == id) {
+					HotdealUtilities.showToast("Đăng tin thành công", 0, getActivity());
+				} else {
+//					HotdealUtilities.showToast("Đăng tin TB", 0, getActivity());
+				}
+
+			}
+		}, hinhthucID, duanID, "", duanID, tinhID, quanID, phuongID, duongID, "", khuvucID, "", edKhuvuc.getText().toString(), edMota.getText().toString(), edMattien.getText().toString(),
+				edDuongvao.getText().toString(), edSoTang.getText().toString(), edNoithat.getText().toString(), edDiachi.getText().toString(), "price", huongnhaID, huongbancongID,
+				edSoPngu.getText().toString(), edToilet.getText().toString(), /* latitude */"0", /* longitude */"0", "1", edBatdau.getText().toString(), edKetthuc.getText().toString(),
+				edTenLh.getText().toString(), edDiachiLh.getText().toString(), edDienThoai.getText().toString(), edEmailLh.getText().toString(), /* creatorID */"", /* userID */"");
+
 	}
 
 	@Override

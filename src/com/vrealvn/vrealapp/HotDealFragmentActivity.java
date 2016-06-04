@@ -28,15 +28,18 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.vreal.libs.ConstantValue;
 import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.SessionManager;
 import com.vreal.ui2.PostPro;
 
 public class HotDealFragmentActivity extends FragmentActivity {
 	public LinearLayout llTopBar;
 	public ImageView imgTooggle;
+	public SessionManager sm;
 
 	@Override
 	protected void onCreate(@Nullable Bundle arg0) {
 		super.onCreate(arg0);
+		sm=new SessionManager(this);
 		// HotdealApp.context = HotDealFragmentActivity.this;
 
 	}

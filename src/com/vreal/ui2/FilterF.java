@@ -32,7 +32,7 @@ import com.vrealvn.vrealapp.HotDealFragmentActivity;
 import com.vrealvn.vrealapp.HotdealApp;
 
 public class FilterF extends HotDealFragmentActivity implements OnClickListener {
-//	private RelativeLayout rlRefresh;
+	// private RelativeLayout rlRefresh;
 	private RelativeLayout rlKhuvuc;
 	private RelativeLayout rlMuagia;
 	private RelativeLayout rlLoai;
@@ -43,7 +43,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 	private TextView tvNam;
 	private Button btnTimkiem;
 
-	private String defauldID = "";
+	private String defauldID = "-1";
 	private String loaiID = defauldID;
 	private String loaiName = "Chọn loại";
 	private String KVID = defauldID;
@@ -59,15 +59,18 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 		setContentView(R.layout.filter);
 		initView();
 	}
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//		View rootView = inflater.inflate(R.layout.filter, container, false);
-//		initView(rootView);
-//		return rootView;
-//	}
+
+	// @Override
+	// public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	// Bundle savedInstanceState) {
+	// View rootView = inflater.inflate(R.layout.filter, container, false);
+	// initView(rootView);
+	// return rootView;
+	// }
 
 	private void initView() {
-//		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
+		// rlRefresh = (RelativeLayout)
+		// getActivity().findViewById(R.id.rlRefresh);
 		rlKhuvuc = (RelativeLayout) findViewById(R.id.rlKhuvuc);
 		rlMuagia = (RelativeLayout) findViewById(R.id.rlMuagia);
 		rlLoai = (RelativeLayout) findViewById(R.id.rlLoai);
@@ -78,7 +81,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 		tvNam = (TextView) findViewById(R.id.tvNam);
 		btnTimkiem = (Button) findViewById(R.id.btnTimkiem);
 		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
-		imgTooggle=(ImageView)findViewById(R.id.imgTooggle);
+		imgTooggle = (ImageView) findViewById(R.id.imgTooggle);
 		HotdealUtilities.setHeight(llTopBar, 11.5);
 		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
 		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
@@ -94,7 +97,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 		rlMuagia.setOnClickListener(this);
 		rlLoai.setOnClickListener(this);
 		rlNam.setOnClickListener(this);
-//		rlRefresh.setOnClickListener(this);
+		// rlRefresh.setOnClickListener(this);
 		btnTimkiem.setOnClickListener(this);
 		notifyData();
 	}
@@ -102,24 +105,24 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 	@Override
 	public void onResume() {
 		super.onResume();
-//		rlRefresh.setVisibility(View.VISIBLE);
+		// rlRefresh.setVisibility(View.VISIBLE);
 		Main.setTextTop("Bộ lọc");
 		IntentFilter intentGetKeySend = new IntentFilter();
 		intentGetKeySend.addAction("ABC");
 		registerReceiver(receiver, intentGetKeySend);
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-//		rlRefresh.setVisibility(View.GONE);
-//		try {
-//			getActivity().unregisterReceiver(receiver);
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
-	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		try {
+			unregisterReceiver(receiver);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void onClick(View v) {
 		if (v == rlKhuvuc) {
@@ -170,11 +173,15 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 
 		} else if (v == rlNam) {
 			show();
-		} 
-//		else if (v == rlRefresh) {
-//			setDefault();
-//		}
+		}
+		// else if (v == rlRefresh) {
+		// setDefault();
+		// }
 		else if (v == btnTimkiem) {
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra("result", KVID + "/" + giaFrom + "/" + loaiID);
+			setResult(Activity.RESULT_OK, returnIntent);
+			finish();
 
 		}
 
@@ -197,7 +204,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 			public void onClick(View v) {
 				// tv.setText(String.valueOf(np.getValue()));
 				d.dismiss();
-				namXD=String.valueOf(np.getValue());
+				namXD = String.valueOf(np.getValue());
 				notifyData();
 			}
 		});

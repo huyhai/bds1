@@ -309,20 +309,21 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		btnTimkiem.setOnClickListener(this);
 		rlDuan.setOnClickListener(this);
 		rlRefresh.setOnClickListener(this);
-//		 DataManager2.getInstance().showProgress(getActivity());
-		if (DataManager2.getInstance().getListProvices().size() == 0) {
-			if (sm.getProviceJson().equals("")) {
-				getProvice();
-			} else {
-				JSONArray job = null;
-				try {
-					job = new JSONArray(sm.getProviceJson());
-				} catch (JSONException e1) {
-					e1.printStackTrace();
-				}
-				DataManager2.getInstance().handleProvice(job, notifyData);
-			}
-		}
+		
+//		if (DataManager2.getInstance().getListProvices().size() == 0) {
+//			if (sm.getProviceJson().equals("")) {
+//				getProvice();
+//			} else {
+//				JSONArray job = null;
+//				try {
+//					job = new JSONArray(sm.getProviceJson());
+//				} catch (JSONException e1) {
+//					e1.printStackTrace();
+//				}
+//				DataManager2.getInstance().handleProvice(job, notifyData);
+//			}
+//		}
+		
 		if (HotdealApp.isExpand) {
 //			HotdealApp.isExpand = true;
 			pdBar1.setVisibility(View.VISIBLE);

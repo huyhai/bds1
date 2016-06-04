@@ -120,7 +120,7 @@ public class DataManager2 {
 
 	private Dialog dialogSelectImage;
 
-	public void showDialog(Activity ac) {
+	private void showDialog(Activity ac) {
 		if (!ac.isFinishing()) {
 			dialogSelectImage = new Dialog(ac);
 			dialogSelectImage.getWindow();
@@ -875,7 +875,7 @@ public class DataManager2 {
 			String SoTang, String interior, String address, String price, String homeDirectionID, String balconyID, String noOfRoom, String noOfRest, String latitude, String longitude,
 			String isVisible, String start, String end, String contactName, String contactAddress, String contactPhone, String contactEmail, String creatorID, String userID) {
 		HashMap<String, String> builder = new HashMap<>();
-		builder.put(ConstantValue.API, ConstantValue.SEARCG);
+		builder.put(ConstantValue.API, "V_RealNews_Post");
 		builder.put("realTypeID", realTypeID);
 		builder.put("realCateID", realCateID);
 		builder.put("realPriorityID", realPriorityID);

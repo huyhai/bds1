@@ -78,9 +78,9 @@ public class DetailV2 extends Fragment {
 			tvLoai.setText("Nhà đất cho thuê");
 		}
 		
-		tvDateStart.setText(md.getPublishStart());
-		tvDateEnd.setText(md.getPublishEnd());
-		tvAddress1.setText(md.getAddress());
+		tvDateStart.setText("Ngày đăng: "+md.getPublishStart());
+		tvDateEnd.setText("Ngày hết hạn: "+md.getPublishEnd());
+		tvAddress1.setText("Địa chỉ: "+md.getAddress());
 		ArrayList<VrealModel> listTI=new ArrayList<>();
 		for(String a:md.getListTienIch()){
 			listTI.add(new VrealModel(a));

@@ -92,6 +92,18 @@ public class HotdealUtilities {
 	public static void addLogOut() {
 	}
 
+	public static Date getDateTimeFromString(String datetime) {
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = null;
+		try {
+			date = format.parse(datetime);
+			System.out.println(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
+
 	public static void pickerDate(Context c, DatePickerDialog.OnDateSetListener date) {
 		Calendar myCalendar = Calendar.getInstance();
 		new DatePickerDialog(c, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -941,7 +953,7 @@ public class HotdealUtilities {
 	}
 
 	public static int getDataInt(JSONObject jSonOb, String key) {
-		int result = 0;
+		int result = -1;
 		try {
 			result = jSonOb.getInt(key);
 		} catch (JSONException e) {
@@ -1141,11 +1153,11 @@ public class HotdealUtilities {
 		AlertDialog.Builder builderSingle = new AlertDialog.Builder(c);
 		// builderSingle.setIcon(R.drawable.ic_launcher);
 		// builderSingle.setTitle("Select One Name:-");
-//		final String koxacdinh = "Không xác định";
+		// final String koxacdinh = "Không xác định";
 		// PopupAdapter arrayAdapter=new PopupAdapter(c, listData);
 		final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_activated_1);
 		if (null != listData) {
-//			arrayAdapter.add(koxacdinh);
+			// arrayAdapter.add(koxacdinh);
 			for (VrealModel name : listData) {
 				arrayAdapter.add(name.getProvinceName());
 			}

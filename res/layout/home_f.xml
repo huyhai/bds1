@@ -146,7 +146,7 @@
                     android:layout_below="@+id/img4"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/padding5"
-                    android:text="Chung cư" />
+                    android:text="POST" />
             </RelativeLayout>
         </LinearLayout>
 

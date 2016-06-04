@@ -583,7 +583,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding15"
-                android:background="@drawable/bg_top1"
+                android:background="@color/vreal_orange"
                 android:padding="@dimen/padding10"
                 android:text="Thông tin khác"
                 android:textColor="@color/white" />
@@ -824,7 +824,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding15"
-                android:background="@drawable/bg_top1"
+                android:background="@color/vreal_orange"
                 android:padding="@dimen/padding10"
                 android:text="Liên hệ"
                 android:textColor="@color/white" />
@@ -980,7 +980,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding15"
-                android:background="@drawable/bg_top1"
+                android:background="@color/vreal_orange"
                 android:padding="@dimen/padding10"
                 android:text="Lịch đăng tin"
                 android:textColor="@color/white" />
@@ -1178,7 +1178,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_top1"
+            android:background="@color/vreal_orange"
             android:text="ĐĂNG TIN"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_medium_large" />
@@ -1188,7 +1188,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_top1"
+            android:background="@color/vreal_orange"
             android:text="XEM TRƯỚC"
             android:visibility="gone"
             android:textColor="@color/white"

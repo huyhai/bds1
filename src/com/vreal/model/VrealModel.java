@@ -45,8 +45,8 @@ public class VrealModel implements Serializable {
 	private String PublishStart = "";
 	private String PublishEnd = "";
 	private String UnitName = "";
-	// private String ContactAddress;
-	// private String ContactAddress;
+	 private int AreaID;
+	 private String filterString;
 	// private String ContactAddress;
 
 	private ArrayList<String> listTienIch;
@@ -81,6 +81,8 @@ public class VrealModel implements Serializable {
 		this.setRealNewsTypeID(HotdealUtilities.getDataInt(jSonInfo, "RealNewsTypeID"));
 		this.setPublishStart(HotdealUtilities.getDataString(jSonInfo, "PublishStart"));
 		this.setPublishEnd(HotdealUtilities.getDataString(jSonInfo, "PublishEnd"));
+		this.setAreaID(HotdealUtilities.getDataInt(jSonInfo, "AreaID"));
+//		setFilterString(getAreaID() + "-" + getPrice() + "-" + getRealNewsTypeID());
 
 		setListPhoto(new ArrayList<String>());
 		JSONArray listJson;
@@ -516,6 +518,23 @@ public class VrealModel implements Serializable {
 
 	public void setUnitName(String unitName) {
 		UnitName = unitName;
+	}
+
+
+	public String getFilterString() {
+		return filterString;
+	}
+
+	public void setFilterString(String filterString) {
+		this.filterString = filterString;
+	}
+
+	public int getAreaID() {
+		return AreaID;
+	}
+
+	public void setAreaID(int areaID) {
+		AreaID = areaID;
 	}
 
 }
