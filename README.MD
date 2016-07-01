@@ -1,1 +1,1 @@
-du an cua tao
+thêm google play service trước khi run
