@@ -2,7 +2,7 @@ package com.vreal.calendarcard;
 
 import java.util.Calendar;
 
-import com.vrealvn.vrealapp.HotdealApp;
+import com.vrealvn.vrealapp.VrealApp;
 
 import android.content.Context;
 import android.os.Parcelable;

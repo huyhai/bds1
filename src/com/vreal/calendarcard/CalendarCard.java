@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.vrealvn.vrealapp.HotdealApp;
+import com.vrealvn.vrealapp.VrealApp;
 import com.android.vrealapp.R;
 
 import android.content.Context;
@@ -103,7 +103,7 @@ public class CalendarCard extends RelativeLayout {
 			
 			@Override
 			public void run() {
-				HotdealApp.height1=cardDays.getHeight();
+				VrealApp.height1=cardDays.getHeight();
 				
 			}
 		});
@@ -111,7 +111,7 @@ public class CalendarCard extends RelativeLayout {
 			
 			@Override
 			public void run() {
-				HotdealApp.height2=cardTitle.getHeight();
+				VrealApp.height2=cardTitle.getHeight();
 				
 			}
 		});

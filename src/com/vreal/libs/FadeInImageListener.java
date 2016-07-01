@@ -40,7 +40,7 @@ public class FadeInImageListener implements ImageLoader.ImageListener {
 	@Override
 	public void onErrorResponse(VolleyError arg0) {
 		if(mImageView.get() != null) {
-			mImageView.get().setImageResource(R.drawable.img_thumb);
+			mImageView.get().setImageResource(R.drawable.noimage);
 		}
 	}
 
@@ -52,7 +52,7 @@ public class FadeInImageListener implements ImageLoader.ImageListener {
                 image.startAnimation(AnimationUtils.loadAnimation(mContext, R.animator.fade_in));
                 image.setImageBitmap(response.getBitmap());
 			} else {
-				image.setImageResource(R.drawable.img_thumb);
+				image.setImageResource(R.drawable.noimage);
 			}
 		}
 	}

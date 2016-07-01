@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import com.android.vrealapp.R;
 import com.vreal.adapter.LoaiNhadatAdapter;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.libs.NotifyVreal;
 import com.vreal.model.VrealModel;
@@ -74,12 +74,12 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 		epLoai = (ExpandableListView) this.findViewById(R.id.epLoai);
 		btnOK = (Button) this.findViewById(R.id.btnOK);
 		rlToogle = (LinearLayout) this.findViewById(R.id.rlToogle);
-		HotdealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
-		HotdealUtilities.setHeight(btnOK, 12);
-		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
+		VrealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
+		VrealUtilities.setHeight(btnOK, 12);
+		VrealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
 		rlToogle.setOnClickListener(this);
 		try {
-			idType = HotdealUtilities.getDataBundle(this);
+			idType = VrealUtilities.getDataBundle(this);
 		} catch (Exception e) {
 		}
 		if(idType.equals("-1")){
@@ -95,7 +95,7 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 
 		@Override
 		public void onNotify(VrealModel md) {
-			HotdealUtilities.sendMessage(LoaiNhaDat.this, "ABC", md.getProvinceName() + "-" + md.getId());
+			VrealUtilities.sendMessage(LoaiNhaDat.this, "ABC", md.getProvinceName() + "-" + md.getId());
 			LoaiNhaDat.this.finish();
 		}
 	};
@@ -103,7 +103,7 @@ public class LoaiNhaDat extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (rlToogle == v) {
-			HotdealUtilities.setClickAnim(rlToogle);
+			VrealUtilities.setClickAnim(rlToogle);
 			this.finish();
 		}
 

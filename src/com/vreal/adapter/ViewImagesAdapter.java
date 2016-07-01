@@ -3,7 +3,7 @@ package com.vreal.adapter;
 import java.util.ArrayList;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.TouchImageView;
 
 import android.app.Activity;
@@ -58,7 +58,7 @@ public class ViewImagesAdapter extends PagerAdapter {
 		final View imageLayout = this.inflater.inflate(R.layout.view_image_item, null);
 		imgBanner = (TouchImageView) imageLayout.findViewById(R.id.imgBanner);
 		((ViewPager) view).addView(imageLayout, 0);
-		HotdealUtilities.loadImage(listBanner.get(position),imgBanner, act);
+		VrealUtilities.loadImage(listBanner.get(position),imgBanner, act);
 //		Picasso.with(act).load(listBanner.get(position)).placeholder(R.drawable.img_thumb)
 //				.error(R.drawable.noimage).into(imgBanner);
 		return imageLayout;

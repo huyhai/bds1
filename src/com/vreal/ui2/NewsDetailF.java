@@ -1,11 +1,11 @@
 package com.vreal.ui2;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.SessionManager;
 import com.vreal.model.DetailsModel;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class NewsDetailF extends HotDealFragmentActivity {
+public class NewsDetailF extends VrealFragmentActivity {
 	private TextView tvName;
 	private TextView tvDate;
 	private ImageView imgPic;
@@ -57,7 +57,7 @@ public class NewsDetailF extends HotDealFragmentActivity {
 			tvDate.setText(md.getIntroduce());
 			tvCondi.setText(Html.fromHtml(md.getConditions()));
 			// tvContent.setText(Html.fromHtml(md.getDescription()));
-			HotdealUtilities.showALog(sm.getTextSize() + md.getDescription());
+			VrealUtilities.showALog(sm.getTextSize() + md.getDescription());
 			// String formatHTML =
 			// "<html><head><style type=\"text/css\">body {font-size: " +
 			// (sm.getTextSize()) +
@@ -100,8 +100,8 @@ public class NewsDetailF extends HotDealFragmentActivity {
 		imgTooggle=(ImageView)findViewById(R.id.imgTooggle);
 		tvContent.setInitialScale(100);
 		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
-		HotdealUtilities.setHeight(llTopBar, 11.5);
-		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		VrealUtilities.setHeight(llTopBar, 11.5);
+		VrealUtilities.setWidthHeight(imgTooggle, 17, 35);
 		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
 
 			@Override

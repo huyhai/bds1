@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.squareup.picasso.Picasso;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.model.StateModel;
 
@@ -68,7 +68,7 @@ public class GanAdapter extends BaseAdapter {
 			holder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 			holder.rlName1 = (RelativeLayout) convertView.findViewById(R.id.rlName1);
 			holder.imgAvatara = (ImageView) convertView.findViewById(R.id.imgAvatara);
-			HotdealUtilities.setHeight(holder.rlName1, 13);
+			VrealUtilities.setHeight(holder.rlName1, 13);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -83,7 +83,7 @@ public class GanAdapter extends BaseAdapter {
 			holder.imgAvatara.setBackgroundResource(R.drawable.ic_oto);
 		}
 
-		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
+		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.noimage).error(R.drawable.noimage).into(holder.imgPic);
 		convertView.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -10,7 +10,7 @@ import com.android.vrealapp.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 
 import java.io.File;
 

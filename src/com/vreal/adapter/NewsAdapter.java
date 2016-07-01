@@ -12,10 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.TwoWayView;
 import com.vreal.model.DealHomeModel;
-import com.vrealvn.vrealapp.HotdealApp;
+import com.vrealvn.vrealapp.VrealApp;
 
 public class NewsAdapter extends BaseAdapter {
 	private ArrayList<DealHomeModel> listData;

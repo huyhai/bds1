@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import com.android.vrealapp.R;
 import com.vreal.adapter.TimMoiGioiAdapter;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.StateModel;
 import com.vreal.ui2.LoaiNhaDat;
 
@@ -95,7 +95,7 @@ public class TimMoiGioiF extends Fragment implements OnClickListener, OnItemClic
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		HotdealUtilities.startActivity(getActivity(), ListAgent.class, "");
+		VrealUtilities.startActivity(getActivity(), ListAgent.class, "");
 		
 	}
 }

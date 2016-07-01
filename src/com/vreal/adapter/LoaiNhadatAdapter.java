@@ -14,10 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.libs.NotifyVreal;
-import com.vreal.model.CateSildeSubModel;
 import com.vreal.model.VrealModel;
 
 public class LoaiNhadatAdapter extends BaseExpandableListAdapter {
@@ -115,7 +114,7 @@ public class LoaiNhadatAdapter extends BaseExpandableListAdapter {
 		});
 
 		lblListHeader.setText(header.getProvinceName());
-		HotdealUtilities.setWidthHeight(imgICDown, 22, 70);
+		VrealUtilities.setWidthHeight(imgICDown, 22, 70);
 
 		return convertView;
 	}

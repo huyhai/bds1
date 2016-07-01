@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.RelativeLayout;
 
-public class HotdealActivity extends FragmentActivity{
+public class VrealActivity extends FragmentActivity{
 	protected RelativeLayout pdBar;
 	@Override
 	protected void onCreate(@Nullable Bundle arg0) {

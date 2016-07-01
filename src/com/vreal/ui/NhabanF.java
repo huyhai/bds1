@@ -31,7 +31,7 @@ import com.android.vrealapp.R;
 import com.vreal.adapter.DealHomeItemAdapter;
 import com.vreal.adapter.SoPhongAdapter;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.libs.SessionManager;
@@ -41,8 +41,8 @@ import com.vreal.ui2.DuAnMoiF;
 import com.vreal.ui2.LoaiNhaDat;
 import com.vreal.ui2.VrealFragment;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
-import com.vrealvn.vrealapp.HotdealApp;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
+import com.vrealvn.vrealapp.VrealApp;
 
 public class NhabanF extends VrealFragment implements OnClickListener, OnCheckedChangeListener {
 	private RelativeLayout rlDuan;
@@ -89,19 +89,19 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	// DATA
 	private String defauldID = "";
 	private String proviceID = defauldID;
-	private String proviceName = HotdealApp.getContext().getString(R.string.str_province);
+	private String proviceName = VrealApp.getContext().getString(R.string.str_province);
 	private String disID = defauldID;
-	private String disName = HotdealApp.getContext().getString(R.string.str_district);
+	private String disName = VrealApp.getContext().getString(R.string.str_district);
 	private String areaName = "Diện tích";
 	private String priceName = "Mức giá";
 	private String wayID = defauldID;
 	private String wayName = "Hướng nhà";
 	private String KVID = defauldID;
-	private String KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+	private String KVName = VrealApp.getContext().getString(R.string.str_khuvuc);
 	private String streetID = defauldID;
-	private String streetName = HotdealApp.getContext().getString(R.string.str_street);
+	private String streetName = VrealApp.getContext().getString(R.string.str_street);
 	private String wardID = defauldID;
-	private String wardName = HotdealApp.getContext().getString(R.string.str_ward);
+	private String wardName = VrealApp.getContext().getString(R.string.str_ward);
 	private String loaiID = defauldID;
 	private String loaiName = "Chọn loại";
 	private String dientichFrom = defauldID;
@@ -127,19 +127,19 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	private void setDefault() {
 		defauldID = "";
 		proviceID = defauldID;
-		proviceName = HotdealApp.getContext().getString(R.string.str_province);
+		proviceName = VrealApp.getContext().getString(R.string.str_province);
 		disID = defauldID;
-		disName = HotdealApp.getContext().getString(R.string.str_district);
+		disName = VrealApp.getContext().getString(R.string.str_district);
 		areaName = "Diện tích";
 		priceName = "Mức giá";
 		wayID = defauldID;
 		wayName = "Hướng nhà";
 		KVID = defauldID;
-		KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+		KVName = VrealApp.getContext().getString(R.string.str_khuvuc);
 		streetID = defauldID;
-		streetName = HotdealApp.getContext().getString(R.string.str_street);
+		streetName = VrealApp.getContext().getString(R.string.str_street);
 		wardID = defauldID;
-		wardName = HotdealApp.getContext().getString(R.string.str_ward);
+		wardName = VrealApp.getContext().getString(R.string.str_ward);
 		loaiID = defauldID;
 		loaiName = "Chọn loại";
 		dientichFrom = defauldID;
@@ -235,7 +235,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	}
 
 	private void initView(View rootView) {
-		idType = HotdealUtilities.getDataFragment(this);
+		idType = VrealUtilities.getDataFragment(this);
 		rlDuan = (RelativeLayout) rootView.findViewById(R.id.rlDuan);
 		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
 		tvMorong = (TextView) rootView.findViewById(R.id.tvMorong);
@@ -324,7 +324,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 //			}
 //		}
 		
-		if (HotdealApp.isExpand) {
+		if (VrealApp.isExpand) {
 //			HotdealApp.isExpand = true;
 			pdBar1.setVisibility(View.VISIBLE);
 		}else{
@@ -527,7 +527,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			@Override
 			public void onNotify(String api, int id) {
 				if (NotifyDataListener.NOTIFY_OK == id) {
-					HotdealUtilities.startActivity(getActivity(), DuAnMoiF.class, idType);
+					VrealUtilities.startActivity(getActivity(), DuAnMoiF.class, idType);
 					// ((HotDealFragmentActivity)
 					// getActivity()).startFragment(new DuAnMoiF(), idType);
 				} else {
@@ -564,7 +564,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equalsIgnoreCase("ABC")) {
-				HotdealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
+				VrealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
 				try {
 					String loai = (String) intent.getExtras().get(ConstantValue.IS_SUCCESS);
 					StringTokenizer tokens = new StringTokenizer(loai, "-");
@@ -599,10 +599,10 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 	public void onClick(View v) {
 		// HotdealUtilities.setClickAnim(v);
 		if (v == rlLoai) {
-			HotdealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, idType);
+			VrealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, idType);
 
 		} else if (v == rlTinh) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -641,7 +641,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 					listDisFilter.add(md);
 				}
 			}
-			HotdealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -672,7 +672,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			});
 
 		} else if (v == rlDT) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDientich(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDientich(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -695,7 +695,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			});
 
 		} else if (v == rlMG) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -718,7 +718,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			});
 
 		} else if (v == rlHuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListHuong(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListHuong(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -744,7 +744,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 					listDisFilter.add(md);
 				}
 			}
-			HotdealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -775,7 +775,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 				}
 
 			}
-			HotdealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -796,7 +796,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			});
 
 		} else if (v == rlDuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListStreet(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListStreet(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -822,7 +822,7 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 			search();
 
 		} else if (v == rlDuan) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDuAn(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDuAn(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -850,10 +850,10 @@ public class NhabanF extends VrealFragment implements OnClickListener, OnChecked
 
 		} else if (v == tvMorong) {
 			if (pdBar1.isShown()) {
-				HotdealApp.isExpand = false;
+				VrealApp.isExpand = false;
 				pdBar1.setVisibility(View.GONE);
 			} else {
-				HotdealApp.isExpand = true;
+				VrealApp.isExpand = true;
 				pdBar1.setVisibility(View.VISIBLE);
 			}
 

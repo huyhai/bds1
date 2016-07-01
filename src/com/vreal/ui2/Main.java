@@ -22,12 +22,12 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
-public class Main extends HotDealFragmentActivity implements OnClickListener {
+public class Main extends VrealFragmentActivity implements OnClickListener {
 	public static ImageLoader imageLoader;
 	public static DisplayImageOptions options;
 	private LinearLayout llTopBar;
@@ -64,12 +64,12 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 		imgLocation = (ImageView) findViewById(R.id.imgLocation);
 		imgRefresh = (ImageView) findViewById(R.id.imgRefresh);
 		imgFilter = (ImageView) findViewById(R.id.imgFilter);
-		HotdealUtilities.setWidthHeight(imgTooggle, 16, 37);
-		HotdealUtilities.setWidthHeight(imgLocation, 17, 24);
-		HotdealUtilities.setWidthHeight(imgRefresh, 12.5, 25);
-		HotdealUtilities.setWidthHeight(imgFilter, 15, 32);
+		VrealUtilities.setWidthHeight(imgTooggle, 16, 37);
+		VrealUtilities.setWidthHeight(imgLocation, 17, 24);
+		VrealUtilities.setWidthHeight(imgRefresh, 12.5, 25);
+		VrealUtilities.setWidthHeight(imgFilter, 15, 32);
 
-		HotdealUtilities.setHeight(llTopBar, 11.5);
+		VrealUtilities.setHeight(llTopBar, 11.5);
 
 		rlToogle.setOnClickListener(this);
 
@@ -233,7 +233,7 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 		DataManager2.getInstance().getDuan(this, false, false, notifyData);
 	}
 	private void init() {
-		HotdealUtilities.setWH(this);
+		VrealUtilities.setWH(this);
 
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(ImageLoaderConfiguration.createDefault(this));
@@ -241,7 +241,7 @@ public class Main extends HotDealFragmentActivity implements OnClickListener {
 		// .showImageForEmptyUrl(placeholder)
 		// .showStubImage(placeholder).cacheOnDisc()
 		// .decodingType(DecodingType.MEMORY_SAVING).build();
-		options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.img_thumb).showImageForEmptyUri(R.drawable.img_thumb).showImageOnFail(R.drawable.img_thumb).cacheInMemory(true)
+		options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.noimage).showImageForEmptyUri(R.drawable.noimage).showImageOnFail(R.drawable.noimage).cacheInMemory(true)
 				.cacheOnDisc().considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
 		// startService(new Intent(this, MyService.class));
 

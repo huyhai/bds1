@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import com.android.vrealapp.R;
 import com.vreal.adapter.ListAgentAdapter;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 
 public class ListAgent extends Activity implements OnClickListener {
 	private RelativeLayout rlHome;
@@ -30,8 +30,8 @@ public class ListAgent extends Activity implements OnClickListener {
 		rlHome = (RelativeLayout) this.findViewById(R.id.rlHome);
 		rlToogle = (LinearLayout) this.findViewById(R.id.rlToogle);
 		lvEgent = (ListView) this.findViewById(R.id.lvEgent);
-		HotdealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
-		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
+		VrealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
+		VrealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
 		rlToogle.setOnClickListener(this);
 
 		ListAgentAdapter adapter = new ListAgentAdapter(this, null, null);

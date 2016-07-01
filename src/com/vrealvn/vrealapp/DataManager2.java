@@ -1,25 +1,17 @@
 package com.vrealvn.vrealapp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.ClientError;
@@ -27,45 +19,23 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
-import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.vreal.connection.JsonObjectInterface;
 import com.vreal.connection.VolleyRequestCustom;
 import com.vreal.db.DatabaseHandler;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.libs.SessionManager;
-import com.vreal.model.BannerHomeModel;
-import com.vreal.model.CateSildeModel;
-import com.vreal.model.CommentsModel;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.DealHomeModel;
-import com.vreal.model.DeliveryAddressModel;
 import com.vreal.model.DetailsModel;
-import com.vreal.model.FilterModel;
-import com.vreal.model.LocationModel;
-import com.vreal.model.OrderByUserChildModel;
-import com.vreal.model.OrderByUserModel;
-import com.vreal.model.PaymentOrderModel;
-import com.vreal.model.RewardModel;
-import com.vreal.model.StateModel;
-import com.vreal.model.UsersModel;
 import com.vreal.model.VrealModel;
-import com.android.vrealapp.R;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by G8 on 1/25/2016.
@@ -104,7 +74,7 @@ public class DataManager2 {
 
 	private DataManager2() {
 		if (null == sm) {
-			sm = new SessionManager(HotdealApp.getContext());
+			sm = new SessionManager(VrealApp.getContext());
 		}
 	}
 
@@ -120,23 +90,6 @@ public class DataManager2 {
 
 	private Dialog dialogSelectImage;
 
-	private void showDialog(Activity ac) {
-		if (!ac.isFinishing()) {
-			dialogSelectImage = new Dialog(ac);
-			dialogSelectImage.getWindow();
-			dialogSelectImage.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialogSelectImage.setContentView(R.layout.chochay);
-			dialogSelectImage.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-			ImageView img = (ImageView) dialogSelectImage.findViewById(R.id.webView1);
-			img.setBackgroundResource(R.drawable.cho_chay);
-			AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-			frameAnimation.start();
-			dialogSelectImage.setCancelable(false);
-			dialogSelectImage.setCanceledOnTouchOutside(false);
-			dialogSelectImage.show();
-		}
-
-	}
 
 	public void stopProgress() {
 		try {
@@ -159,7 +112,7 @@ public class DataManager2 {
 
 	public void callServer(final Activity activity, HashMap<String, String> parameters, final boolean showPro, boolean isPost, final JsonObjectInterface jsonObjectInterface,
 			final boolean isGetJsonArray) {
-		HotdealUtilities.showALog(parameters.toString());
+		VrealUtilities.showALog(parameters.toString());
 		if (showPro && !isShowPro) {
 			showProgress(activity);
 
@@ -176,7 +129,7 @@ public class DataManager2 {
 		jsonObjRequest = new VolleyRequestCustom(method, urlServer, parameters, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
-				HotdealUtilities.showALog(response);
+				VrealUtilities.showALog(response);
 				if (isGetJsonArray) {
 					JSONArray jsonResponse = null;
 					try {
@@ -229,7 +182,7 @@ public class DataManager2 {
 				} else if (error instanceof TimeoutError) {
 					setMessage(errorMess + " (Timeout Error)");
 				}
-				HotdealUtilities.showALog(error.getMessage());
+				VrealUtilities.showALog(error.getMessage());
 
 				jsonObjectInterface.callResultJOb(activity, null);
 				if (showPro)

@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 
 public class DealHomeModel implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,11 +20,11 @@ public class DealHomeModel implements Serializable {
 	}
 
 	public void setData(JSONObject jSonInfo) throws JSONException {
-		this.setCategoryId(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setName(HotdealUtilities.getDataString(jSonInfo, "NewsTypeName"));
+		this.setCategoryId(VrealUtilities.getDataString(jSonInfo, "ID"));
+		this.setName(VrealUtilities.getDataString(jSonInfo, "NewsTypeName"));
 		setListTintuc(new ArrayList<DetailsModel>());
 		JSONArray listJson;
-		listJson=HotdealUtilities.getArray(jSonInfo, "DSTin");
+		listJson=VrealUtilities.getArray(jSonInfo, "DSTin");
 //		listJson = jSonInfo.getJSONArray("DSTin");
 		getListTintuc().clear();
 		for (int i = 0; i < listJson.length(); i++) {

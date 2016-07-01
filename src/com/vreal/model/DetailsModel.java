@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import android.widget.Toast;
 
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 
 public class DetailsModel implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -29,13 +29,13 @@ public class DetailsModel implements Serializable {
 	}
 
 	public void setData(JSONObject jSonInfo) throws JSONException {
-		this.setProductId(HotdealUtilities.getDataString(jSonInfo, "ID"));
-		this.setName(HotdealUtilities.getDataString(jSonInfo, "Title"));
-		this.setDescription(HotdealUtilities.getDataString(jSonInfo, "Content"));
-		this.setIntroduce(HotdealUtilities.getDataString(jSonInfo, "CreatedDate"));
-		this.setConditions(HotdealUtilities.getDataString(jSonInfo, "Summary"));
-		this.setNewsTypeID(HotdealUtilities.getDataInt(jSonInfo, "NewsTypeID"));
-		this.setImage(HotdealUtilities.getDataString(jSonInfo, "Icon"));
+		this.setProductId(VrealUtilities.getDataString(jSonInfo, "ID"));
+		this.setName(VrealUtilities.getDataString(jSonInfo, "Title"));
+		this.setDescription(VrealUtilities.getDataString(jSonInfo, "Content"));
+		this.setIntroduce(VrealUtilities.getDataString(jSonInfo, "CreatedDate"));
+		this.setConditions(VrealUtilities.getDataString(jSonInfo, "Summary"));
+		this.setNewsTypeID(VrealUtilities.getDataInt(jSonInfo, "NewsTypeID"));
+		this.setImage(VrealUtilities.getDataString(jSonInfo, "Icon"));
 
 	}
 

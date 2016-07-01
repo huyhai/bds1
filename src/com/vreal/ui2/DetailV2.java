@@ -17,7 +17,7 @@ import com.android.vrealapp.R;
 import com.vreal.adapter.DetailsBannerAdapter;
 import com.vreal.adapter.TienIchAdapter;
 import com.vreal.libs.DepthPageTransformer;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.VrealModel;
 import com.vreal.pageindicator.CirclePageIndicator;
 import com.vreal.pageindicator.PageIndicator;
@@ -67,7 +67,7 @@ public class DetailV2 extends Fragment {
 		tvName.setText(md.getProvinceName());
 		tvAddress.setText(md.getAddress());
 		tvGiaVl.setText(md.getPrice()+" "+md.getUnitName());
-		tvDTVl.setText(HotdealUtilities.formatDientich(md.getAcreage()));
+		tvDTVl.setText(VrealUtilities.formatDientich(md.getAcreage()));
 		tvDes.setText(Html.fromHtml(md.getDescription()));
 		tvFong.setText(md.getContactName());
 		tvPhone.setText(md.getContacPhone());
@@ -112,7 +112,7 @@ public class DetailV2 extends Fragment {
 		gvTienich = (GridView) rootView.findViewById(R.id.gvTienich);
 		// tvName = (TextView) rootView.findViewById(R.id.tvName);
 
-		HotdealUtilities.setHeight(rlSlide, 3);
+		VrealUtilities.setHeight(rlSlide, 3);
 
 		// ArrayList<String> list = new ArrayList<>();
 		// list.add("http://img.v3.news.zdn.vn/w660/Uploaded/wyhktpu/2016_04_11/Hai_mau_xe_long_lay_dam_tinh_thoi_trang_cua_Yamaha_1.jpg");

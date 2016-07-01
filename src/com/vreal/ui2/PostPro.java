@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.vreal.adapter.ListImagesAdapter;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.libs.TwoWayView;
@@ -205,7 +205,7 @@ public class PostPro extends Fragment implements OnClickListener {
 		rlDuong.setOnClickListener(this);
 		rlDuan.setOnClickListener(this);
 		rlDT.setOnClickListener(this);
-		HotdealUtilities.setHeight(rlMota, 4);
+		VrealUtilities.setHeight(rlMota, 4);
 		rlHuongnha.setOnClickListener(this);
 		rlHuongbancong.setOnClickListener(this);
 		btnDangTin.setOnClickListener(this);
@@ -227,9 +227,9 @@ public class PostPro extends Fragment implements OnClickListener {
 			myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
 			if (isStart) {
-				edBatdau.setText(HotdealUtilities.getDateFromDate(myCalendar.getTime(), HotdealUtilities.FORMAT_DATE));
+				edBatdau.setText(VrealUtilities.getDateFromDate(myCalendar.getTime(), VrealUtilities.FORMAT_DATE));
 			} else {
-				edKetthuc.setText(HotdealUtilities.getDateFromDate(myCalendar.getTime(), HotdealUtilities.FORMAT_DATE));
+				edKetthuc.setText(VrealUtilities.getDateFromDate(myCalendar.getTime(), VrealUtilities.FORMAT_DATE));
 			}
 		}
 
@@ -254,13 +254,13 @@ public class PostPro extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == tvAddIMG) {
-			HotdealUtilities.getImageFromGalery(getActivity());
+			VrealUtilities.getImageFromGalery(getActivity());
 		} else if (v == rlBatdau) {
 			isStart = true;
-			HotdealUtilities.pickerDate(getActivity(), date);
+			VrealUtilities.pickerDate(getActivity(), date);
 		} else if (v == rlKetthuc) {
 			isStart = false;
-			HotdealUtilities.pickerDate(getActivity(), date);
+			VrealUtilities.pickerDate(getActivity(), date);
 		}
 
 		else if (v == rlHinhthuc) {
@@ -272,7 +272,7 @@ public class PostPro extends Fragment implements OnClickListener {
 			md = new VrealModel();
 			md.setProvinceName("Nhà cho thuê");
 			md.setId("2");
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListTypeProperty(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListTypeProperty(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -293,7 +293,7 @@ public class PostPro extends Fragment implements OnClickListener {
 			});
 
 		} else if (v == rlTinh) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -313,7 +313,7 @@ public class PostPro extends Fragment implements OnClickListener {
 			});
 
 		} else if (v == rlKhuVuc) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -332,7 +332,7 @@ public class PostPro extends Fragment implements OnClickListener {
 				}
 			});
 		} else if (v == rlXa) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListWard(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListWard(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -357,7 +357,7 @@ public class PostPro extends Fragment implements OnClickListener {
 			// listDisFilter.add(md);
 			// }
 			// }
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDistrict(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDistrict(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -377,7 +377,7 @@ public class PostPro extends Fragment implements OnClickListener {
 				}
 			});
 		} else if (v == rlDuong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListStreet(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListStreet(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -396,7 +396,7 @@ public class PostPro extends Fragment implements OnClickListener {
 				}
 			});
 		} else if (v == rlDuan) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDuAn(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDuAn(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -416,7 +416,7 @@ public class PostPro extends Fragment implements OnClickListener {
 				}
 			});
 		} else if (v == rlDT) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDientich(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListDientich(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -436,7 +436,7 @@ public class PostPro extends Fragment implements OnClickListener {
 				}
 			});
 		} else if (v == rlHuongnha) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListHuong(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListHuong(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -454,7 +454,7 @@ public class PostPro extends Fragment implements OnClickListener {
 				}
 			});
 		} else if (v == rlHuongbancong) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListHuong(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListHuong(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -531,7 +531,7 @@ public class PostPro extends Fragment implements OnClickListener {
 			public void onNotify(String api, int id) {
 		
 				if (NOTIFY_OK == id) {
-					HotdealUtilities.showToast("Đăng tin thành công", 0, getActivity());
+					VrealUtilities.showToast("Đăng tin thành công", 0, getActivity());
 				} else {
 //					HotdealUtilities.showToast("Đăng tin TB", 0, getActivity());
 				}
@@ -549,10 +549,10 @@ public class PostPro extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-		case HotdealUtilities.SELECT_PHOTO:
+		case VrealUtilities.SELECT_PHOTO:
 			if (resultCode == Activity.RESULT_OK) {
 				Uri selectedImage = data.getData();
-				listUri.add(Uri.parse("file://" + HotdealUtilities.getPath(selectedImage, getActivity())));
+				listUri.add(Uri.parse("file://" + VrealUtilities.getPath(selectedImage, getActivity())));
 				adapter.notifyDataSetChanged();
 				// try {
 				// Bitmap yourSelectedImage =

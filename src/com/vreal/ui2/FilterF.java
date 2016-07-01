@@ -25,13 +25,13 @@ import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
-import com.vrealvn.vrealapp.HotdealApp;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
+import com.vrealvn.vrealapp.VrealApp;
 
-public class FilterF extends HotDealFragmentActivity implements OnClickListener {
+public class FilterF extends VrealFragmentActivity implements OnClickListener {
 	// private RelativeLayout rlRefresh;
 	private RelativeLayout rlKhuvuc;
 	private RelativeLayout rlMuagia;
@@ -47,7 +47,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 	private String loaiID = defauldID;
 	private String loaiName = "Chọn loại";
 	private String KVID = defauldID;
-	private String KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+	private String KVName = VrealApp.getContext().getString(R.string.str_khuvuc);
 	private String giaFrom = defauldID;
 	private String giaTo = defauldID;
 	private String giaName = "Chọn giá";
@@ -82,8 +82,8 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 		btnTimkiem = (Button) findViewById(R.id.btnTimkiem);
 		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
 		imgTooggle = (ImageView) findViewById(R.id.imgTooggle);
-		HotdealUtilities.setHeight(llTopBar, 11.5);
-		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		VrealUtilities.setHeight(llTopBar, 11.5);
+		VrealUtilities.setWidthHeight(imgTooggle, 17, 35);
 		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -126,7 +126,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 	@Override
 	public void onClick(View v) {
 		if (v == rlKhuvuc) {
-			HotdealUtilities.showDialogCustomListView(this, DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(this, DataManager2.getInstance().getListKhuvuc(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -146,7 +146,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 				}
 			});
 		} else if (v == rlMuagia) {
-			HotdealUtilities.showDialogCustomListView(this, DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(this, DataManager2.getInstance().getListGia(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -169,7 +169,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 			});
 
 		} else if (v == rlLoai) {
-			HotdealUtilities.startActivityForResult(this, LoaiNhaDat.class, 1, HotdealUtilities.getDataBundle(this));
+			VrealUtilities.startActivityForResult(this, LoaiNhaDat.class, 1, VrealUtilities.getDataBundle(this));
 
 		} else if (v == rlNam) {
 			show();
@@ -223,7 +223,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 		loaiID = defauldID;
 		loaiName = "Chọn loại";
 		KVID = defauldID;
-		KVName = HotdealApp.getContext().getString(R.string.str_khuvuc);
+		KVName = VrealApp.getContext().getString(R.string.str_khuvuc);
 		giaFrom = defauldID;
 		giaTo = defauldID;
 		giaName = "Chọn giá";
@@ -235,7 +235,7 @@ public class FilterF extends HotDealFragmentActivity implements OnClickListener 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equalsIgnoreCase("ABC")) {
-				HotdealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
+				VrealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
 				try {
 					String loai = (String) intent.getExtras().get(ConstantValue.IS_SUCCESS);
 					StringTokenizer tokens = new StringTokenizer(loai, "-");

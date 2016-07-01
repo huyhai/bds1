@@ -2,9 +2,7 @@ package com.vreal.ui2;
 
 import java.util.ArrayList;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,10 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,15 +19,10 @@ import com.android.vrealapp.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.vreal.adapter.TienIchAdapter;
-import com.vreal.libs.HotdealUtilities;
 import com.vreal.libs.MapLibs;
 import com.vreal.libs.NotifyDataListener;
-import com.vreal.model.DiaDiemModel;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
 
@@ -114,7 +105,7 @@ public class MapF extends MapLibs implements OnMapReadyCallback, OnClickListener
 		tvKm4.setOnClickListener(this);
 		tvKm5.setOnClickListener(this);
 
-		HotdealUtilities.setHeight(rlTienICh, 2.5);
+		VrealUtilities.setHeight(rlTienICh, 2.5);
 
 		// for (int i = 0; i < 6; i++) {
 		// TextView tv = new TextView(getActivity());

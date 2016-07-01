@@ -12,7 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.VrealModel;
 import com.vreal.pageindicator.IconPagerAdapter;
 
@@ -52,7 +52,7 @@ public class DetailsBannerAdapter extends PagerAdapter implements IconPagerAdapt
 		final View imageLayout = this.inflater.inflate(R.layout.details_item_banner_layout, null);
 		imgBanner = (ImageView) imageLayout.findViewById(R.id.imgBanner);
 		((ViewPager) view).addView(imageLayout, 0);
-		HotdealUtilities.loadImage(listBanner.get(position),imgBanner, ac);
+		VrealUtilities.loadImage(listBanner.get(position),imgBanner, ac);
 //		Picasso.with(ac).load(listBanner.get(position)).placeholder(R.drawable.img_thumb)
 //				.error(R.drawable.noimage).into(imgBanner);
 		imageLayout.setOnClickListener(new OnClickListener() {

@@ -17,13 +17,13 @@ import android.widget.TextView;
 import com.android.vrealapp.R;
 import com.vreal.adapter.GanAdapter;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.StateModel;
 import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
-public class DetailF extends HotDealFragmentActivity implements OnClickListener {
+public class DetailF extends VrealFragmentActivity implements OnClickListener {
 	private RelativeLayout rlHome;
 	private RelativeLayout rlPic;
 	private RelativeLayout rlPic1;
@@ -85,7 +85,7 @@ public class DetailF extends HotDealFragmentActivity implements OnClickListener 
 		tvTienich.setText(Html.fromHtml(ticc));
 		imgLogo.setText(md.getDeveloper());
 		try {
-			HotdealUtilities.loadImagePicaso(md.getListPhoto().get(0), imgPic1,
+			VrealUtilities.loadImagePicaso(md.getListPhoto().get(0), imgPic1,
 					this);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -117,7 +117,7 @@ public class DetailF extends HotDealFragmentActivity implements OnClickListener 
 		lvGan = (ListView) this.findViewById(R.id.lvGan);
 
 		rlToogle = (LinearLayout) this.findViewById(R.id.rlToogle);
-		HotdealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
+		VrealUtilities.setWidth(rlToogle, ConstantValue.WIDTH_BACK);
 		rlToogle.setOnClickListener(this);
 		tvName = (TextView) this.findViewById(R.id.tvName);
 		tvAddress = (TextView) this.findViewById(R.id.tvAddress);
@@ -139,7 +139,7 @@ public class DetailF extends HotDealFragmentActivity implements OnClickListener 
 		// rlHome=(RelativeLayout)this.findViewById(R.id.rlHome);
 		imgPic1 = (ImageView) this.findViewById(R.id.imgPic1);
 		imgTooggle=(ImageView)findViewById(R.id.imgTooggle);
-		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		VrealUtilities.setWidthHeight(imgTooggle, 17, 35);
 		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -149,18 +149,18 @@ public class DetailF extends HotDealFragmentActivity implements OnClickListener 
 			}
 		});
 		double w = 2.2;
-		HotdealUtilities.setWidth(a, w);
-		HotdealUtilities.setWidth(aa, w);
-		HotdealUtilities.setWidth(aaa, w);
-		HotdealUtilities.setWidth(aaaa, w);
-		HotdealUtilities.setWidth(aaaaa, w);
-		HotdealUtilities.setWidth(aaaaaa, w);
-		HotdealUtilities.setWidth(aaaaaaa, w);
+		VrealUtilities.setWidth(a, w);
+		VrealUtilities.setWidth(aa, w);
+		VrealUtilities.setWidth(aaa, w);
+		VrealUtilities.setWidth(aaaa, w);
+		VrealUtilities.setWidth(aaaaa, w);
+		VrealUtilities.setWidth(aaaaaa, w);
+		VrealUtilities.setWidth(aaaaaaa, w);
 
-		HotdealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
-		HotdealUtilities.setHeight(rlPic, 3);
-		HotdealUtilities.setWidthHeight(rlPic1, 10, 20);
-		HotdealUtilities.setHeight(llPic, 4.5);
+		VrealUtilities.setHeight(rlHome, ConstantValue.HEIGHT_TOP_BAR);
+		VrealUtilities.setHeight(rlPic, 3);
+		VrealUtilities.setWidthHeight(rlPic1, 10, 20);
+		VrealUtilities.setHeight(llPic, 4.5);
 		imgPic1.setOnClickListener(this);
 
 		// String htl =
@@ -215,10 +215,10 @@ public class DetailF extends HotDealFragmentActivity implements OnClickListener 
 	@Override
 	public void onClick(View v) {
 		if (rlToogle == v) {
-			HotdealUtilities.setClickAnim(rlToogle);
+			VrealUtilities.setClickAnim(rlToogle);
 			this.finish();
 		} else if (v == imgPic1) {
-			HotdealUtilities.startActivity(this, ViewImageActivity.class, "");
+			VrealUtilities.startActivity(this, ViewImageActivity.class, "");
 		}
 
 	}

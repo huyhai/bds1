@@ -12,7 +12,7 @@ import com.android.vrealapp.R;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.SessionManager;
 import com.vreal.ui2.Main;
 
@@ -30,8 +30,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 	 **/
 	@Override
 	protected void onRegistered(Context context, String registrationId) {
-		HotdealUtilities.showALog(registrationId);
-		HotdealApp.regId = registrationId;
+		VrealUtilities.showALog(registrationId);
+		VrealApp.regId = registrationId;
 		// SplashScreen.regId = registrationId;
 		// List<NameValuePair> params = new ArrayList<NameValuePair>();
 		// params.add(new BasicNameValuePair("tag", "adddevice"));
@@ -69,7 +69,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		try {
 			message = intent.getExtras().getString("message");
 			url = intent.getExtras().getString("screen");
-			HotdealApp.countNotify = intent.getExtras().getString("badge");
+			VrealApp.countNotify = intent.getExtras().getString("badge");
 			Uri uri = Uri.parse(url);
 			screen = uri.getQueryParameter("action");
 			value = uri.getQueryParameter("value");

@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import com.vreal.db.DatabaseHandler;
 import com.vreal.libs.SessionManager;
 
-public class HotdealFragment extends Fragment {
+public class VrealFragment extends Fragment {
 	protected SessionManager sm;
 	protected DatabaseHandler db;
 	private FragmentActivity myAc;

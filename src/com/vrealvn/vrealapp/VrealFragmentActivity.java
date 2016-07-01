@@ -27,11 +27,11 @@ import com.google.android.gcm.GCMRegistrar;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.SessionManager;
 import com.vreal.ui2.PostPro;
 
-public class HotDealFragmentActivity extends FragmentActivity {
+public class VrealFragmentActivity extends FragmentActivity {
 	public LinearLayout llTopBar;
 	public ImageView imgTooggle;
 	public SessionManager sm;
@@ -47,10 +47,10 @@ public class HotDealFragmentActivity extends FragmentActivity {
 	private void doGcmRegistration() {
 		GCMRegistrar.checkDevice(this);
 		GCMRegistrar.checkManifest(this);
-		HotdealApp.regId = GCMRegistrar.getRegistrationId(this);
-		HotdealUtilities.showALog("regId = " + HotdealApp.regId);
+		VrealApp.regId = GCMRegistrar.getRegistrationId(this);
+		VrealUtilities.showALog("regId = " + VrealApp.regId);
 		// GCMRegistrar.unregister(getApplicationContext());
-		if (HotdealApp.regId.equals("")) {
+		if (VrealApp.regId.equals("")) {
 			GCMRegistrar.register(getApplicationContext(), GCMIntentService.SENDER_ID);
 		}
 	}

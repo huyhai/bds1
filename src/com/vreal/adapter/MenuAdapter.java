@@ -64,7 +64,7 @@ public class MenuAdapter extends BaseAdapter {
 		}
 		final StateModel ca = listData.get(position);
 		holder.tvName.setText(ca.getStateName());
-		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
+		Picasso.with(ac).load(ca.getImage()).placeholder(R.drawable.noimage).error(R.drawable.noimage).into(holder.imgPic);
 //		convertView.setOnClickListener(new OnClickListener() {
 //
 //			@Override

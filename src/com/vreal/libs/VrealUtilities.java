@@ -82,9 +82,9 @@ import com.squareup.picasso.Picasso;
 import com.vreal.db.DatabaseHandler;
 import com.vreal.model.VrealModel;
 import com.vreal.ui2.Main;
-import com.vrealvn.vrealapp.HotdealApp;
+import com.vrealvn.vrealapp.VrealApp;
 
-public class HotdealUtilities {
+public class VrealUtilities {
 	private static SessionManager sm;
 	private static DatabaseHandler db;
 	public static String FORMAT_DATE = "dd/MM/yyyy";
@@ -529,7 +529,7 @@ public class HotdealUtilities {
 			// .showImageForEmptyUrl(placeholder)
 			// .showStubImage(placeholder).cacheOnDisc()
 			// .decodingType(DecodingType.MEMORY_SAVING).build();
-			Main.options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.img_thumb).showImageForEmptyUri(R.drawable.img_thumb).showImageOnFail(R.drawable.img_thumb)
+			Main.options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.noimage).showImageForEmptyUri(R.drawable.noimage).showImageOnFail(R.drawable.noimage)
 					.cacheInMemory(true).cacheOnDisc().considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
 		}
 		try {
@@ -547,7 +547,7 @@ public class HotdealUtilities {
 		try {
 			String ui = ConstantValue.domainIMG + url;
 			showALog(ui);
-			Picasso.with(ac).load(ui).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(img);
+			Picasso.with(ac).load(ui).placeholder(R.drawable.noimage).error(R.drawable.noimage).into(img);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -567,55 +567,6 @@ public class HotdealUtilities {
 		}
 	}
 
-	public static String getStatusDH(String stt) {
-		if (stt.equals(ConstantValue.THANHTOANTHATBAI)) {
-			return "Thanh toán thất bại";
-		} else if (stt.equals(ConstantValue.HOANTAT)) {
-			return "Hoàn tất";
-		} else if (stt.equals(ConstantValue.MOIDAT)) {
-			return "Mới đặt";
-		} else if (stt.equals(ConstantValue.DAXACNHAN)) {
-			return "Đã xác nhận";
-		} else if (stt.equals(ConstantValue.DANGGIAHANG)) {
-			return "Đang giao hàng";
-		} else if (stt.equals(ConstantValue.HUY)) {
-			return "Hủy";
-		} else if (stt.equals(ConstantValue.GOILAN1)) {
-			return "Gọi lần 1";
-		} else if (stt.equals("E")) {
-			return "Gọi lần 2";
-		} else if (stt.equals("G")) {
-			return "Gọi lần 3";
-		} else if (stt.equals(ConstantValue.CHOXACNHAN)) {
-			return "Chờ xác nhận giao dịch";
-		} else if (stt.equals(ConstantValue.MOIDAT_DATHANHTOAN)) {
-			return "Mới đặt (đã thanh toán)";
-		} else if (stt.equals("J")) {
-			return "Hẹn";
-		} else if (stt.equals("H")) {
-			return "Nhận tại văn phòng";
-		} else if (stt.equals("M")) {
-			return "Chuyển tiếp";
-		} else if (stt.equals("T")) {
-			return "Chờ kế toán xác nhận";
-		} else if (stt.equals("Q")) {
-			return "Chờ hủy";
-		} else if (stt.equals("Y")) {
-			return "Gửi lại mã kích hoạt";
-		} else if (stt.equals("N")) {
-			return "Trả hàng";
-		} else if (stt.equals("Z")) {
-			return "Kích hoạt";
-		} else if (stt.equals("P")) {
-			return "Đã thanh toán";
-		} else if (stt.equals("D")) {
-			return "Từ chối bởi công ty";
-		} else if (stt.equals("B")) {
-			return "Backordered";
-		} else {
-			return stt;
-		}
-	}
 
 	public static String getQuery(HashMap<String, String> parameters) throws UnsupportedEncodingException {
 		StringBuilder result = new StringBuilder();
@@ -634,7 +585,7 @@ public class HotdealUtilities {
 			result.append("=");
 			result.append(URLEncoder.encode(parameters.get(key), "UTF-8"));
 		}
-		HotdealUtilities.showLog(result.toString());
+		VrealUtilities.showLog(result.toString());
 		return result.toString();
 	}
 
@@ -666,13 +617,13 @@ public class HotdealUtilities {
 		Display display = ac.getWindowManager().getDefaultDisplay();
 		int width = display.getWidth();
 		int height = display.getHeight();
-		HotdealApp.device_height = height;
-		HotdealApp.device_width = width;
+		VrealApp.device_height = height;
+		VrealApp.device_width = width;
 	}
 
 	public static void setHeight(View paramView, double paramDouble) {
 		ViewGroup.LayoutParams localLayoutParams = paramView.getLayoutParams();
-		localLayoutParams.height = (int) (HotdealApp.device_height / paramDouble);
+		localLayoutParams.height = (int) (VrealApp.device_height / paramDouble);
 		paramView.setLayoutParams(localLayoutParams);
 	}
 
@@ -685,7 +636,7 @@ public class HotdealUtilities {
 
 	public static void setWidth(View paramView, double paramDouble) {
 		ViewGroup.LayoutParams localLayoutParams = paramView.getLayoutParams();
-		localLayoutParams.width = (int) (HotdealApp.device_width / paramDouble);
+		localLayoutParams.width = (int) (VrealApp.device_width / paramDouble);
 		paramView.setLayoutParams(localLayoutParams);
 	}
 
@@ -697,8 +648,8 @@ public class HotdealUtilities {
 
 	public static void setWidthHeight(View paramView, double paramDouble1, double paramDouble2) {
 		ViewGroup.LayoutParams localLayoutParams = paramView.getLayoutParams();
-		localLayoutParams.width = (int) (HotdealApp.device_width / paramDouble1);
-		localLayoutParams.height = (int) (HotdealApp.device_height / paramDouble2);
+		localLayoutParams.width = (int) (VrealApp.device_width / paramDouble1);
+		localLayoutParams.height = (int) (VrealApp.device_height / paramDouble2);
 		paramView.setLayoutParams(localLayoutParams);
 	}
 
@@ -1287,7 +1238,7 @@ public class HotdealUtilities {
 	public static String nameAc;
 
 	public static void startActivity(Activity ac, Class<?> class1, String data) {
-		if (HotdealUtilities.checkInternetConnection(ac)) {
+		if (VrealUtilities.checkInternetConnection(ac)) {
 			// mTracker = HotdealApp.getDefaultTracker(ac);
 			// mTracker.setScreenName(class1.getName());
 			// mTracker.send(new HitBuilders.ScreenViewBuilder().build());

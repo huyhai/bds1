@@ -34,7 +34,7 @@ public class DatePickerFragment extends DialogFragment implements
 
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		if (notifi != null) {
-			notifi.onReturnDataString(String.valueOf(HotdealUtilities.getLongFromDate(day + "-" + (month+1) + "-" + year, "dd-MM-yyyy")));
+			notifi.onReturnDataString(String.valueOf(VrealUtilities.getLongFromDate(day + "-" + (month+1) + "-" + year, "dd-MM-yyyy")));
 		}
 	}
 }

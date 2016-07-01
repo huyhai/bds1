@@ -40,7 +40,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vrealvn.vrealapp.DataManager2;
 
 public class ACRAPostSender implements ReportSender {
@@ -59,7 +59,7 @@ public class ACRAPostSender implements ReportSender {
 	private String getUrl() {
 		String token = getToken();
 		String key = getKey(token);
-		HotdealUtilities.showALog(String.format("%s&token=%s&key=%s&", BASE_URL, token, key));
+		VrealUtilities.showALog(String.format("%s&token=%s&key=%s&", BASE_URL, token, key));
 		return String.format("%s&token=%s&key=%s&", BASE_URL, token, key);
 	}
 
@@ -142,7 +142,7 @@ public class ACRAPostSender implements ReportSender {
 			// parameters
 			// .add(new BasicNameValuePair("USER_EMAIL",
 			// report.get(ReportField.USER_EMAIL)));
-			parameters.add(new BasicNameValuePair("USER_EMAIL", HotdealUtilities.email));
+			parameters.add(new BasicNameValuePair("USER_EMAIL", VrealUtilities.email));
 			parameters.add(new BasicNameValuePair("DEVICE_FEATURES", report.get(ReportField.DEVICE_FEATURES)));
 			// parameters.add(new BasicNameValuePair("ENVIRONMENT", report
 			// .get(ReportField.ENVIRONMENT)));

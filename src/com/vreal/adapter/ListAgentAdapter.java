@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.squareup.picasso.Picasso;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.model.StateModel;
 

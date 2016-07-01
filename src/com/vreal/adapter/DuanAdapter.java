@@ -14,9 +14,8 @@ import android.widget.TextView;
 
 import com.android.vrealapp.R;
 import com.squareup.picasso.Picasso;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
-import com.vreal.model.StateModel;
 import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
 
@@ -68,16 +67,16 @@ public class DuanAdapter extends BaseAdapter {
 			holder.tvDiachi = (TextView) convertView.findViewById(R.id.tvDiachi);
 			holder.imgPic = (ImageView) convertView.findViewById(R.id.imgAvatar);
 			holder.tvGia = (TextView) convertView.findViewById(R.id.tvGia);
-			HotdealUtilities.setHeight(holder.a, 3);
+			VrealUtilities.setHeight(holder.a, 3);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		final VrealModel ca = listData.get(position);
 		holder.tvName.setText(ca.getProvinceName());
-		holder.tvGia.setText(HotdealUtilities.formatMoney(ca.getPrice()));
+		holder.tvGia.setText(VrealUtilities.formatMoney(ca.getPrice()));
 		holder.tvDiachi.setText(ca.getAddress());
-		HotdealUtilities.loadImagePicaso(ca.getIcon(), holder.imgPic, ac);
+		VrealUtilities.loadImagePicaso(ca.getIcon(), holder.imgPic, ac);
 		// Picasso.with(ac).load(ca.getIcon()).placeholder(R.drawable.img_thumb).error(R.drawable.noimage).into(holder.imgPic);
 		convertView.setOnClickListener(new OnClickListener() {
 

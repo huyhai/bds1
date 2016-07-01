@@ -1,7 +1,7 @@
 package com.vreal.ui2;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -32,7 +32,7 @@ public class LoginA extends Activity implements OnClickListener {
 	}
 
 	private void initView() {
-		HotdealUtilities.setWH(this);
+		VrealUtilities.setWH(this);
 		edUser = (EditText) findViewById(R.id.edUser);
 		edPass = (EditText) findViewById(R.id.edPass);
 		btnDangNhap = (Button) findViewById(R.id.btnDangNhap);
@@ -44,9 +44,9 @@ public class LoginA extends Activity implements OnClickListener {
 		btnDangNhap.setOnClickListener(this);
 		double w= 1.5;
 		double h= 12;
-		HotdealUtilities.setWidthHeight(rlContent1, w, h);
-		HotdealUtilities.setWidthHeight(rlContent2, w, h);
-		HotdealUtilities.setWidthHeight(rlContent3, w, h);
+		VrealUtilities.setWidthHeight(rlContent1, w, h);
+		VrealUtilities.setWidthHeight(rlContent2, w, h);
+		VrealUtilities.setWidthHeight(rlContent3, w, h);
 
 	}
 
@@ -58,7 +58,7 @@ public class LoginA extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if(v==btnDangNhap){
-			HotdealUtilities.startActivityClearStack(this, Main.class, "");
+			VrealUtilities.startActivityClearStack(this, Main.class, "");
 		}
 		
 	}

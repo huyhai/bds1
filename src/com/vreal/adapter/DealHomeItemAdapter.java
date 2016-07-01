@@ -14,13 +14,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.DetailsModel;
 import com.vreal.ui2.Main;
 import com.vreal.ui2.NewsDetailF;
 import com.vreal.ui2.TintucF;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
 public class DealHomeItemAdapter extends BaseAdapter {
 	private ArrayList<DetailsModel> listData;
@@ -67,11 +67,11 @@ public class DealHomeItemAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		HotdealUtilities.setHeight(holder.imgPic, 5);
-		HotdealUtilities.setWidth(holder.rlAll, 2.5);
+		VrealUtilities.setHeight(holder.imgPic, 5);
+		VrealUtilities.setWidth(holder.rlAll, 2.5);
 
 		final DetailsModel md = listData.get(position);
-		HotdealUtilities.loadImage(md.getImage(), holder.imgPic, ac);
+		VrealUtilities.loadImage(md.getImage(), holder.imgPic, ac);
 		// Main.imageLoader.displayImage(md.getImage(), holder.imgPic);
 
 		holder.tvName.setText(md.getName());
@@ -82,7 +82,7 @@ public class DealHomeItemAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				DataManager2.getInstance().setMd(md);
-				HotdealUtilities.startActivity(ac, NewsDetailF.class, "");
+				VrealUtilities.startActivity(ac, NewsDetailF.class, "");
 //				((HotDealFragmentActivity) ac).startFragment(new NewsDetailF(), "");
 
 			}

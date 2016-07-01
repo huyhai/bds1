@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.pageindicator.IconPagerAdapter;
 import com.vreal.pageindicator.TabPageIndicator;
 
@@ -37,14 +37,14 @@ public class PostF extends Fragment {
 		View rootView = inflater.inflate(R.layout.simple_tabs, container, false);
 		initView(rootView);
 		setData();
-		HotdealUtilities.showALog("S CREATE");
+		VrealUtilities.showALog("S CREATE");
 		return rootView;
 	}
 
 	private void initView(View rootView) {
 		// rlRefresh = (RelativeLayout)
 		// getActivity().findViewById(R.id.rlRefresh);
-		pos = HotdealUtilities.parseInt(HotdealUtilities.getDataFragment(this));
+		pos = VrealUtilities.parseInt(VrealUtilities.getDataFragment(this));
 		pager = (ViewPager) rootView.findViewById(R.id.pager);
 		indicator = (TabPageIndicator) rootView.findViewById(R.id.indicator);
 
@@ -66,14 +66,14 @@ public class PostF extends Fragment {
 	public void onResume() {
 		super.onResume();
 		// rlRefresh.setVisibility(View.VISIBLE);
-		HotdealUtilities.showALog("S RESUME");
+		VrealUtilities.showALog("S RESUME");
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		// rlRefresh.setVisibility(View.GONE);
-		HotdealUtilities.showALog("S PAUSE");
+		VrealUtilities.showALog("S PAUSE");
 	}
 
 	class GoogleMusicAdapter extends FragmentPagerAdapter implements IconPagerAdapter {

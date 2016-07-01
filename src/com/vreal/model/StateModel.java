@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 
 public class StateModel implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,36 +20,36 @@ public class StateModel implements Serializable {
 	}
 
 	public void setData(JSONObject jSonInfo) throws JSONException {
-		this.setStateID(HotdealUtilities.getDataString(jSonInfo, "state_id"));
-		this.setStateName(HotdealUtilities.getDataString(jSonInfo, "state"));
+		this.setStateID(VrealUtilities.getDataString(jSonInfo, "state_id"));
+		this.setStateName(VrealUtilities.getDataString(jSonInfo, "state"));
 	}
 
 	public void setDataDis(JSONObject jSonInfo) throws JSONException {
-		this.setStateName(HotdealUtilities.getDataString(jSonInfo, "district_name"));
-		this.setStateID(HotdealUtilities.getDataString(jSonInfo, "district_id"));
+		this.setStateName(VrealUtilities.getDataString(jSonInfo, "district_name"));
+		this.setStateID(VrealUtilities.getDataString(jSonInfo, "district_id"));
 	}
 
 	public void setDataWard(JSONObject jSonInfo) throws JSONException {
-		this.setStateName(HotdealUtilities.getDataString(jSonInfo, "ward_name"));
-		this.setStateID(HotdealUtilities.getDataString(jSonInfo, "ward_id"));
+		this.setStateName(VrealUtilities.getDataString(jSonInfo, "ward_name"));
+		this.setStateID(VrealUtilities.getDataString(jSonInfo, "ward_id"));
 	}
 
 	public void setDataAboutRoot(JSONObject jSonInfo) throws JSONException {
-		this.setStateID(HotdealUtilities.getDataString(jSonInfo, "pageId"));
-		this.setStateName(HotdealUtilities.getDataString(jSonInfo, "name"));
+		this.setStateID(VrealUtilities.getDataString(jSonInfo, "pageId"));
+		this.setStateName(VrealUtilities.getDataString(jSonInfo, "name"));
 	}
 	public void setDataAboutRoot3(JSONObject jSonInfo) throws JSONException {
-		this.setStateID(HotdealUtilities.getDataString(jSonInfo, "pageId"));
-		this.setStateName(HotdealUtilities.getDataString(jSonInfo, "description"));
+		this.setStateID(VrealUtilities.getDataString(jSonInfo, "pageId"));
+		this.setStateName(VrealUtilities.getDataString(jSonInfo, "description"));
 	}
 	public void setDataTabs(JSONObject jSonInfo) throws JSONException {
-		this.setStateID(HotdealUtilities.getDataString(jSonInfo, "tab"));
-		this.setStateName(HotdealUtilities.getDataString(jSonInfo, "name"));
+		this.setStateID(VrealUtilities.getDataString(jSonInfo, "tab"));
+		this.setStateName(VrealUtilities.getDataString(jSonInfo, "name"));
 	}
 	public void setDataSort(JSONObject jSonInfo) throws JSONException {
-		this.setStateID(HotdealUtilities.getDataString(jSonInfo, "field"));
-		this.setStateName(HotdealUtilities.getDataString(jSonInfo, "name"));
-		this.setSort(HotdealUtilities.getDataString(jSonInfo, "sort"));
+		this.setStateID(VrealUtilities.getDataString(jSonInfo, "field"));
+		this.setStateName(VrealUtilities.getDataString(jSonInfo, "name"));
+		this.setSort(VrealUtilities.getDataString(jSonInfo, "sort"));
 		setCheck(false);
 	}
 

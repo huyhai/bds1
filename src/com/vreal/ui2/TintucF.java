@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import com.android.vrealapp.R;
 import com.vreal.adapter.HeaderTintucAdapter;
 import com.vreal.adapter.NewsAdapter;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.model.DetailsModel;
 import com.vrealvn.vrealapp.DataManager2;
@@ -47,7 +47,7 @@ public class TintucF extends Fragment {
 	private void initView(View rootView) {
 		lvNews = (ListView) rootView.findViewById(R.id.lvNews);
 		ll = (RelativeLayout) rootView.findViewById(R.id.ll);
-		HotdealUtilities.setHeight(ll, 2.5);
+		VrealUtilities.setHeight(ll, 2.5);
 		// LayoutInflater inflater = getActivity().getLayoutInflater();
 		// View header = inflater.inflate(R.layout.header_tintuc, lvNews,
 		// false);
@@ -78,7 +78,7 @@ public class TintucF extends Fragment {
 
 		adapter = new NewsAdapter(getActivity(), DataManager2.getInstance().getListTintuc());
 		lvNews.setAdapter(adapter);
-		HotdealUtilities.setListViewHeightBasedOnChildren(lvNews);
+		VrealUtilities.setListViewHeightBasedOnChildren(lvNews);
 
 	}
 

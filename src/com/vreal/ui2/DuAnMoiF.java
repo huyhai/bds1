@@ -7,11 +7,11 @@ import java.util.StringTokenizer;
 
 import com.android.vrealapp.R;
 import com.vreal.adapter.DuanAdapter;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,7 +27,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener {
+public class DuAnMoiF extends VrealFragmentActivity implements OnClickListener {
 	private ListView lvDuan;
 	private RelativeLayout rlFilter;
 	private RelativeLayout rlMap;
@@ -51,7 +51,7 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 		listData = new ArrayList<>(DataManager2.getInstance().getListSearch());
 		// listData.addAll(DataManager2.getInstance().getListSearch());
 		// idType = HotdealUtilities.getDataFragment(this);
-		idType = HotdealUtilities.getDataBundle(this);
+		idType = VrealUtilities.getDataBundle(this);
 		setCount();
 		adapter = new DuanAdapter(this, listData, no);
 		lvDuan.setAdapter(adapter);
@@ -80,10 +80,10 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 		imgLocation = (ImageView) this.findViewById(R.id.imgLocation);
 		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
 		imgTooggle = (ImageView) this.findViewById(R.id.imgTooggle);
-		HotdealUtilities.setHeight(llTopBar, 11.5);
-		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
-		HotdealUtilities.setWidthHeight(imgLocation, 17, 24);
-		HotdealUtilities.setWidthHeight(imgFilter, 15, 32);
+		VrealUtilities.setHeight(llTopBar, 11.5);
+		VrealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		VrealUtilities.setWidthHeight(imgLocation, 17, 24);
+		VrealUtilities.setWidthHeight(imgFilter, 15, 32);
 
 		rlFilter.setOnClickListener(this);
 		rlMap.setOnClickListener(this);
@@ -108,11 +108,11 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 		public void onReturnData(int id) {
 			DataManager2.getInstance().setVrealModel(listData.get(id));
 			if (idType.equals("")) {
-				HotdealUtilities.startActivity(DuAnMoiF.this, DetailF.class, "");
+				VrealUtilities.startActivity(DuAnMoiF.this, DetailF.class, "");
 				// ((HotDealFragmentActivity) this).startFragment(new
 				// DetailF(), id + "");
 			} else {
-				HotdealUtilities.startActivity(DuAnMoiF.this, SearchF.class, id + "");
+				VrealUtilities.startActivity(DuAnMoiF.this, SearchF.class, id + "");
 				// ((HotDealFragmentActivity) this).startFragment(new SearchF(),
 				// id + "");
 			}
@@ -192,11 +192,11 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 	@Override
 	public void onClick(View v) {
 		if (v == rlFilter) {
-			HotdealUtilities.startActivityForResult(this, FilterF.class, 1, idType);
+			VrealUtilities.startActivityForResult(this, FilterF.class, 1, idType);
 			// ((HotDealFragmentActivity) this).startFragment(new FilterF(),
 			// idType);
 		} else if (v == rlMap) {
-			HotdealUtilities.startActivity(DuAnMoiF.this, MapActivity.class, "-1");
+			VrealUtilities.startActivity(DuAnMoiF.this, MapActivity.class, "-1");
 			// startFragment(new MapF(-1), "");
 		} else if (v == tvSX) {
 			ArrayList<VrealModel> list = new ArrayList<>();
@@ -205,7 +205,7 @@ public class DuAnMoiF extends HotDealFragmentActivity implements OnClickListener
 			list.add(new VrealModel("Giá cao nhất"));
 			list.add(new VrealModel("Diện tích lớn nhất"));
 			list.add(new VrealModel("Diện tích nhỏ nhất"));
-			HotdealUtilities.showDialogCustomListView(this, list, new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(this, list, new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {

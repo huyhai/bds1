@@ -6,14 +6,14 @@ import java.util.StringTokenizer;
 
 import com.android.vrealapp.R;
 import com.vreal.libs.ConstantValue;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.libs.SessionManager;
 import com.vreal.model.VrealModel;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
-import com.vrealvn.vrealapp.HotdealApp;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
+import com.vrealvn.vrealapp.VrealApp;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -92,7 +92,7 @@ public class DuAnMoiSearch extends Fragment implements OnClickListener {
 
 			} else if (api.equals(ConstantValue.SEARCH_PROJECT)) {
 				if (id == NOTIFY_OK) {
-					HotdealUtilities.startActivity(getActivity(), DuAnMoiF.class, "");
+					VrealUtilities.startActivity(getActivity(), DuAnMoiF.class, "");
 //					((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiF(), "");
 				} else {
 					
@@ -105,9 +105,9 @@ public class DuAnMoiSearch extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == rlLoai) {
-			HotdealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, "-1");
+			VrealUtilities.startActivityForResult(getActivity(), LoaiNhaDat.class, 1, "-1");
 		} else if (v == rlTinh) {
-			HotdealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), DataManager2.getInstance().getListProvices(), new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -134,7 +134,7 @@ public class DuAnMoiSearch extends Fragment implements OnClickListener {
 					listDisFilter.add(md);
 				}
 			}
-			HotdealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
+			VrealUtilities.showDialogCustomListView(getActivity(), listDisFilter, new NotifySomesDataListener() {
 
 				@Override
 				public void onReturnDataString(String id) {
@@ -161,15 +161,15 @@ public class DuAnMoiSearch extends Fragment implements OnClickListener {
 	private String loaiID = defauldID;
 	private String loaiName = "Chọn loại";
 	private String proviceID = defauldID;
-	private String proviceName = HotdealApp.getContext().getString(R.string.str_province);
+	private String proviceName = VrealApp.getContext().getString(R.string.str_province);
 	private String disID = defauldID;
-	private String disName = HotdealApp.getContext().getString(R.string.str_district);
+	private String disName = VrealApp.getContext().getString(R.string.str_district);
 	BroadcastReceiver receiver = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equalsIgnoreCase("ABC")) {
-				HotdealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
+				VrealUtilities.showALog(intent.getExtras().get(ConstantValue.IS_SUCCESS));
 				try {
 					String loai = (String) intent.getExtras().get(ConstantValue.IS_SUCCESS);
 					StringTokenizer tokens = new StringTokenizer(loai, "-");

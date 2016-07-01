@@ -16,13 +16,13 @@ import android.widget.Toast;
 
 import com.android.vrealapp.R;
 import com.vreal.adapter.MenuAdapter;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifySomesDataListener;
 import com.vreal.libs.SessionManager;
 import com.vreal.model.StateModel;
 import com.vreal.ui.NhabanF;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
 public class MenuSlide extends Fragment implements OnItemClickListener {
 	private LinearLayout llTop;
@@ -44,7 +44,7 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 		lvMenu = (ListView) rootView.findViewById(R.id.lvMenu);
 		tvUser= (TextView) rootView.findViewById(R.id.tvUser);
 
-		HotdealUtilities.setHeight(llTop, 5);
+		VrealUtilities.setHeight(llTop, 5);
 
 		ArrayList<StateModel> listData = new ArrayList<>();
 		StateModel md;
@@ -111,20 +111,20 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 			long id) {
 		((Main) getActivity()).closeMenu();
 		if (position == 0) {
-			((HotDealFragmentActivity) getActivity())
+			((VrealFragmentActivity) getActivity())
 					.startFragment(new NhabanF(),"1");
 		} else if (position == 1) {
-			((HotDealFragmentActivity) getActivity())
+			((VrealFragmentActivity) getActivity())
 					.startFragment(new NhabanF(),"2");
 		} else if (position == 2) {
-			HotdealUtilities.startActivity(getActivity(), DuAnMoiF.class, "");
+			VrealUtilities.startActivity(getActivity(), DuAnMoiF.class, "");
 //			((HotDealFragmentActivity) getActivity())
 //					.startFragment(new DuAnMoiF(),"");
 		} else if (position == 3) {
-			((HotDealFragmentActivity) getActivity())
+			((VrealFragmentActivity) getActivity())
 					.startFragment(new TintucF(),"");
 		} else if (position == 4) {
-			((HotDealFragmentActivity) getActivity())
+			((VrealFragmentActivity) getActivity())
 					.startFragment(new TimMoiGioiF(),"");
 		} else if (position == 5) {
 			// ((HotDealFragmentActivity) getActivity())
@@ -133,7 +133,7 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 			// ((HotDealFragmentActivity) getActivity())
 			// .startFragment(new TimMoiGioiF());
 		} else if (position == 7) {
-			HotdealUtilities.showDialogConfirm(getActivity(),
+			VrealUtilities.showDialogConfirm(getActivity(),
 					"Bạn muốn đăng xuất ?", new NotifySomesDataListener() {
 
 						@Override
@@ -144,7 +144,7 @@ public class MenuSlide extends Fragment implements OnItemClickListener {
 						@Override
 						public void onReturnData(int id) {
 							if (id != -1) {
-								HotdealUtilities.showToast(
+								VrealUtilities.showToast(
 										"Đăng xuất thành công",
 										Toast.LENGTH_SHORT, getActivity());
 							}

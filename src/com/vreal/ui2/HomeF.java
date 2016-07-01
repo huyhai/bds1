@@ -1,11 +1,11 @@
 package com.vreal.ui2;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.libs.NotifyDataListener;
 import com.vreal.ui.NhabanF;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,7 +35,7 @@ public class HomeF extends Fragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.home_f, container, false);
 		initView(rootView);
-		HotdealUtilities.showALog("Home CREATE");
+		VrealUtilities.showALog("Home CREATE");
 		return rootView;
 	}
 
@@ -43,7 +43,7 @@ public class HomeF extends Fragment implements OnClickListener {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		HotdealUtilities.showALog("Home RESUME");
+		VrealUtilities.showALog("Home RESUME");
 		Main.setTextTop("Vreal.vn");
 		llTopBar.setBackgroundResource(R.drawable.bg_home11);
 	}
@@ -53,7 +53,7 @@ public class HomeF extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onPause();
 		llTopBar.setBackgroundResource(R.color.vreal_orange);
-		HotdealUtilities.showALog("Home PAUSE");
+		VrealUtilities.showALog("Home PAUSE");
 	}
 
 	private void initView(View rootView) {
@@ -67,7 +67,7 @@ public class HomeF extends Fragment implements OnClickListener {
 		llTopBar = (LinearLayout) getActivity().findViewById(R.id.llTopBar);
 		tv1 = (TextView) rootView.findViewById(R.id.tv1);
 		tv2 = (TextView) rootView.findViewById(R.id.tv2);
-		HotdealUtilities.setHeight(img, 3);
+		VrealUtilities.setHeight(img, 3);
 		llBanthue.setOnClickListener(this);
 		llDuanmoi.setOnClickListener(this);
 		llMenu4.setOnClickListener(this);
@@ -101,7 +101,7 @@ public class HomeF extends Fragment implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		HotdealUtilities.setClickAnim(v);
+		VrealUtilities.setClickAnim(v);
 		if (v == llBanthue) {
 			String id = "";
 			try {
@@ -110,7 +110,7 @@ public class HomeF extends Fragment implements OnClickListener {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
+			((VrealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
 		} else if (v == llDuanmoi) {
 			String id = "";
 			try {
@@ -119,16 +119,16 @@ public class HomeF extends Fragment implements OnClickListener {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			((HotDealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
+			((VrealFragmentActivity) getActivity()).startFragment(new NhabanF(), id);
 		} else if (v == llMenu4) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new PostPro(), "");
+			((VrealFragmentActivity) getActivity()).startFragment(new PostPro(), "");
 		} else if (v == llMenu3) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new DuAnMoiSearch(), "");
+			((VrealFragmentActivity) getActivity()).startFragment(new DuAnMoiSearch(), "");
 			// HotdealUtilities.startActivity(getActivity(), PostPro.class, "");
 		} else if (v == llTintuc) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new TintucF(), "");
+			((VrealFragmentActivity) getActivity()).startFragment(new TintucF(), "");
 		} else if (v == llMenu4M) {
-			((HotDealFragmentActivity) getActivity()).startFragment(new TimMoiGioiF(), "");
+			((VrealFragmentActivity) getActivity()).startFragment(new TimMoiGioiF(), "");
 		}
 	}
 }

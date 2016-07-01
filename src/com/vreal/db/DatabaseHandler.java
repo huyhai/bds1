@@ -11,9 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.DetailsModel;
-import com.vreal.model.UsersModel;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -208,7 +207,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return count;
 	}
 
-	public void addNewUser(UsersModel user) {
+/*	public void addNewUser(UsersModel user) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		deleteUser(db);
 		ContentValues values = new ContentValues();
@@ -255,7 +254,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 
 		return md;
-	}
+	}*/
 
 	public void addNewCache(String api, String data) {
 		SQLiteDatabase db = this.getWritableDatabase();

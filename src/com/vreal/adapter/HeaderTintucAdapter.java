@@ -13,13 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.model.DetailsModel;
 import com.vreal.model.VrealModel;
 import com.vreal.pageindicator.IconPagerAdapter;
 import com.vreal.ui2.NewsDetailF;
 import com.vrealvn.vrealapp.DataManager2;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
 public class HeaderTintucAdapter extends PagerAdapter implements IconPagerAdapter {
 
@@ -62,7 +62,7 @@ public class HeaderTintucAdapter extends PagerAdapter implements IconPagerAdapte
 		tv12 = (TextView) imageLayout.findViewById(R.id.tv12);
 		((ViewPager) view).addView(imageLayout, 0);
 		final DetailsModel md = listBanner.get(position);
-		HotdealUtilities.loadImage(md.getImage(), imgBanner, ac);
+		VrealUtilities.loadImage(md.getImage(), imgBanner, ac);
 		tv1.setText(md.getIntroduce());
 		tv12.setText(md.getName());
 		// Picasso.with(ac).load(listBanner.get(position)).placeholder(R.drawable.img_thumb)
@@ -74,7 +74,7 @@ public class HeaderTintucAdapter extends PagerAdapter implements IconPagerAdapte
 				// Intent i=new Intent(ac, ViewImageActivity.class);
 				// ac.startActivity(i);
 				DataManager2.getInstance().setMd(md);
-				HotdealUtilities.startActivity(ac, NewsDetailF.class, "");
+				VrealUtilities.startActivity(ac, NewsDetailF.class, "");
 //				((HotDealFragmentActivity) ac).startFragment(new NewsDetailF(), "");
 
 			}

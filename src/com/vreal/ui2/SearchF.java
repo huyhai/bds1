@@ -17,13 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.vrealapp.R;
-import com.vreal.libs.HotdealUtilities;
+import com.vreal.libs.VrealUtilities;
 import com.vreal.pageindicator.IconPagerAdapter;
 import com.vreal.pageindicator.TabPageIndicator;
 import com.vreal.ui.NhabanF;
-import com.vrealvn.vrealapp.HotDealFragmentActivity;
+import com.vrealvn.vrealapp.VrealFragmentActivity;
 
-public class SearchF extends HotDealFragmentActivity {
+public class SearchF extends VrealFragmentActivity {
 	private static final String[] CONTENT = new String[] { "Chi tiết", "Tiện ích" };
 	private static final int[] ICONS = new int[] { R.drawable.ic_chitiet, R.drawable.ic_tienich };
 
@@ -55,14 +55,14 @@ public class SearchF extends HotDealFragmentActivity {
 	private void initView() {
 //		rlRefresh = (RelativeLayout) getActivity().findViewById(R.id.rlRefresh);
 //		pos = HotdealUtilities.parseInt(HotdealUtilities.getDataFragment(this));
-		pos = HotdealUtilities.parseInt(HotdealUtilities.getDataBundle(this));
+		pos = VrealUtilities.parseInt(VrealUtilities.getDataBundle(this));
 		llTopBar = (LinearLayout) findViewById(R.id.llTopBar);
-		HotdealUtilities.setHeight(llTopBar, 11.5);
+		VrealUtilities.setHeight(llTopBar, 11.5);
 		
 		pager = (ViewPager) findViewById(R.id.pager);
 		indicator = (TabPageIndicator) findViewById(R.id.indicator);
 		imgTooggle=(ImageView)findViewById(R.id.imgTooggle);
-		HotdealUtilities.setWidthHeight(imgTooggle, 17, 35);
+		VrealUtilities.setWidthHeight(imgTooggle, 17, 35);
 		findViewById(R.id.rlToogle).setOnClickListener(new OnClickListener() {
 
 			@Override

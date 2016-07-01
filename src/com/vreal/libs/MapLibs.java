@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.vreal.model.DiaDiemModel;
 import com.vreal.model.VrealModel;
 
 public class MapLibs extends Fragment implements OnInfoWindowClickListener {
